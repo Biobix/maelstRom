@@ -6,19 +6,28 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-MAGE: Modeller of Allelic Gene Expression
+Welcome to MAGE’s readme!
+
+MAGE is the Modeller of Allelic Gene Expression, an R package providing
+extensive functions for various RNAseq-based allelic analyses. This
+ranges from basic tasks such as (solely) RNAseq-base genotyping, to the
+analysis of more complex population-level phenomena such as
+(differential) allelic bias, allellic divergence and (loss of)
+imprinting analyses. More information about what these are and how to
+model them using MAGE can be found in the package vignette.
 
 ## Installation
 
-Put installation instructions here:
+MAGE can be installed using the function from the package:
 
 ``` r
-install.packages("MAGE")
+library(devtools)
+install_github("BioBix/MAGE")
 ```
 
-## Examples
+## Getting started
 
-Link to vignette…
+Link to vignette and website…
 
 MAGE does stuff:
 
@@ -34,13 +43,4 @@ ChromPlot[["ADDE_plot"]] / ChromPlot[["MethCNA_plot"]] / (ChromPlot[["LEG1"]] +
   patchwork::plot_layout(heights = c(2,1,0.5), widths = c(1,1,1))
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
-
-Render `README.Rmd` regularly, to keep `README.md` up-to-date.
-`devtools::build_readme()` is handy for this. You could also use GitHub
-Actions to re-render `README.Rmd` every time you push. An example
-workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
-
-You can also embed plots. In that case, don’t forget to commit and push
-the resulting figure files, so they display on GitHub and CRAN.
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
