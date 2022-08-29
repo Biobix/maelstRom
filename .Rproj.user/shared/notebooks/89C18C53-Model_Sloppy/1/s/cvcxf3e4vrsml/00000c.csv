@@ -1,0 +1,8 @@
+"0","# Fit the model:
+TripletDF_SS.mblogit <- mblogit(formula = count ~ genotype, 
+                           random = ~1|sampleID,
+                           data = TripletDF_SS)
+"
+"2","Error in mblogit(formula = count ~ genotype, random = ~1 | sampleID, data = TripletDF_SS) : 
+  response must either be a factor or a matrix of counts or dummies
+"

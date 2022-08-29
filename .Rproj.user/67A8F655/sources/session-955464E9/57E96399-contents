@@ -1,0 +1,16 @@
+---
+title: "Title"
+author: "Me"
+header-includes: \usepackage{xfrac}
+output:
+  html_document: default
+  pdf_document: default
+---
+
+Other columns contain additional filter criteria, like:
+
+  + median_AB: a median (robust) reference allele ratio estimate in case you want to play it extra safe in retaining significantly biased loci
+  + quality: will contain "!" if a locus contained no heterozygous samples to detect AB on
+  + "allele.frequency": referring to the reference allele frequency across genotypes; you may not want to trust loci with extreme allele frequencies     as these probably contain very little heterozygous individuals
+  + "coverage": contains the median coverage of all samples covering the locus)
+  + "nr_samples": number of samples covering the locus

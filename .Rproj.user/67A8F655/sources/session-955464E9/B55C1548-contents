@@ -1,0 +1,121 @@
+dAD_analysis <- function(data){
+  
+  controlListP <- data[[1]]
+  caseListP <- data[[2]]
+  positions <- names(controlListP)
+  
+  dAD_res <- data.frame(LocName = names(controlListP), PiFitH0 = 0, PiFitH1 = 0, ThetaH0 = 0, ThetaCTRL_H1 = 0, 
+                        ThetaCASE_H1 = 0, RhoH0 = 0, RhoCTRL = 0, RhoCASE = 0, LRTpval = 0, NumHetCTRL = 0, NumHetCASE = 0, RobFlagCTRL = "", 
+                        RobFlagCASE = "", HWECTRL = 0, HWECASE = 0, CovCTRL_mean = 0, CovCASE_mean = 0, CovCTRL_med = 0, CovCASE_med = 0, 
+                        NumOutCTRL = 0, NumOutCASE = 0, QualityCTRL = "N", QualityCASE = "N", pr = 0, prv = 0, pv = 0, ThetaHom = 0)
+  
+  for (LOC in positions) {
+    
+    CTRL_DF <- data.frame("ref_count" = controlListP[[LOC]]$ref_count, 
+                          "var_count" = controlListP[[LOC]]$var_count, "isCase" = 0)
+    CASE_DF <- data.frame("ref_count" = caseListP[[LOC]]$ref_count, 
+                          "var_count" = caseListP[[LOC]]$var_count, "isCase" = 1)
+    
+    # Previously, we used EMfit_betabinom_robust() to ROBUSTLY fit our models by removing outliers via 
+    # Cook's distance. Now however, we're working with data from two different sources (control- and tumor 
+    # tissue) and have no way of knowing in advance how similar these are. As such, outlier detections 
+    # should happen ON BOTH SETS SEPARATELY yet the two hypotheses we'll be fitting share all or some 
+    # parameters between the two. For this, we can use the EMfit_betabinom_robust() function with its
+    # "fitH0" set to false, which will not complete the entire eqtl-detection pipeline, but will cut it 
+    # short before fitting the unshifted model. By running this function on both our datasets separately 
+    # in advance of the dAD-relevant fits, we ensure correct outlier detection ánd the use of the same 
+    # dataset in our upcoming likelihood ratio tests.
+    
+    # 1. Detect and extract outliers using EMfit_betabinom_robust()
+    OUTfitCTRL <- MAGE::EMfit_betabinom_robust(data_counts = CTRL_DF, SE = SEmedian, inbr = Fmedian, 
+                                               fitH0 = FALSE)
+    OUTfitCASE <- MAGE::EMfit_betabinom_robust(data_counts = CASE_DF, SE = SEmedian, inbr = Fmedian, 
+                                               fitH0 = FALSE)
+    OUTfitCTRL_DH <- OUTfitCTRL$data_hash; OUTfitCASE_DH <- OUTfitCASE$data_hash
+    CTRL_DF$Outlier <- OUTfitCTRL_DH$Outlier; CASE_DF$Outlier <- OUTfitCASE_DH$Outlier
+    CurDF <- rbind(CTRL_DF, CASE_DF)
+    # These results are also handy for an estimation of the number of heterozygotes in controls and tumors
+    # AND the number of outliers, both good filter criteria.
+    # We can also include a "RobFlag" which gives more information about outlier detection 
+    # (e.g. none detected, or so unreasonably many that none were removed)
+    dAD_res$NumHetCTRL[dAD_res$LocName == LOC] <- 
+      sum(OUTfitCTRL_DH$prv); dAD_res$NumHetCASE[dAD_res$LocName == LOC] <- sum(OUTfitCASE_DH$prv)
+    dAD_res$NumOutCTRL[dAD_res$LocName == LOC] <- 
+      sum(CTRL_DF$Outlier); dAD_res$NumOutCASE[dAD_res$LocName == LOC] <- sum(CASE_DF$Outlier)
+    dAD_res$RobFlagCTRL[dAD_res$LocName == LOC] <- 
+      OUTfitCTRL$RobFlag; dAD_res$RobFlagCASE[dAD_res$LocName == LOC] <- OUTfitCASE$RobFlag
+    
+    
+    # 2. Perform one fit on the entire (non-outlying) data, i.e. all parameters shared, i.e. assuming 
+    # no dAD; the null hypothesis in dAD detection
+    # Remark this uses the non-robust fitting function, since outliers were already detected.
+    NOdAD_fit <- MAGE::EMfit_betabinom(data_counts = CurDF[CurDF$Outlier == 0,], SE = SEmedian, 
+                                       inbr = Fmedian, fitH0 = FALSE)
+    NOdAD_fit_DF <- NOdAD_fit$data_hash
+    PiH0 <- NOdAD_fit$AB
+    rho_rr <- NOdAD_fit$rho_rr; rho_rv <- NOdAD_fit$rho_rv; rho_vv <- NOdAD_fit$rho_vv
+    ThetaHomH0 <- NOdAD_fit$theta_hom; ThetaHetH0 <- NOdAD_fit$theta_het
+    
+    dAD_res$PiFitH0[dAD_res$LocName == LOC] <- PiH0
+    dAD_res$ThetaH0[dAD_res$LocName == LOC] <- ThetaHetH0
+    
+    
+    # 3. Perform a fit on the (non-outlying) data allowing separate theta_het parameters for control- 
+    # and case-data
+    FullFit <- MAGE::EMfit_betabinom_popcomb(data_counts = CurDF[CurDF$Outlier == 0,], SE = SEmedian, 
+                                             inbr = Fmedian, probshift_init = PiH0)
+    ParamVec <- FullFit$ParamVec
+    dAD_res$PiFitH1[dAD_res$LocName == LOC] <- ParamVec["probshift"]
+    dAD_res$ThetaCTRL_H1[dAD_res$LocName == LOC] <- ParamVec["theta_het_control"]
+    dAD_res$ThetaCASE_H1[dAD_res$LocName == LOC] <- ParamVec["theta_het_case"]
+    
+    
+    # 4. Perform the Likelihood Ratio Test for dAD detection
+    # Likelihood of fit with all parameters shared:
+    LikTot <- MAGE::pmf_betabinomMix(CurDF[CurDF$Outlier==0,]$ref_count, 
+                                     CurDF[CurDF$Outlier==0,]$var_count, probshift = PiH0, SEmedian, rho_rr, rho_vv, rho_rv, 
+                                     theta_hom = ThetaHomH0, theta_het = ThetaHetH0)
+    # Likelihood of fit with separate theta_het (calculated in two steps because of the different theta)
+    LikCTRL <- MAGE::pmf_betabinomMix(CTRL_DF[CTRL_DF$Outlier==0,]$ref_count, CTRL_DF[CTRL_DF$Outlier==0,]$var_count,
+                                      probshift = ParamVec["probshift"], SEmedian, ParamVec["pr"], ParamVec["pv"], ParamVec["prv"], 
+                                      theta_hom = ParamVec["theta_hom"], theta_het = ParamVec["theta_het_control"])
+    LikCASE <- MAGE::pmf_betabinomMix(CASE_DF[CASE_DF$Outlier==0,]$ref_count, CASE_DF[CASE_DF$Outlier==0,]$var_count, 
+                                      probshift = ParamVec["probshift"], SEmedian, ParamVec["pr"], ParamVec["pv"], ParamVec["prv"], 
+                                      theta_hom = ParamVec["theta_hom"], theta_het = ParamVec["theta_het_case"])
+    lrtstat <- -2 * (sum(log(LikTot)) - sum(log(c(LikCTRL, LikCASE))))
+    LRTpval <- pchisq(lrtstat, df = 1, lower.tail = F)
+    dAD_res$LRTpval[dAD_res$LocName == LOC] <- LRTpval
+    
+    
+    # 5. Fill out the results dataframe
+    dAD_res$QualityCTRL[dAD_res$LocName == LOC] <- # spot bad quality data
+      OUTfitCTRL$quality; dAD_res$QualityCASE[dAD_res$LocName == LOC] <-OUTfitCASE$quality 
+    # Test HWE on both the control and tumor data:
+    HWEtest_CTRL <- MAGE::HWE_chisquared(Fmedian = Fmedian, data = OUTfitCTRL_DH)
+    dAD_res$HWECTRL[dAD_res$LocName == LOC] <- HWEtest_CTRL$PVAL
+    HWEtest_CASE <- MAGE::HWE_chisquared(Fmedian = Fmedian, data = OUTfitCASE_DH)
+    dAD_res$HWECASE[dAD_res$LocName == LOC] <- HWEtest_CASE$PVAL
+    # Mean and median coverages:
+    dAD_res$CovCTRL_mean[dAD_res$LocName == LOC] <- mean(CTRL_DF[CTRL_DF$Outlier==0,]$ref_count + 
+                                                           CTRL_DF[CTRL_DF$Outlier==0,]$var_count)
+    dAD_res$CovCASE_mean[dAD_res$LocName == LOC] <- mean(CASE_DF[CASE_DF$Outlier==0,]$ref_count + 
+                                                           CASE_DF[CASE_DF$Outlier==0,]$var_count)
+    dAD_res$CovCTRL_med[dAD_res$LocName == LOC] <- median(CTRL_DF[CTRL_DF$Outlier==0,]$ref_count + 
+                                                            CTRL_DF[CTRL_DF$Outlier==0,]$var_count)
+    dAD_res$CovCASE_med[dAD_res$LocName == LOC] <- median(CASE_DF[CASE_DF$Outlier==0,]$ref_count + 
+                                                            CASE_DF[CASE_DF$Outlier==0,]$var_count)
+    dAD_res$pr[dAD_res$LocName == LOC] <- ParamVec["pr"]; dAD_res$prv[dAD_res$LocName == LOC] <- 
+      ParamVec["prv"]; dAD_res$pv[dAD_res$LocName == LOC] <- ParamVec["pv"]
+    
+    dAD_res$ThetaHom[dAD_res$LocName == LOC] <- ParamVec["theta_hom"]
+  }
+  
+  dAD_res$HWECTRL[is.na(dAD_res$HWECTRL)] <- 
+    dAD_res$HWECTRL[is.na(dAD_res$HWECTRL)] <- -1
+  
+  dAD_res$RhoH0 <- 1/((1/dAD_res$ThetaH0)+1)
+  dAD_res$RhoCTRL <- 1/((1/dAD_res$ThetaCTRL_H1)+1)
+  dAD_res$RhoCASE <- 1/((1/dAD_res$ThetaCASE_H1)+1)
+  
+  return(dAD_res)
+}

@@ -1,0 +1,28 @@
+{
+    "id": "40393D62",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1661419935001.0,
+    "source_on_save": false,
+    "relative_order": 16,
+    "properties": {
+        "id": "4255abea7045404bb6390892d010bad0",
+        "name": "ParCTRL",
+        "title": "ParCTRL",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 27866473669132387,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1661419935001,
+    "read_only": false,
+    "read_only_alternatives": []
+}

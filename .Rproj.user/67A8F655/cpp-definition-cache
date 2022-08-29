@@ -1,0 +1,69 @@
+[
+    {
+        "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+        "file_last_write": 1615890223.0,
+        "definitions": [
+            {
+                "usr": "c:@F@dBetaBinom_MP#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#b#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "dBetaBinom_MP(Rcpp::NumericVector, Rcpp::NumericVector, double, double, bool, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "line": 26,
+                "column": 15,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_pi_MP#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_pi_MP(Rcpp::NumericVector, Rcpp::NumericVector, double, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "line": 80,
+                "column": 15,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_theta_MP#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_theta_MP(Rcpp::NumericVector, Rcpp::NumericVector, double, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "line": 124,
+                "column": 15,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@dBetaBinom_cpp_old#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#b#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "dBetaBinom_cpp_old(Rcpp::NumericVector, Rcpp::NumericVector, double, double, bool)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "line": 173,
+                "column": 15,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_pi_old#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_pi_old(Rcpp::NumericVector, Rcpp::NumericVector, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "line": 226,
+                "column": 15,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_theta_old#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_theta_old(Rcpp::NumericVector, Rcpp::NumericVector, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "line": 270,
+                "column": 15,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    }
+]

@@ -1,0 +1,22 @@
+"0","for(i in 1:nrow(TripletDF_SS2)){
+  TripletDF_SS2$triplet[i] <- TripletDF_SS$count[TripletDF_SS$sampleID == TripletDF_SS2$sampleID[i]]
+}
+"
+"2","invalid factor level, NA generated"
+"2","number of items to replace is not a multiple of replacement length"
+"2","invalid factor level, NA generated"
+"2","number of items to replace is not a multiple of replacement length"
+"2","invalid factor level, NA generated"
+"2","number of items to replace is not a multiple of replacement length"
+"2","invalid factor level, NA generated"
+"2","number of items to replace is not a multiple of replacement length"
+"2","invalid factor level, NA generated"
+"2","number of items to replace is not a multiple of replacement length"
+"2","invalid factor level, NA generated"
+"2","number of items to replace is not a multiple of replacement length"
+"2","invalid factor level, NA generated"
+"2","number of items to replace is not a multiple of replacement length"
+"2","invalid factor level, NA generated"
+"2","number of items to replace is not a multiple of replacement length"
+"2","invalid factor level, NA generated"
+"2","number of items to replace is not a multiple of replacement length"

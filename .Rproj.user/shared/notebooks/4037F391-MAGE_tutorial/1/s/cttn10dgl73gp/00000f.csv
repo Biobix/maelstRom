@@ -1,0 +1,2 @@
+"0","data(""MAGE"", package = ""MAGE"")"
+"0","knitr::kable(head(ControlCounts))"

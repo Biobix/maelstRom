@@ -1,0 +1,16 @@
+"0","library(ArrayExpress)
+library(affy) 
+library(ALLMLL)
+library(affyPLM)
+library(arrayQualityMetrics)
+
+# Data wrangling and plotting
+library(tidyverse)
+"
+"2","package ‘tidyverse’ was built under R version 4.0.3"
+"2","package ‘ggplot2’ was built under R version 4.0.3"
+"2","package ‘dplyr’ was built under R version 4.0.3"
+"2","package ‘forcats’ was built under R version 4.0.3"
+"0","library(reshape2)"
+"0","library(gridExtra)"
+"0","library(car)"

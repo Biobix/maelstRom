@@ -1,0 +1,7 @@
+"0","# Statistical evidence for significant AB at the 5% FDR level:"
+"0","print(paste(Geno_AB_res$position[p.adjust(Geno_AB_res$p, method = ""BH"") < 0.05 & "
+"0","      Geno_AB_res$quality != ""!"" & Geno_AB_res$Chi2PVAL >= 0.001], collapse = "", ""))"
+"1","[1]"
+"1"," ""loc0, loc5, loc8, loc9, loc11, loc12, loc14, loc16, loc18, loc20, loc24, loc25, loc26, loc27, loc28, loc29, loc30, loc31, loc34, loc35, loc39, loc41, loc44, loc45, loc46, loc49, loc54, loc55, loc56, loc62, loc63, loc67, loc71, loc72, loc73, loc74, loc75, loc78, loc80, loc86, loc90, loc92, loc94, loc95, loc97, loc99, loc101, loc103, loc105, loc111, loc114, loc119, loc120, loc121, loc123, loc124, loc126, loc131, loc132, loc145, loc147, loc149, loc151, loc153, loc154, loc155, loc158, loc161, loc164, loc171, loc174, loc176, loc179, loc182, loc184, loc185, loc186, loc187, loc189, loc194, loc198, loc199, loc204, loc206, loc218, loc220, loc221, loc225, loc232, loc236, loc238, loc240, loc241, loc242, loc244, loc245, loc247, loc248, loc254, loc259, loc260, loc261, loc262, loc263, loc264, loc265, loc266, loc267"""
+"1","
+"

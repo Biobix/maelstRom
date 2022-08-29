@@ -1,0 +1,15 @@
+"0","library(edgeR)
+"
+"2","Loading required package: limma
+"
+"0","library(edgeR)"
+"0","library(gplots)"
+"2","
+Attaching package: ‘gplots’
+
+"
+"2","The following object is masked from ‘package:stats’:
+
+    lowess
+
+"

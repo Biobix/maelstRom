@@ -1,0 +1,6 @@
+"0",""
+"0","HistC <- MAGE::plot_histo(controlList[[""snp202""]]$ref_count, controlList[[""snp202""]]$var_count, wd_res = NULL)"
+"0","HistT <- MAGE::plot_histo(caseList[[""snp202""]]$ref_count, caseList[[""snp202""]]$var_count, wd_res = NULL)"
+"0",""
+"0","gridExtra::grid.arrange(HistC, HistT, ncol=2)"
+"0",""

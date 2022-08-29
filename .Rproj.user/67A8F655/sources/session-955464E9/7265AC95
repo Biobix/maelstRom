@@ -1,0 +1,27 @@
+{
+    "id": "7265AC95",
+    "path": "~/MAGEgenotyper/Script2_Genotyping.R",
+    "project_path": null,
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1661418257894.0,
+    "source_on_save": false,
+    "relative_order": 17,
+    "properties": {
+        "tempName": "Untitled8",
+        "cursorPosition": "86,13",
+        "scrollLine": "0",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1635261533,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1635261533,
+    "read_only": false,
+    "read_only_alternatives": []
+}
