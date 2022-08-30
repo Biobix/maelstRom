@@ -26,7 +26,7 @@ MAGE is the Modeller of Allelic Gene Expression, an R package providing extensiv
 
 ## Installation
 
-MAGE can be installed using the \code{install_github} function from the \code{devtools} package:
+MAGE can be installed using the `install_github` function from the `devtools` package:
 
 ```{r, warning=FALSE, message=FALSE}
 library(devtools)
