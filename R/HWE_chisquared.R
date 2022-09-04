@@ -8,7 +8,7 @@
 #' @param data List or dataframe. A named list of per-SNP data frames (or one such dataframe) for a single chromosome, with names
 #'    corresponding to the position on the chromosome. The list contains genotype probabilities
 #'    ("prr", "prv" and "pvv") for each sample ("sample").
-#' @param Fmedian Number. Estimated or assumed degree of inbreeding within the population
+#' @param inbr Number. Estimated or assumed degree of inbreeding within the population
 #'    under study (default = 0).
 #' @param results Data frame. Data frame with SNP results in each row, containing
 #'    at least the chromosomal position of the SNP (results$position). If NULL, one dataframe is expected as the \code{data} input argument.
@@ -17,7 +17,7 @@
 #' \item{Chi2STAT}{The test statistic of the chi-squared test.}
 #' @export
 
-HWE_chisquared <- function(data, Fmedian = 0, results = NULL){
+HWE_chisquared <- function(data, inbr = 0, results = NULL){
   
   if(is.null(results)){
     prrOBS <- sum(data$prr)
@@ -32,18 +32,18 @@ HWE_chisquared <- function(data, Fmedian = 0, results = NULL){
     # Fail-safe for negative values of inbreeding:
     # For a given locus with multiple samples, the mathematically lowest possible inbreeding value
     # actually equals -q/(1-q), with q the minor allele frequency.
-    # So, if Fmedian is lower than the -q/(1-q) of a specific locus,
+    # So, if inbr is lower than the -q/(1-q) of a specific locus,
     # it needs to be put at -q/(1-q) to avoid negative "rr/rv/vv" frequencies.
     pqmin <- min(c(p, q))
     F_alt <- - pqmin / (1 - pqmin)
-    if (Fmedian < F_alt) {
-      Fmedian <- F_alt
+    if (inbr < F_alt) {
+      inbr <- F_alt
     }
     
     # Avoid precision errors that would return negative values through max(0, ...)
-    prrEXP <- max(0, (p ^ 2 + Fmedian * p * q)) * nrow(data)
-    prvEXP <- max(0, (2 * p * q * (1 - Fmedian))) * nrow(data)
-    pvvEXP <- max(0, (q ^ 2 + Fmedian * p * q)) * nrow(data)
+    prrEXP <- max(0, (p ^ 2 + inbr * p * q)) * nrow(data)
+    prvEXP <- max(0, (2 * p * q * (1 - inbr))) * nrow(data)
+    pvvEXP <- max(0, (q ^ 2 + inbr * p * q)) * nrow(data)
     
     PVAL <- chisq.test(rbind(c(prrOBS, prvOBS, pvvOBS), c(prrEXP, prvEXP, pvvEXP)))$p.value
     STAT <- chisq.test(rbind(c(prrOBS, prvOBS, pvvOBS), c(prrEXP, prvEXP, pvvEXP)))$statistic
@@ -51,7 +51,7 @@ HWE_chisquared <- function(data, Fmedian = 0, results = NULL){
     return(list("PVAL" = PVAL, "STAT" = STAT))
   }else{
     
-    FmedianC <- Fmedian
+    inbrC <- inbr
     positionsOI <- results$position
     
     counter <- 0
@@ -60,7 +60,7 @@ HWE_chisquared <- function(data, Fmedian = 0, results = NULL){
     results$Chi2STAT <- 0
     
     for (z in positionsOI) {
-      Fmedian <- FmedianC
+      inbr <- inbrC
       counter <- counter + 1
       DataNow <- data[[z]]
       prrOBS <- sum(DataNow$prr)
@@ -75,18 +75,18 @@ HWE_chisquared <- function(data, Fmedian = 0, results = NULL){
       # Fail-safe for negative values of inbreeding:
       # For a given locus with multiple samples, the mathematically lowest possible inbreeding value
       # actually equals -q/(1-q), with q the minor allele frequency.
-      # So, if Fmedian is lower than the -q/(1-q) of a specific locus,
+      # So, if inbr is lower than the -q/(1-q) of a specific locus,
       # it needs to be put at -q/(1-q) to avoid negative "rr/rv/vv" frequencies.
       pqmin <- min(c(p, q))
       F_alt <- - pqmin / (1 - pqmin)
-      if (Fmedian < F_alt) {
-        Fmedian <- F_alt
+      if (inbr < F_alt) {
+        inbr <- F_alt
       }
       
       # Avoid precision errors that would return negative values through max(0, ...)
-      prrEXP <- max(0, (p ^ 2 + Fmedian * p * q)) * nrow(DataNow)
-      prvEXP <- max(0, (2 * p * q * (1 - Fmedian))) * nrow(DataNow)
-      pvvEXP <- max(0, (q ^ 2 + Fmedian * p * q)) * nrow(DataNow)
+      prrEXP <- max(0, (p ^ 2 + inbr * p * q)) * nrow(DataNow)
+      prvEXP <- max(0, (2 * p * q * (1 - inbr))) * nrow(DataNow)
+      pvvEXP <- max(0, (q ^ 2 + inbr * p * q)) * nrow(DataNow)
       
       PVAL <- chisq.test(rbind(c(prrOBS, prvOBS, pvvOBS), c(prrEXP, prvEXP, pvvEXP)))$p.value
       STAT <- chisq.test(rbind(c(prrOBS, prvOBS, pvvOBS), c(prrEXP, prvEXP, pvvEXP)))$statistic

@@ -5,13 +5,13 @@
 \title{Plot MAGE's EM-fit results.}
 \usage{
 MAGE_EMfitplot(
-  ref_counts,
-  var_counts,
-  pr,
-  prv,
-  pv,
-  theta_hom,
-  theta_het,
+  ref_counts = NULL,
+  var_counts = NULL,
+  pr = NULL,
+  prv = NULL,
+  pv = NULL,
+  theta_hom = NULL,
+  theta_het = NULL,
   pr_NoShift = NULL,
   prv_NoShift = NULL,
   pv_NoShift = NULL,
@@ -30,7 +30,11 @@ MAGE_EMfitplot(
   wd_res = NULL,
   chr = "",
   position = "",
-  gene = ""
+  gene = "",
+  DataList_out = NULL,
+  Geno_AB_res = NULL,
+  dAD_res = NULL,
+  PlotWhich = "choose"
 )
 }
 \arguments{
@@ -85,11 +89,30 @@ the final figure way too clustered, so only one color value is required. A defau
 
 \item{wd_res}{String. Working directory where plots are saved; if non is given, the plot itself (as a \code{ggplot2} object) is returned instead.}
 
-\item{chr}{Number. Chromosome of the locus, to be used in naming the outpud file if a \code{wd_res} is given.}
+\item{chr}{Number. Chromosome of the locus, to be used in naming the output file if a \code{wd_res} is given.}
 
-\item{position}{Number. Position of the locus, to be used in naming the outpud file if a \code{wd_res} is given.}
+\item{position}{Number. Position of the locus, to be used in naming the output file if a \code{wd_res} is given.}
 
-\item{gene}{String. Gene the locus is part of, to be used in naming the outpud file if a \code{wd_res} is given; optional.}
+\item{gene}{String. Gene the locus is part of, to be used in naming the output file if a \code{wd_res} is given; optional.}
+
+\item{DataList_out}{Dataframe. Alternatively, \code{MAGE_EMfitplot} accepts a dataframes containing per-sample data of the locus of interest. From this, it can
+infer its \code{ref_counts}, \code{var_counts}, \code{pr_NoShift}, \code{prv_NoShift} and \code{pv_NoShift} arguments. This is possible
+as long as \code{EMfit_betabinom_robust} was run on this dataframe with its \code{fitH0} argument set to TRUE.}
+
+\item{Geno_AB_res}{Dataframe with 1 row. Alternatively, \code{MAGE_EMfitplot} accepts a dataframe containing beta-binomial mixture model EM-fit results from calling \code{EMfit_betabinom_robust}'s
+wrapper function \code{BetaBinomGenotyping}. As such, expected columns are listed on \code{BetaBinomGenotyping}'s help page, more specifically
+its produced \code{Geno_AB_res} output. The one row provided must correspond to the locus of interest. From this, \code{MAGE_EMfitplot} can
+infer its \code{pr}, \code{prv}, \code{pv}, \code{theta_hom}, \code{theta_het}, \code{theta_hom_NoShift}, \code{theta_het_NoShift} and \code{probshift} arguments.}
+
+\item{dAD_res}{Dataframe with 1 row. Alternatively, \code{MAGE_EMfitplot} accepts a dataframe containing beta-binomial mixture model EM-fit results from calling \code{EMfit_betabinom_popcomb}'s
+wrapper function \code{dAD_analysis}. As such, expected columns are listed on \code{dAD_analysis}'s help page, more specifically
+its produced \code{dAD_res} output. The one row provided must correspond to the locus of interest. From this, \code{MAGE_EMfitplot} can
+infer its \code{pr}, \code{prv}, \code{pv}, \code{theta_hom}, \code{theta_het}, and \code{probshift} arguments. The "NoShift" case can not be plotted in this scenario,
+as dAD-detection happens without AB-detection. If \code{dAD_res} is not NULL, \code{Geno_AB_res} has to be NULL and vice-versa. Also, when using \code{dAD_res},
+you need to specify whether to plot controls or cases using the \code{PlotWhich} argument.}
+
+\item{PlotWhich}{String. Either "control" or "case", to know which data to fetch from \code{dAD_res} for plotting.
+The dataframe given as the \code{DataList_out} argument should of course be of the corresponding population.}
 }
 \description{
 \code{MAGE_EMfitplot} plots the results of MAGE's beta-binomial EM-fit. More specifically, it plots both the observed reference allele fractions as a histogram (optionally scaled

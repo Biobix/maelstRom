@@ -1,2 +1,0 @@
-"0","knitr::kable(head(controlList[[""loc27""]][,c(""locus_id"", ""sample_id"", ""ref"", "
-"0","                                            ""var"", ""genotypeN"")]))"

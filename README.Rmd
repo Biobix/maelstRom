@@ -28,25 +28,15 @@ MAGE is the Modeller of Allelic Gene Expression, an R package providing extensiv
 
 MAGE can be installed using the `install_github` function from the `devtools` package:
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval = FALSE}
 library(devtools)
 install_github("BioBix/MAGE")
 ```
 
 ## Getting started
 
-Link to vignette and website...
+MAGE contains a vignette going over its entire anaylis pipeline, which can be found under "articles" on https://biobix.github.io/MAGE.
 
-MAGE does stuff:
+Both a "regular" and "expanded" vignette are included, the latter writing out all analyses much more in-depth using MAGE's base functions while the former makes use of wrapper functions that handle many analyses and intermediary steps under-the hood. As such, the regular vignette is recommended for first-time users or users that just want a plug-and-play pipeline, while the expanded vignette provides more insight into MAGE's analyses and is recommended when setting out to create your own custom/specialized analysis pipeline.
 
-```{r, out.width='100%', fig.width=8.5, fig.height=5, fig.align='center', warning=FALSE, results = 'asis', message=FALSE}
-library(MAGE)
-data("MAGE", package = "MAGE")
-
-ChromPlot <- MAGE::MAGE_ADChromplot(AD_Data, DE_Data, Meth_Data, CNAgain_Data, CNAloss_Data,
-                                    pvalSIG = 0.05, roll_median = 15)
-
-ChromPlot[["ADDE_plot"]] / ChromPlot[["MethCNA_plot"]] / (ChromPlot[["LEG1"]] + 
-  ChromPlot[["LEG2"]] + ChromPlot[["LEG3"]]) + 
-  patchwork::plot_layout(heights = c(2,1,0.5), widths = c(1,1,1))
-```
+MAGE has an associated paper pending publication. Coming soon...

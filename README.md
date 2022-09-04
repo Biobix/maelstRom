@@ -18,7 +18,8 @@ model them using MAGE can be found in the package vignette.
 
 ## Installation
 
-MAGE can be installed using the function from the package:
+MAGE can be installed using the `install_github` function from the
+`devtools` package:
 
 ``` r
 library(devtools)
@@ -27,20 +28,16 @@ install_github("BioBix/MAGE")
 
 ## Getting started
 
-Link to vignette and website…
+MAGE contains a vignette going over its entire anaylis pipeline, which
+can be found under “articles” on <https://biobix.github.io/MAGE>.
 
-MAGE does stuff:
+Both a “regular” and “expanded” vignette are included, the latter
+writing out all analyses much more in-depth using MAGE’s base functions
+while the former makes use of wrapper functions that handle many
+analyses and intermediary steps under-the hood. As such, the regular
+vignette is recommended for first-time users or users that just want a
+plug-and-play pipeline, while the expanded vignette provides more
+insight into MAGE’s analyses and is recommended when setting out to
+create your own custom/specialized analysis pipeline.
 
-``` r
-library(MAGE)
-data("MAGE", package = "MAGE")
-
-ChromPlot <- MAGE::MAGE_ADChromplot(AD_Data, DE_Data, Meth_Data, CNAgain_Data, CNAloss_Data,
-                                    pvalSIG = 0.05, roll_median = 15)
-
-ChromPlot[["ADDE_plot"]] / ChromPlot[["MethCNA_plot"]] / (ChromPlot[["LEG1"]] + 
-  ChromPlot[["LEG2"]] + ChromPlot[["LEG3"]]) + 
-  patchwork::plot_layout(heights = c(2,1,0.5), widths = c(1,1,1))
-```
-
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
+MAGE has an associated paper pending publication. Coming soon…

@@ -4,14 +4,14 @@
 \alias{HWE_chisquared}
 \title{Chi-squared test assessing the Hardy-Weinberg assumption.}
 \usage{
-HWE_chisquared(data, Fmedian = 0, results = NULL)
+HWE_chisquared(data, inbr = 0, results = NULL)
 }
 \arguments{
 \item{data}{List or dataframe. A named list of per-SNP data frames (or one such dataframe) for a single chromosome, with names
 corresponding to the position on the chromosome. The list contains genotype probabilities
 ("prr", "prv" and "pvv") for each sample ("sample").}
 
-\item{Fmedian}{Number. Estimated or assumed degree of inbreeding within the population
+\item{inbr}{Number. Estimated or assumed degree of inbreeding within the population
 under study (default = 0).}
 
 \item{results}{Data frame. Data frame with SNP results in each row, containing

@@ -5,7 +5,7 @@ Title: Modeller of Allelic Gene Expression (MAGE): Detection of
 Version: 1.0.0
 Date: 2021-02-24
 Author: Cedric Stroobandt, Tine Goovaerts, Louis Coussement, Laure Van Steenbergen, Floris Voorthuyzen, Femke De Graeve, Jeroen Galle, Wim Van Criekinge, Tim De Meyer
-Maintainer: Jeroen Galle <jeroen.galle@ugent.be>
+Maintainer: Cedric Stroobandt <cedric.stroobandt@ugent.be>
 Description: Detection of imprinting, loss of 
     imprinting, cis-eQTLS and induced allelic imbalance.
 License: Unlimited

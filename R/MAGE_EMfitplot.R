@@ -33,14 +33,63 @@
 #' @param NoShiftCol String. Color for the unshifted PMF (no allelic bias; heterozygous pi-parameter = 0.5). There's no option to split the peaks of this unshifted fit as it would make
 #' the final figure way too clustered, so only one color value is required. A default color is used in case non is given as input.
 #' @param wd_res String. Working directory where plots are saved; if non is given, the plot itself (as a \code{ggplot2} object) is returned instead.
-#' @param position Number. Position of the locus, to be used in naming the outpud file if a \code{wd_res} is given.
-#' @param chr Number. Chromosome of the locus, to be used in naming the outpud file if a \code{wd_res} is given.
-#' @param gene String. Gene the locus is part of, to be used in naming the outpud file if a \code{wd_res} is given; optional.
+#' @param position Number. Position of the locus, to be used in naming the output file if a \code{wd_res} is given.
+#' @param chr Number. Chromosome of the locus, to be used in naming the output file if a \code{wd_res} is given.
+#' @param gene String. Gene the locus is part of, to be used in naming the output file if a \code{wd_res} is given; optional.
+#' @param DataList_out Dataframe. Alternatively, \code{MAGE_EMfitplot} accepts a dataframes containing per-sample data of the locus of interest. From this, it can
+#' infer its \code{ref_counts}, \code{var_counts}, \code{pr_NoShift}, \code{prv_NoShift} and \code{pv_NoShift} arguments. This is possible
+#' as long as \code{EMfit_betabinom_robust} was run on this dataframe with its \code{fitH0} argument set to TRUE.
+#' @param Geno_AB_res Dataframe with 1 row. Alternatively, \code{MAGE_EMfitplot} accepts a dataframe containing beta-binomial mixture model EM-fit results from calling \code{EMfit_betabinom_robust}'s
+#' wrapper function \code{BetaBinomGenotyping}. As such, expected columns are listed on \code{BetaBinomGenotyping}'s help page, more specifically
+#' its produced \code{Geno_AB_res} output. The one row provided must correspond to the locus of interest. From this, \code{MAGE_EMfitplot} can
+#' infer its \code{pr}, \code{prv}, \code{pv}, \code{theta_hom}, \code{theta_het}, \code{theta_hom_NoShift}, \code{theta_het_NoShift} and \code{probshift} arguments.
+#' @param dAD_res Dataframe with 1 row. Alternatively, \code{MAGE_EMfitplot} accepts a dataframe containing beta-binomial mixture model EM-fit results from calling \code{EMfit_betabinom_popcomb}'s
+#' wrapper function \code{dAD_analysis}. As such, expected columns are listed on \code{dAD_analysis}'s help page, more specifically
+#' its produced \code{dAD_res} output. The one row provided must correspond to the locus of interest. From this, \code{MAGE_EMfitplot} can
+#' infer its \code{pr}, \code{prv}, \code{pv}, \code{theta_hom}, \code{theta_het}, and \code{probshift} arguments. The "NoShift" case can not be plotted in this scenario,
+#' as dAD-detection happens without AB-detection. If \code{dAD_res} is not NULL, \code{Geno_AB_res} has to be NULL and vice-versa. Also, when using \code{dAD_res},
+#' you need to specify whether to plot controls or cases using the \code{PlotWhich} argument.
+#' @param PlotWhich String. Either "control" or "case", to know which data to fetch from \code{dAD_res} for plotting.
+#' The dataframe given as the \code{DataList_out} argument should of course be of the corresponding population.
 #' @export
 
-MAGE_EMfitplot <- function(ref_counts, var_counts, pr, prv, pv, theta_hom, theta_het, pr_NoShift = NULL, prv_NoShift = NULL, pv_NoShift = NULL, 
-                                theta_hom_NoShift = NULL, theta_het_NoShift = NULL, probshift, SE, MinCount = 0, ScaleCount = 50, ScaleHist = TRUE, nbins = 100, 
-                                plot_NoShift = TRUE, SplitPeaks = TRUE, ShiftCols = NULL, NoShiftCol = NULL, wd_res = NULL, chr = "", position = "", gene = "") {
+MAGE_EMfitplot <- function(ref_counts = NULL, var_counts = NULL, pr = NULL, prv = NULL, pv = NULL, theta_hom = NULL, theta_het = NULL, pr_NoShift = NULL, prv_NoShift = NULL, pv_NoShift = NULL, 
+                           theta_hom_NoShift = NULL, theta_het_NoShift = NULL, probshift, SE, MinCount = 0, ScaleCount = 50, ScaleHist = TRUE, nbins = 100, 
+                           plot_NoShift = TRUE, SplitPeaks = TRUE, ShiftCols = NULL, NoShiftCol = NULL, wd_res = NULL, chr = "", position = "", gene = "",
+                           DataList_out = NULL, Geno_AB_res = NULL, dAD_res = NULL, PlotWhich = "choose") {
+  
+  if(!is.null(DataList_out)){
+    ref_counts<-DataList_out$ref_count
+    var_counts<-DataList_out$var_count
+    pr_NoShift<-mean(DataList_out$prr_H0)
+    prv_NoShift<-mean(DataList_out$prv_H0)
+    pv_NoShift<-mean(DataList_out$pvv_H0)
+  }
+  if(!is.null(Geno_AB_res)){
+    pr<-Geno_AB_res$rho_rr
+    prv<-Geno_AB_res$rho_rv
+    pv<-Geno_AB_res$rho_vv
+    theta_hom<-Geno_AB_res$theta_hom
+    theta_het<-Geno_AB_res$theta_het
+    theta_hom_NoShift<-Geno_AB_res$theta_hom_NoShift
+    theta_het_NoShift<-Geno_AB_res$theta_het_NoShift
+    probshift<-as.numeric(Geno_AB_res$probshift)
+  }
+  if(!is.null(dAD_res)){
+    pr<-dAD_res$pr
+    prv<-dAD_res$prv
+    pv<-dAD_res$pv
+    theta_hom<-dAD_res$ThetaHomH0
+    if(PlotWhich == "control"){
+      theta_het<-dAD_res$ThetaHetCTRL
+    }else if(PlotWhich == "case"){
+      theta_het<-dAD_res$ThetaHetCASE
+    }else{
+      stop("PlotWhich has to be either \"control\" or \"case\"")
+    }
+    probshift<-as.numeric(dAD_res$PiFitH1)
+    plot_NoShift <- FALSE
+  }
   
   if(SplitPeaks){
     if(is.null(ShiftCols) | length(ShiftCols)!= 3){
