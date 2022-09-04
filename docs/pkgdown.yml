@@ -1,0 +1,8 @@
+pandoc: '2.18'
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  MAGE_expanded_tutorial: MAGE_expanded_tutorial.html
+  MAGE_tutorial: MAGE_tutorial.html
+last_built: 2022-09-04T14:41Z
+
