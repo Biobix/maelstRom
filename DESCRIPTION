@@ -8,7 +8,7 @@ Author: Cedric Stroobandt, Tine Goovaerts, Louis Coussement, Laure Van Steenberg
 Maintainer: Cedric Stroobandt <cedric.stroobandt@ugent.be>
 Description: Detection of imprinting, loss of 
     imprinting, cis-eQTLS and induced allelic imbalance.
-License: Unlimited
+License: AGPL-3.0 license
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
