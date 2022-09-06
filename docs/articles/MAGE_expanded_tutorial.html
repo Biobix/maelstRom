@@ -75,7 +75,7 @@
                         <h4 data-toc-skip class="author">Cedric
 Stroobandt</h4>
             
-            <h4 data-toc-skip class="date">2022-09-04</h4>
+            <h4 data-toc-skip class="date">2022-09-05</h4>
       
       
       <div class="hidden name"><code>MAGE_expanded_tutorial.Rmd</code></div>
@@ -311,23 +311,23 @@ finish:</p>
 only two alleles are allowed (which is compatible with the large
 majority of all loci in most diploid species, including humans).
 Accounting for more alleles would require a different approach,
-ppossibilities being the use of multiple beta-binomial models (for all
+possibilities being the use of multiple beta-binomial models (for all
 alleles against one set reference, or even all pairwise combinations) or
 of (beta-)multinomial models”. The latter is, however, not supported by
 MAGE at the moment.</p>
-<p>So as it stands, we need to pick one reference and one variant allele
-and retain only their count data. This can be done by hand by a
+<p>So as it stands, we need to select one reference and one variant
+allele and retain only their count data. This can be done by hand by a
 researcher based on biological knowledge or through some automated
 procedure, e.g. retaining only the most common alleles. MAGE’s
 <code><a href="../reference/standard_alleles.html">standard_alleles()</a></code> function combines both approaches by
 taking a look at the standard alleles for every locus according to dbSNP
-which are supplied by the <code>ref_alleles</code> column, then picking
-the two most common alleles from among these suggested standard alleles
-only. Should one wish to solely rely on RNAseq count files without
-external annotation, it’s possible to supply
+which are supplied by the <code>ref_alleles</code> column, then
+selecting the two most common alleles from among these suggested
+standard alleles only. Should one wish to solely rely on RNAseq count
+files without external annotation, it’s possible to supply
 <code><a href="../reference/standard_alleles.html">standard_alleles()</a></code> with <code>A/T/C/G</code> strings in all
 of its <code>ref_alleles</code> columns, which will result in the most
-abundant alleles being picked.</p>
+abundant alleles being selected.</p>
 <p><code><a href="../reference/standard_alleles.html">standard_alleles()</a></code> updates each dataframe in our lists,
 retaining only two alleles in the <code>ref_alleles</code> column and
 including additional columns specifying which allele is chosen as
@@ -456,9 +456,9 @@ count in all RNAseq data combined):</p>
 </tbody>
 </table>
 <p>We could run <code><a href="../reference/standard_alleles.html">standard_alleles()</a></code> on the case data as
-well, but to enable comparison between both datasets, we enforce picked
-alleles to be the same for corresponding loci in the control- and
-case-datasets (this makes sense from a biological perspective as
+well, but to enable comparison between both datasets, we enforce
+selected alleles to be the same for corresponding loci in the control
+and case datasets (this makes sense from a biological perspective as
 well):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span><span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">caseList</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
@@ -485,23 +485,23 @@ counts). After all, loci with a too low minor allele frequency will
 feature insufficient numbers of heterozygous individuals, which are
 required to observe ASE effects. Also, if its
 <code>checkref_filter</code> argument is set to TRUE, it checks whether
-the total nucleotide counts truly suggest there’s only two occurring
+the total nucleotide counts truly suggest there are only two occurring
 alleles as assumed in the previous step, or whether there’s heuristic
 evidence to the contrary, in which case the locus is removed (details
 are found on this function’s help page).</p>
-<p>For now, we’ll restrict ourselves to just a minimum number of samples
-filter of 20 in controls (only counting samples with at least one
-reference- or variant-read). The first analysis is genotyping after all,
-and researchers might be interested in getting the most likely genotype
-for every sample regardless of median coverage or minor allele frequency
-across the entire locus (as MAGE is a population-level modeller a
-minimal number of samples of at least 20 is always advised). We apply no
-actual filtering on the case dataset however, but rather retain case
-data if its locus is retained in the control set as well, as comparison
-against controls is the case dataset’s main purpose. We do run
-<code>prior_filter</code> on cases with no actual filter setting applied
-though, which reduces the function to removing samples having a
-zero-count for both reference- and variant-alleles (not removing these
+<p>For now, we’ll restrict ourselves to just a “minimum number of
+samples” filter of 20 in controls (only counting samples with at least
+one reference or variant read). The first analysis is genotyping after
+all, and researchers might be interested in getting the most likely
+genotype for every sample regardless of median coverage or minor allele
+frequency across the entire locus (as MAGE is a population-level
+modeller, a minimal number of samples of at least 20 is always advised).
+We apply no actual filtering on the case dataset however, but rather
+retain case data if its locus is retained in the control set as well, as
+comparison against controls is the case dataset’s main purpose. We do
+run <code>prior_filter</code> on cases with no actual filter setting
+applied though, which reduces the function to removing samples having a
+zero-count for both reference and variant alleles (not removing these
 would give NA-results during several calculations in the pipeline). This
 reduces the toy datasets from 269 to 264 loci:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -580,7 +580,11 @@ actual genotyping and allelic bias detection.</p>
 <p>As hinted upon in the previous section, the code below (and the code
 in following sections) puts the analysis pipelines into functions to
 enable parallellizations (if no parallellization is required, for-loops
-would do just fine).</p>
+would do just fine). The code below returns vectors containing reliable
+(according to the filters mentioned above) metaparameter estimates, of
+which one still has to take e.g. the mean or median to get final
+metaparameters estimates. In this vignette, we use the more robust
+median.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">AllelicMeta_est_par</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">DataList</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
@@ -692,7 +696,7 @@ being marked as outlier). The reason for focussing on heterozygous
 distributional parameters is that these are still being fitted (the
 homozygous <span class="math inline">\(\pi\)</span> parameters are
 already fixed by the metaparameter SE) and are actually affected by
-allele-specific expression effects (<span class="math inline">\(\pi_{het}\)</span> can indicate AB and <span class="math inline">\(\theta{het}\)</span> can indicate allelic
+allele-specific expression effects (<span class="math inline">\(\pi_{het}\)</span> can indicate AB and <span class="math inline">\(\theta_{het}\)</span> can indicate allelic
 divergence, see later; meanwhile <span class="math inline">\(\theta_{hom}\)</span> is a nuisance parameter at
 best). Do note, however, that the robust fit is significantly slower
 than the non-robust one provided by the <code>EMfit_betabinom</code>
@@ -837,10 +841,9 @@ case you want to play it extra safe in retaining significantly biased
 loci</li>
 <li>“quality”: will contain “!” if a locus contained no heterozygous
 samples to detect AB on</li>
-<li>“allele.frequency”: referring to the reference allele frequency
-across genotypes; you may not want to trust loci with extreme allele
-frequencies as these probably contain very little heterozygous
-individuals</li>
+<li>“allele.frequency”: the reference allele frequency across genotypes;
+you may not want to trust loci with extreme allele frequencies as these
+probably contain very little heterozygous individuals</li>
 <li>“coverage”: contains the median coverage of all samples covering the
 locus</li>
 <li>“nr_samples”: number of samples covering the locus</li>
@@ -864,8 +867,10 @@ earlier. Since we retain only those loci for which we can’t find
 sufficient evidence against the null hypothesis of HWE, this is a
 statistically weak conclusion, yet in scientific research a cut-off of
 the p-value of this test of 0.001 is often used to filter out loci with
-which something seems wrong (see e.g. , , ); such extreme deviations
-from HWE should not occur in a normal population.</p>
+which something seems wrong (see e.g. <span class="citation">Sha and
+Zhang (2011)</span>, <span class="citation">Teo et al. (2007)</span>,
+<span class="citation">Rohlfs and Weir (2008)</span>); such extreme
+deviations from HWE should not occur in a normal population.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Statistical evidence for significant AB at the 5% FDR level:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">Geno_AB_res</span><span class="op">$</span><span class="va">position</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html" class="external-link">p.adjust</a></span><span class="op">(</span><span class="va">Geno_AB_res</span><span class="op">$</span><span class="va">p</span>, method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="op">&amp;</span> </span>
@@ -903,19 +908,19 @@ anyway to test for a significant shift using a likelihood ratio test.
 This plot can illustrate just how much better the shifted model fits to
 the data, as illustrated below.</p>
 <p>Keep in mind, however, that for a beta-binomial PMF, its shape
-(variance) depends on the coverage is inferred from, even when
-normalized from the reference allele count to a 0-to-1 reference allele
-fraction, such as on the x-axis in the plot below. As such, we have to
-pick a coverage to use as basis for the PMF plots
-(<code>ScaleCount</code> argument). The median coverage across samples
-is a good pick for this, though for data points with outlying coverages,
-the resulting visualization may still be poor (even if those data points
-are well fitted by the model). This is because the fitted model allows
-for a flexible per-sample coverage parameter, whereas for our PMF plot,
-we have to pick just one.</p>
+(variance) depends on the coverage, even when normalized from the
+reference allele count to a 0-to-1 reference allele fraction, such as on
+the x-axis in the plot below. As such, we have to choose a coverage to
+use as basis for the PMF plots (<code>ScaleCount</code> argument). The
+median coverage across samples is a good choice for this, though for
+data points with outlying coverages, the resulting visualization may
+still be poor (even if those data points are well fitted by the model).
+This is because the fitted model allows for a flexible per-sample
+coverage parameter, whereas for our PMF plot, we have to choose just
+one.</p>
 <p>To accomodate for this, one might opt to set the
 <code>ScaleHist</code> argument to TRUE, which will re-calculate
-observed per-sample reference allele fraction that are to be plotted in
+observed per-sample reference allele fractions that are to be plotted in
 the histogram using the MAGE’s beta-binomial quantile function given the
 observed per-sample data probability as input, but while using
 <code>ScaleCount</code> total counts (i.e. we transform observed
@@ -966,7 +971,7 @@ unshifted PMF, and to not plot the unshifted fit, via the code below
 </h2>
 <p>In the context of MAGE, we see case-specific events such copy number
 alterations, aberrant hypermethylation, promotor mutation and silencing
-events of tumor suppressor genes as mechanisms that will affect one
+events of e.g. tumor suppressor genes as mechanisms that will affect one
 allele, or both alleles in a different way, per sample. However, these
 mechanisms show no preference towards either allele on a
 population-level, acting mainly as an added source of variance on the
@@ -974,10 +979,10 @@ observed reference allele fraction captured by <span class="math inline">\(\thet
 variance <em>Allelic Divergence (AD)</em>, we term its change (increase)
 in disease due to, amongst others, the mechanisms listed above
 <em>differential Allelic Divergence (dAD)</em>.</p>
-<p>Detecting dAD between to populations can be done via likelihood ratio
-test, comparing: (1) a model fitting ALL data, both control and case, as
-one beta-binomial mixture model, with (2) a model allowing the control-
-and tumor data to have their separate <span class="math inline">\(\theta\)</span> parameters for the heterozygous
+<p>Detecting dAD between two populations can be done via a likelihood
+ratio test, comparing: (1) a model fitting ALL data, both control and
+case, as one beta-binomial mixture model, with (2) a model allowing the
+control- and case data to have their separate <span class="math inline">\(\theta\)</span> parameters for the heterozygous
 samples, yet keeping the <span class="math inline">\(\pi\)</span>
 parameter constant. These two models’ parameters are distinguished by
 respectively <code>H0</code> (null hypothesis) and <code>H1</code>
@@ -1250,9 +1255,9 @@ one can e.g. use the minimum of this weight across populations.</p>
 overdisperstion (<span class="math inline">\(\rho\)</span>) parameters
 in controls (black) and cases (colored). The case-<span class="math inline">\(\rho\)</span> is colored according to the (already
 5% FDR corrected) p-value testing for significant dAD in cases versus
-controls, while the relative heights of these histograms provide an
-illustration of the effect size. The remaining plot elements are
-explained in the legend.</p>
+controls, while the difference in height of these histograms provide an
+illustration of the effect size (actual <span class="math inline">\(\rho\)</span> values). The remaining plot elements
+are explained in the legend.</p>
 </div>
 <div class="section level2">
 <h2 id="detecting-imprinted-and-differentially-imprinted-loci">Detecting imprinted and differentially imprinted loci<a class="anchor" aria-label="anchor" href="#detecting-imprinted-and-differentially-imprinted-loci"></a>
@@ -1286,7 +1291,8 @@ samples in two separate groups according to a degree of imprinting <span class="
 likelihoods along the way to perform a likelihood-ratio test to check
 for differential imprinting (i.e. compare the most likely model with the
 non-imprinted one; <span class="math inline">\(i=0\)</span>). For
-completeness, the imprinted PMF is (see for a full elaboration):</p>
+completeness, the imprinted PMF is (see <span class="citation">Goovaerts
+et al. (2018)</span> for a full elaboration):</p>
 <p><span class="math display">\[
 \small
 \begin{aligned}
@@ -1312,16 +1318,17 @@ to test for differential imprinting. More specifically, logistic
 regression is used to evaluate whether case samples feature a
 significantly higher number of apparently heterozygous samples than
 control samples (by considering the least expressed allele as a success;
-more details can be found on the function’s help page; note that the
+more details can be found on the function’s help page. Note that the
 logistic regression approach takes into account variable coverage
-between samples). If this is true, it indicates that a significant
-fraction of heterozygous samples in tumor tissue “lost their imprinting”
-and actually started expressing both alleles again. We call these loci
-“differentially imprinted”, as we reserve the term “loss-of-imprinting”
-for the phenomenon where differential imprinting co-occurs with
-increased total expression, indicative of re-expression of the silenced
-allele. Comment in the code below provide additional insight into the
-imprinting analysis pipeline:</p>
+between samples, contrasting our previously published strategy by <span class="citation">Goovaerts et al. (2018)</span>). If this is true, it
+indicates that a significant fraction of heterozygous samples in tumor
+tissue “lost their imprinting” and actually started expressing both
+alleles again. We call these loci “differentially imprinted”, as we
+reserve the term “loss-of-imprinting” for the phenomenon where
+differential imprinting co-occurs with increased total expression,
+indicative of re-expression of the silenced allele. Comments in the code
+below provide additional insight into the imprinting analysis
+pipeline:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform filtering using symmetry_gof()</span></span>
 <span><span class="co"># Notice we use allelefreq_prel as input in this function, which is the allele frequency as </span></span>
@@ -1370,7 +1377,7 @@ imprinting analysis pipeline:</p>
 <span>  file_all_counts <span class="op">=</span> <span class="cn">FALSE</span>, file_impr_counts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="co"># From among actually imprinted loci, detect differential expression in case data</span></span>
+<span><span class="co"># Amongst actually imprinted loci, detect differential expression in case data</span></span>
 <span><span class="va">pos_impr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">impr_res_FIN</span><span class="op">$</span><span class="va">position</span><span class="op">)</span></span>
 <span><span class="va">p_DI_df</span> <span class="op">&lt;-</span> <span class="va">impr_res_FIN</span></span>
 <span><span class="va">p_DI_df</span><span class="op">$</span><span class="va">DI_pval</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
@@ -1388,13 +1395,13 @@ from above):</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">impr_res_FIN</span><span class="op">$</span><span class="va">position</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>[1] “loc42, loc81, loc138, loc166, loc167, loc168, loc169, loc202,
 loc215”</p>
-<p>From among this set, a part is actually differentially imprinted in
-case samples, which is indicated by the p-value in the
-<code>DI_pval</code> column in the <code>p_DI_df</code> dataframe. We
-can control loss-of-imprinting detection, for a change, at the 5% FWER
-level (actually feasible here due to the small number of actually
-imprinted loci remaining, though we’re looking at a small toy dataset
-here; this isn’t necessarily the case in larger experiments):</p>
+<p>From this set, a part is actually differentially imprinted in case
+samples, which is indicated by the p-value in the <code>DI_pval</code>
+column in the <code>p_DI_df</code> dataframe. We can control
+loss-of-imprinting detection, for a change, at the 5% FWER level
+(actually feasible here due to the small number of actually imprinted
+loci remaining, though we’re looking at a small toy dataset here; this
+isn’t necessarily the case in larger experiments):</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">p_DI_df</span><span class="op">$</span><span class="va">position</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html" class="external-link">p.adjust</a></span><span class="op">(</span><span class="va">p_DI_df</span><span class="op">$</span><span class="va">DI_pval</span>, method <span class="op">=</span> <span class="st">"holm"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">]</span>, </span>
 <span>            collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -1524,6 +1531,30 @@ histogram for cases instead).</p>
 <span><span class="co">#&gt; [70] knitr_1.31         </span></span>
 <span><span class="co">#&gt; [71] patchwork_1.1.1    </span></span>
 <span><span class="co">#&gt; [72] sass_0.4.2</span></span></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-goovaerts2018" class="csl-entry">
+Goovaerts, Tine, Sandra Steyaert, Chari A Vandenbussche, Jeroen Galle,
+Olivier Thas, Wim Van Criekinge, and Tim De Meyer. 2018. <span>“A
+Comprehensive Overview of Genomic Imprinting in Breast and Its
+Deregulation in Cancer.”</span> <em>Nature Communications</em> 9 (1):
+1–14.
+</div>
+<div id="ref-rohlfs" class="csl-entry">
+Rohlfs, Rori V, and Bruce S Weir. 2008. <span>“Distributions of
+Hardy–Weinberg Equilibrium Test Statistics.”</span> <em>Genetics</em>
+180 (3): 1609–16.
+</div>
+<div id="ref-sha" class="csl-entry">
+Sha, Qiuying, and Shuanglin Zhang. 2011. <span>“A Test of Hardy-Weinberg
+Equilibrium in Structured Populations.”</span> <em>Genetic
+Epidemiology</em> 35 (7): 671–78.
+</div>
+<div id="ref-teo" class="csl-entry">
+Teo, Yik Y, Andrew E Fry, Taane G Clark, ES Tai, and Mark Seielstad.
+2007. <span>“On the Usage of HWE for Identifying Genotyping
+Errors.”</span> <em>Annals of Human Genetics</em> 71 (5): 701–3.
+</div>
+</div>
 </div>
   </div>
 

@@ -342,6 +342,8 @@ MAGE_EMfitplot <- function(ref_counts = NULL, var_counts = NULL, pr = NULL, prv 
     
   }
   
+  pl <- pl + ggplot2::theme(legend.key.width = unit(1, "cm"))
+  
   if(!is.null(wd_res)){
     ggplot2::ggsave(filename = paste(wd_res, "eQTL_chr", chr, "_", position, "_", gene, "BetaBinom.png", sep = ""), plot = pl, width = 10, height = 8, units = "in", dpi = 300)
   } else{

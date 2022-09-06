@@ -144,6 +144,8 @@ MAGE_imprintplot <- function (ref_counts, var_counts, allelefreq, impr, SE, inbr
     
   }
   
+  pl <- pl + ggplot2::theme(legend.key.width = unit(1, "cm"))
+  
   if(!is.null(wd_res)){
     ggplot2::ggsave(filename = paste(wd_res, "chr", chr, "_", position, "_", gene, ".png", sep = ""), plot = pl, width = 10, height = 8, units = "in", dpi = 300)
   } else{

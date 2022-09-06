@@ -79,21 +79,34 @@
 <!-- badges: start -->
 <!-- badges: end -->
 <p>Welcome to MAGE’s readme!</p>
-<p>MAGE is the Modeller of Allelic Gene Expression, an R package providing extensive functions for various RNAseq-based allelic analyses. This ranges from basic tasks such as (solely) RNAseq-base genotyping, to the analysis of more complex population-level phenomena such as (differential) allelic bias, allellic divergence and (loss of) imprinting analyses. More information about what these are and how to model them using MAGE can be found in the package vignette.</p>
+<p>MAGE is the Modeller of Allelic Gene Expression, an R package providing extensive functions for various RNAseq-based allelic analyses. This ranges from basic tasks such as (solely) RNAseq-based genotyping, to the analysis of more complex population-level phenomena such as (differential) allelic bias, allellic divergence and (loss of) imprinting analyses. More information about what these are and how to model them using MAGE can be found in the package vignette.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>MAGE can be installed using the <code>install_github</code> function from the <code>devtools</code> package:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<p>If you want to install MAGE in a conda environment including an R-installation, the following bash commands set up all necessary dependencies, opens the environment, and launches R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> <span class="op">&lt;</span>envname<span class="op">&gt;</span> r-essentials r-base r-devtools gmp mpfr</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate <span class="op">&lt;</span>envname<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span></span></code></pre></div>
+<p>MAGE source code can be found on its associated Github page: <a href="https://github.com/Biobix/MAGE" class="external-link uri">https://github.com/Biobix/MAGE</a>. As such, MAGE can be installed using the <code>install_github</code> function from R’s <code>devtools</code> package:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"BioBix/MAGE"</span><span class="op">)</span></span></code></pre></div>
+<p>For a local installation, rtools will be required. In case the code chunk above throws the error <code>ERROR: loading failed for 'i386'</code>, running the following instead potentially solves the issue:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"BioBix/MAGE"</span>, INSTALL_opts<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"--no-multiarch"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
-<p>MAGE contains a vignette going over its entire anaylis pipeline, which can be found under “articles” on <a href="https://biobix.github.io/MAGE" class="external-link uri">https://biobix.github.io/MAGE</a>.</p>
-<p>Both a “regular” and “expanded” vignette are included, the latter writing out all analyses much more in-depth using MAGE’s base functions while the former makes use of wrapper functions that handle many analyses and intermediary steps under-the hood. As such, the regular vignette is recommended for first-time users or users that just want a plug-and-play pipeline, while the expanded vignette provides more insight into MAGE’s analyses and is recommended when setting out to create your own custom/specialized analysis pipeline.</p>
+<p>MAGE contains a vignette going over its entire anaylis pipeline, which can be found here: <a href="https://biobix.github.io/MAGE/articles/MAGE_tutorial.html" class="external-link uri">https://biobix.github.io/MAGE/articles/MAGE_tutorial.html</a></p>
+<p>Besides this “regular” vignette an “expanded” one is included as well (<a href="https://biobix.github.io/MAGE/articles/MAGE_expanded_tutorial.html" class="external-link uri">https://biobix.github.io/MAGE/articles/MAGE_expanded_tutorial.html</a>), containing more in-depth code using MAGE’s base functions while the regular one uses wrapper functions that handle many analyses and intermediary steps under-the hood. As such, the regular vignette is recommended for first-time users or users that just want a plug-and-play pipeline, while the expanded vignette provides more insight into MAGE’s analyses and is recommended when setting out to create your own custom/specialized analysis pipeline.</p>
 <p>MAGE has an associated paper pending publication. Coming soon…</p>
+</div>
+<div class="section level2">
+<h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
+</h2>
+<p>For theoretical/technical questions or issues while using the MAGE package, please contact me at <a href="mailto:cedric.stroobandt@ugent.be" class="email">cedric.stroobandt@ugent.be</a>; for everything else, contact Tim De Meyer at <a href="mailto:tim.demeyer@ugent.be" class="email">tim.demeyer@ugent.be</a>.</p>
 </div>
 </div>
   </div>

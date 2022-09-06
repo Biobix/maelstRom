@@ -10,7 +10,7 @@ Welcome to MAGE’s readme!
 
 MAGE is the Modeller of Allelic Gene Expression, an R package providing
 extensive functions for various RNAseq-based allelic analyses. This
-ranges from basic tasks such as (solely) RNAseq-base genotyping, to the
+ranges from basic tasks such as (solely) RNAseq-based genotyping, to the
 analysis of more complex population-level phenomena such as
 (differential) allelic bias, allellic divergence and (loss of)
 imprinting analyses. More information about what these are and how to
@@ -18,26 +18,54 @@ model them using MAGE can be found in the package vignette.
 
 ## Installation
 
-MAGE can be installed using the `install_github` function from the
-`devtools` package:
+If you want to install MAGE in a conda environment including an
+R-installation, the following bash commands set up all necessary
+dependencies, opens the environment, and launches R:
+
+``` bash
+conda create -n <envname> r-essentials r-base r-devtools gmp mpfr
+conda activate <envname>
+R
+```
+
+MAGE source code can be found on its associated Github page:
+<https://github.com/Biobix/MAGE>. As such, MAGE can be installed using
+the `install_github` function from R’s `devtools` package:
 
 ``` r
 library(devtools)
 install_github("BioBix/MAGE")
 ```
 
+For a local installation, rtools will be required. In case the code
+chunk above throws the error `ERROR: loading failed for 'i386'`, running
+the following instead potentially solves the issue:
+
+``` r
+library(devtools)
+install_github("BioBix/MAGE", INSTALL_opts=c("--no-multiarch"))
+```
+
 ## Getting started
 
 MAGE contains a vignette going over its entire anaylis pipeline, which
-can be found under “articles” on <https://biobix.github.io/MAGE>.
+can be found here:
+<https://biobix.github.io/MAGE/articles/MAGE_tutorial.html>
 
-Both a “regular” and “expanded” vignette are included, the latter
-writing out all analyses much more in-depth using MAGE’s base functions
-while the former makes use of wrapper functions that handle many
-analyses and intermediary steps under-the hood. As such, the regular
-vignette is recommended for first-time users or users that just want a
-plug-and-play pipeline, while the expanded vignette provides more
-insight into MAGE’s analyses and is recommended when setting out to
-create your own custom/specialized analysis pipeline.
+Besides this “regular” vignette an “expanded” one is included as well
+(<https://biobix.github.io/MAGE/articles/MAGE_expanded_tutorial.html>),
+containing more in-depth code using MAGE’s base functions while the
+regular one uses wrapper functions that handle many analyses and
+intermediary steps under-the hood. As such, the regular vignette is
+recommended for first-time users or users that just want a plug-and-play
+pipeline, while the expanded vignette provides more insight into MAGE’s
+analyses and is recommended when setting out to create your own
+custom/specialized analysis pipeline.
 
 MAGE has an associated paper pending publication. Coming soon…
+
+## Contact
+
+For theoretical/technical questions or issues while using the MAGE
+package, please contact me at <cedric.stroobandt@ugent.be>; for
+everything else, contact Tim De Meyer at <tim.demeyer@ugent.be>.
