@@ -81,16 +81,47 @@
 <p>Welcome to MAGE’s readme!</p>
 <p>MAGE is the Modeller of Allelic Gene Expression, an R package providing extensive functions for various RNAseq-based allelic analyses. This ranges from basic tasks such as (solely) RNAseq-based genotyping, to the analysis of more complex population-level phenomena such as (differential) allelic bias, allellic divergence and (loss of) imprinting analyses. More information about what these are and how to model them using MAGE can be found in the package vignette.</p>
 <div class="section level2">
+<h2 id="system-requirements">System requirements<a class="anchor" aria-label="anchor" href="#system-requirements"></a>
+</h2>
+<div class="section level3">
+<h3 id="hardware-requirements">Hardware requirements<a class="anchor" aria-label="anchor" href="#hardware-requirements"></a>
+</h3>
+<p>MAGE requires a standard computer (server) with sufficient RAM for in-memory operations.</p>
+</div>
+<div class="section level3">
+<h3 id="os-requirements">OS requirements<a class="anchor" aria-label="anchor" href="#os-requirements"></a>
+</h3>
+<p>This package is supported for Windows, Linux and MacOS. The package has been tested on the following systems:</p>
+<ul>
+<li>Linux: Ubuntu 18.04 (bionic), Ubuntu 16.04 (Xenial)</li>
+<li>Windows: Windows 10</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="other-software-requirements">Other software requirements<a class="anchor" aria-label="anchor" href="#other-software-requirements"></a>
+</h3>
+<p>MAGE is an R software package with additional C/C++ code under-the-hood, and as such relies on (versions listed are those used for MAGE’s latest test, though more recent versions should work fine as well):</p>
+<ul>
+<li>R (v4.0.2)</li>
+<li>GNU multiple precision arithmetic library (gmp; v6.1.2)</li>
+<li>Boost Multiple Precision Floating-Point Reliable Library (mpfr; v4.0.1)</li>
+</ul>
+<p>Furthermore, MAGE relies on other R packages for its operations, which are listed in the tutorial: <a href="https://biobix.github.io/MAGE/articles/MAGE_tutorial.html#session-info" class="external-link uri">https://biobix.github.io/MAGE/articles/MAGE_tutorial.html#session-info</a></p>
+</div>
+</div>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>If you want to install MAGE in a conda environment including an R-installation, the following bash commands set up all necessary dependencies, opens the environment, and launches R:</p>
+<p>If you want to install MAGE in a conda environment including an R-installation, the following bash commands sets up the previously listed software dependencies, then opens the environment, and launches R:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> <span class="op">&lt;</span>envname<span class="op">&gt;</span> r-essentials r-base r-devtools gmp mpfr</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate <span class="op">&lt;</span>envname<span class="op">&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span></span></code></pre></div>
+<p>Setting up this environment takes about 9 minutes on a linux-based server (Ubuntu 18.04; bionic)</p>
 <p>MAGE source code can be found on its associated Github page: <a href="https://github.com/Biobix/MAGE" class="external-link uri">https://github.com/Biobix/MAGE</a>. As such, MAGE can be installed using the <code>install_github</code> function from R’s <code>devtools</code> package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"BioBix/MAGE"</span><span class="op">)</span></span></code></pre></div>
+<p>From a clean R installation (e.g. as in the conda environment set up previously), this installation takes about 2 minutes.</p>
 <p>For a local installation, rtools will be required. In case the code chunk above throws the error <code>ERROR: loading failed for 'i386'</code>, running the following instead potentially solves the issue:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
@@ -101,6 +132,7 @@
 </h2>
 <p>MAGE contains a vignette going over its entire anaylis pipeline, which can be found here: <a href="https://biobix.github.io/MAGE/articles/MAGE_tutorial.html" class="external-link uri">https://biobix.github.io/MAGE/articles/MAGE_tutorial.html</a></p>
 <p>Besides this “regular” vignette an “expanded” one is included as well (<a href="https://biobix.github.io/MAGE/articles/MAGE_expanded_tutorial.html" class="external-link uri">https://biobix.github.io/MAGE/articles/MAGE_expanded_tutorial.html</a>), containing more in-depth code using MAGE’s base functions while the regular one uses wrapper functions that handle many analyses and intermediary steps under-the hood. As such, the regular vignette is recommended for first-time users or users that just want a plug-and-play pipeline, while the expanded vignette provides more insight into MAGE’s analyses and is recommended when setting out to create your own custom/specialized analysis pipeline.</p>
+<p>Running the entire vignette takes about 2.5 hours on a standard computer (local installation; Windows 10) if parallellization is not used (single-core). Enabling parallellization when running MAGE on large-scale datasets on server is advised.</p>
 <p>MAGE has an associated paper pending publication. Coming soon…</p>
 </div>
 <div class="section level2">

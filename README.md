@@ -16,17 +16,51 @@ analysis of more complex population-level phenomena such as
 imprinting analyses. More information about what these are and how to
 model them using MAGE can be found in the package vignette.
 
+## System requirements
+
+### Hardware requirements
+
+MAGE requires a standard computer (server) with sufficient RAM for
+in-memory operations.
+
+### OS requirements
+
+This package is supported for Windows, Linux and MacOS. The package has
+been tested on the following systems:
+
+-   Linux: Ubuntu 18.04 (bionic), Ubuntu 16.04 (Xenial)
+-   Windows: Windows 10
+
+### Other software requirements
+
+MAGE is an R software package with additional C/C++ code under-the-hood,
+and as such relies on (versions listed are those used for MAGE’s latest
+test, though more recent versions should work fine as well):
+
+-   R (v4.0.2)
+-   GNU multiple precision arithmetic library (gmp; v6.1.2)
+-   Boost Multiple Precision Floating-Point Reliable Library (mpfr;
+    v4.0.1)
+
+Furthermore, MAGE relies on other R packages for its operations, which
+are listed in the tutorial:
+<https://biobix.github.io/MAGE/articles/MAGE_tutorial.html#session-info>
+
 ## Installation
 
 If you want to install MAGE in a conda environment including an
-R-installation, the following bash commands set up all necessary
-dependencies, opens the environment, and launches R:
+R-installation, the following bash commands sets up the previously
+listed software dependencies, then opens the environment, and launches
+R:
 
 ``` bash
 conda create -n <envname> r-essentials r-base r-devtools gmp mpfr
 conda activate <envname>
 R
 ```
+
+Setting up this environment takes about 9 minutes on a linux-based
+server (Ubuntu 18.04; bionic)
 
 MAGE source code can be found on its associated Github page:
 <https://github.com/Biobix/MAGE>. As such, MAGE can be installed using
@@ -36,6 +70,9 @@ the `install_github` function from R’s `devtools` package:
 library(devtools)
 install_github("BioBix/MAGE")
 ```
+
+From a clean R installation (e.g. as in the conda environment set up
+previously), this installation takes about 2 minutes.
 
 For a local installation, rtools will be required. In case the code
 chunk above throws the error `ERROR: loading failed for 'i386'`, running
@@ -61,6 +98,11 @@ recommended for first-time users or users that just want a plug-and-play
 pipeline, while the expanded vignette provides more insight into MAGE’s
 analyses and is recommended when setting out to create your own
 custom/specialized analysis pipeline.
+
+Running the entire vignette takes about 2.5 hours on a standard computer
+(local installation; Windows 10) if parallellization is not used
+(single-core). Enabling parallellization when running MAGE on
+large-scale datasets on server is advised.
 
 MAGE has an associated paper pending publication. Coming soon…
 
