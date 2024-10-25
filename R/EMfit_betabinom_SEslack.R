@@ -482,12 +482,12 @@ EMfit_betabinom_SEslack <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
         theta_het <- exp(OptObj$par[2])
       }
       
-      f <- function(thetaX) MAGE::dBetaBinom(maxC,maxC,piRR,thetaX, LOG=TRUE)-MAGE::dBetaBinom(maxC,maxC,probshift,theta_het, LOG=TRUE)
+      f <- function(thetaX) maelstRom::dBetaBinom(maxC,maxC,piRR,thetaX, LOG=TRUE)-maelstRom::dBetaBinom(maxC,maxC,probshift,theta_het, LOG=TRUE)
       US <- tryCatch( {uniroot(f, interval = c(0,1), tol=10^-16)}, error = function(e) NULL)
       if(!is.null(US)){
         theta_RR <- US$root
       }
-      f <- function(thetaX) MAGE::dBetaBinom(0,maxC,1-piVV,thetaX, LOG=TRUE)-MAGE::dBetaBinom(0,maxC,probshift,theta_het, LOG=TRUE)
+      f <- function(thetaX) maelstRom::dBetaBinom(0,maxC,1-piVV,thetaX, LOG=TRUE)-maelstRom::dBetaBinom(0,maxC,probshift,theta_het, LOG=TRUE)
       US <- tryCatch( {uniroot(f, interval = c(0,1), tol=10^-16)}, error = function(e) NULL)
       if(!is.null(US)){
         theta_VV <- US$root
@@ -745,12 +745,12 @@ EMfit_betabinom_SEslack <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
         
       }
       
-      f <- function(thetaX) MAGE::dBetaBinom(maxC,maxC,piRR,thetaX, LOG=TRUE)-MAGE::dBetaBinom(maxC,maxC,probshift,theta_het, LOG=TRUE)
+      f <- function(thetaX) maelstRom::dBetaBinom(maxC,maxC,piRR,thetaX, LOG=TRUE)-maelstRom::dBetaBinom(maxC,maxC,probshift,theta_het, LOG=TRUE)
       US <- tryCatch( {uniroot(f, interval = c(0,1), tol=10^-16)}, error = function(e) NULL)
       if(!is.null(US)){
         theta_RR <- US$root
       }
-      f <- function(thetaX) MAGE::dBetaBinom(0,maxC,1-piVV,thetaX, LOG=TRUE)-MAGE::dBetaBinom(0,maxC,probshift,theta_het, LOG=TRUE)
+      f <- function(thetaX) maelstRom::dBetaBinom(0,maxC,1-piVV,thetaX, LOG=TRUE)-maelstRom::dBetaBinom(0,maxC,probshift,theta_het, LOG=TRUE)
       US <- tryCatch( {uniroot(f, interval = c(0,1), tol=10^-16)}, error = function(e) NULL)
       if(!is.null(US)){
         theta_VV <- US$root

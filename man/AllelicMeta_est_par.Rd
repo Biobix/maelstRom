@@ -11,7 +11,7 @@ AllelicMeta_est_par(
   SE_prior = 0.002,
   F_inbr_prior = NULL,
   HetProb = 0.5,
-  pA_filt = 0.15,
+  MinAllele_filt = 0.15,
   SE_filt = 0.035,
   NumSamp_filt = 20,
   MedianCov_filt = 4
@@ -31,7 +31,7 @@ two consecutive iterations (default is 1e-08).}
 
 \item{HetProb}{Number. Allelic bias in heterozygotes (expected reference over total allele count in RNAseq data; default is 0.5}
 
-\item{pA_filt}{Number. Minimum allowed estimated minor allele frequency for a locus to be considered in the metaparameter estimates.}
+\item{MinAllele_filt}{Number. Minimum allowed estimated minor allele frequency for a locus to be considered in the metaparameter estimates.}
 
 \item{SE_filt}{Number. Maximum allowed estimated sequencing error rate for a locus to be considered in the metaparameter estimates.}
 

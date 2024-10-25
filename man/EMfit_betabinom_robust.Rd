@@ -25,7 +25,9 @@ EMfit_betabinom_robust(
   NumHetMin = 5,
   MaxOutFrac = 0.5,
   thetaTRY = c(10^-1, 10^-3, 10^-7),
-  fitH0 = TRUE
+  fitH0 = TRUE,
+  FirstFewFixed = NULL,
+  epsabs = 0.001
 )
 }
 \arguments{

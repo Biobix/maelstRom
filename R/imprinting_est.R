@@ -21,14 +21,14 @@
 
 imprinting_est <- function(ref_counts, var_counts, allelefreq, SE, inbr = 0) {
   #PMF1 => i = 0
-  PMF1 <- MAGE::pmf_impr(ref_counts, var_counts, allelefreq, 0, SE, inbr)
+  PMF1 <- maelstRom::pmf_impr(ref_counts, var_counts, allelefreq, 0, SE, inbr)
 
   #PMF2 => i = î
   i_est <- 0
   product_max <- -Inf
   PMF2 <- rep(0, length(ref_counts))
   for (i in seq(0, 1, 0.01)) {
-    PMF2_iest <- MAGE::pmf_impr(ref_counts, var_counts, allelefreq, i, SE, inbr)
+    PMF2_iest <- maelstRom::pmf_impr(ref_counts, var_counts, allelefreq, i, SE, inbr)
     product_est <- sum(log(PMF2_iest))
     if (product_est > product_max) {
       product_max <- product_est
@@ -44,7 +44,7 @@ imprinting_est <- function(ref_counts, var_counts, allelefreq, SE, inbr = 0) {
   p_impr <- 1 / 2 * pchisq(LRT, 1, lower.tail = FALSE) + 1 / 2 * pchisq(LRT, 0, lower.tail = FALSE)
 
   #GOF BASED ON CORRECTED LIKELIHOODS
-  PMF_corrected <- MAGE::pmf_impr(ref_counts, var_counts, allelefreq, i_est, SE, inbr) * (ref_counts + var_counts + 1)
+  PMF_corrected <- maelstRom::pmf_impr(ref_counts, var_counts, allelefreq, i_est, SE, inbr) * (ref_counts + var_counts + 1)
   logLikelihood <- mean(log(PMF_corrected))
 
   results <- list("est_i" = i_est, "LRT" = LRT, "p_value" = p_impr, "GOF_likelihood" = logLikelihood)

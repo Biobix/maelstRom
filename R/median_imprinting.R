@@ -21,7 +21,7 @@
 median_imprinting <- function(ref_counts, var_counts, allelefreq, inbr = 0) {
   median_hetero <- round(length(ref_counts) * allelefreq * (1 - allelefreq) * (1 - inbr))
   ratios <- sort((apply(data.frame(ref_counts, var_counts), 1, min) / apply(data.frame(ref_counts, var_counts), 1, max)), TRUE)
-
+  
   med_impr <- 2 * (0.5 - ratios[median_hetero])
   if (length(med_impr) == 0) med_impr <- 0
   return(med_impr)

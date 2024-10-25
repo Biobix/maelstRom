@@ -1,6 +1,6 @@
 #' Prior filtering of loci.
 #'
-#' \code{prior_filter} filters loci prior to analysis using MAGE: 
+#' \code{prior_filter} filters loci prior to analysis using maelstRom: 
 #' \itemize{
 #'   \item a filter throwing out samples showcasing relevant allele counts for alleles not present in the ref_alleles column (if checkref_filter == TRUE)
 #'   \item a filter throwing out loci showcasing a low minor allele fraction (if prior_allelefreq_filter == TRUE, governed by min_PrioAlleleFreq)
@@ -27,7 +27,7 @@
 #' @export
 #' @return The data as data frame with total and median coverage or NULL if the SNP positions was filtered.
 
-prior_filter <- function(data_pos, min_median_cov = 5, min_nr_samples = 30, checkref_filter = TRUE,
+prior_filter <- function(data_pos, min_median_cov = 5, min_nr_samples = 30, checkref_filter = FALSE,
                          prior_allelefreq_filter = FALSE, min_PriorAlleleFreq = 0.1) {
   
   if(checkref_filter){
@@ -96,7 +96,7 @@ prior_filter <- function(data_pos, min_median_cov = 5, min_nr_samples = 30, chec
   #FILTER ON COVERAGE AND ON NUMBER OF SAMPLES
   data_pos$total <- data_pos$ref_count + data_pos$var_count
   data_pos$coverage <- median(data_pos$total)
-  if (data_pos$coverage < min_median_cov || nrow(data_pos) < min_nr_samples) return(NULL)
+  if (median(data_pos$total) < min_median_cov || nrow(data_pos) < min_nr_samples) return(NULL)
   
   
   return(data_pos)

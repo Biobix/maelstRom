@@ -36,7 +36,7 @@ A named vector containing moment estimates of the pi- and theta-parameters for b
 }
 \description{
 \code{MomentEst_MixedBetaBinom} calculates moment estimates for the pi- and theta-parameters of the beta-binomial data,
-given data with a varying number of observations. This estimator was previously described by \insertCite{kleinman}{MAGE},
+given data with a varying number of observations. This estimator was previously described by \insertCite{kleinman}{maelstRom},
 but was adapted into a weighted (according to how likely a sample is to be homozygous reference, homozygous variant, or
 heterozygous) estimator to be used in an expectation-maximization-framework. Due to the varying number of observations, this moment estimate
 is actually rather tricky should incorporate an additional per-sample weight that is to be tuned via an iterative procedure,

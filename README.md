@@ -1,26 +1,26 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# MAGE
+# maelstRom
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-Welcome to MAGE’s readme!
+Welcome to maelstRom’s readme!
 
-MAGE is the Modeller of Allelic Gene Expression, an R package providing
+maelstRom is the Modeller of Allelic Gene Expression, an R package providing
 extensive functions for various RNAseq-based allelic analyses. This
 ranges from basic tasks such as (solely) RNAseq-based genotyping, to the
 analysis of more complex population-level phenomena such as
 (differential) allelic bias, allellic divergence and (loss of)
 imprinting analyses. More information about what these are and how to
-model them using MAGE can be found in the package vignette.
+model them using maelstRom can be found in the package vignette.
 
 ## System requirements
 
 ### Hardware requirements
 
-MAGE requires a standard computer (server) with sufficient RAM for
+maelstRom requires a standard computer (server) with sufficient RAM for
 in-memory operations.
 
 ### OS requirements
@@ -33,8 +33,8 @@ been tested on the following systems:
 
 ### Other software requirements
 
-MAGE is an R software package with additional C/C++ code under-the-hood,
-and as such relies on (versions listed are those used for MAGE’s latest
+maelstRom is an R software package with additional C/C++ code under-the-hood,
+and as such relies on (versions listed are those used for maelstRom’s latest
 test, though more recent versions should work fine as well):
 
 -   R (v4.0.2)
@@ -42,13 +42,13 @@ test, though more recent versions should work fine as well):
 -   Boost Multiple Precision Floating-Point Reliable Library (mpfr;
     v4.0.1)
 
-Furthermore, MAGE relies on other R packages for its operations, which
+Furthermore, maelstRom relies on other R packages for its operations, which
 are listed in the tutorial:
-<https://biobix.github.io/MAGE/articles/MAGE_tutorial.html#session-info>
+<https://biobix.github.io/maelstRom/articles/maelstRom_tutorial.html#session-info>
 
 ## Installation
 
-If you want to install MAGE in a conda environment including an
+If you want to install maelstRom in a conda environment including an
 R-installation, the following bash commands sets up the previously
 listed software dependencies, then opens the environment, and launches
 R:
@@ -62,13 +62,13 @@ R
 Setting up this environment takes about 9 minutes on a linux-based
 server (Ubuntu 18.04; bionic)
 
-MAGE source code can be found on its associated Github page:
-<https://github.com/Biobix/MAGE>. As such, MAGE can be installed using
+maelstRom source code can be found on its associated Github page:
+<https://github.com/Biobix/maelstRom>. As such, maelstRom can be installed using
 the `install_github` function from R’s `devtools` package:
 
 ``` r
 library(devtools)
-install_github("BioBix/MAGE")
+install_github("BioBix/maelstRom")
 ```
 
 From a clean R installation (e.g. as in the conda environment set up
@@ -80,34 +80,34 @@ the following instead potentially solves the issue:
 
 ``` r
 library(devtools)
-install_github("BioBix/MAGE", INSTALL_opts=c("--no-multiarch"))
+install_github("BioBix/maelstRom", INSTALL_opts=c("--no-multiarch"))
 ```
 
 ## Getting started
 
-MAGE contains a vignette going over its entire anaylis pipeline, which
+maelstRom contains a vignette going over its entire anaylis pipeline, which
 can be found here:
-<https://biobix.github.io/MAGE/articles/MAGE_tutorial.html>
+<https://biobix.github.io/maelstRom/articles/maelstRom_tutorial.html>
 
 Besides this “regular” vignette an “expanded” one is included as well
-(<https://biobix.github.io/MAGE/articles/MAGE_expanded_tutorial.html>),
-containing more in-depth code using MAGE’s base functions while the
+(<https://biobix.github.io/maelstRom/articles/maelstRom_expanded_tutorial.html>),
+containing more in-depth code using maelstRom’s base functions while the
 regular one uses wrapper functions that handle many analyses and
 intermediary steps under-the hood. As such, the regular vignette is
 recommended for first-time users or users that just want a plug-and-play
-pipeline, while the expanded vignette provides more insight into MAGE’s
+pipeline, while the expanded vignette provides more insight into maelstRom’s
 analyses and is recommended when setting out to create your own
 custom/specialized analysis pipeline.
 
 Running the entire vignette takes about 2.5 hours on a standard computer
 (local installation; Windows 10) if parallellization is not used
-(single-core). Enabling parallellization when running MAGE on
+(single-core). Enabling parallellization when running maelstRom on
 large-scale datasets on server is advised.
 
-MAGE has an associated paper pending publication. Coming soon…
+maelstRom has an associated paper pending publication. Coming soon…
 
 ## Contact
 
-For theoretical/technical questions or issues while using the MAGE
+For theoretical/technical questions or issues while using the maelstRom
 package, please contact me at <cedric.stroobandt@ugent.be>; for
 everything else, contact Tim De Meyer at <tim.demeyer@ugent.be>.

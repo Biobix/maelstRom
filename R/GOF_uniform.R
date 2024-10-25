@@ -22,7 +22,7 @@ GOF_uniform <- function(ref_counts, var_counts, allelefreq, SE, inbr = 0) {
     pv * dbinom(var_counts, ref_counts + var_counts, prob = 1 - SE) +
     (prv / (ref_counts + var_counts + 1))
 
-  PMF_HWE <- MAGE::pmf_impr(ref_counts, var_counts, allelefreq = allelefreq, impr = 0, SE = SE, inbr = inbr)
+  PMF_HWE <- maelstRom::pmf_impr(ref_counts, var_counts, allelefreq = allelefreq, impr = 0, SE = SE, inbr = inbr)
 
   hetero_frac <- round(prv * length(ref_counts))
   ratio <- PMF_uniform / PMF_HWE

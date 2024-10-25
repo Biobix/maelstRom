@@ -43,17 +43,13 @@ LikelyDistsHet <- function(ref_counts, var_counts, sprv, parvec_cur, NoSplitHet,
     probshift <- parvec_cur[1]
     theta_het <- parvec_cur[2]
     if(NoSplitHet){
-      theta_het_clone <- theta_het
-      OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                 ref_counts = ref_counts, var_counts=var_counts, sprv = sprv)},
-                          error = function(e) NULL)
-      if(is.null(OptObj)){
-        OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, method = "BFGS",
-                        ref_counts = ref_counts, var_counts=var_counts, sprv = sprv)
-      }
       
-      probshift_i <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-      theta_het_i <- exp(OptObj$par[2])
+      theta_het_clone <- theta_het
+      OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), 
+                                   ref_counts = ref_counts, var_counts=var_counts, sprv = sprv, epsabs = 0.01)
+      
+      probshift_i <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+      theta_het_i <- exp(OptObj[3])
       
       if(theta_het_i  > max(probshift_i, 1-probshift_i)){
         
@@ -72,16 +68,12 @@ LikelyDistsHet <- function(ref_counts, var_counts, sprv, parvec_cur, NoSplitHet,
         
       }
     } else{
-      OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                 ref_counts = ref_counts, var_counts=var_counts, sprv = sprv)},
-                          error = function(e) NULL)
-      if(is.null(OptObj)){
-        OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, method = "BFGS",
-                        ref_counts = ref_counts, var_counts=var_counts, sprv = sprv)
-      }
+      OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), 
+                                   ref_counts = ref_counts, var_counts=var_counts, sprv = sprv, epsabs = 0.01)
       
-      probshift_i <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-      theta_het_i <- exp(OptObj$par[2])
+      probshift_i <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+      theta_het_i <- exp(OptObj[3])
+      
     }
     
     if(probshift_i > (1-10*SE)){
@@ -92,12 +84,12 @@ LikelyDistsHet <- function(ref_counts, var_counts, sprv, parvec_cur, NoSplitHet,
     
     probshift <- probshift_i
     theta_het <- theta_het_i
-    CurLL <- LogLikComp_het(c(probshift, theta_het), ref_counts, var_counts, sprv)
+    CurLL <- LogLikComp_het(c(gtools::logit(probshift), log(theta_het)), ref_counts, var_counts, sprv)
     
   }else{
-    CurLL <- LogLikComp_het(parvec_cur, ref_counts, var_counts, sprv)
     probshift <- parvec_cur[1]
     theta_het <- parvec_cur[2]
+    CurLL <- LogLikComp_het(c(gtools::logit(probshift), log(theta_het)), ref_counts, var_counts, sprv)
   }
   
   
@@ -113,17 +105,13 @@ LikelyDistsHet <- function(ref_counts, var_counts, sprv, parvec_cur, NoSplitHet,
     
     
     if(NoSplitHet){
-      theta_het_clone <- theta_het
-      OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                 ref_counts = ref_counts_i, var_counts=var_counts_i, sprv = sprv_i)},
-                          error = function(e) NULL)
-      if(is.null(OptObj)){
-        OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, method = "BFGS",
-                        ref_counts = ref_counts_i, var_counts=var_counts_i, sprv = sprv_i)
-      }
       
-      probshift_i <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-      theta_het_i <- exp(OptObj$par[2])
+      theta_het_clone <- theta_het
+      OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), 
+                                   ref_counts = ref_counts, var_counts=var_counts, sprv = sprv, epsabs = 0.01)
+      
+      probshift_i <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+      theta_het_i <- exp(OptObj[3])
       
       if(theta_het_i  > max(probshift_i, 1-probshift_i)){
         
@@ -142,16 +130,12 @@ LikelyDistsHet <- function(ref_counts, var_counts, sprv, parvec_cur, NoSplitHet,
         
       }
     } else{
-      OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                 ref_counts = ref_counts_i, var_counts=var_counts_i, sprv = sprv_i)},
-                          error = function(e) NULL)
-      if(is.null(OptObj)){
-        OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, method = "BFGS",
-                        ref_counts = ref_counts_i, var_counts=var_counts_i, sprv = sprv_i)
-      }
+      theta_het_clone <- theta_het
+      OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), 
+                                   ref_counts = ref_counts, var_counts=var_counts, sprv = sprv, epsabs = 0.01)
       
-      probshift_i <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-      theta_het_i <- exp(OptObj$par[2])
+      probshift_i <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+      theta_het_i <- exp(OptObj[3])
     }
     
     if(probshift_i > (1-10*SE)){
@@ -161,7 +145,7 @@ LikelyDistsHet <- function(ref_counts, var_counts, sprv, parvec_cur, NoSplitHet,
     }
     
     
-    LLi <- LogLikComp_het(c(probshift_i, theta_het_i), ref_counts, var_counts, sprv)
+    LLi <- LogLikComp_het(c(gtools::logit(probshift_i), exp(theta_het_i)), ref_counts, var_counts, sprv)
     NewLLs <- c(NewLLs, LLi)
     PiDists <- c(PiDists, probshift_i - probshift)
     ThetaDists <- c(ThetaDists, theta_het_i - theta_het)

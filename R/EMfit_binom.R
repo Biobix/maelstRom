@@ -134,7 +134,7 @@ EMfit_binom <- function(data_counts, SE, allelefreq = 0.5, inbr = 0, dltaco = 0.
   data_counts$genotypeN <- c("rr", "rv", "vv")[apply(data_counts[, c("prr", "prv", "pvv")], 1, function(x) which(x == max(x))[1])]
 
   # A GOF-heuristic
-  dmixase_corrected <- MAGE::pmf_binomMix(data_counts$ref_count, data_counts$var_count, probshift, SE, mean(spr), mean(spv), mean(sprv)) * (data_counts$ref_count + data_counts$var_count + 1)
+  dmixase_corrected <- maelstRom::pmf_binomMix(data_counts$ref_count, data_counts$var_count, probshift, SE, mean(spr), mean(spv), mean(sprv)) * (data_counts$ref_count + data_counts$var_count + 1)
   logLikelihood <- mean(log(dmixase_corrected))
   #probshift_adj <- -(as.numeric(probshift) - 0.5) / 0.5
 
@@ -208,8 +208,8 @@ EMfit_binom <- function(data_counts, SE, allelefreq = 0.5, inbr = 0, dltaco = 0.
     lrtstat <- NA
     pval <- NA
   } else {
-    dmixh0 <- MAGE::pmf_binomMix(data_counts$ref_count, data_counts$var_count, probshift = 0.5, SE,  mean(spr_H0), mean(spv_H0), mean(sprv_H0))
-    dmixase <- MAGE::pmf_binomMix(data_counts$ref_count, data_counts$var_count, probshift = probshift, SE, mean(spr), mean(spv), mean(sprv))
+    dmixh0 <- maelstRom::pmf_binomMix(data_counts$ref_count, data_counts$var_count, probshift = 0.5, SE,  mean(spr_H0), mean(spv_H0), mean(sprv_H0))
+    dmixase <- maelstRom::pmf_binomMix(data_counts$ref_count, data_counts$var_count, probshift = probshift, SE, mean(spr), mean(spv), mean(sprv))
     lrtstat <- -2 * (sum(log(dmixh0)) - sum(log(dmixase)))
     pval <- pchisq(lrtstat, df = 1, lower.tail = F)
   }

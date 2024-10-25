@@ -1,7 +1,7 @@
 #' multi-locus wrapper function for imprinting detection and loss-of-imprinting analysis
 #'
 #' \code{impr_LOI_analysis} is a wrapper function of \code{symmetry_gof}, \code{imprinting_est}, \code{median_imprinting}, \code{final_filter}, and
-#' \code{LOItest_logreg} performing MAGE's entire (loss of) imprinting pipeline. It goes over the following steps:
+#' \code{LOItest_logreg} performing maelstRom's entire (loss of) imprinting pipeline. It goes over the following steps:
 #' \enumerate{
 #'   \item Prior filtering on basis of the \code{allelefreq_prel} column that should be present in the control dataframe,
 #'   which it should be after running \code{AllelicMeta_est}.
@@ -41,7 +41,7 @@
 #'      \item{symmetry}{Symmetry statistic as determined by \code{symmetry_gof}.}
 #'      \item{med_impr}{Median imprinting as determined by \code{median_imprinting.}}
 #'    }
-#' \item{LOI_res}{A dataframe containing, only for loci fitting well to MAGE's imprinting model (see \code{imprinting_est}, determined by \code{gof_filt}) 
+#' \item{LOI_res}{A dataframe containing, only for loci fitting well to maelstRom's imprinting model (see \code{imprinting_est}, determined by \code{gof_filt}) 
 #' that are significantly (determined by the \code{adj_p_filt input}) and suffiently (determined by \code{i_filt} and \code{med_i_filt}) imprinted,
 #' the results of the differential imprinting analysis (which equals loss of imprinting if there's less imprinting in cases). This contains the same
 #' columns as \code{impr_res}, but supplemented with:}
@@ -59,7 +59,7 @@ impr_LOI_analysis <- function(DataList, SE, inbr, MinMinorAllelefreq=0.15, sym_f
         ImprData[[LOC]]$allelefreq_prel[1] >= (1 - MinMinorAllelefreq)) {
       ImprData[[LOC]] <- NULL
     } else {
-      ImprData[[LOC]]$sym <- MAGE::symmetry_gof(ImprData[[LOC]]$ref_count, 
+      ImprData[[LOC]]$sym <- maelstRom::symmetry_gof(ImprData[[LOC]]$ref_count, 
                                                 ImprData[[LOC]]$var_count, ImprData[[LOC]]$allelefreq_prel[1])
       if (ImprData[[LOC]]$sym[1] <= sym_filt) {
         ImprData[[LOC]] <- NULL
@@ -71,12 +71,12 @@ impr_LOI_analysis <- function(DataList, SE, inbr, MinMinorAllelefreq=0.15, sym_f
   # Detect imprinted control loci
   impr_res <- data.frame()
   for(LOC in names(ImprData)){
-    i_results <- MAGE::imprinting_est(ImprData[[LOC]]$ref_count, ImprData[[LOC]]$var_count, 
+    i_results <- maelstRom::imprinting_est(ImprData[[LOC]]$ref_count, ImprData[[LOC]]$var_count, 
                                       allelefreq = ImprData[[LOC]]$allelefreq_prel[1], 
                                       SE = SE, inbr = inbr)
     # An additional robustified "median imprinting" across samples to be used as possible 
     # additional filter criterion:
-    med_imp <- MAGE::median_imprinting(ImprData[[LOC]]$ref_count, ImprData[[LOC]]$var_count, 
+    med_imp <- maelstRom::median_imprinting(ImprData[[LOC]]$ref_count, ImprData[[LOC]]$var_count, 
                                        allelefreq = ImprData[[LOC]]$allelefreq_prel[1], inbr = inbr)
     # Write various results to a dataframe:
     results_z <- data.frame("position" = ImprData[[LOC]]$locus_id[1], "LRT" = i_results$LRT, 
@@ -93,7 +93,7 @@ impr_LOI_analysis <- function(DataList, SE, inbr, MinMinorAllelefreq=0.15, sym_f
   # which a custom  Goodness-Of-Fit which more or less corresponds to a locus' likelihood of
   # the imprinted model*coverage; 0.8 is a good cutoff. Other filter criteria are imprinting 
   # (0.6) and median imprinting (0.8)
-  impr_res_FIN <- MAGE::final_filter(data_hash=NULL, impr_res, results_wd=NULL, gof_filt = gof_filt, 
+  impr_res_FIN <- maelstRom::final_filter(data_hash=NULL, impr_res, results_wd=NULL, gof_filt = gof_filt, 
                                      med_impr_filt = med_i_filt, i_filt = i_filt, adj_p_filt = adj_p_filt, file_all = FALSE, file_impr = FALSE, 
                                      file_all_counts = FALSE, file_impr_counts = FALSE)
   
@@ -104,7 +104,7 @@ impr_LOI_analysis <- function(DataList, SE, inbr, MinMinorAllelefreq=0.15, sym_f
   LOI_res$DI_pval <- 1
   for(LOC in pos_impr){
     CData <- ImprData[[LOC]]; TData <- caseList[[LOC]]
-    p_DI <- MAGE::LOItest_logreg(CData$ref_count, CData$var_count, 
+    p_DI <- maelstRom::LOItest_logreg(CData$ref_count, CData$var_count, 
                                  TData$ref_count, TData$var_count)$p.value
     LOI_res$DI_pval[LOI_res$position == LOC] <- p_DI
   }

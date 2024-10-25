@@ -66,6 +66,6 @@ A list containing the following components:
 \code{BetaBinomGenotyping} is a wrapper function of \code{EMfit_betabinom_robust} allowing multiple loci to be given as input (as lists).
 Besides calling the latter to perform a EM-fit and update the inputted per-locus dataframes as listed in \code{EMfit_betabinom_robust} output,
 it also returns a results-dataframe with one row for every locus, containing genotyping- and Allelic Bias-detection results.
-This function is mainly useful when following MAGE's vignette step-by-step, as its input requirement are rather stictly dependent on performing all previous steps in that pipeline.
+This function is mainly useful when following maelstRom's vignette step-by-step, as its input requirement are rather stictly dependent on performing all previous steps in that pipeline.
 See the help page of \code{EMfit_betabinom_robust} for more information on these outputs
 }

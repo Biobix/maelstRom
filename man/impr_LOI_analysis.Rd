@@ -55,7 +55,7 @@ A list containing the following components:
      \item{symmetry}{Symmetry statistic as determined by \code{symmetry_gof}.}
      \item{med_impr}{Median imprinting as determined by \code{median_imprinting.}}
    }
-\item{LOI_res}{A dataframe containing, only for loci fitting well to MAGE's imprinting model (see \code{imprinting_est}, determined by \code{gof_filt}) 
+\item{LOI_res}{A dataframe containing, only for loci fitting well to maelstRom's imprinting model (see \code{imprinting_est}, determined by \code{gof_filt}) 
 that are significantly (determined by the \code{adj_p_filt input}) and suffiently (determined by \code{i_filt} and \code{med_i_filt}) imprinted,
 the results of the differential imprinting analysis (which equals loss of imprinting if there's less imprinting in cases). This contains the same
 columns as \code{impr_res}, but supplemented with:}
@@ -65,7 +65,7 @@ columns as \code{impr_res}, but supplemented with:}
 }
 \description{
 \code{impr_LOI_analysis} is a wrapper function of \code{symmetry_gof}, \code{imprinting_est}, \code{median_imprinting}, \code{final_filter}, and
-\code{LOItest_logreg} performing MAGE's entire (loss of) imprinting pipeline. It goes over the following steps:
+\code{LOItest_logreg} performing maelstRom's entire (loss of) imprinting pipeline. It goes over the following steps:
 \enumerate{
   \item Prior filtering on basis of the \code{allelefreq_prel} column that should be present in the control dataframe,
   which it should be after running \code{AllelicMeta_est}.

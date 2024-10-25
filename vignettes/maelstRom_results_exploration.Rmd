@@ -1,0 +1,72 @@
+---
+title: "maelstRom results exploration"
+author: "Cedric Stroobandt"
+date: "`r Sys.Date()`"
+bibliography: REFERENCES.bib
+output:
+  rmarkdown::html_vignette: default
+  html_document:
+    code_download: yes
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+    highlight: tango
+    number_sections: yes
+vignette: |
+  %\VignetteIndexEntry{Vignette Title} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+options(width = 16)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# maelstRom explorations
+
+The results from maelstRom's Allelic Dispersion tutorial can be explored even further with auxiliary data analyses, as documented in this tutorial. It starts from the previously obtained Allelic Dispersion tutorial results, which are loaded into the workspace below.
+
+```{r}
+library(maelstRom)
+data("VignetteImage", package = "maelstRom")
+
+knitr::kable(head(dAD_res))
+```
+
+# Exploration: Sample-level AD correlations
+
+If AD is reflective of underlying (epi)genetic dysregulation, it stands to reason that the most extreme (allelically imbalanced) samples that contribute most to increased AD (i.e. in the plots above: those heterozygotes deviating most from $\pi_{het}$ - marked in a green vertical dotted line - and thus contributing most to broadening of the heterozygous beta-binomial fit) are also the most (epi)genetically dysregulated ones. We can try to detect such a link by correlating each heterozygous sample's extremity to any known (epi)genetic dysregulation of these samples, such as (promotor) methylation or the occurrence of copy number alterations.
+
+As this tutorial relies on SNP counts alone, we correlate this sample extremity, or "sample-level AD" to the amount of expression itself. After all, the previously mentioned mechanisms (promotor hypermethylation, copy number gains or losses) are known to impact a gene's expression; so, accordingly, those very dysregulated samples showing extreme sample-level AD could show the most deviant (differential) expression as well. To take count biases into account, the actual measure for a sample's extremity (sample-level AD) is not e.g. simply deviance from $\pi_{het}$, but the -log of the minimum of that sample’s heterozygous cumulative distribution function or its complement, which will be higher the more extreme of an observation the sample is.
+
+Though correlating AD  with expression is the default setting of the `AD_correlator` function below, it accepts any per-sample measure (if e.g. hypermethylation percentages or any other dysregulation data are available) as an optional input.
+
+```{r, warning=FALSE}
+AD_EX_Corrs <- c()
+AD_EX_Corr_pvals <- c()
+
+for(LocOI in dAD_res$Locus){
+  CountDF <- caseList[[LocOI]]
+  dAD_fitres <- dAD_res[dAD_res$Locus == LocOI,]
+  
+  CorResult <- AD_correlator(CountDF, dAD_fitres, MinCount = 20, method = "spearman")
+  
+  AD_EX_Corrs <- c(AD_EX_Corrs, as.numeric(CorResult["correlation"]))
+  AD_EX_Corr_pvals <- c(AD_EX_Corr_pvals, as.numeric(CorResult["p-value"]))
+}
+
+dAD_res$AD_EX_Corr <- AD_EX_Corrs
+dAD_res$AD_EX_Corr_pval <- AD_EX_Corr_pvals
+
+print(dAD_res$Locus[!is.na(dAD_res$AD_EX_Corr_pval) & dAD_res$AD_EX_Corr_pval < 0.05 & dAD_res$HWEC > 0.001 & dAD_res$HWET > 0.001])
+```
+
+A minimum count filter of 20 is used here to avoid low-count-based biases in the correlations' computation. Eventually, the returned number of actually significant correlations is relatively small. But they are meant as more of a data exploration tool rather than a hard result or filter criterion anyway, as their analysis isn't as robust as the population-level AD estimates to detect biologically relevant genes, and both AD in expression can be regulated in many different ways and influenced by many biases (e.g. tumor purity), making overly strong correlations between them and/or other (epi)genetic data not evident. Nevertheless, in cases where e.g. hypermethylation is strongly suspected to cause an allelic imbalance in sequencing data of afflicted samples, computing these correlations can provide soft evidence to that effect.
+
+# Session info
+
+```{r}
+sessionInfo()
+```

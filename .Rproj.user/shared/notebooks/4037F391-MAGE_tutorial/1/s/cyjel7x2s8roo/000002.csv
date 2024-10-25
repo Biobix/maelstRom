@@ -1,4 +1,0 @@
-"0","for(n in names(controlList)){"
-"0","  controlList[[n]] <- MAGE::standard_alleles(controlList[[n]])"
-"0","}"
-"0","knitr::kable(head(controlList[[""snp27""]]))"

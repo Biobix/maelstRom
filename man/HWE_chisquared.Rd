@@ -19,8 +19,8 @@ at least the chromosomal position of the SNP (results$position). If NULL, one da
 }
 \value{
 The \code{results} input data frame appended with the following columns:
-\item{Chi2PVAL}{The p-value of the chi-squared test.}
-\item{Chi2STAT}{The test statistic of the chi-squared test.}
+\item{HWEpval}{The p-value of the chi-squared test.}
+\item{HWE_TestStat}{The test statistic of the chi-squared test.}
 }
 \description{
 \code{HWE_chisquared} performs a per-SNP chi-squared test comparing observed genotype

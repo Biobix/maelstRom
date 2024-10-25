@@ -11,7 +11,7 @@
 #' @param SE_prior Number. Initial estimate of the sequencing error rate (default is 0.002).
 #' @param F_inbr_prior Number. Initial estimate of the inbreeding coefficient used for calculating initial genotype frequencies (default is NULL, in which case the initial genotype frequences all get set to 1/3).
 #' @param HetProb Number. Allelic bias in heterozygotes (expected reference over total allele count in RNAseq data; default is 0.5
-#' @param pA_filt Number. Minimum allowed estimated minor allele frequency for a locus to be considered in the metaparameter estimates.
+#' @param MinAllele_filt Number. Minimum allowed estimated minor allele frequency for a locus to be considered in the metaparameter estimates.
 #' @param SE_filt Number. Maximum allowed estimated sequencing error rate for a locus to be considered in the metaparameter estimates.
 #' @param NumSamp_filt Number. Minimum allowed number of samples for a locus to be considered in the metaparameter estimates.
 #' @param MedianCov_filt Number. Minimum allowed median coverage across samples (reference plus variant allele count) for a locus to be considered in the metaparameter estimates.
@@ -22,7 +22,7 @@
 #' \item{F_vec}{Vector of estimated inbreeding coefficients of reliable loci.}
 
 AllelicMeta_est_par <- function(DataList, deltaF = 10^-8, maxIT = 100, SE_prior = 0.002, F_inbr_prior = NULL, HetProb = 0.5,
-                                pA_filt = 0.15, SE_filt = 0.035, NumSamp_filt = 20, MedianCov_filt = 4) {
+                                MinAllele_filt = 0.15, SE_filt = 0.035, NumSamp_filt = 20, MedianCov_filt = 4) {
   
   SE_vec <- c()
   F_vec <- c()
@@ -31,7 +31,7 @@ AllelicMeta_est_par <- function(DataList, deltaF = 10^-8, maxIT = 100, SE_prior 
   results <- data.frame()
   
   for(n in names(DataList)){
-    MetaEst_res <- MAGE::AllelicMeta_est(ref_counts = DataList[[n]]$ref_count, var_counts = DataList[[n]]$var_count,
+    MetaEst_res <- maelstRom::AllelicMeta_est(ref_counts = DataList[[n]]$ref_count, var_counts = DataList[[n]]$var_count,
       deltaF = deltaF, maxIT = maxIT, SE_prior = SE_prior, F_inbr_prior = F_inbr_prior, HetProb = HetProb)
     # You can store each locus' Sequencing Error (SE) and inbreeding coefficient (F) estimate 
     # in its dataframe, if you want:
@@ -43,7 +43,7 @@ AllelicMeta_est_par <- function(DataList, deltaF = 10^-8, maxIT = 100, SE_prior 
     DataList[[n]]$pvv_prel <- (MetaEst_res$genoprobs)$p.vv.
     DataList[[n]]$genotype_prel <- MetaEst_res$genotypes
     # Only take a locus' estimates into account if the locus is high-quality:
-    if (!(MetaEst_res$allelefreq <= pA_filt || MetaEst_res$allelefreq >= (1 - pA_filt) 
+    if (!(MetaEst_res$allelefreq <= MinAllele_filt || MetaEst_res$allelefreq >= (1 - MinAllele_filt) 
           # allelefreq returns allele frequency of the ref-allele,
           # so just in case this is the minor allele on population level 
           # (even though it is the most expresse one across all RNAseq data),

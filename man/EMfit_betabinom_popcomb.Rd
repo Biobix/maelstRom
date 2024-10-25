@@ -12,6 +12,7 @@ EMfit_betabinom_popcomb(
   dltaco = 10^-6,
   HWE = FALSE,
   p_InitEst = FALSE,
+  p_inits = c(1/3, 1/3, 1/3),
   ThetaInits = "moment",
   ReEstThetas = "moment",
   NoSplitHom = TRUE,
@@ -19,7 +20,12 @@ EMfit_betabinom_popcomb(
   ResetThetaMin = 10^-10,
   ResetThetaMax = 10^-1,
   thetaTRY = c(10^-1, 10^-3, 10^-7),
-  probshift_init = 0.5
+  probshift_init = 0.5,
+  FirstFewFixed = NULL,
+  MemLim = 2048,
+  Xtra = 5,
+  epsabs = 0.001,
+  MaxIt = 100
 )
 }
 \arguments{

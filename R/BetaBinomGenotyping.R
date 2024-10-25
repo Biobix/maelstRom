@@ -3,7 +3,7 @@
 #' \code{BetaBinomGenotyping} is a wrapper function of \code{EMfit_betabinom_robust} allowing multiple loci to be given as input (as lists).
 #' Besides calling the latter to perform a EM-fit and update the inputted per-locus dataframes as listed in \code{EMfit_betabinom_robust} output,
 #' it also returns a results-dataframe with one row for every locus, containing genotyping- and Allelic Bias-detection results.
-#' This function is mainly useful when following MAGE's vignette step-by-step, as its input requirement are rather stictly dependent on performing all previous steps in that pipeline.
+#' This function is mainly useful when following maelstRom's vignette step-by-step, as its input requirement are rather stictly dependent on performing all previous steps in that pipeline.
 #' See the help page of \code{EMfit_betabinom_robust} for more information on these outputs
 #' 
 #' @param DataList List of dataframes. Each dataframes should at least contain the columns "ref", ref_count", "var", "var_count" and "est_SE",
@@ -44,31 +44,31 @@ BetaBinomGenotyping <- function(DataList, allelefreq=0.5, SE, inbr = 0, dltaco =
   positions <- names(DataList)
   results <- data.frame()
   for (z in positions) {
-    MAGEres <- MAGE::EMfit_betabinom_robust(data_counts = DataList[[z]], 
-                                            SE = SE, inbr = inbr,
-                                            allelefreq=allelefreq, dltaco = dltaco, HWE = HWE, p_InitEst = p_InitEst, 
-                                            ThetaInits = ThetaInits, ReEstThetas = ReEstThetas, NoSplitHom = NoSplitHom, NoSplitHet = NoSplitHet,
-                                            ResetThetaMin = ResetThetaMin, ResetThetaMax = ResetThetaMax, DistRob = DistRob, CookMargin = CookMargin, LikEmpNum = LikEmpNum, LikMargin = LikMargin,
-                                            NumHetMin = NumHetMin, MaxOutFrac = MaxOutFrac, thetaTRY = thetaTRY, fitH0 = fitH0)
-    DataList[[z]] <- MAGEres$data_hash
+    maelstRomres <- maelstRom::EMfit_betabinom_robust(data_counts = DataList[[z]], 
+                                                      SE = SE, inbr = inbr,
+                                                      allelefreq=allelefreq, dltaco = dltaco, HWE = HWE, p_InitEst = p_InitEst, 
+                                                      ThetaInits = ThetaInits, ReEstThetas = ReEstThetas, NoSplitHom = NoSplitHom, NoSplitHet = NoSplitHet,
+                                                      ResetThetaMin = ResetThetaMin, ResetThetaMax = ResetThetaMax, DistRob = DistRob, CookMargin = CookMargin, LikEmpNum = LikEmpNum, LikMargin = LikMargin,
+                                                      NumHetMin = NumHetMin, MaxOutFrac = MaxOutFrac, thetaTRY = thetaTRY, fitH0 = fitH0)
+    DataList[[z]] <- maelstRomres$data_hash
     # median_AB also calculates a robust median AB,
     # besides the AB as determined during EMfit_betabinom_robust's fitting procedure.
     # This can be used as additional filter when detecting significant AB:
-    med_AB <- MAGE::median_AB(DataList[[z]]$ref_count, DataList[[z]]$var_count, 
-                              DataList[[z]]$allelefreq[1], inbr) 
-    res_loc <- data.frame("position" = z, "probshift" = as.numeric(MAGEres$AB), 
-                          "LRT" = as.numeric(MAGEres$AB_lrt), "p" = as.numeric(MAGEres$AB_p),
-                          "quality" = MAGEres$quality, "allele.frequency" = DataList[[z]]$allelefreq[1], 
+    med_AB <- maelstRom::median_AB(DataList[[z]]$ref_count, DataList[[z]]$var_count, 
+                                   DataList[[z]]$allelefreq[1], inbr) 
+    res_loc <- data.frame("position" = z, "probshift" = as.numeric(maelstRomres$AB), 
+                          "LRT" = as.numeric(maelstRomres$AB_lrt), "p" = as.numeric(maelstRomres$AB_p),
+                          "quality" = maelstRomres$quality, "allele.frequency" = DataList[[z]]$allelefreq[1], 
                           "reference" = DataList[[z]]$ref[1], "variant" = DataList[[z]]$var[1], 
                           "est_SE" = DataList[[z]]$est_SE[1], "coverage" =  median(DataList[[z]]$ref_count+DataList[[z]]$var_count),
                           "nr_samples" = nrow(DataList[[z]]), "median_AB" = med_AB, 
-                          "rho_rr" = MAGEres$rho_rr, "rho_rv" = MAGEres$rho_rv, "rho_vv" = MAGEres$rho_vv, 
-                          "theta_hom" = MAGEres$theta_hom, "theta_het" = MAGEres$theta_het,
-                          "theta_hom_NoShift" = MAGEres$theta_hom_NoShift, 
-                          "theta_het_NoShift" = MAGEres$theta_het_NoShift, stringsAsFactors = FALSE)
+                          "rho_rr" = maelstRomres$rho_rr, "rho_rv" = maelstRomres$rho_rv, "rho_vv" = maelstRomres$rho_vv, 
+                          "theta_hom" = maelstRomres$theta_hom, "theta_het" = maelstRomres$theta_het,
+                          "theta_hom_NoShift" = maelstRomres$theta_hom_NoShift, 
+                          "theta_het_NoShift" = maelstRomres$theta_het_NoShift, stringsAsFactors = FALSE)
     results <- rbind(results, res_loc) # results; one position per line
   }
-  results <- MAGE::HWE_chisquared(data = DataList, inbr, results = results)
+  results <- maelstRom::HWE_chisquared(data = DataList, inbr, results = results)
   results$Chi2PVAL[is.na(results$Chi2PVAL)] <- 
     results$Chi2STAT[is.na(results$Chi2STAT)] <- -1
   return(list("DataList_out" = DataList,"Geno_AB_res" = results))

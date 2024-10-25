@@ -1,7 +1,0 @@
-"0","for(n in names(controlList)){"
-"0","  controlList[[n]] <- MAGE::prior_filter(controlList[[n]], min_median_cov = 0, "
-"0","    min_nr_samples = 20, prior_allelefreq_filter = FALSE, min_PriorAlleleFreq = 0)"
-"0","  if(is.null(controlList[[n]])){"
-"0","    caseList[[n]] <- NULL"
-"0","  }"
-"0","}"

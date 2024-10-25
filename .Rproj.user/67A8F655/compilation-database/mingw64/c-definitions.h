@@ -2,12 +2,12 @@
 # define __DBL_MIN_EXP__ (-1021)
 #endif
 
-#ifndef __FLT32X_MAX_EXP__
-# define __FLT32X_MAX_EXP__ 1024
-#endif
-
 #ifndef __UINT_LEAST16_MAX__
 # define __UINT_LEAST16_MAX__ 0xffff
+#endif
+
+#ifndef __FLT16_HAS_QUIET_NAN__
+# define __FLT16_HAS_QUIET_NAN__ 1
 #endif
 
 #ifndef __ATOMIC_ACQUIRE
@@ -34,10 +34,6 @@
 # define __SIZEOF_FLOAT80__ 16
 #endif
 
-#ifndef _WIN32
-# define _WIN32 1
-#endif
-
 #ifndef __INTMAX_C
 # define __INTMAX_C(c) c ## LL
 #endif
@@ -46,8 +42,16 @@
 # define __CHAR_BIT__ 8
 #endif
 
+#ifndef __MINGW32__
+# define __MINGW32__ 1
+#endif
+
 #ifndef __UINT8_MAX__
 # define __UINT8_MAX__ 0xff
+#endif
+
+#ifndef __SCHAR_WIDTH__
+# define __SCHAR_WIDTH__ 8
 #endif
 
 #ifndef _WIN64
@@ -74,20 +78,12 @@
 # define __WCHAR_MAX__ 0xffff
 #endif
 
-#ifndef __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1
-# define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 1
-#endif
-
 #ifndef __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2
 # define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 1
 #endif
 
 #ifndef __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4
 # define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 1
-#endif
-
-#ifndef __DBL_DENORM_MIN__
-# define __DBL_DENORM_MIN__ ((double)4.94065645841246544176568792868221372e-324L)
 #endif
 
 #ifndef __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8
@@ -118,10 +114,6 @@
 # define __GCC_ATOMIC_CHAR32_T_LOCK_FREE 2
 #endif
 
-#ifndef __x86_64
-# define __x86_64 1
-#endif
-
 #ifndef __UINT_FAST64_MAX__
 # define __UINT_FAST64_MAX__ 0xffffffffffffffffULL
 #endif
@@ -138,8 +130,12 @@
 # define __FINITE_MATH_ONLY__ 0
 #endif
 
-#ifndef __GNUC_PATCHLEVEL__
-# define __GNUC_PATCHLEVEL__ 0
+#ifndef __FLT32X_MAX_EXP__
+# define __FLT32X_MAX_EXP__ 1024
+#endif
+
+#ifndef __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1
+# define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 1
 #endif
 
 #ifndef __FLT32_HAS_DENORM__
@@ -150,8 +146,8 @@
 # define __UINT_FAST8_MAX__ 0xff
 #endif
 
-#ifndef __has_include
-# define __has_include(STR) __has_include__(STR)
+#ifndef __FLT32_MAX_10_EXP__
+# define __FLT32_MAX_10_EXP__ 38
 #endif
 
 #ifndef _stdcall
@@ -186,6 +182,14 @@
 # define __FLT64X_MAX_10_EXP__ 4932
 #endif
 
+#ifndef __LDBL_IS_IEC_60559__
+# define __LDBL_IS_IEC_60559__ 2
+#endif
+
+#ifndef __FLT64X_HAS_QUIET_NAN__
+# define __FLT64X_HAS_QUIET_NAN__ 1
+#endif
+
 #ifndef __UINT_LEAST8_MAX__
 # define __UINT_LEAST8_MAX__ 0xff
 #endif
@@ -214,8 +218,8 @@
 # define __UINT32_MAX__ 0xffffffffU
 #endif
 
-#ifndef __LDBL_MAX_EXP__
-# define __LDBL_MAX_EXP__ 16384
+#ifndef __DBL_DENORM_MIN__
+# define __DBL_DENORM_MIN__ ((double)4.94065645841246544176568792868221372e-324L)
 #endif
 
 #ifndef __FLT128_MIN_EXP__
@@ -228,6 +232,10 @@
 
 #ifndef __FLT128_MIN_10_EXP__
 # define __FLT128_MIN_10_EXP__ (-4931)
+#endif
+
+#ifndef __FLT32X_IS_IEC_60559__
+# define __FLT32X_IS_IEC_60559__ 2
 #endif
 
 #ifndef __INT_LEAST16_WIDTH__
@@ -250,28 +258,12 @@
 # define __INT64_C(c) c ## LL
 #endif
 
-#ifndef __DBL_DIG__
-# define __DBL_DIG__ 15
-#endif
-
 #ifndef __GCC_ATOMIC_POINTER_LOCK_FREE
 # define __GCC_ATOMIC_POINTER_LOCK_FREE 2
 #endif
 
-#ifndef __FLT64X_MANT_DIG__
-# define __FLT64X_MANT_DIG__ 64
-#endif
-
-#ifndef __SIZEOF_INT__
-# define __SIZEOF_INT__ 4
-#endif
-
-#ifndef __SIZEOF_POINTER__
-# define __SIZEOF_POINTER__ 8
-#endif
-
-#ifndef __USER_LABEL_PREFIX__
-# define __USER_LABEL_PREFIX__ 
+#ifndef __FLT32X_MANT_DIG__
+# define __FLT32X_MANT_DIG__ 53
 #endif
 
 #ifndef __FLT64X_EPSILON__
@@ -282,16 +274,16 @@
 # define __STDC_HOSTED__ 1
 #endif
 
-#ifndef __WIN32
-# define __WIN32 1
-#endif
-
-#ifndef __LDBL_HAS_INFINITY__
-# define __LDBL_HAS_INFINITY__ 1
+#ifndef __DEC64_MIN_EXP__
+# define __DEC64_MIN_EXP__ (-382)
 #endif
 
 #ifndef __WIN64
 # define __WIN64 1
+#endif
+
+#ifndef __DBL_DIG__
+# define __DBL_DIG__ 15
 #endif
 
 #ifndef __FLT32_DIG__
@@ -306,12 +298,20 @@
 # define __SHRT_WIDTH__ 16
 #endif
 
+#ifndef __FLT32_IS_IEC_60559__
+# define __FLT32_IS_IEC_60559__ 2
+#endif
+
 #ifndef __LDBL_MIN__
 # define __LDBL_MIN__ 3.36210314311209350626267781732175260e-4932L
 #endif
 
 #ifndef __STDC_UTF_16__
 # define __STDC_UTF_16__ 1
+#endif
+
+#ifndef __DBL_IS_IEC_60559__
+# define __DBL_IS_IEC_60559__ 2
 #endif
 
 #ifndef __DEC32_MAX__
@@ -322,16 +322,16 @@
 # define __FLT64X_DENORM_MIN__ 3.64519953188247460252840593361941982e-4951F64x
 #endif
 
-#ifndef __MINGW32__
-# define __MINGW32__ 1
-#endif
-
 #ifndef __FLT32X_HAS_INFINITY__
 # define __FLT32X_HAS_INFINITY__ 1
 #endif
 
 #ifndef __INT32_MAX__
 # define __INT32_MAX__ 0x7fffffff
+#endif
+
+#ifndef __FLT16_DIG__
+# define __FLT16_DIG__ 3
 #endif
 
 #ifndef __INT_WIDTH__
@@ -346,10 +346,6 @@
 # define __UINT16_C(c) c
 #endif
 
-#ifndef __PTRDIFF_WIDTH__
-# define __PTRDIFF_WIDTH__ 64
-#endif
-
 #ifndef __DECIMAL_DIG__
 # define __DECIMAL_DIG__ 21
 #endif
@@ -358,12 +354,8 @@
 # define __FLT64_EPSILON__ 2.22044604925031308084726333618164062e-16F64
 #endif
 
-#ifndef __INTMAX_WIDTH__
-# define __INTMAX_WIDTH__ 64
-#endif
-
-#ifndef __has_include_next
-# define __has_include_next(STR) __has_include_next__(STR)
+#ifndef __FLT128_IS_IEC_60559__
+# define __FLT128_IS_IEC_60559__ 2
 #endif
 
 #ifndef __FLT64X_MIN_10_EXP__
@@ -374,6 +366,10 @@
 # define __LDBL_HAS_QUIET_NAN__ 1
 #endif
 
+#ifndef __FLT16_MIN_EXP__
+# define __FLT16_MIN_EXP__ (-13)
+#endif
+
 #ifndef __FLT64_MANT_DIG__
 # define __FLT64_MANT_DIG__ 53
 #endif
@@ -382,8 +378,12 @@
 # define _REENTRANT 1
 #endif
 
+#ifndef __FLT64X_MANT_DIG__
+# define __FLT64X_MANT_DIG__ 64
+#endif
+
 #ifndef __GNUC__
-# define __GNUC__ 8
+# define __GNUC__ 12
 #endif
 
 #ifndef _cdecl
@@ -410,6 +410,10 @@
 # define __FLT64_MAX_10_EXP__ 308
 #endif
 
+#ifndef __FLT16_MAX_10_EXP__
+# define __FLT16_MAX_10_EXP__ 4
+#endif
+
 #ifndef __DBL_MAX__
 # define __DBL_MAX__ ((double)1.79769313486231570814527423731704357e+308L)
 #endif
@@ -430,8 +434,16 @@
 # define __DBL_HAS_INFINITY__ 1
 #endif
 
+#ifndef __SIZEOF_FLOAT__
+# define __SIZEOF_FLOAT__ 4
+#endif
+
 #ifndef __WINNT__
 # define __WINNT__ 1
+#endif
+
+#ifndef __HAVE_SPECULATION_SAFE_VALUE
+# define __HAVE_SPECULATION_SAFE_VALUE 1
 #endif
 
 #ifndef __DEC32_MIN_EXP__
@@ -442,12 +454,24 @@
 # define __INTPTR_WIDTH__ 64
 #endif
 
+#ifndef __FLT64X_HAS_INFINITY__
+# define __FLT64X_HAS_INFINITY__ 1
+#endif
+
+#ifndef __UINT_LEAST32_MAX__
+# define __UINT_LEAST32_MAX__ 0xffffffffU
+#endif
+
 #ifndef __FLT32X_HAS_DENORM__
 # define __FLT32X_HAS_DENORM__ 1
 #endif
 
 #ifndef __INT_FAST16_TYPE__
 # define __INT_FAST16_TYPE__ short int
+#endif
+
+#ifndef __MMX_WITH_SSE__
+# define __MMX_WITH_SSE__ 1
 #endif
 
 #ifndef _fastcall
@@ -458,16 +482,12 @@
 # define __LDBL_HAS_DENORM__ 1
 #endif
 
+#ifndef __SEG_GS
+# define __SEG_GS 1
+#endif
+
 #ifndef __FLT128_HAS_INFINITY__
 # define __FLT128_HAS_INFINITY__ 1
-#endif
-
-#ifndef __DEC128_MAX__
-# define __DEC128_MAX__ 9.999999999999999999999999999999999E6144DL
-#endif
-
-#ifndef __INT_LEAST32_MAX__
-# define __INT_LEAST32_MAX__ 0x7fffffff
 #endif
 
 #ifndef __DEC32_MIN__
@@ -488,6 +508,10 @@
 
 #ifndef __DEC128_EPSILON__
 # define __DEC128_EPSILON__ 1E-33DL
+#endif
+
+#ifndef __FLT16_DECIMAL_DIG__
+# define __FLT16_DECIMAL_DIG__ 5
 #endif
 
 #ifndef __SSE2_MATH__
@@ -512,10 +536,6 @@
 
 #ifndef __ATOMIC_HLE_ACQUIRE
 # define __ATOMIC_HLE_ACQUIRE 65536
-#endif
-
-#ifndef __FLT32_HAS_QUIET_NAN__
-# define __FLT32_HAS_QUIET_NAN__ 1
 #endif
 
 #ifndef __LONG_LONG_MAX__
@@ -543,15 +563,19 @@
 #endif
 
 #ifndef __GXX_ABI_VERSION
-# define __GXX_ABI_VERSION 1013
+# define __GXX_ABI_VERSION 1017
 #endif
 
 #ifndef __FLT_MIN_EXP__
 # define __FLT_MIN_EXP__ (-125)
 #endif
 
-#ifndef __FLT64X_HAS_QUIET_NAN__
-# define __FLT64X_HAS_QUIET_NAN__ 1
+#ifndef __INT16_MAX__
+# define __INT16_MAX__ 0x7fff
+#endif
+
+#ifndef __x86_64
+# define __x86_64 1
 #endif
 
 #ifndef __INT_FAST64_TYPE__
@@ -564,6 +588,30 @@
 
 #ifndef __DBL_MIN__
 # define __DBL_MIN__ ((double)2.22507385850720138309023271733240406e-308L)
+#endif
+
+#ifndef __FLT16_DENORM_MIN__
+# define __FLT16_DENORM_MIN__ 5.96046447753906250000000000000000000e-8F16
+#endif
+
+#ifndef __FLT128_EPSILON__
+# define __FLT128_EPSILON__ 1.92592994438723585305597794258492732e-34F128
+#endif
+
+#ifndef __FLT64X_NORM_MAX__
+# define __FLT64X_NORM_MAX__ 1.18973149535723176502126385303097021e+4932F64x
+#endif
+
+#ifndef __SIZEOF_POINTER__
+# define __SIZEOF_POINTER__ 8
+#endif
+
+#ifndef __SIZE_TYPE__
+# define __SIZE_TYPE__ long long unsigned int
+#endif
+
+#ifndef __DBL_HAS_QUIET_NAN__
+# define __DBL_HAS_QUIET_NAN__ 1
 #endif
 
 #ifndef __FLT32X_EPSILON__
@@ -584,6 +632,10 @@
 
 #ifndef __FLT64_MIN_10_EXP__
 # define __FLT64_MIN_10_EXP__ (-307)
+#endif
+
+#ifndef __FLT16_MIN_10_EXP__
+# define __FLT16_MIN_10_EXP__ (-4)
 #endif
 
 #ifndef __FLT64X_DECIMAL_DIG__
@@ -610,6 +662,10 @@
 # define __cdecl __attribute__((__cdecl__))
 #endif
 
+#ifndef __LDBL_HAS_INFINITY__
+# define __LDBL_HAS_INFINITY__ 1
+#endif
+
 #ifndef __FLT32_MIN__
 # define __FLT32_MIN__ 1.17549435082228750796873653722224568e-38F32
 #endif
@@ -618,8 +674,20 @@
 # define __UINT8_TYPE__ unsigned char
 #endif
 
+#ifndef __FLT_DIG__
+# define __FLT_DIG__ 6
+#endif
+
 #ifndef __NO_INLINE__
 # define __NO_INLINE__ 1
+#endif
+
+#ifndef __DEC_EVAL_METHOD__
+# define __DEC_EVAL_METHOD__ 2
+#endif
+
+#ifndef __DEC128_MAX__
+# define __DEC128_MAX__ 9.999999999999999999999999999999999E6144DL
 #endif
 
 #ifndef __FLT_MANT_DIG__
@@ -631,11 +699,23 @@
 #endif
 
 #ifndef __VERSION__
-# define __VERSION__ "8.3.0"
+# define __VERSION__ "12.3.0"
 #endif
 
 #ifndef __UINT64_C
 # define __UINT64_C(c) c ## ULL
+#endif
+
+#ifndef _WIN32
+# define _WIN32 1
+#endif
+
+#ifndef __SEH__
+# define __SEH__ 1
+#endif
+
+#ifndef __INT_LEAST32_MAX__
+# define __INT_LEAST32_MAX__ 0x7fffffff
 #endif
 
 #ifndef __GCC_ATOMIC_INT_LOCK_FREE
@@ -654,16 +734,20 @@
 # define __FLOAT_WORD_ORDER__ __ORDER_LITTLE_ENDIAN__
 #endif
 
+#ifndef __FLT32X_MIN_EXP__
+# define __FLT32X_MIN_EXP__ (-1021)
+#endif
+
 #ifndef __FLT128_HAS_DENORM__
 # define __FLT128_HAS_DENORM__ 1
 #endif
 
-#ifndef __FLT128_DIG__
-# define __FLT128_DIG__ 33
+#ifndef __FLT32_DECIMAL_DIG__
+# define __FLT32_DECIMAL_DIG__ 9
 #endif
 
-#ifndef __SCHAR_WIDTH__
-# define __SCHAR_WIDTH__ 8
+#ifndef __FLT128_DIG__
+# define __FLT128_DIG__ 33
 #endif
 
 #ifndef __INT32_C
@@ -682,10 +766,6 @@
 # define __DEC128_MIN_EXP__ (-6142)
 #endif
 
-#ifndef __FLT32_MAX_10_EXP__
-# define __FLT32_MAX_10_EXP__ 38
-#endif
-
 #ifndef __INT_FAST32_TYPE__
 # define __INT_FAST32_TYPE__ int
 #endif
@@ -694,20 +774,16 @@
 # define __UINT_LEAST16_TYPE__ short unsigned int
 #endif
 
-#ifndef __FLT64X_HAS_INFINITY__
-# define __FLT64X_HAS_INFINITY__ 1
-#endif
-
-#ifndef __INT16_MAX__
-# define __INT16_MAX__ 0x7fff
-#endif
-
-#ifndef __SIZE_TYPE__
-# define __SIZE_TYPE__ long long unsigned int
-#endif
-
 #ifndef __UINT64_MAX__
 # define __UINT64_MAX__ 0xffffffffffffffffULL
+#endif
+
+#ifndef __FLT_IS_IEC_60559__
+# define __FLT_IS_IEC_60559__ 2
+#endif
+
+#ifndef __GNUC_WIDE_EXECUTION_CHARSET_NAME
+# define __GNUC_WIDE_EXECUTION_CHARSET_NAME "UTF-16LE"
 #endif
 
 #ifndef __FLT64X_DIG__
@@ -720,6 +796,10 @@
 
 #ifndef __GCC_ASM_FLAG_OUTPUTS__
 # define __GCC_ASM_FLAG_OUTPUTS__ 1
+#endif
+
+#ifndef __UINT32_TYPE__
+# define __UINT32_TYPE__ unsigned int
 #endif
 
 #ifndef __FLT_RADIX__
@@ -746,8 +826,8 @@
 # define __k8 1
 #endif
 
-#ifndef __SEH__
-# define __SEH__ 1
+#ifndef __FLT32X_MIN__
+# define __FLT32X_MIN__ 2.22507385850720138309023271733240406e-308F32x
 #endif
 
 #ifndef __SIG_ATOMIC_MAX__
@@ -758,20 +838,32 @@
 # define __GCC_ATOMIC_WCHAR_T_LOCK_FREE 2
 #endif
 
+#ifndef __USER_LABEL_PREFIX__
+# define __USER_LABEL_PREFIX__ 
+#endif
+
 #ifndef __SIZEOF_PTRDIFF_T__
 # define __SIZEOF_PTRDIFF_T__ 8
 #endif
 
-#ifndef __FLT32X_MANT_DIG__
-# define __FLT32X_MANT_DIG__ 53
+#ifndef __LDBL_DIG__
+# define __LDBL_DIG__ 18
+#endif
+
+#ifndef __FLT64_IS_IEC_60559__
+# define __FLT64_IS_IEC_60559__ 2
 #endif
 
 #ifndef __x86_64__
 # define __x86_64__ 1
 #endif
 
-#ifndef __FLT32X_MIN_EXP__
-# define __FLT32X_MIN_EXP__ (-1021)
+#ifndef __FLT16_IS_IEC_60559__
+# define __FLT16_IS_IEC_60559__ 2
+#endif
+
+#ifndef __FLT16_MAX_EXP__
+# define __FLT16_MAX_EXP__ 16
 #endif
 
 #ifndef __DEC32_SUBNORMAL_MIN__
@@ -786,6 +878,10 @@
 # define __INT_FAST16_MAX__ 0x7fff
 #endif
 
+#ifndef __GCC_CONSTRUCTIVE_SIZE
+# define __GCC_CONSTRUCTIVE_SIZE 64
+#endif
+
 #ifndef __FLT64_DIG__
 # define __FLT64_DIG__ 15
 #endif
@@ -796,6 +892,10 @@
 
 #ifndef __UINT_LEAST64_TYPE__
 # define __UINT_LEAST64_TYPE__ long long unsigned int
+#endif
+
+#ifndef __FLT16_EPSILON__
+# define __FLT16_EPSILON__ 9.76562500000000000000000000000000000e-4F16
 #endif
 
 #ifndef __FLT_HAS_QUIET_NAN__
@@ -820,6 +920,10 @@
 
 #ifndef __FLT_HAS_INFINITY__
 # define __FLT_HAS_INFINITY__ 1
+#endif
+
+#ifndef __GNUC_EXECUTION_CHARSET_NAME
+# define __GNUC_EXECUTION_CHARSET_NAME "UTF-8"
 #endif
 
 #ifndef __UINT_FAST16_TYPE__
@@ -854,6 +958,10 @@
 # define __INT_LEAST16_MAX__ 0x7fff
 #endif
 
+#ifndef __FLT16_NORM_MAX__
+# define __FLT16_NORM_MAX__ 6.55040000000000000000000000000000000e+4F16
+#endif
+
 #ifndef __DEC64_MANT_DIG__
 # define __DEC64_MANT_DIG__ 16
 #endif
@@ -862,20 +970,8 @@
 # define __INT64_MAX__ 0x7fffffffffffffffLL
 #endif
 
-#ifndef __UINT_LEAST32_MAX__
-# define __UINT_LEAST32_MAX__ 0xffffffffU
-#endif
-
-#ifndef __SEG_GS
-# define __SEG_GS 1
-#endif
-
 #ifndef __FLT32_DENORM_MIN__
 # define __FLT32_DENORM_MIN__ 1.40129846432481707092372958328991613e-45F32
-#endif
-
-#ifndef __GCC_ATOMIC_LONG_LOCK_FREE
-# define __GCC_ATOMIC_LONG_LOCK_FREE 2
 #endif
 
 #ifndef __SIG_ATOMIC_WIDTH__
@@ -894,8 +990,16 @@
 # define __INT_LEAST8_TYPE__ signed char
 #endif
 
+#ifndef __FLT16_MAX__
+# define __FLT16_MAX__ 6.55040000000000000000000000000000000e+4F16
+#endif
+
 #ifndef __STDC_VERSION__
 # define __STDC_VERSION__ 201710L
+#endif
+
+#ifndef __SIZEOF_INT__
+# define __SIZEOF_INT__ 4
 #endif
 
 #ifndef __DEC32_MAX_EXP__
@@ -914,10 +1018,6 @@
 # define __INTPTR_MAX__ 0x7fffffffffffffffLL
 #endif
 
-#ifndef __GXX_MERGED_TYPEINFO_NAMES
-# define __GXX_MERGED_TYPEINFO_NAMES 0
-#endif
-
 #ifndef __FLT64_HAS_QUIET_NAN__
 # define __FLT64_HAS_QUIET_NAN__ 1
 #endif
@@ -930,20 +1030,20 @@
 # define __FLT32_MIN_10_EXP__ (-37)
 #endif
 
-#ifndef __SSE2__
-# define __SSE2__ 1
-#endif
-
 #ifndef __FLT32X_DIG__
 # define __FLT32X_DIG__ 15
 #endif
 
-#ifndef __LDBL_MANT_DIG__
-# define __LDBL_MANT_DIG__ 64
+#ifndef __GXX_MERGED_TYPEINFO_NAMES
+# define __GXX_MERGED_TYPEINFO_NAMES 0
 #endif
 
-#ifndef __DBL_HAS_QUIET_NAN__
-# define __DBL_HAS_QUIET_NAN__ 1
+#ifndef __PTRDIFF_WIDTH__
+# define __PTRDIFF_WIDTH__ 64
+#endif
+
+#ifndef __LDBL_MANT_DIG__
+# define __LDBL_MANT_DIG__ 64
 #endif
 
 #ifndef __FLT64_HAS_INFINITY__
@@ -954,8 +1054,24 @@
 # define __FLT64X_MAX__ 1.18973149535723176502126385303097021e+4932F64x
 #endif
 
+#ifndef __FLT16_HAS_INFINITY__
+# define __FLT16_HAS_INFINITY__ 1
+#endif
+
 #ifndef __SIG_ATOMIC_MIN__
 # define __SIG_ATOMIC_MIN__ (-__SIG_ATOMIC_MAX__ - 1)
+#endif
+
+#ifndef __GCC_ATOMIC_LONG_LOCK_FREE
+# define __GCC_ATOMIC_LONG_LOCK_FREE 2
+#endif
+
+#ifndef __DEC32_MANT_DIG__
+# define __DEC32_MANT_DIG__ 7
+#endif
+
+#ifndef __FLT16_MANT_DIG__
+# define __FLT16_MANT_DIG__ 11
 #endif
 
 #ifndef __k8__
@@ -974,10 +1090,6 @@
 # define __WCHAR_TYPE__ short unsigned int
 #endif
 
-#ifndef __SIZEOF_FLOAT__
-# define __SIZEOF_FLOAT__ 4
-#endif
-
 #ifndef __pic__
 # define __pic__ 1
 #endif
@@ -990,14 +1102,6 @@
 # define __INT_FAST64_WIDTH__ 64
 #endif
 
-#ifndef __DEC64_MIN_EXP__
-# define __DEC64_MIN_EXP__ (-382)
-#endif
-
-#ifndef __FLT32_DECIMAL_DIG__
-# define __FLT32_DECIMAL_DIG__ 9
-#endif
-
 #ifndef __INT_FAST64_MAX__
 # define __INT_FAST64_MAX__ 0x7fffffffffffffffLL
 #endif
@@ -1006,8 +1110,8 @@
 # define __GCC_ATOMIC_TEST_AND_SET_TRUEVAL 1
 #endif
 
-#ifndef __FLT_DIG__
-# define __FLT_DIG__ 6
+#ifndef __FLT_NORM_MAX__
+# define __FLT_NORM_MAX__ 3.40282346638528859811704183484516925e+38F
 #endif
 
 #ifndef __FLT32_HAS_INFINITY__
@@ -1024,10 +1128,6 @@
 
 #ifndef __INT_MAX__
 # define __INT_MAX__ 0x7fffffff
-#endif
-
-#ifndef __amd64__
-# define __amd64__ 1
 #endif
 
 #ifndef WIN32
@@ -1086,6 +1186,10 @@
 # define __SIZEOF_SHORT__ 2
 #endif
 
+#ifndef __FLT32_NORM_MAX__
+# define __FLT32_NORM_MAX__ 3.40282346638528859811704183484516925e+38F32
+#endif
+
 #ifndef __SSE__
 # define __SSE__ 1
 #endif
@@ -1098,6 +1202,10 @@
 # define __FLT64_MAX__ 1.79769313486231570814527423731704357e+308F64
 #endif
 
+#ifndef __amd64__
+# define __amd64__ 1
+#endif
+
 #ifndef __WINT_WIDTH__
 # define __WINT_WIDTH__ 16
 #endif
@@ -1106,12 +1214,32 @@
 # define __INT_LEAST8_MAX__ 0x7f
 #endif
 
+#ifndef __INT_LEAST64_WIDTH__
+# define __INT_LEAST64_WIDTH__ 64
+#endif
+
+#ifndef __LDBL_MAX_EXP__
+# define __LDBL_MAX_EXP__ 16384
+#endif
+
 #ifndef __FLT32X_MAX_10_EXP__
 # define __FLT32X_MAX_10_EXP__ 308
 #endif
 
+#ifndef __WIN32
+# define __WIN32 1
+#endif
+
 #ifndef __SIZEOF_INT128__
 # define __SIZEOF_INT128__ 16
+#endif
+
+#ifndef __FLT16_MIN__
+# define __FLT16_MIN__ 6.10351562500000000000000000000000000e-5F16
+#endif
+
+#ifndef __FLT64X_IS_IEC_60559__
+# define __FLT64X_IS_IEC_60559__ 2
 #endif
 
 #ifndef __LDBL_MAX_10_EXP__
@@ -1154,8 +1282,24 @@
 # define __UINT64_TYPE__ long long unsigned int
 #endif
 
+#ifndef __GNUC_PATCHLEVEL__
+# define __GNUC_PATCHLEVEL__ 0
+#endif
+
+#ifndef __FLT128_NORM_MAX__
+# define __FLT128_NORM_MAX__ 1.18973149535723176508575932662800702e+4932F128
+#endif
+
+#ifndef __FLT64_NORM_MAX__
+# define __FLT64_NORM_MAX__ 1.79769313486231570814527423731704357e+308F64
+#endif
+
 #ifndef __FLT128_HAS_QUIET_NAN__
 # define __FLT128_HAS_QUIET_NAN__ 1
+#endif
+
+#ifndef __INTMAX_MAX__
+# define __INTMAX_MAX__ 0x7fffffffffffffffLL
 #endif
 
 #ifndef __INT_FAST8_TYPE__
@@ -1182,6 +1326,10 @@
 # define __FLT32_EPSILON__ 1.19209289550781250000000000000000000e-7F32
 #endif
 
+#ifndef __FLT16_HAS_DENORM__
+# define __FLT16_HAS_DENORM__ 1
+#endif
+
 #ifndef __DBL_DECIMAL_DIG__
 # define __DBL_DECIMAL_DIG__ 17
 #endif
@@ -1198,28 +1346,32 @@
 # define __FXSR__ 1
 #endif
 
-#ifndef __DEC_EVAL_METHOD__
-# define __DEC_EVAL_METHOD__ 2
-#endif
-
 #ifndef __FLT32X_MAX__
 # define __FLT32X_MAX__ 1.79769313486231570814527423731704357e+308F32x
+#endif
+
+#ifndef __DBL_NORM_MAX__
+# define __DBL_NORM_MAX__ ((double)1.79769313486231570814527423731704357e+308L)
+#endif
+
+#ifndef __BYTE_ORDER__
+# define __BYTE_ORDER__ __ORDER_LITTLE_ENDIAN__
 #endif
 
 #ifndef __MINGW64__
 # define __MINGW64__ 1
 #endif
 
+#ifndef __GCC_DESTRUCTIVE_SIZE
+# define __GCC_DESTRUCTIVE_SIZE 64
+#endif
+
+#ifndef __INTMAX_WIDTH__
+# define __INTMAX_WIDTH__ 64
+#endif
+
 #ifndef __UINT32_C
 # define __UINT32_C(c) c ## U
-#endif
-
-#ifndef __INTMAX_MAX__
-# define __INTMAX_MAX__ 0x7fffffffffffffffLL
-#endif
-
-#ifndef __BYTE_ORDER__
-# define __BYTE_ORDER__ __ORDER_LITTLE_ENDIAN__
 #endif
 
 #ifndef WINNT
@@ -1246,12 +1398,20 @@
 # define __UINT_FAST32_TYPE__ unsigned int
 #endif
 
+#ifndef __FLT32X_NORM_MAX__
+# define __FLT32X_NORM_MAX__ 1.79769313486231570814527423731704357e+308F32x
+#endif
+
 #ifndef __CHAR32_TYPE__
 # define __CHAR32_TYPE__ unsigned int
 #endif
 
 #ifndef __FLT_MAX__
 # define __FLT_MAX__ 3.40282346638528859811704183484516925e+38F
+#endif
+
+#ifndef __SSE2__
+# define __SSE2__ 1
 #endif
 
 #ifndef __INT32_TYPE__
@@ -1306,10 +1466,6 @@
 # define __UINTMAX_MAX__ 0xffffffffffffffffULL
 #endif
 
-#ifndef __DEC32_MANT_DIG__
-# define __DEC32_MANT_DIG__ 7
-#endif
-
 #ifndef __FLT32X_DENORM_MIN__
 # define __FLT32X_DENORM_MIN__ 4.94065645841246544176568792868221372e-324F32x
 #endif
@@ -1338,10 +1494,6 @@
 # define __ATOMIC_SEQ_CST 5
 #endif
 
-#ifndef __UINT32_TYPE__
-# define __UINT32_TYPE__ unsigned int
-#endif
-
 #ifndef __FLT32X_MIN_10_EXP__
 # define __FLT32X_MIN_10_EXP__ (-307)
 #endif
@@ -1362,10 +1514,6 @@
 # define __LDBL_MIN_10_EXP__ (-4931)
 #endif
 
-#ifndef __FLT128_EPSILON__
-# define __FLT128_EPSILON__ 1.92592994438723585305597794258492732e-34F128
-#endif
-
 #ifndef __SIZEOF_LONG_LONG__
 # define __SIZEOF_LONG_LONG__ 8
 #endif
@@ -1378,12 +1526,8 @@
 # define __GCC_ATOMIC_LLONG_LOCK_FREE 2
 #endif
 
-#ifndef __FLT32X_MIN__
-# define __FLT32X_MIN__ 2.22507385850720138309023271733240406e-308F32x
-#endif
-
-#ifndef __LDBL_DIG__
-# define __LDBL_DIG__ 18
+#ifndef __FLT32_HAS_QUIET_NAN__
+# define __FLT32_HAS_QUIET_NAN__ 1
 #endif
 
 #ifndef __FLT_DECIMAL_DIG__
@@ -1394,12 +1538,12 @@
 # define __UINT_FAST16_MAX__ 0xffff
 #endif
 
-#ifndef __GCC_ATOMIC_SHORT_LOCK_FREE
-# define __GCC_ATOMIC_SHORT_LOCK_FREE 2
+#ifndef __LDBL_NORM_MAX__
+# define __LDBL_NORM_MAX__ 1.18973149535723176502126385303097021e+4932L
 #endif
 
-#ifndef __INT_LEAST64_WIDTH__
-# define __INT_LEAST64_WIDTH__ 64
+#ifndef __GCC_ATOMIC_SHORT_LOCK_FREE
+# define __GCC_ATOMIC_SHORT_LOCK_FREE 2
 #endif
 
 #ifndef __UINT_FAST8_TYPE__

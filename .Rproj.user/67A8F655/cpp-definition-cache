@@ -1,14 +1,14 @@
 [
     {
-        "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
-        "file_last_write": 1615890223.0,
+        "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/BetaBinomFuns.cpp",
+        "file_last_write": 1688652042.0,
         "definitions": [
             {
                 "usr": "c:@F@dBetaBinom_MP#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#b#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "dBetaBinom_MP(Rcpp::NumericVector, Rcpp::NumericVector, double, double, bool, double)",
-                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/BetaBinomFuns.cpp",
                 "line": 26,
                 "column": 15,
                 "hidden": false
@@ -18,7 +18,7 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_pi_MP(Rcpp::NumericVector, Rcpp::NumericVector, double, double, double)",
-                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/BetaBinomFuns.cpp",
                 "line": 80,
                 "column": 15,
                 "hidden": false
@@ -28,7 +28,7 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_theta_MP(Rcpp::NumericVector, Rcpp::NumericVector, double, double, double)",
-                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/BetaBinomFuns.cpp",
                 "line": 124,
                 "column": 15,
                 "hidden": false
@@ -38,7 +38,7 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "dBetaBinom_cpp_old(Rcpp::NumericVector, Rcpp::NumericVector, double, double, bool)",
-                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/BetaBinomFuns.cpp",
                 "line": 173,
                 "column": 15,
                 "hidden": false
@@ -48,7 +48,7 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_pi_old(Rcpp::NumericVector, Rcpp::NumericVector, double, double)",
-                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/BetaBinomFuns.cpp",
                 "line": 226,
                 "column": 15,
                 "hidden": false
@@ -58,9 +58,710 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_theta_old(Rcpp::NumericVector, Rcpp::NumericVector, double, double)",
-                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/MAGE/src/BetaBinomFuns.cpp",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/BetaBinomFuns.cpp",
                 "line": 270,
                 "column": 15,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTest.cpp",
+        "file_last_write": 1688652042.0,
+        "definitions": [
+            {
+                "usr": "c:@F@my_f#*1$@SA@gsl_vector#*v#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "my_f(const gsl_vector *, void *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTest.cpp",
+                "line": 14,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@my_df#*1$@SA@gsl_vector#*v#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "my_df(const gsl_vector *, void *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTest.cpp",
+                "line": 28,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@my_fdf#*1$@SA@gsl_vector#*v#*d#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "my_fdf(const gsl_vector *, void *, double *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTest.cpp",
+                "line": 43,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@MyOptTest#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "MyOptTest(Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTest.cpp",
+                "line": 59,
+                "column": 3,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+        "file_last_write": 1688652042.0,
+        "definitions": [
+            {
+                "usr": "c:@S@myCnT_P",
+                "kind": 3,
+                "parent_name": "",
+                "name": "myCnT_P",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 17,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@S@myHom_P",
+                "kind": 3,
+                "parent_name": "",
+                "name": "myHom_P",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 19,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@S@myHet_P",
+                "kind": 3,
+                "parent_name": "",
+                "name": "myHet_P",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 21,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@S@myHetH0_P",
+                "kind": 3,
+                "parent_name": "",
+                "name": "myHetH0_P",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 23,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@dBetaBin_cppi_MP#d#d#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "dBetaBin_cppi_MP(double, double, double, double, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 31,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@dBetaBin_cppi#d#d#d#d#b#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "dBetaBin_cppi(double, double, double, double, bool, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 71,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@dBetaBinom#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#b#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "dBetaBinom(Rcpp::NumericVector, Rcpp::NumericVector, double, double, bool, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 160,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_het_CnTcpp#*1$@SA@gsl_vector#*v#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_het_CnTcpp(const gsl_vector *, void *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 179,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradPi_cppi_MP#d#d#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradPi_cppi_MP(double, double, double, double, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 259,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradPi_cppi#d#d#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradPi_cppi(double, double, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 292,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_pi#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_pi(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 380,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradTheta_cppi_MP#d#d#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradTheta_cppi_MP(double, double, double, double, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 403,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradTheta_cppi#d#d#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradTheta_cppi(double, double, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 440,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_theta#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_theta(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 568,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_het_CnTcpp_Df#*1$@SA@gsl_vector#*v#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_het_CnTcpp_Df(const gsl_vector *, void *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 588,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_het_CnTcpp_fdfY#*1$@SA@gsl_vector#*v#*d#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_het_CnTcpp_fdfY(const gsl_vector *, void *, double *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 638,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@CppCnT_Optim#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#I#I#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "CppCnT_Optim(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, int, int, double, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 661,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_homcpp#*1$@SA@gsl_vector#*v#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_homcpp(const gsl_vector *, void *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 749,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_homcpp_Df#*1$@SA@gsl_vector#*v#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_homcpp_Df(const gsl_vector *, void *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 783,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_homcpp_fdfY#*1$@SA@gsl_vector#*v#*d#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_homcpp_fdfY(const gsl_vector *, void *, double *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 818,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@CppHom_Optim#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#I#I#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "CppHom_Optim(double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, int, int, double, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 831,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_hetcpp#*1$@SA@gsl_vector#*v#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_hetcpp(const gsl_vector *, void *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 896,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_hetcpp_Df#*1$@SA@gsl_vector#*v#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_hetcpp_Df(const gsl_vector *, void *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 928,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_hetcpp_fdfY#*1$@SA@gsl_vector#*v#*d#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_hetcpp_fdfY(const gsl_vector *, void *, double *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 968,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@CppHet_Optim#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#I#I#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "CppHet_Optim(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, int, int, double, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 991,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_hetH0cpp#*1$@SA@gsl_vector#*v#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_hetH0cpp(const gsl_vector *, void *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1075,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_hetH0cpp_Df#*1$@SA@gsl_vector#*v#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_hetH0cpp_Df(const gsl_vector *, void *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1106,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogLikComp_hetH0cpp_fdfY#*1$@SA@gsl_vector#*v#*d#*S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogLikComp_hetH0cpp_fdfY(const gsl_vector *, void *, double *, gsl_vector *)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1139,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@CppHetH0_Optim#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#I#I#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "CppHetH0_Optim(double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, int, int, double, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1152,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradPiPi_cppi_MP#d#d#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradPiPi_cppi_MP(double, double, double, double, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1220,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradPiPi_cppi#d#d#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradPiPi_cppi(double, double, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1254,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_pi_pi#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_pi_pi(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1333,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradPiTheta_cppi_MP#d#d#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradPiTheta_cppi_MP(double, double, double, double, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1363,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradPiTheta_cppi#d#d#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradPiTheta_cppi(double, double, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1397,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_pi_theta#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_pi_theta(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1476,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@MPhelper_GradThetaTheta#d#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "MPhelper_GradThetaTheta(double, double, double, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1501,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradThetaTheta_cppi_MP#d#d#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradThetaTheta_cppi_MP(double, double, double, double, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1527,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@GradThetaTheta_cppi#d#d#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "GradThetaTheta_cppi(double, double, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1565,
+                "column": 3,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_theta_theta#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_theta_theta(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
+                "line": 1681,
+                "column": 3,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+        "file_last_write": 1725884040.0,
+        "definitions": [
+            {
+                "usr": "c:@F@logSums_MaxMethod_CPP#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "logSums_MaxMethod_CPP(int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 12,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@logSums_MaxMethod_CPP_R#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "logSums_MaxMethod_CPP_R(Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 45,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@logSums_MaxMethodSigned_CPP#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "logSums_MaxMethodSigned_CPP(int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 78,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogTrapezoidalInt_CPP#d#d#I#d#d#d#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogTrapezoidalInt_CPP(double, double, int, double, double, double, int, int, int, int)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 118,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogNewtonCotes_CPP#d#d#d#d#d#I#I#I#I#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogNewtonCotes_CPP(double, double, double, double, double, int, int, int, int, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 192,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogGaussianQuad_CPP#d#d#d#d#d#I#I#I#I#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogGaussianQuad_CPP(double, double, double, double, double, int, int, int, int, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 248,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LogTanhSinhQuad_CPP#d#d#I#d#d#d#I#I#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LogTanhSinhQuad_CPP(double, double, int, double, double, double, int, int, int, int, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 291,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPurHelpFun_CPP#I#I#I#d#d#d#I#I#I#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPurHelpFun_CPP(int, int, int, double, double, double, int, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 381,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPurHelpFun_CPP_R#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#S0_#d#d#d#S0_#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPurHelpFun_CPP_R(Rcpp::NumericVector, int, Rcpp::NumericVector, double, double, double, Rcpp::NumericVector, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 464,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 546,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@qbeta_C#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "qbeta_C(Rcpp::NumericVector, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 623,
+                "column": 15,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@qbeta_C3#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "qbeta_C3(Rcpp::NumericVector, double, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 645,
+                "column": 15,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP2#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP2(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 674,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP2X#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP2X(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 757,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP3#d#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP3(double, double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 840,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP3X#d#d#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP3X(double, double, double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 917,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP4#d#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP4(double, double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 996,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP_DB1#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP_DB1(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 1077,
+                "column": 21,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP_DB2#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP_DB2(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 1161,
+                "column": 33,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP_DB3#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP_DB3(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 1245,
+                "column": 33,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@BrolDB#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "BrolDB(int, double)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 1326,
+                "column": 21,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP2_10#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP2_10(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 1345,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP2_100#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP2_100(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 1425,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP2_1000#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP2_1000(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 1505,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@TumPur_LogLik_CPP2Y#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TumPur_LogLik_CPP2Y(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
+                "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
+                "line": 1588,
+                "column": 8,
                 "hidden": false
             }
         ],

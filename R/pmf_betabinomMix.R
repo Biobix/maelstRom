@@ -1,7 +1,7 @@
 #' Probability Mass Function of the beta-binomial mixture distribution modeling population-level RNAseq data
 #'
 #' @description \code{pmf_betabinomMix} calculates the probability of observing given population-level RNAseq data (i.e. both reference- and variant counts of one or more samples)
-#' assuming a beta-binomial mixture model with parameter values as determined by the input. More specifically, the formula used is (using MAGE's \code{dBetaBinom} function):
+#' assuming a beta-binomial mixture model with parameter values as determined by the input. More specifically, the formula used is (using maelstRom's \code{dBetaBinom} function):
 #'
 #' @description pr * dBetaBinom(ref_counts, ref_counts + var_counts, pi = 1 - SE, theta = theta_hom, LOG = FALSE) + 
 #' 

@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAGE expanded tutorial • MAGE</title>
+<title>maelstRom expanded tutorial • maelstRom</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="MAGE expanded tutorial">
-<meta property="og:description" content="MAGE">
+<script src="../pkgdown.js"></script><meta property="og:title" content="maelstRom expanded tutorial">
+<meta property="og:description" content="maelstRom">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -32,7 +32,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">MAGE</a>
+        <a class="navbar-link" href="../index.html">maelstRom</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
@@ -50,10 +50,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/MAGE_expanded_tutorial.html">MAGE expanded tutorial</a>
+      <a href="../articles/maelstRom_expanded_tutorial.html">maelstRom expanded tutorial</a>
     </li>
     <li>
-      <a href="../articles/MAGE_tutorial.html">MAGE tutorial</a>
+      <a href="../articles/maelstRom_tutorial.html">maelstRom tutorial</a>
     </li>
   </ul>
 </li>
@@ -71,23 +71,23 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>MAGE expanded tutorial</h1>
+      <h1 data-toc-skip>maelstRom expanded tutorial</h1>
                         <h4 data-toc-skip class="author">Cedric
 Stroobandt</h4>
             
             <h4 data-toc-skip class="date">2022-10-12</h4>
       
       
-      <div class="hidden name"><code>MAGE_expanded_tutorial.Rmd</code></div>
+      <div class="hidden name"><code>maelstRom_expanded_tutorial.Rmd</code></div>
 
     </div>
 
     
     
 <div class="section level2">
-<h2 id="mage-modeller-of-allelic-gene-expression">MAGE: Modeller of Allelic Gene Expression<a class="anchor" aria-label="anchor" href="#mage-modeller-of-allelic-gene-expression"></a>
+<h2 id="mage-modeller-of-allelic-gene-expression">maelstRom: Modeller of Allelic Gene Expression<a class="anchor" aria-label="anchor" href="#mage-modeller-of-allelic-gene-expression"></a>
 </h2>
-<p>The MAGE package provides extensive functions for RNAseq-based
+<p>The maelstRom package provides extensive functions for RNAseq-based
 allelic analyses, ranging from basic tasks such as genotyping - albeit
 allele-specific-expression (ASE) aware and relying on RNAseq data only -
 to the analysis of more complex ASE-related phenomena such as allelic
@@ -95,13 +95,13 @@ bias (AB) detection, differential allelic divergence (AD) detection in
 case (e.g. tumor) populations compared to controls, and detection of
 imprinted loci with subsequent detection of loss of this imprinting
 (LOI) in cases. More information on these phenomena is provided
-throughout this vignette. As MAGE relies on population-level models,
+throughout this vignette. As maelstRom relies on population-level models,
 large numbers of samples are extremely beneficial (100 or more is ideal;
 20 as a bare minimum).</p>
 <p>This is an expanded vignette that doesn’t utilize wrapper function,
-but fully writes out all analyses calling MAGE’s base functions and
+but fully writes out all analyses calling maelstRom’s base functions and
 including intermediary steps. This may not be interesting for most users
-that just want to use MAGE as plug-and-play (for which the regular
+that just want to use maelstRom as plug-and-play (for which the regular
 vignette is more appropriate), but is recommended for those wanting
 additional insight into the pipeline or more control over its component
 steps for e.g. advanced analyses.</p>
@@ -109,16 +109,16 @@ steps for e.g. advanced analyses.</p>
 <div class="section level2">
 <h2 id="a-toy-dataset">A toy dataset<a class="anchor" aria-label="anchor" href="#a-toy-dataset"></a>
 </h2>
-<p>MAGE’s main input consists of per-locus per-sample nucleotide counts
+<p>maelstRom’s main input consists of per-locus per-sample nucleotide counts
 (A/T/C/G). These are relatively straightforward to extract from BAM/SAM
 files via custom scripting or established pipelines such as SAMtools’
 mpileup or GATK’s CollectAllelicCounts functionality (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037594071-CollectAllelicCounts" class="external-link uri">https://gatk.broadinstitute.org/hc/en-us/articles/360037594071-CollectAllelicCounts</a>),
 though the latter already filters the data down to one reference- and
 one variant-allele count.</p>
-<p>MAGE includes a small example of such data, including both a control
+<p>maelstRom includes a small example of such data, including both a control
 (e.g. healthy tissue) and case (e.g. tumor tissue) dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MAGE"</span>, package <span class="op">=</span> <span class="st">"MAGE"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"maelstRom"</span>, package <span class="op">=</span> <span class="st">"maelstRom"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ControlCounts</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -274,7 +274,7 @@ comparison of cases against controls.</p>
 <div class="section level2">
 <h2 id="input-pre-processing">Input pre-processing<a class="anchor" aria-label="anchor" href="#input-pre-processing"></a>
 </h2>
-<p>MAGE expects its input data to be formatted as <em>lists of
+<p>maelstRom expects its input data to be formatted as <em>lists of
 dataframes, every dataframe containing the per-sample nucleotide counts
 of one particular locus</em>, and has some requirements about naming as
 well. The first function we’ll be using is
@@ -288,7 +288,7 @@ pages, though besides this initial setup all remaining input
 requirements will be met if following this entire vignette from start to
 finish:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># MAGE expects lists:</span></span>
+<code class="sourceCode R"><span><span class="co"># maelstRom expects lists:</span></span>
 <span><span class="va">controlList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="va">caseList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -307,18 +307,18 @@ finish:</p>
 <div class="section level2">
 <h2 id="determine-one-reference-and-one-variant-allele">Determine one reference and one variant allele<a class="anchor" aria-label="anchor" href="#determine-one-reference-and-one-variant-allele"></a>
 </h2>
-<p>MAGE employs beta-binomial modelling of allele counts, which implies
+<p>maelstRom employs beta-binomial modelling of allele counts, which implies
 only two alleles are allowed (which is compatible with the large
 majority of all loci in most diploid species, including humans).
 Accounting for more alleles would require a different approach,
 possibilities being the use of multiple beta-binomial models (for all
 alleles against one set reference, or even all pairwise combinations) or
 of (beta-)multinomial models”. The latter is, however, not supported by
-MAGE at the moment.</p>
+maelstRom at the moment.</p>
 <p>So as it stands, we need to select one reference and one variant
 allele and retain only their count data. This can be done by hand by a
 researcher based on biological knowledge or through some automated
-procedure, e.g. retaining only the most common alleles. MAGE’s
+procedure, e.g. retaining only the most common alleles. maelstRom’s
 <code><a href="../reference/standard_alleles.html">standard_alleles()</a></code> function combines both approaches by
 taking a look at the standard alleles for every locus according to dbSNP
 which are supplied by the <code>ref_alleles</code> column, then
@@ -336,7 +336,7 @@ reference and which as variant allele, alongside their respective counts
 count in all RNAseq data combined):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span><span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">controlList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/standard_alleles.html">standard_alleles</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">controlList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/standard_alleles.html">standard_alleles</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">[[</span><span class="st">"loc27"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
@@ -476,7 +476,7 @@ well):</p>
 <h2 id="prior-filtering">Prior filtering<a class="anchor" aria-label="anchor" href="#prior-filtering"></a>
 </h2>
 <p>Before doing any analyses, it might be beneficial (in terms of
-runtime) to filter out low-quality loci. MAGE’s
+runtime) to filter out low-quality loci. maelstRom’s
 <code><a href="../reference/prior_filter.html">prior_filter()</a></code> offers this functionality, leaving out loci
 based on a required minimal median coverage across all samples, a
 minimal number of samples, or a crudely estimated minimal minor allele
@@ -494,7 +494,7 @@ samples” filter of 20 in controls (only counting samples with at least
 one reference or variant read). The first analysis is genotyping after
 all, and researchers might be interested in getting the most likely
 genotype for every sample regardless of median coverage or minor allele
-frequency across the entire locus (as MAGE is a population-level
+frequency across the entire locus (as maelstRom is a population-level
 modeller, a minimal number of samples of at least 20 is always advised).
 We apply no actual filtering on the case dataset however, but rather
 retain case data if its locus is retained in the control set as well, as
@@ -506,10 +506,10 @@ would give NA-results during several calculations in the pipeline). This
 reduces the toy datasets from 269 to 264 loci:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span><span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">controlList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/prior_filter.html">prior_filter</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span>, min_median_cov <span class="op">=</span> <span class="fl">0</span>, </span>
+<span>  <span class="va">controlList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/prior_filter.html">prior_filter</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span>, min_median_cov <span class="op">=</span> <span class="fl">0</span>, </span>
 <span>    min_nr_samples <span class="op">=</span> <span class="fl">20</span>, checkref_filter <span class="op">=</span> <span class="cn">TRUE</span>, prior_allelefreq_filter <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>    min_PriorAlleleFreq <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span>  <span class="va">caseList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/prior_filter.html">prior_filter</a></span><span class="op">(</span><span class="va">caseList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span>, min_median_cov <span class="op">=</span> <span class="fl">0</span>, </span>
+<span>  <span class="va">caseList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/prior_filter.html">prior_filter</a></span><span class="op">(</span><span class="va">caseList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span>, min_median_cov <span class="op">=</span> <span class="fl">0</span>, </span>
 <span>    min_nr_samples <span class="op">=</span> <span class="fl">0</span>, checkref_filter <span class="op">=</span> <span class="cn">FALSE</span>, prior_allelefreq_filter <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>    min_PriorAlleleFreq <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
@@ -522,11 +522,11 @@ reduces the toy datasets from 269 to 264 loci:</p>
 </h2>
 <p>Before any further analyses, this vignette first splits input data
 into <code>NC</code> chunks below as a list, <code>NC</code> being a
-number of cores as the coding in this vignette allows MAGE to be run in
+number of cores as the coding in this vignette allows maelstRom to be run in
 parallel on a server using R’s <code>parallel</code> package. A local
 (Windows) installation is only able to use 1 core at a time though, so
 <code>NC</code> is set as one in the code below. Feel free to change it
-when running MAGE on e.g. a linux-based server:</p>
+when running maelstRom on e.g. a linux-based server:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">NC</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># Number of Cores</span></span>
 <span><span class="va">NS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">)</span> </span>
@@ -548,7 +548,7 @@ when running MAGE on e.g. a linux-based server:</p>
 metaparameters shared across all loci, those being the inbreeding
 coefficient of the population and the sequencing error rate. These
 values can be set based on prior knowledge about the population and the
-sequencing protocol of choice, but MAGE’s <code><a href="../reference/AllelicMeta_est.html">AllelicMeta_est()</a></code>
+sequencing protocol of choice, but maelstRom’s <code><a href="../reference/AllelicMeta_est.html">AllelicMeta_est()</a></code>
 can estimate them based on observed <em>control</em> data, which is
 recommended anyway for a good model fit. This function fits a regular
 binomial mixture model assuming no allelic bias (i.e. perfectly balanced
@@ -600,7 +600,7 @@ median.</p>
 <span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="kw">for</span><span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">DataList</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="va">MetaEst_res</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/AllelicMeta_est.html">AllelicMeta_est</a></span><span class="op">(</span>ref_counts <span class="op">=</span> <span class="va">DataList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, var_counts <span class="op">=</span> <span class="va">DataList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span><span class="op">)</span></span>
+<span>    <span class="va">MetaEst_res</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/AllelicMeta_est.html">AllelicMeta_est</a></span><span class="op">(</span>ref_counts <span class="op">=</span> <span class="va">DataList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, var_counts <span class="op">=</span> <span class="va">DataList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span><span class="op">)</span></span>
 <span>    <span class="co"># You can store each locus' Sequencing Error (SE) and inbreeding coefficient (F) estimate </span></span>
 <span>    <span class="co"># in its dataframe, if you want:</span></span>
 <span>    <span class="va">DataList</span><span class="op">[[</span><span class="va">n</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">est_SE</span> <span class="op">&lt;-</span> <span class="va">MetaEst_res</span><span class="op">$</span><span class="va">SE</span></span>
@@ -656,7 +656,7 @@ setups.</p>
 <div class="section level2">
 <h2 id="genotyping-rnaseq-data-allelic-bias-detection">Genotyping RNAseq data &amp; allelic bias detection<a class="anchor" aria-label="anchor" href="#genotyping-rnaseq-data-allelic-bias-detection"></a>
 </h2>
-<p>For both genotyping and allelic bias detection, we can use MAGE’s
+<p>For both genotyping and allelic bias detection, we can use maelstRom’s
 <code>EMfit_betabinom_robust</code> function, which fits a beta-binomial
 mixture model using expectation maximization while allowing for unequal
 allelic expression in heterozygotes:</p>
@@ -678,7 +678,7 @@ fitted genotype frequencies, <span class="math inline">\((\theta_{hom},
 and heterozygotes respectively, and <span class="math inline">\(\pi_{het}\)</span> the heterozygous <span class="math inline">\(\pi\)</span> parameter indicating the expected
 reference allele fraction, thus allowing for unequal allelic expression
 in heterozygotes. <code>pBetaBinom</code> is a function included in the
-MAGE package for the beta-binomial PMF, using a <span class="math inline">\(\pi, \theta\)</span> parameterisation (probability
+maelstRom package for the beta-binomial PMF, using a <span class="math inline">\(\pi, \theta\)</span> parameterisation (probability
 of success, here defined as observing a reference read, and
 overdispersion, respectively) instead of the classical <span class="math inline">\(\alpha, \beta\)</span> parameterisation as given
 on e.g. <a href="https://en.wikipedia.org/wiki/Beta-binomial_distribution" class="external-link uri">https://en.wikipedia.org/wiki/Beta-binomial_distribution</a>.
@@ -704,7 +704,7 @@ function (proportional to the number of samples), and its merit for
 genotyping and AB-detection is limited, so one might opt for the latter
 instead. A robust fit is, however, very valuable for statistical
 inference on the overdispersion parameter <span class="math inline">\(\theta\)</span> (see the next section).</p>
-<p>MAGE’s functions have many optional input parameters to customize the
+<p>maelstRom’s functions have many optional input parameters to customize the
 fitting procedure, but throughout this tutorial and for most
 applications the defaults should suffice. Feel free to read up on all
 options on each function’s help page. After performing the fit and
@@ -717,28 +717,28 @@ hyperparameter, to be used for filtering later.</p>
 <span>  <span class="va">positions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">z</span> <span class="kw">in</span> <span class="va">positions</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">MAGEres</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom_robust.html">EMfit_betabinom_robust</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span>, </span>
+<span>    <span class="va">maelstRomres</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom_robust.html">EMfit_betabinom_robust</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span>, </span>
 <span>                                            SE <span class="op">=</span> <span class="va">SEmedian</span>, inbr <span class="op">=</span> <span class="va">Fmedian</span><span class="op">)</span></span>
-<span>    <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">MAGEres</span><span class="op">$</span><span class="va">data_hash</span></span>
+<span>    <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">maelstRomres</span><span class="op">$</span><span class="va">data_hash</span></span>
 <span>    <span class="co"># median_AB also calculates a robust median AB,</span></span>
 <span>    <span class="co"># besides the AB as determined during EMfit_betabinom_robust's fitting procedure.</span></span>
 <span>    <span class="co"># This can be used as additional filter when detecting significant AB:</span></span>
-<span>    <span class="va">med_AB</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/median_AB.html">median_AB</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, </span>
+<span>    <span class="va">med_AB</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/median_AB.html">median_AB</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, </span>
 <span>                               <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">allelefreq</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">Fmedian</span><span class="op">)</span> </span>
-<span>    <span class="va">res_loc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"position"</span> <span class="op">=</span> <span class="va">z</span>, <span class="st">"probshift"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">MAGEres</span><span class="op">$</span><span class="va">AB</span><span class="op">)</span>, </span>
-<span>      <span class="st">"LRT"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">MAGEres</span><span class="op">$</span><span class="va">AB_lrt</span><span class="op">)</span>, <span class="st">"p"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">MAGEres</span><span class="op">$</span><span class="va">AB_p</span><span class="op">)</span>,</span>
-<span>      <span class="st">"quality"</span> <span class="op">=</span> <span class="va">MAGEres</span><span class="op">$</span><span class="va">quality</span>, <span class="st">"allele.frequency"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">allelefreq</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, </span>
+<span>    <span class="va">res_loc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"position"</span> <span class="op">=</span> <span class="va">z</span>, <span class="st">"probshift"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">maelstRomres</span><span class="op">$</span><span class="va">AB</span><span class="op">)</span>, </span>
+<span>      <span class="st">"LRT"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">maelstRomres</span><span class="op">$</span><span class="va">AB_lrt</span><span class="op">)</span>, <span class="st">"p"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">maelstRomres</span><span class="op">$</span><span class="va">AB_p</span><span class="op">)</span>,</span>
+<span>      <span class="st">"quality"</span> <span class="op">=</span> <span class="va">maelstRomres</span><span class="op">$</span><span class="va">quality</span>, <span class="st">"allele.frequency"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">allelefreq</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, </span>
 <span>      <span class="st">"reference"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"variant"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, </span>
 <span>      <span class="st">"est_SE"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">est_SE</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"coverage"</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span><span class="op">+</span><span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span><span class="op">)</span>,</span>
 <span>      <span class="st">"nr_samples"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">z</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="st">"median_AB"</span> <span class="op">=</span> <span class="va">med_AB</span>, </span>
-<span>      <span class="st">"rho_rr"</span> <span class="op">=</span> <span class="va">MAGEres</span><span class="op">$</span><span class="va">rho_rr</span>, <span class="st">"rho_rv"</span> <span class="op">=</span> <span class="va">MAGEres</span><span class="op">$</span><span class="va">rho_rv</span>, <span class="st">"rho_vv"</span> <span class="op">=</span> <span class="va">MAGEres</span><span class="op">$</span><span class="va">rho_vv</span>, </span>
-<span>      <span class="st">"theta_hom"</span> <span class="op">=</span> <span class="va">MAGEres</span><span class="op">$</span><span class="va">theta_hom</span>, <span class="st">"theta_het"</span> <span class="op">=</span> <span class="va">MAGEres</span><span class="op">$</span><span class="va">theta_het</span>,</span>
-<span>      <span class="st">"theta_hom_NoShift"</span> <span class="op">=</span> <span class="va">MAGEres</span><span class="op">$</span><span class="va">theta_hom_NoShift</span>, </span>
-<span>      <span class="st">"theta_het_NoShift"</span> <span class="op">=</span> <span class="va">MAGEres</span><span class="op">$</span><span class="va">theta_het_NoShift</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>      <span class="st">"rho_rr"</span> <span class="op">=</span> <span class="va">maelstRomres</span><span class="op">$</span><span class="va">rho_rr</span>, <span class="st">"rho_rv"</span> <span class="op">=</span> <span class="va">maelstRomres</span><span class="op">$</span><span class="va">rho_rv</span>, <span class="st">"rho_vv"</span> <span class="op">=</span> <span class="va">maelstRomres</span><span class="op">$</span><span class="va">rho_vv</span>, </span>
+<span>      <span class="st">"theta_hom"</span> <span class="op">=</span> <span class="va">maelstRomres</span><span class="op">$</span><span class="va">theta_hom</span>, <span class="st">"theta_het"</span> <span class="op">=</span> <span class="va">maelstRomres</span><span class="op">$</span><span class="va">theta_het</span>,</span>
+<span>      <span class="st">"theta_hom_NoShift"</span> <span class="op">=</span> <span class="va">maelstRomres</span><span class="op">$</span><span class="va">theta_hom_NoShift</span>, </span>
+<span>      <span class="st">"theta_het_NoShift"</span> <span class="op">=</span> <span class="va">maelstRomres</span><span class="op">$</span><span class="va">theta_het_NoShift</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>    </span>
 <span>    <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">results</span>, <span class="va">res_loc</span><span class="op">)</span> <span class="co"># results; one position per line</span></span>
 <span>  <span class="op">}</span></span>
-<span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/HWE_chisquared.html">HWE_chisquared</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, <span class="va">Fmedian</span>, results <span class="op">=</span> <span class="va">results</span><span class="op">)</span></span>
+<span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/HWE_chisquared.html">HWE_chisquared</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, <span class="va">Fmedian</span>, results <span class="op">=</span> <span class="va">results</span><span class="op">)</span></span>
 <span>  <span class="va">results</span><span class="op">$</span><span class="va">Chi2PVAL</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">Chi2PVAL</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">results</span><span class="op">$</span><span class="va">Chi2STAT</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">Chi2STAT</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">results</span><span class="op">)</span><span class="op">)</span></span>
@@ -753,13 +753,13 @@ hyperparameter, to be used for filtering later.</p>
 <span><span class="va">controlList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">c</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">GenoFinData</span>, <span class="va">`[[`</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Geno_AB_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"rbind"</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">GenoFinData</span>, <span class="va">`[[`</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>As a sidenote, while this vignette represses warnings, calling upon
-MAGE’s beta-binomial density function (<code>pBetaBinom</code>, which
+maelstRom’s beta-binomial density function (<code>pBetaBinom</code>, which
 <code>EMfit_betabinom_robust</code> does) can result in a memory limit
 warning which can usually be ignored; most of the time it signifies that
 a certain locus’ beta-binomial fit was so close to a regular binomial
 fit that the overdispersion parameter is extremely close to zero,
 leading to precision errors in beta-binomial calculations which will
-trigger MAGE to use regular binomial functions instead.</p>
+trigger maelstRom to use regular binomial functions instead.</p>
 <p>The genotyping results can now be retrieved from the
 <code>controlList</code> object, being included as the “genotypeN”
 column in each locus’ dataframe:</p>
@@ -899,7 +899,7 @@ loc263, loc264, loc265, loc266, loc267”</p>
 <p>[1] “loc0, loc9, loc11, loc16, loc24, loc41, loc62, loc67, loc86,
 loc92, loc94, loc111, loc119, loc124, loc131, loc149, loc155, loc179,
 loc186, loc245, loc254, loc260, loc263, loc264”</p>
-<p>MAGE contains a function to plot histograms of the reference allele
+<p>maelstRom contains a function to plot histograms of the reference allele
 fraction across samples for a specific locus, while also including PMF
 plots of both the unshifted (assuming no AB) and shifted models. The
 theta-parameters for the unshifted model are included in the previous
@@ -921,7 +921,7 @@ one.</p>
 <p>To accomodate for this, one might opt to set the
 <code>ScaleHist</code> argument to TRUE, which will re-calculate
 observed per-sample reference allele fractions that are to be plotted in
-the histogram using the MAGE’s beta-binomial quantile function given the
+the histogram using the maelstRom’s beta-binomial quantile function given the
 observed per-sample data probability as input, but while using
 <code>ScaleCount</code> total counts (i.e. we transform observed
 reference allele fractions to the fractions we “would have observed” -
@@ -934,7 +934,7 @@ recommended if the per-sample coverage is very variable.</p>
 <code class="sourceCode R"><span><span class="va">PlotData</span> <span class="op">&lt;-</span> <span class="va">controlList</span><span class="op">[[</span><span class="st">"loc11"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">PlotData_eqtl</span> <span class="op">&lt;-</span> <span class="va">Geno_AB_res</span><span class="op">[</span><span class="va">Geno_AB_res</span><span class="op">$</span><span class="va">position</span><span class="op">==</span><span class="st">"loc11"</span>,<span class="op">]</span></span>
 <span></span>
-<span><span class="va">loc_plot</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/MAGE_EMfitplot.html">MAGE_EMfitplot</a></span><span class="op">(</span>ref_counts<span class="op">=</span><span class="va">PlotData</span><span class="op">$</span><span class="va">ref_count</span>, </span>
+<span><span class="va">loc_plot</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/maelstRom_EMfitplot.html">maelstRom_EMfitplot</a></span><span class="op">(</span>ref_counts<span class="op">=</span><span class="va">PlotData</span><span class="op">$</span><span class="va">ref_count</span>, </span>
 <span>  var_counts<span class="op">=</span><span class="va">PlotData</span><span class="op">$</span><span class="va">var_count</span>, pr<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">rho_rr</span>, prv<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">rho_rv</span>,</span>
 <span>  pv<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">rho_vv</span>, theta_hom<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">theta_hom</span>, </span>
 <span>  theta_het<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">theta_het</span>, pr_NoShift<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">PlotData</span><span class="op">$</span><span class="va">prr_H0</span><span class="op">)</span>, </span>
@@ -945,14 +945,14 @@ recommended if the per-sample coverage is very variable.</p>
 <span>  ScaleCount <span class="op">=</span> <span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">coverage</span>, ScaleHist <span class="op">=</span> <span class="cn">TRUE</span>, plot_NoShift <span class="op">=</span> <span class="cn">TRUE</span>, nbins <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">loc_plot</span></span></code></pre></div>
-<p><img src="MAGE_expanded_tutorial_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="maelstRom_expanded_tutorial_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>The plotting function contains some customization options, the plot
 above mainly using default colors with the PMF of the shifted fit split
 up according to genotype. One can e.g. choose to plot one combined
 unshifted PMF, and to not plot the unshifted fit, via the code below
 (once again using default colors, though these can all be changed):</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">loc_plot</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/MAGE_EMfitplot.html">MAGE_EMfitplot</a></span><span class="op">(</span>ref_counts<span class="op">=</span><span class="va">PlotData</span><span class="op">$</span><span class="va">ref_count</span>, </span>
+<code class="sourceCode R"><span><span class="va">loc_plot</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/maelstRom_EMfitplot.html">maelstRom_EMfitplot</a></span><span class="op">(</span>ref_counts<span class="op">=</span><span class="va">PlotData</span><span class="op">$</span><span class="va">ref_count</span>, </span>
 <span>  var_counts<span class="op">=</span><span class="va">PlotData</span><span class="op">$</span><span class="va">var_count</span>, pr<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">rho_rr</span>, prv<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">rho_rv</span>,</span>
 <span>  pv<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">rho_vv</span>, theta_hom<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">theta_hom</span>, </span>
 <span>  theta_het<span class="op">=</span><span class="va">PlotData_eqtl</span><span class="op">$</span><span class="va">theta_het</span>, pr_NoShift<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">PlotData</span><span class="op">$</span><span class="va">prr_H0</span><span class="op">)</span>, </span>
@@ -964,12 +964,12 @@ unshifted PMF, and to not plot the unshifted fit, via the code below
 <span>  SplitPeaks <span class="op">=</span> <span class="cn">FALSE</span>, nbins <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">loc_plot</span></span></code></pre></div>
-<p><img src="MAGE_expanded_tutorial_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="maelstRom_expanded_tutorial_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="differential-allelic-divergence-detection">Differential allelic divergence detection<a class="anchor" aria-label="anchor" href="#differential-allelic-divergence-detection"></a>
 </h2>
-<p>In the context of MAGE, we see case-specific events such copy number
+<p>In the context of maelstRom, we see case-specific events such copy number
 alterations, aberrant hypermethylation, promotor mutation and silencing
 events of e.g. tumor suppressor genes as mechanisms that will affect one
 allele, or both alleles in a different way, per sample. However, these
@@ -1032,9 +1032,9 @@ different heterozygote-thetas while keeping all other parameters shared
 <span>    <span class="co"># detection ánd the use of the same dataset in our upcoming likelihood ratio tests.</span></span>
 <span>  </span>
 <span>    <span class="co"># 1. Detect and extract outliers using EMfit_betabinom_robust()</span></span>
-<span>    <span class="va">OUTfitCTRL</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom_robust.html">EMfit_betabinom_robust</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">CTRL_DF</span>, SE <span class="op">=</span> <span class="va">SEmedian</span>, </span>
+<span>    <span class="va">OUTfitCTRL</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom_robust.html">EMfit_betabinom_robust</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">CTRL_DF</span>, SE <span class="op">=</span> <span class="va">SEmedian</span>, </span>
 <span>                                               inbr <span class="op">=</span> <span class="va">Fmedian</span>, fitH0 <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span>    <span class="va">OUTfitCASE</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom_robust.html">EMfit_betabinom_robust</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">CASE_DF</span>, SE <span class="op">=</span> <span class="va">SEmedian</span>,</span>
+<span>    <span class="va">OUTfitCASE</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom_robust.html">EMfit_betabinom_robust</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">CASE_DF</span>, SE <span class="op">=</span> <span class="va">SEmedian</span>,</span>
 <span>                                               inbr <span class="op">=</span> <span class="va">Fmedian</span>, fitH0 <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>    <span class="va">OUTfitCTRL_DH</span> <span class="op">&lt;-</span> <span class="va">OUTfitCTRL</span><span class="op">$</span><span class="va">data_hash</span>; <span class="va">OUTfitCASE_DH</span> <span class="op">&lt;-</span> <span class="va">OUTfitCASE</span><span class="op">$</span><span class="va">data_hash</span></span>
 <span>    <span class="va">CTRL_DF</span><span class="op">$</span><span class="va">Outlier</span> <span class="op">&lt;-</span> <span class="va">OUTfitCTRL_DH</span><span class="op">$</span><span class="va">Outlier</span>; <span class="va">CASE_DF</span><span class="op">$</span><span class="va">Outlier</span> <span class="op">&lt;-</span> <span class="va">OUTfitCASE_DH</span><span class="op">$</span><span class="va">Outlier</span></span>
@@ -1054,7 +1054,7 @@ different heterozygote-thetas while keeping all other parameters shared
 <span>    <span class="co"># 2. Perform one fit on the entire (non-outlying) data, i.e. all parameters shared,</span></span>
 <span>    <span class="co"># i.e. assuming no dAD; the null hypothesis in dAD detection.</span></span>
 <span>    <span class="co"># Remark this uses the non-robust fitting function, since outliers were already detected.</span></span>
-<span>    <span class="va">NOdAD_fit</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom.html">EMfit_betabinom</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">CurDF</span><span class="op">[</span><span class="va">CurDF</span><span class="op">$</span><span class="va">Outlier</span> <span class="op">==</span> <span class="fl">0</span>,<span class="op">]</span>, </span>
+<span>    <span class="va">NOdAD_fit</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom.html">EMfit_betabinom</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">CurDF</span><span class="op">[</span><span class="va">CurDF</span><span class="op">$</span><span class="va">Outlier</span> <span class="op">==</span> <span class="fl">0</span>,<span class="op">]</span>, </span>
 <span>      SE <span class="op">=</span> <span class="va">SEmedian</span>, inbr <span class="op">=</span> <span class="va">Fmedian</span>, fitH0 <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>    <span class="va">NOdAD_fit_DF</span> <span class="op">&lt;-</span> <span class="va">NOdAD_fit</span><span class="op">$</span><span class="va">data_hash</span></span>
 <span>    <span class="va">PiH0</span> <span class="op">&lt;-</span> <span class="va">NOdAD_fit</span><span class="op">$</span><span class="va">AB</span></span>
@@ -1067,7 +1067,7 @@ different heterozygote-thetas while keeping all other parameters shared
 <span>  </span>
 <span>    <span class="co"># 3. Perform a fit on the (non-outlying) data allowing separate theta_het parameters </span></span>
 <span>    <span class="co"># for control- and case-data</span></span>
-<span>    <span class="va">FullFit</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom_popcomb.html">EMfit_betabinom_popcomb</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">CurDF</span><span class="op">[</span><span class="va">CurDF</span><span class="op">$</span><span class="va">Outlier</span> <span class="op">==</span> <span class="fl">0</span>,<span class="op">]</span>,</span>
+<span>    <span class="va">FullFit</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/EMfit_betabinom_popcomb.html">EMfit_betabinom_popcomb</a></span><span class="op">(</span>data_counts <span class="op">=</span> <span class="va">CurDF</span><span class="op">[</span><span class="va">CurDF</span><span class="op">$</span><span class="va">Outlier</span> <span class="op">==</span> <span class="fl">0</span>,<span class="op">]</span>,</span>
 <span>      SE <span class="op">=</span> <span class="va">SEmedian</span>, inbr <span class="op">=</span> <span class="va">Fmedian</span>, probshift_init <span class="op">=</span> <span class="va">PiH0</span><span class="op">)</span></span>
 <span>    <span class="va">ParamVec</span> <span class="op">&lt;-</span> <span class="va">FullFit</span><span class="op">$</span><span class="va">ParamVec</span></span>
 <span>    <span class="va">dAD_res</span><span class="op">$</span><span class="va">PiFitH1</span><span class="op">[</span><span class="va">dAD_res</span><span class="op">$</span><span class="va">LocName</span> <span class="op">==</span> <span class="va">LOC</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">ParamVec</span><span class="op">[</span><span class="st">"probshift"</span><span class="op">]</span></span>
@@ -1077,16 +1077,16 @@ different heterozygote-thetas while keeping all other parameters shared
 <span>  </span>
 <span>    <span class="co"># 4. Perform the Likelihood Ratio Test for dAD detection</span></span>
 <span>    <span class="co"># Likelihood of fit with all parameters shared:</span></span>
-<span>    <span class="va">LikTot</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/pmf_betabinomMix.html">pmf_betabinomMix</a></span><span class="op">(</span><span class="va">CurDF</span><span class="op">[</span><span class="va">CurDF</span><span class="op">$</span><span class="va">Outlier</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
+<span>    <span class="va">LikTot</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/pmf_betabinomMix.html">pmf_betabinomMix</a></span><span class="op">(</span><span class="va">CurDF</span><span class="op">[</span><span class="va">CurDF</span><span class="op">$</span><span class="va">Outlier</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
 <span>      <span class="va">CurDF</span><span class="op">[</span><span class="va">CurDF</span><span class="op">$</span><span class="va">Outlier</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, probshift <span class="op">=</span> <span class="va">PiH0</span>, <span class="va">SEmedian</span>, <span class="va">rho_rr</span>, <span class="va">rho_vv</span>, <span class="va">rho_rv</span>, </span>
 <span>      theta_hom <span class="op">=</span> <span class="va">ThetaHomH0</span>, theta_het <span class="op">=</span> <span class="va">ThetaHetH0</span><span class="op">)</span></span>
 <span>    <span class="co"># Likelihood of fit with separate theta_het (calculated in two steps because of the </span></span>
 <span>    <span class="co"># different theta)</span></span>
-<span>    <span class="va">LikCTRL</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/pmf_betabinomMix.html">pmf_betabinomMix</a></span><span class="op">(</span><span class="va">CTRL_DF</span><span class="op">[</span><span class="va">CTRL_DF</span><span class="op">$</span><span class="va">Outlier</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
+<span>    <span class="va">LikCTRL</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/pmf_betabinomMix.html">pmf_betabinomMix</a></span><span class="op">(</span><span class="va">CTRL_DF</span><span class="op">[</span><span class="va">CTRL_DF</span><span class="op">$</span><span class="va">Outlier</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
 <span>      <span class="va">CTRL_DF</span><span class="op">[</span><span class="va">CTRL_DF</span><span class="op">$</span><span class="va">Outlier</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, probshift <span class="op">=</span> <span class="va">ParamVec</span><span class="op">[</span><span class="st">"probshift"</span><span class="op">]</span>, <span class="va">SEmedian</span>,</span>
 <span>      <span class="va">ParamVec</span><span class="op">[</span><span class="st">"pr"</span><span class="op">]</span>, <span class="va">ParamVec</span><span class="op">[</span><span class="st">"pv"</span><span class="op">]</span>, <span class="va">ParamVec</span><span class="op">[</span><span class="st">"prv"</span><span class="op">]</span>, theta_hom <span class="op">=</span> <span class="va">ParamVec</span><span class="op">[</span><span class="st">"theta_hom"</span><span class="op">]</span>,</span>
 <span>      theta_het <span class="op">=</span> <span class="va">ParamVec</span><span class="op">[</span><span class="st">"theta_het_control"</span><span class="op">]</span><span class="op">)</span></span>
-<span>    <span class="va">LikCASE</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/pmf_betabinomMix.html">pmf_betabinomMix</a></span><span class="op">(</span><span class="va">CASE_DF</span><span class="op">[</span><span class="va">CASE_DF</span><span class="op">$</span><span class="va">Outlier</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
+<span>    <span class="va">LikCASE</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/pmf_betabinomMix.html">pmf_betabinomMix</a></span><span class="op">(</span><span class="va">CASE_DF</span><span class="op">[</span><span class="va">CASE_DF</span><span class="op">$</span><span class="va">Outlier</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
 <span>      <span class="va">CASE_DF</span><span class="op">[</span><span class="va">CASE_DF</span><span class="op">$</span><span class="va">Outlier</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, probshift <span class="op">=</span> <span class="va">ParamVec</span><span class="op">[</span><span class="st">"probshift"</span><span class="op">]</span>, <span class="va">SEmedian</span>,</span>
 <span>      <span class="va">ParamVec</span><span class="op">[</span><span class="st">"pr"</span><span class="op">]</span>, <span class="va">ParamVec</span><span class="op">[</span><span class="st">"pv"</span><span class="op">]</span>, <span class="va">ParamVec</span><span class="op">[</span><span class="st">"prv"</span><span class="op">]</span>, theta_hom <span class="op">=</span> <span class="va">ParamVec</span><span class="op">[</span><span class="st">"theta_hom"</span><span class="op">]</span>, </span>
 <span>      theta_het <span class="op">=</span> <span class="va">ParamVec</span><span class="op">[</span><span class="st">"theta_het_case"</span><span class="op">]</span><span class="op">)</span></span>
@@ -1099,9 +1099,9 @@ different heterozygote-thetas while keeping all other parameters shared
 <span>    <span class="va">dAD_res</span><span class="op">$</span><span class="va">QualityCTRL</span><span class="op">[</span><span class="va">dAD_res</span><span class="op">$</span><span class="va">LocName</span> <span class="op">==</span> <span class="va">LOC</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="co"># spot bad quality data</span></span>
 <span>      <span class="va">OUTfitCTRL</span><span class="op">$</span><span class="va">quality</span>; <span class="va">dAD_res</span><span class="op">$</span><span class="va">QualityCASE</span><span class="op">[</span><span class="va">dAD_res</span><span class="op">$</span><span class="va">LocName</span> <span class="op">==</span> <span class="va">LOC</span><span class="op">]</span> <span class="op">&lt;-</span><span class="va">OUTfitCASE</span><span class="op">$</span><span class="va">quality</span> </span>
 <span>    <span class="co"># Test HWE on both the control and tumor data:</span></span>
-<span>    <span class="va">HWEtest_CTRL</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/HWE_chisquared.html">HWE_chisquared</a></span><span class="op">(</span>inbr <span class="op">=</span> <span class="va">Fmedian</span>, data <span class="op">=</span> <span class="va">OUTfitCTRL_DH</span><span class="op">)</span></span>
+<span>    <span class="va">HWEtest_CTRL</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/HWE_chisquared.html">HWE_chisquared</a></span><span class="op">(</span>inbr <span class="op">=</span> <span class="va">Fmedian</span>, data <span class="op">=</span> <span class="va">OUTfitCTRL_DH</span><span class="op">)</span></span>
 <span>    <span class="va">dAD_res</span><span class="op">$</span><span class="va">HWECTRL</span><span class="op">[</span><span class="va">dAD_res</span><span class="op">$</span><span class="va">LocName</span> <span class="op">==</span> <span class="va">LOC</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">HWEtest_CTRL</span><span class="op">$</span><span class="va">PVAL</span></span>
-<span>    <span class="va">HWEtest_CASE</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/HWE_chisquared.html">HWE_chisquared</a></span><span class="op">(</span>inbr <span class="op">=</span> <span class="va">Fmedian</span>, data <span class="op">=</span> <span class="va">OUTfitCASE_DH</span><span class="op">)</span></span>
+<span>    <span class="va">HWEtest_CASE</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/HWE_chisquared.html">HWE_chisquared</a></span><span class="op">(</span>inbr <span class="op">=</span> <span class="va">Fmedian</span>, data <span class="op">=</span> <span class="va">OUTfitCASE_DH</span><span class="op">)</span></span>
 <span>    <span class="va">dAD_res</span><span class="op">$</span><span class="va">HWECASE</span><span class="op">[</span><span class="va">dAD_res</span><span class="op">$</span><span class="va">LocName</span> <span class="op">==</span> <span class="va">LOC</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">HWEtest_CASE</span><span class="op">$</span><span class="va">PVAL</span></span>
 <span>    <span class="co"># Mean and median coverages:</span></span>
 <span>    <span class="va">dAD_res</span><span class="op">$</span><span class="va">CovCTRL_mean</span><span class="op">[</span><span class="va">dAD_res</span><span class="op">$</span><span class="va">LocName</span> <span class="op">==</span> <span class="va">LOC</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
@@ -1186,7 +1186,7 @@ typically be larger in cases than in controls.</p>
 <p>[1] “loc0, loc6, loc7, loc68, loc80, loc84, loc85, loc86, loc88,
 loc89, loc91, loc92, loc93, loc95, loc96, loc97, loc98, loc100, loc158,
 loc211, loc212, loc218, loc223, loc258”</p>
-<p>The previously used <code>MAGE_EMfitplot</code> function can also be
+<p>The previously used <code>maelstRom_EMfitplot</code> function can also be
 used to vizualize the dAD detection results via separate plots of the
 control- and case-population utilizing their separately fitted
 overdispersion parameters. Here, it’s important to set the input
@@ -1197,60 +1197,60 @@ the width of the PMFs can actually be compared correctly.</p>
 <span><span class="va">CASE_DF</span> <span class="op">&lt;-</span> <span class="va">caseList</span><span class="op">[[</span><span class="st">"loc85"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">PlotData_dAD</span> <span class="op">&lt;-</span> <span class="va">dAD_res</span><span class="op">[</span><span class="va">dAD_res</span><span class="op">$</span><span class="va">LocName</span><span class="op">==</span><span class="st">"loc85"</span>,<span class="op">]</span></span>
 <span></span>
-<span><span class="va">dAD_plot1</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/MAGE_EMfitplot.html">MAGE_EMfitplot</a></span><span class="op">(</span>ref_counts<span class="op">=</span><span class="va">CTRL_DF</span><span class="op">$</span><span class="va">ref_count</span>, var_counts<span class="op">=</span><span class="va">CTRL_DF</span><span class="op">$</span><span class="va">var_count</span>,</span>
+<span><span class="va">dAD_plot1</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/maelstRom_EMfitplot.html">maelstRom_EMfitplot</a></span><span class="op">(</span>ref_counts<span class="op">=</span><span class="va">CTRL_DF</span><span class="op">$</span><span class="va">ref_count</span>, var_counts<span class="op">=</span><span class="va">CTRL_DF</span><span class="op">$</span><span class="va">var_count</span>,</span>
 <span>  pr<span class="op">=</span><span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">pr</span>, prv<span class="op">=</span><span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">prv</span>, pv<span class="op">=</span><span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">pv</span>, </span>
 <span>  theta_hom <span class="op">=</span> <span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">ThetaHomH1</span>, theta_het <span class="op">=</span> <span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">ThetaHetCTRL</span>, </span>
 <span>  probshift <span class="op">=</span> <span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">PiFitH1</span>, SE <span class="op">=</span> <span class="va">SEmedian</span>, ScaleCount <span class="op">=</span> <span class="fl">50</span>, ScaleHist <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>  nbins <span class="op">=</span> <span class="fl">30</span>, plot_NoShift <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">dAD_plot2</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/MAGE_EMfitplot.html">MAGE_EMfitplot</a></span><span class="op">(</span><span class="va">CASE_DF</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">CASE_DF</span><span class="op">$</span><span class="va">var_count</span>, pr<span class="op">=</span><span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">pr</span>,</span>
+<span><span class="va">dAD_plot2</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/maelstRom_EMfitplot.html">maelstRom_EMfitplot</a></span><span class="op">(</span><span class="va">CASE_DF</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">CASE_DF</span><span class="op">$</span><span class="va">var_count</span>, pr<span class="op">=</span><span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">pr</span>,</span>
 <span>  prv<span class="op">=</span><span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">prv</span>, pv<span class="op">=</span><span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">pv</span>, theta_hom <span class="op">=</span> <span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">ThetaHomH1</span>, </span>
 <span>  theta_het <span class="op">=</span> <span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">ThetaHetCASE</span>, probshift <span class="op">=</span> <span class="va">PlotData_dAD</span><span class="op">$</span><span class="va">PiFitH1</span>, SE <span class="op">=</span> <span class="va">SEmedian</span>,</span>
 <span>  ScaleCount <span class="op">=</span> <span class="fl">50</span>, ScaleHist <span class="op">=</span> <span class="cn">TRUE</span>, nbins <span class="op">=</span> <span class="fl">30</span>, plot_NoShift <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="va">dAD_plot1</span>, <span class="va">dAD_plot2</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MAGE_expanded_tutorial_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="maelstRom_expanded_tutorial_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>The plot above is of a locus showcasing very clear differential
 allelic divergence, with the reference allele fraction in heterozygous
 case samples being way more variable, probably due to case-specific
 effects.</p>
 <p>As promised, to conclude, this section showcases a plot of dAD
-results across a chromosome using the <code>MAGE_ADChromplot</code>
+results across a chromosome using the <code>maelstRom_ADChromplot</code>
 function. The toy data isn’t very fit for this, however (no chromosomal
 location, too small), so included with the toy data is some thoroughly
 processed data to illustrate the plot on. The inputs needed are <span class="math inline">\(\rho\)</span> values in both controls and cases
 along with differential expression data (log2 fold changes) which can be
 easily generated by tools for differential expression analysis on the
-data at hand. <code>MAGE_ADChromplot</code> optionally even accepts
+data at hand. <code>maelstRom_ADChromplot</code> optionally even accepts
 additional hypermethylation and copy-number-alteration data for even
 more extensive plots. As this is for illustrative purposes only, we just
 make the plot using the provided datasets below, but more details can be
-learned from <code>MAGE_ADChromplot</code>’s help page. The function
+learned from <code>maelstRom_ADChromplot</code>’s help page. The function
 returns several plot components (including legends) as separate objects
 due to its complexity, so it’s up to the end user to arrange them into a
 satisfactory composition.</p>
 <p>As a final remark, many of the measures in this plot (differential
 expression, hypermethylation, copy number alterations) are usually
 obtained at the gene-level rather than the SNP/locus level. To make the
-results of different analyses more compareable, MAGE’s per-locus
+results of different analyses more compareable, maelstRom’s per-locus
 p-values can be combined using the <code>combine_p_gene</code> function.
 For this, we recommend using the geometric mean as a nice balance
 between more conservative (arithmetic mean, maximum) and liberal
 (harmonic mean, minimum) methods for combining p-values, and the
 different loci should be weighted as well, for which we recommend <span class="math inline">\(\small \sqrt{median \ locus \ coverage \ * \
 estimated \ number \ of \ heterozygous \ samples }\)</span>, the latter
-being an output of MAGE’s beta-binomial mixture model fits via the
+being an output of maelstRom’s beta-binomial mixture model fits via the
 heterozygote genotype frequency times the number of samples. For
 p-values concerning a comparison between a control- and case-population,
 one can e.g. use the minimum of this weight across populations.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ChromPlot</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/MAGE_ADChromplot.html">MAGE_ADChromplot</a></span><span class="op">(</span><span class="va">AD_Data</span>, <span class="va">DE_Data</span>, <span class="va">Meth_Data</span>, <span class="va">CNAgain_Data</span>, <span class="va">CNAloss_Data</span>,</span>
+<code class="sourceCode R"><span><span class="va">ChromPlot</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/maelstRom_ADChromplot.html">maelstRom_ADChromplot</a></span><span class="op">(</span><span class="va">AD_Data</span>, <span class="va">DE_Data</span>, <span class="va">Meth_Data</span>, <span class="va">CNAgain_Data</span>, <span class="va">CNAloss_Data</span>,</span>
 <span>                                    pvalSIG <span class="op">=</span> <span class="fl">0.05</span>, roll_median <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ChromPlot</span><span class="op">[[</span><span class="st">"ADDE_plot"</span><span class="op">]</span><span class="op">]</span> <span class="op">/</span> <span class="va">ChromPlot</span><span class="op">[[</span><span class="st">"MethCNA_plot"</span><span class="op">]</span><span class="op">]</span> <span class="op">/</span> <span class="op">(</span><span class="va">ChromPlot</span><span class="op">[[</span><span class="st">"LEG1"</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> </span>
 <span>  <span class="va">ChromPlot</span><span class="op">[[</span><span class="st">"LEG2"</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">ChromPlot</span><span class="op">[[</span><span class="st">"LEG3"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MAGE_expanded_tutorial_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="maelstRom_expanded_tutorial_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>The histograms in the top panes show (rolling medians) of the
 overdisperstion (<span class="math inline">\(\rho\)</span>) parameters
 in controls (black) and cases (colored). The case-<span class="math inline">\(\rho\)</span> is colored according to the (already
@@ -1262,13 +1262,13 @@ are explained in the legend.</p>
 <div class="section level2">
 <h2 id="detecting-imprinted-and-differentially-imprinted-loci">Detecting imprinted and differentially imprinted loci<a class="anchor" aria-label="anchor" href="#detecting-imprinted-and-differentially-imprinted-loci"></a>
 </h2>
-<p>Imprinting analyses in MAGE are quite different from the analyses up
+<p>Imprinting analyses in maelstRom are quite different from the analyses up
 until now in that they don’t rely on beta-binomial modelling and make
 different assumptions about the data. They are, generally speaking, a
 bit more robust because imprinting is usually an extreme phenomenon,
 i.e. heterozygous samples of imprinted loci will almost always “seem
 like” homozygous samples because one of the alleles has been silenced
-almost entirely. Partial imprinting can exist and MAGE can detect it,
+almost entirely. Partial imprinting can exist and maelstRom can detect it,
 but this phenomenon is not modelled as thoroughly as the previous ones
 in this vignette.</p>
 <p>First off we assume samples show no AB and are conform
@@ -1342,7 +1342,7 @@ pipeline:</p>
 <span>      <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">allelefreq_prel</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&gt;=</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.15</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">sym</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/symmetry_gof.html">symmetry_gof</a></span><span class="op">(</span><span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
+<span>    <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">sym</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/symmetry_gof.html">symmetry_gof</a></span><span class="op">(</span><span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
 <span>      <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">allelefreq_prel</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">sym</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">{</span></span>
 <span>      <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
@@ -1354,11 +1354,11 @@ pipeline:</p>
 <span><span class="co"># Detect imprinted control loci</span></span>
 <span><span class="va">impr_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">LOC</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ImprData</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">i_results</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/imprinting_est.html">imprinting_est</a></span><span class="op">(</span><span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, </span>
+<span>  <span class="va">i_results</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/imprinting_est.html">imprinting_est</a></span><span class="op">(</span><span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, </span>
 <span>                allelefreq <span class="op">=</span> <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">allelefreq_prel</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, SE <span class="op">=</span> <span class="va">SEmedian</span>, inbr <span class="op">=</span> <span class="va">Fmedian</span><span class="op">)</span></span>
 <span>  <span class="co"># An additional robustified "median imprinting" across samples to be used as possible </span></span>
 <span>  <span class="co"># additional filter criterion:</span></span>
-<span>  <span class="va">med_imp</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/median_imprinting.html">median_imprinting</a></span><span class="op">(</span><span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, </span>
+<span>  <span class="va">med_imp</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/median_imprinting.html">median_imprinting</a></span><span class="op">(</span><span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, </span>
 <span>              allelefreq <span class="op">=</span> <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">allelefreq_prel</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, inbr <span class="op">=</span> <span class="va">Fmedian</span><span class="op">)</span></span>
 <span>  <span class="va">results_z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"position"</span> <span class="op">=</span> <span class="va">ImprData</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">locus_id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"LRT"</span> <span class="op">=</span> <span class="va">i_results</span><span class="op">$</span><span class="va">LRT</span>, </span>
 <span>    <span class="st">"p"</span> <span class="op">=</span> <span class="va">i_results</span><span class="op">$</span><span class="va">p_value</span>, <span class="st">"estimated.i"</span> <span class="op">=</span> <span class="va">i_results</span><span class="op">$</span><span class="va">est_i</span>, <span class="st">"allele.frequency"</span> <span class="op">=</span> </span>
@@ -1372,7 +1372,7 @@ pipeline:</p>
 <span><span class="co"># which a custom  Goodness-Of-Fit which more or less corresponds to a locus' likelihood of</span></span>
 <span><span class="co"># the imprinted model*coverage; 0.8 is a good cutoff. Other filter criteria are imprinting </span></span>
 <span><span class="co"># (0.6) and median imprinting (0.8)</span></span>
-<span><span class="va">impr_res_FIN</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/final_filter.html">final_filter</a></span><span class="op">(</span>data_hash<span class="op">=</span><span class="cn">NULL</span>, <span class="va">impr_res</span>, results_wd<span class="op">=</span><span class="cn">NULL</span>, gof_filt <span class="op">=</span> <span class="fl">0.8</span>, </span>
+<span><span class="va">impr_res_FIN</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/final_filter.html">final_filter</a></span><span class="op">(</span>data_hash<span class="op">=</span><span class="cn">NULL</span>, <span class="va">impr_res</span>, results_wd<span class="op">=</span><span class="cn">NULL</span>, gof_filt <span class="op">=</span> <span class="fl">0.8</span>, </span>
 <span>  med_impr_filt <span class="op">=</span> <span class="fl">0.8</span>, i_filt <span class="op">=</span> <span class="fl">0.6</span>, adj_p_filt <span class="op">=</span> <span class="fl">0.05</span>, file_all <span class="op">=</span> <span class="cn">FALSE</span>, file_impr <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>  file_all_counts <span class="op">=</span> <span class="cn">FALSE</span>, file_impr_counts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
@@ -1384,7 +1384,7 @@ pipeline:</p>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">LOC</span> <span class="kw">in</span> <span class="va">pos_impr</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">CData</span> <span class="op">&lt;-</span> <span class="va">controlList</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">TData</span> <span class="op">&lt;-</span> <span class="va">caseList</span><span class="op">[[</span><span class="va">LOC</span><span class="op">]</span><span class="op">]</span></span>
-<span>  <span class="va">p_DI</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/LOItest_logreg.html">LOItest_logreg</a></span><span class="op">(</span><span class="va">CData</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">CData</span><span class="op">$</span><span class="va">var_count</span>, </span>
+<span>  <span class="va">p_DI</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/LOItest_logreg.html">LOItest_logreg</a></span><span class="op">(</span><span class="va">CData</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">CData</span><span class="op">$</span><span class="va">var_count</span>, </span>
 <span>                                  <span class="va">TData</span><span class="op">$</span><span class="va">ref_count</span>, <span class="va">TData</span><span class="op">$</span><span class="va">var_count</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
 <span>  <span class="va">p_DI_df</span><span class="op">$</span><span class="va">DI_pval</span><span class="op">[</span><span class="va">p_DI_df</span><span class="op">$</span><span class="va">position</span> <span class="op">==</span> <span class="va">LOC</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">p_DI</span></span>
 <span><span class="op">}</span></span></code></pre></div>
@@ -1409,12 +1409,12 @@ isn’t necessarily the case in larger experiments):</p>
 <p>We can plot histograms of both the control and case allele fractions;
 locus 202 is obviously imprinted in controls and loses a lot of this
 imprinting in cases (controls are plotted using
-<code>MAGE_imprintplot</code> to visualize imprinting results, but since
+<code>maelstRom_imprintplot</code> to visualize imprinting results, but since
 an imprinting-estimation never happens on the case data - we just detect
 a change in heterozygosity via logistic regression - we simply make a
 histogram for cases instead).</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">HistCTRL</span> <span class="op">&lt;-</span> <span class="fu">MAGE</span><span class="fu">::</span><span class="fu"><a href="../reference/MAGE_imprintplot.html">MAGE_imprintplot</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">[[</span><span class="st">"loc202"</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
+<code class="sourceCode R"><span><span class="va">HistCTRL</span> <span class="op">&lt;-</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="fu"><a href="../reference/maelstRom_imprintplot.html">maelstRom_imprintplot</a></span><span class="op">(</span><span class="va">controlList</span><span class="op">[[</span><span class="st">"loc202"</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ref_count</span>, </span>
 <span>  <span class="va">controlList</span><span class="op">[[</span><span class="st">"loc202"</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">var_count</span>, </span>
 <span>  allelefreq <span class="op">=</span> <span class="va">impr_res_FIN</span><span class="op">$</span><span class="va">allele.frequency</span><span class="op">[</span><span class="va">impr_res_FIN</span><span class="op">$</span><span class="va">position</span><span class="op">==</span><span class="st">"loc202"</span><span class="op">]</span>,</span>
 <span>  impr <span class="op">=</span> <span class="va">impr_res_FIN</span><span class="op">$</span><span class="va">estimated.i</span><span class="op">[</span><span class="va">impr_res_FIN</span><span class="op">$</span><span class="va">position</span><span class="op">==</span><span class="st">"loc202"</span><span class="op">]</span>,</span>
@@ -1429,7 +1429,7 @@ histogram for cases instead).</p>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Case"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="va">HistCTRL</span>, <span class="va">HistCASE</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MAGE_expanded_tutorial_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="maelstRom_expanded_tutorial_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
@@ -1498,7 +1498,7 @@ histogram for cases instead).</p>
 <span><span class="co">#&gt; [37] gridExtra_2.3      </span></span>
 <span><span class="co">#&gt; [38] tibble_3.0.3       </span></span>
 <span><span class="co">#&gt; [39] fansi_0.4.2        </span></span>
-<span><span class="co">#&gt; [40] MAGE_1.0.0         </span></span>
+<span><span class="co">#&gt; [40] maelstRom_1.0.0         </span></span>
 <span><span class="co">#&gt; [41] crayon_1.4.1       </span></span>
 <span><span class="co">#&gt; [42] dplyr_1.0.4        </span></span>
 <span><span class="co">#&gt; [43] MASS_7.3-53        </span></span>

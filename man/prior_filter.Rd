@@ -8,7 +8,7 @@ prior_filter(
   data_pos,
   min_median_cov = 5,
   min_nr_samples = 30,
-  checkref_filter = TRUE,
+  checkref_filter = FALSE,
   prior_allelefreq_filter = FALSE,
   min_PriorAlleleFreq = 0.1
 )
@@ -39,7 +39,7 @@ which is simply determined as the percent occurrence of the less common (variant
 The data as data frame with total and median coverage or NULL if the SNP positions was filtered.
 }
 \description{
-\code{prior_filter} filters loci prior to analysis using MAGE: 
+\code{prior_filter} filters loci prior to analysis using maelstRom: 
 \itemize{
   \item a filter throwing out samples showcasing relevant allele counts for alleles not present in the ref_alleles column (if checkref_filter == TRUE)
   \item a filter throwing out loci showcasing a low minor allele fraction (if prior_allelefreq_filter == TRUE, governed by min_PrioAlleleFreq)

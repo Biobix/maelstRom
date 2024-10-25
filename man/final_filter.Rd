@@ -2,7 +2,7 @@
 % Please edit documentation in R/final_filter.R
 \name{final_filter}
 \alias{final_filter}
-\title{Final filtering of MAGE analysis results and writing to output files}
+\title{Final filtering of maelstRom analysis results and writing to output files}
 \usage{
 final_filter(
   data_hash,

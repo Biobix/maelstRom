@@ -13,6 +13,7 @@
 #' @param dltaco Number. Minimal difference between 2 iterations (default = 0.001).
 #' @param HWE Logical. Should HWE be used for allele frequency estimation, not recommended (default = FALSE).
 #' @param p_InitEst Logical. Calculate initial estimates of pr, pv and prv from allelefreq, not recommended (default = FALSE).
+#' @param probshift_init Number. Initial estimate for the allelic bias in heterozygotes; it's recommended to leave this at NULL, in which case this initial estimate will be 0.5
 #' @param ThetaInits Numeric vector, "moment" or "TryThree". A vector of length two containing the initial dispersion estimate for the homozygous peaks, followed by the one for the heterozygous peak,
 #'    or "moment", in which case moment initial estimates are generated. In case of "TryThree", three initial values given by the \code{thetaTRY} input argument are tried out and the one yielding the best fit is retained.
 #' @param ReEstThetas String. Accepts the methods "moment" or "simple" as arguments, in which case dispersions are re-estimated during every EM-step using a moment estimate or a simple custom procedure respectively, to be used as a starting
@@ -43,11 +44,11 @@
 #' \item{theta_het_H0}{Final overdispersion estimate for the heterozygous peak with Allelic Bias = 0.5. Not included if \code{fitH0==FALSE}.}
 #' \item{GOF, GOFaltMEAN, GOFaltMEDIAN, GOFaltPERDIST, GOFaltPERDIST_S, GOFaltONLYHET, GOFexactMEAN, GOFexactMEANLOG}{Various Goodness-Of-Fit heuristics.}
 
-EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 10^-6, HWE = FALSE, p_InitEst = FALSE, 
-                               ThetaInits = "moment", ReEstThetas = "moment", NoSplitHom = TRUE, NoSplitHet = TRUE,
-                               ResetThetaMin = 10^-10, ResetThetaMax = 10^-1, thetaTRY = c(10^-1, 10^-3, 10^-7),
-                               fitH0 = TRUE) {
-
+EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 10^-6, HWE = FALSE, p_InitEst = FALSE, probshift_init = NULL, 
+                            ThetaInits = "moment", ReEstThetas = "moment", NoSplitHom = TRUE, NoSplitHet = TRUE,
+                            ResetThetaMin = 10^-10, ResetThetaMax = 10^-1, thetaTRY = c(10^-1, 10^-3, 10^-7),
+                            fitH0 = TRUE, FirstFewFixed = NULL, epsabs = 0.001, MaxIt = 100) {
+  
   LogLikComp_hom <- function(theta, SE, ref_counts, var_counts, spr, spv){
     return(-sum(spr*(dBetaBinom(ref_counts, ref_counts+var_counts, pi=1-SE, theta=exp(theta), LOG = TRUE)) +
                   spv*(dBetaBinom(var_counts,ref_counts+var_counts, pi=1-SE, theta=exp(theta), LOG = TRUE))))
@@ -85,7 +86,12 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
     return(( max(1 - probshift, probshift) ) - exp(theta))
   }
   
-  probshift <- 0.5 # Initial estimate position heterozygous peak
+  if(is.null(probshift_init)){
+    probshift <- 0.5 # Initial estimate position heterozygous peak
+  }else{
+    probshift <- probshift_init
+  }
+  
   dlta <- 1
   nrep <- 0 
   if(p_InitEst){
@@ -106,7 +112,7 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
     theta_hom <- ResetThetaMin
     theta_het <- ResetThetaMin
   }else if(ThetaInits == "moment"){
-
+    
     # First fit some regular binomial models to get an initial categorisation of the data points
     spr_est <- pr * dbinom(data_counts$ref_count, data_counts$ref_count + data_counts$var_count, prob = 1 - SE)
     spv_est <- pv * dbinom(data_counts$var_count,data_counts$ref_count + data_counts$var_count, prob = 1 - SE)
@@ -166,8 +172,8 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
   ########################################################################################################################################################################
   
   Q <- 1000
-    
-  while (dlta > dltaco & nrep < 100) {
+  
+  while (dlta > dltaco & nrep < MaxIt) {
     Qold <- Q
     nrep <- nrep + 1
     
@@ -210,14 +216,16 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
     
     allelefreq <- mean(spr) + mean(sprv)/2 
     
-    if (HWE) {
-      prv <- 2 * allelefreq * (1 - allelefreq) * (1 - inbr)
-      pr <- allelefreq^2 + inbr * allelefreq * (1 - allelefreq)
-      pv <- (1 - allelefreq)^2 + inbr * allelefreq * (1 - allelefreq)
-    }else {
-      pv <- mean(spv) 
-      prv <- mean(sprv)
-      pr <- mean(spr)
+    if(is.null(FirstFewFixed) || nrep > FirstFewFixed){
+      if (HWE) {
+        prv <- 2 * allelefreq * (1 - allelefreq) * (1 - inbr)
+        pr <- allelefreq^2 + inbr * allelefreq * (1 - allelefreq)
+        pv <- (1 - allelefreq)^2 + inbr * allelefreq * (1 - allelefreq)
+      }else {
+        pv <- mean(spv) 
+        prv <- mean(sprv)
+        pr <- mean(spr)
+      }
     }
     
     if(ReEstThetas == "moment"){
@@ -273,77 +281,71 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
     #compareDerivatives(LogLikComp_hom, GradComp_hom, t0 = log(0.01), SE = 0.002, ref_counts=ref_counts, var_counts=var_counts, spr = spr, spv = spv)
     
     if(ReEstThetas != "TryThree"){
-    
-    if(sum(spr+spv)!=0){
-      if(NoSplitHom){
-        theta_hom_clone <- theta_hom
-        OptObj <- optim(par = log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                        ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-        theta_hom <- exp(OptObj$par)
+      
+      if(sum(spr+spv)!=0){
+        if(NoSplitHom){
+          theta_hom_clone <- theta_hom
+          OptObj <- CppHom_Optim(log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                 spv, epsabs = epsabs)
+          theta_hom <- exp(OptObj[2])
+          
+          if(theta_hom > max(SE, 1-SE)){
+            
+            theta_hom <- min(c(theta_hom_clone, max((1-SE)/10, SE/10)) ) # Take some distance from the boundary at which bimodality occurs
+            
+            AObj <- alabama::auglag(log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, hin = eval_g_f, SE = SE,
+                                    ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv, control.outer = list("trace" = FALSE))
+            
+            theta_hom <- exp(AObj$par[1])
+            
+          }
+          
+          
+        } else{
+          OptObj <- CppHom_Optim(log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                 spv, epsabs = epsabs)
+          theta_hom <- exp(OptObj[2])
+        }
+      }
+      
+      #compareDerivatives(LogLikComp_hom, GradComp_hom, HessComp_hom, t0 = 0.3, SE=SE, ref_counts=ref_counts, var_counts=var_counts, spr=spr, spv=spv)
+      #compareDerivatives(LogLikComp_het, GradComp_het, t0 = c(gtools::logit(1-0.002), log(0.5)), ref_counts=ref_counts, var_counts=var_counts, sprv = sprv)
+      
+      if(NoSplitHet){
+        theta_het_clone <- theta_het
+        OptObj <- tryCatch( {maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), 
+                                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, epsabs = epsabs)},
+                            error = function(e) NULL)
         
-        if(theta_hom > max(SE, 1-SE)){
-        
-          theta_hom <- min(c(theta_hom_clone, max((1-SE)/10, SE/10)) ) # Take some distance from the boundary at which bimodality occurs
-        
-          AObj <- alabama::auglag(log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, hin = eval_g_f, SE = SE,
-                                  ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv, control.outer = list("trace" = FALSE))
-        
-          theta_hom <- exp(AObj$par[1])
-        
+        if(!is.null(OptObj)){
+          probshift <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+          theta_het <- exp(OptObj[3])
         }
         
-        
+        if((is.null(OptObj)) || (theta_het  > max(probshift, 1-probshift))){
+          
+          theta_het <- min(c(theta_het_clone, max((1-probshift)/10, probshift/10)) ) # Take some distance from the boundary at which bimodality occurs
+          
+          AObj <- tryCatch( {alabama::auglag(c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, hin = eval_g_f_2,
+                                             ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, control.outer = list("trace" = FALSE))},
+                            error = function(e) NULL)
+          if(is.null(AObj)){
+            AObj <- alabama::auglag(c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, hin = eval_g_f_2,
+                                    ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, control.outer = list("trace" = FALSE))
+          }
+          
+          probshift <- gtools::inv.logit(AObj$par[1], max = 1-10^-16, min = 10^-16)
+          theta_het <- exp(AObj$par[2])
+          
+        }
       } else{
-        OptObj <- optim(par = log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                        ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-        theta_hom <- exp(OptObj$par)
-      }
-    }
-
-    #compareDerivatives(LogLikComp_hom, GradComp_hom, HessComp_hom, t0 = 0.3, SE=SE, ref_counts=ref_counts, var_counts=var_counts, spr=spr, spv=spv)
-    #compareDerivatives(LogLikComp_het, GradComp_het, t0 = c(gtools::logit(1-0.002), log(0.5)), ref_counts=ref_counts, var_counts=var_counts, sprv = sprv)
-    
-    if(NoSplitHet){
-      theta_het_clone <- theta_het
-      OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                 ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)},
-                          error = function(e) NULL)
-      if(is.null(OptObj)){
-        OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, method = "BFGS",
-                        ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)
-      }
-      
-      probshift <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-      theta_het <- exp(OptObj$par[2])
-      
-      if(theta_het  > max(probshift, 1-probshift)){
+        theta_het_clone <- theta_het
+        OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), 
+                                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, epsabs = epsabs)
         
-        theta_het <- min(c(theta_het_clone, max((1-probshift)/10, probshift/10)) ) # Take some distance from the boundary at which bimodality occurs
-        
-        AObj <- tryCatch( {alabama::auglag(c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, hin = eval_g_f_2,
-                                ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, control.outer = list("trace" = FALSE))},
-                          error = function(e) NULL)
-        if(is.null(AObj)){
-          AObj <- alabama::auglag(c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, hin = eval_g_f_2,
-                                  ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, control.outer = list("trace" = FALSE))
-        }
-        
-        probshift <- gtools::inv.logit(AObj$par[1], max = 1-10^-16, min = 10^-16)
-        theta_het <- exp(AObj$par[2])
-        
+        probshift <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+        theta_het <- exp(OptObj[3])
       }
-    } else{
-      OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                 ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)},
-                          error = function(e) NULL)
-      if(is.null(OptObj)){
-        OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, method = "BFGS",
-                        ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)
-      }
-      
-      probshift <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-      theta_het <- exp(OptObj$par[2])
-    }
       
     } else{
       
@@ -353,10 +355,10 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
+            OptObj <- CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                   spv, epsabs = epsabs)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, LogLikComp_hom(OptObj[2], SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom <- thetavec[theta_hom_loc]
@@ -380,10 +382,10 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
+            OptObj <- CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                   spv, epsabs = epsabs)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, LogLikComp_hom(OptObj[2], SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom <- thetavec[theta_hom_loc]
@@ -399,17 +401,12 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
         pivec <- c()
         likvec <- c()
         for(TH in thetaTRY){
+          OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(TH)), 
+                                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, epsabs = epsabs)
           
-          OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(TH)), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)},
-                              error = function(e) NULL)
-          if(is.null(OptObj)){
-            OptObj <- optim(par = c(gtools::logit(probshift), log(TH)), fn = LogLikComp_het, method = "BFGS",
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)
-          }
-          thetavec <- c(thetavec, exp(OptObj$par[2]))
-          pivec <- c(pivec, gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16))
-          likvec <- c(likvec, LogLikComp_het(c(OptObj$par[1], OptObj$par[2]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv))
+          thetavec <- c(thetavec, exp(OptObj[3]))
+          pivec <- c(pivec, gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16))
+          likvec <- c(likvec, LogLikComp_het(c(OptObj[2], OptObj[3]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv))
         }
         theta_het_loc <- which(likvec == min(likvec))[1]
         theta_het <- thetavec[theta_het_loc]
@@ -433,7 +430,7 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
             pivec <- c(pivec, gtools::inv.logit(AObj$par[1], max = 1-10^-16, min = 10^-16))
             likvec <- c(likvec, LogLikComp_het(c(AObj$par[1], AObj$par[2]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv))
           }
-            
+          
           theta_het_loc <- which(likvec == min(likvec))[1]
           theta_het <- thetavec[theta_het_loc]
           probshift <- pivec[theta_het_loc]
@@ -445,18 +442,14 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
         pivec <- c()
         likvec <- c()
         for(TH in thetaTRY){
-          OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(TH)), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)},
-                              error = function(e) NULL)
-          if(is.null(OptObj)){
-            OptObj <- optim(par = c(gtools::logit(probshift), log(TH)), fn = LogLikComp_het, method = "BFGS",
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)
-          }
-          thetavec <- c(thetavec, exp(OptObj$par[2]))
-          pivec <- c(pivec, gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16))
-          likvec <- c(likvec, LogLikComp_het(c(OptObj$par[1], OptObj$par[2]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv))
+          
+          OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(TH)), 
+                                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, epsabs = epsabs)
+          
+          thetavec <- c(thetavec, exp(OptObj[3]))
+          pivec <- c(pivec, gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16))
+          likvec <- c(likvec, LogLikComp_het(c(OptObj[2], OptObj[3]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv))
         }
-        
         theta_het_loc <- which(likvec == min(likvec))[1]
         theta_het <- thetavec[theta_het_loc]
         probshift <- pivec[theta_het_loc]
@@ -471,12 +464,14 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
     } else if(probshift < 10*SE){
       probshift <- 10*SE
     }
-
+    
     Q <- sum(ifelse(pr>0, spr*log(pr), 0) + spr*dBetaBinom(data_counts$ref_count, data_counts$ref_count+data_counts$var_count, pi = 1-SE, theta = theta_hom, LOG = TRUE) +
                ifelse(prv>0, sprv*log(prv), 0) + sprv*dBetaBinom(data_counts$ref_count, data_counts$ref_count+data_counts$var_count, pi = probshift, theta = theta_het, LOG = TRUE) +
                ifelse(pv>0, spv*log(pv), 0) + spv*dBetaBinom(data_counts$var_count, data_counts$ref_count+data_counts$var_count, pi = 1-SE, theta = theta_hom, LOG = TRUE))
     
-    dlta <- abs(Qold-Q)
+    if(is.null(FirstFewFixed) || nrep > FirstFewFixed){
+      dlta <- abs(Qold-Q)
+    }
     
     allelefreq <- mean(spr) + mean(sprv)/2
     data_counts$allelefreq <- allelefreq
@@ -484,7 +479,7 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
   
   #############################################################################################################################################################
   #############################################################################################################################################################
-
+  
   data_counts$pvv <- spv; data_counts$prr <- spr; data_counts$prv <- sprv
   data_counts$genotypeN <- c("rr", "rv", "vv")[apply(data_counts[, c("prr", "prv", "pvv")], 1, function(x) which(x==max(x))[1])]
   
@@ -531,7 +526,7 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
   logLikelihood <- mean(log(dmixase_corrected))
   #probshift_adj <- -(as.numeric(probshift) - 0.5)/0.5
   
-
+  
   # For the LRT, we should actually re-fit the unshifted data while keeping the sequencing error constant...
   # So this means an additional EM run!
   
@@ -541,7 +536,7 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
   Q <- 1000
   # We already have initial theta estimates under H0
   
-  while (dlta > dltaco & nrep2 < 100) {
+  while (dlta > dltaco & nrep2 < MaxIt) {
     Qold <- Q
     nrep2 <- nrep2 + 1
     # Beta binom:
@@ -585,7 +580,7 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
       MyFlag <- "!"
       break
     } 
-
+    
     allelefreq_H0 <- mean(spr_H0) + mean(sprv_H0)/2 
     if (HWE) {
       prv_H0 <- 2 * allelefreq_H0 * (1 - allelefreq_H0) * (1 - inbr)
@@ -648,68 +643,59 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
     }
     
     if(ReEstThetas != "TryThree"){
-    if(sum(spr_H0+spv_H0)!=0){
-      if(NoSplitHom){
-        theta_hom_H0_clone <- theta_hom_H0
-        OptObj <- optim(par = log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                        ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0)
-        theta_hom_H0 <- exp(OptObj$par)
-        
-        if(theta_hom_H0 > max(SE, 1-SE)){
-          theta_hom_H0 <- min(c(theta_hom_H0_clone, max((1-SE)/10, SE/10)) ) # Take some distance from the boundary at which bimodality occurs
+      if(sum(spr_H0+spv_H0)!=0){
+        if(NoSplitHom){
           
-          AObj <- alabama::auglag(log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, hin = eval_g_f, SE = SE,
-                                  ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0, control.outer = list("trace" = FALSE))
+          theta_hom_H0_clone <- theta_hom_H0
+          OptObj <- CppHom_Optim(log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr_H0, 
+                                 spv_H0, epsabs = epsabs)
+          theta_hom_H0 <- exp(OptObj[2])
           
-          theta_hom_H0 <- exp(AObj$par[1])
+          if(theta_hom_H0 > max(SE, 1-SE)){
+            theta_hom_H0 <- min(c(theta_hom_H0_clone, max((1-SE)/10, SE/10)) ) # Take some distance from the boundary at which bimodality occurs
+            
+            AObj <- alabama::auglag(log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, hin = eval_g_f, SE = SE,
+                                    ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0, control.outer = list("trace" = FALSE))
+            
+            theta_hom_H0 <- exp(AObj$par[1])
+          }
+          
+        } else{
+          OptObj <- CppHom_Optim(log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr_H0, 
+                                 spv_H0, epsabs = epsabs)
+          theta_hom_H0 <- exp(OptObj[2])
         }
+      }
+      
+      
+      if(NoSplitHet){
         
+        theta_het_H0_clone <- theta_het_H0
+        OptObj <- maelstRom::CppHetH0_Optim(ThetaHetStart = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5,
+                                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, epsabs = epsabs)
+        theta_het_H0 <- exp(OptObj[2])
+        
+        if(theta_het_H0  > 0.5){
+          
+          theta_het_H0 <- min(c(theta_het_H0_clone, 0.5/10) ) # Take some distance from the boundary at which bimodality occurs
+          
+          AObj <- tryCatch( {alabama::auglag(log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, hin = eval_g_f_2_H0,
+                                             ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, control.outer = list("trace" = FALSE))},
+                            error = function(e) NULL)
+          if(is.null(AObj)){
+            AObj <- alabama::auglag(log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, hin = eval_g_f_2_H0,
+                                    ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, control.outer = list("trace" = FALSE))
+          }
+          
+          theta_het_H0 <- exp(AObj$par[1])
+          
+        }
       } else{
-        OptObj <- optim(par = log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                        ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0)
-        theta_hom_H0 <- exp(OptObj$par)
-      }
-    }
-    
-    
-    if(NoSplitHet){
-      theta_het_H0_clone <- theta_het_H0
-      OptObj <- tryCatch( {optim(par = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, method = "BFGS",
-                                 ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)},
-                          error = function(e) NULL)
-      if(is.null(OptObj)){
-        OptObj <- optim(par = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, method = "BFGS",
-                        ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)
-      }
-      
-      theta_het_H0 <- exp(OptObj$par[1])
-      
-      if(theta_het_H0  > 0.5){
+        OptObj <- maelstRom::CppHetH0_Optim(ThetaHetStart = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5,
+                                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, epsabs = epsabs)
         
-        theta_het_H0 <- min(c(theta_het_H0_clone, 0.5/10) ) # Take some distance from the boundary at which bimodality occurs
-        
-        AObj <- tryCatch( {alabama::auglag(log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, hin = eval_g_f_2_H0,
-                                           ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, control.outer = list("trace" = FALSE))},
-                          error = function(e) NULL)
-        if(is.null(AObj)){
-          AObj <- alabama::auglag(log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, hin = eval_g_f_2_H0,
-                                  ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, control.outer = list("trace" = FALSE))
-        }
-
-        theta_het_H0 <- exp(AObj$par[1])
-        
+        theta_het_H0 <- exp(OptObj[2])
       }
-    } else{
-      OptObj <- tryCatch( {optim(par = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, method = "BFGS",
-                                 ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)},
-                          error = function(e) NULL)
-      if(is.null(OptObj)){
-        OptObj <- optim(par = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, method = "BFGS",
-                        ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)
-      }
-      
-      theta_het_H0 <- exp(OptObj$par[1])
-    }
     } else{
       
       if(sum(spr_H0+spv_H0)!=0){
@@ -717,14 +703,14 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr_H0, spv=spv_H0))
+            OptObj <- CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr_H0, 
+                                   spv_H0, epsabs = epsabs)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, LogLikComp_hom(OptObj[2], SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr_H0, spv=spv_H0))
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom_H0 <- thetavec[theta_hom_loc]
-
+          
           if(theta_hom_H0 > max(SE, 1-SE)){
             thetavec <- c()
             likvec <- c()
@@ -734,7 +720,7 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
               thetavec <- c(thetavec, exp(AObj$par[1]))
               likvec <- c(likvec, LogLikComp_hom(AObj$par[1], SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr_H0, spv=spv_H0))
             }
-
+            
             theta_hom_loc <- which(likvec == min(likvec))[1]
             theta_hom_H0 <- thetavec[theta_hom_loc]
           }
@@ -743,10 +729,10 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr_H0, spv=spv_H0))
+            OptObj <- CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr_H0, 
+                                   spv_H0, epsabs = epsabs)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, LogLikComp_hom(OptObj[2], SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr_H0, spv=spv_H0))
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom_H0 <- thetavec[theta_hom_loc]
@@ -758,19 +744,14 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
         thetavec <- c()
         likvec <- c()
         for(TH in thetaTRY){
-          OptObj <- tryCatch( {optim(par = log(TH), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, method = "BFGS",
-                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)},
-                              error = function(e) NULL)
-          if(is.null(OptObj)){
-            OptObj <- optim(par = log(TH), probshift = 0.5, fn = LogLikComp_het_H0, method = "BFGS",
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)
-          }
-          thetavec <- c(thetavec, exp(OptObj$par[1]))
-          likvec <- c(likvec, LogLikComp_het_H0(OptObj$par[1], probshift=0.5, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv_H0))
+          OptObj <- maelstRom::CppHetH0_Optim(ThetaHetStart = log(TH), probshift = 0.5,
+                                              ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, epsabs = epsabs)
+          thetavec <- c(thetavec, exp(OptObj[2]))
+          likvec <- c(likvec, LogLikComp_het_H0(OptObj[2], probshift=0.5, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv_H0))
         }
         theta_het_loc <- which(likvec == min(likvec))[1]
         theta_het_H0 <- thetavec[theta_het_loc]
-
+        
         if(theta_het_H0  > 0.5){
           thetavec <- c()
           likvec <- c()
@@ -793,17 +774,11 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
         thetavec <- c()
         likvec <- c()
         for(TH in thetaTRY){
-          OptObj <- tryCatch( {optim(par = log(TH), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, method = "BFGS",
-                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)},
-                              error = function(e) NULL)
-          if(is.null(OptObj)){
-            OptObj <- optim(par = log(TH), probshift = 0.5, fn = LogLikComp_het_H0, method = "BFGS",
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)
-          }
-          thetavec <- c(thetavec, exp(OptObj$par[1]))
-          likvec <- c(likvec, LogLikComp_het_H0(OptObj$par[1], probshift=0.5, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv_H0))
+          OptObj <- maelstRom::CppHetH0_Optim(ThetaHetStart = log(TH), probshift = 0.5,
+                                              ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, epsabs = epsabs)
+          thetavec <- c(thetavec, exp(OptObj[2]))
+          likvec <- c(likvec, LogLikComp_het_H0(OptObj[2], probshift=0.5, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv_H0))
         }
-        
         theta_het_loc <- which(likvec == min(likvec))[1]
         theta_het_H0 <- thetavec[theta_het_loc]
       }
@@ -811,7 +786,7 @@ EMfit_betabinom <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 
     }
     
     
-
+    
     Q <- sum(ifelse(pr_H0>0, spr_H0*log(pr_H0), 0) + spr_H0*dBetaBinom(data_counts$ref_count, data_counts$ref_count+data_counts$var_count, pi = 1-SE, theta = theta_hom_H0, LOG = TRUE) +
                ifelse(prv_H0>0, sprv_H0*log(prv_H0), 0) + sprv_H0*dBetaBinom(data_counts$ref_count, data_counts$ref_count+data_counts$var_count, pi = 0.5, theta = theta_het_H0, LOG = TRUE) +
                ifelse(pv_H0>0, spv_H0*log(pv_H0), 0) + spv_H0*dBetaBinom(data_counts$var_count, data_counts$ref_count+data_counts$var_count, pi = 1-SE, theta = theta_hom_H0, LOG = TRUE))

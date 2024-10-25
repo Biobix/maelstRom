@@ -13,8 +13,8 @@
 #' @param results Data frame. Data frame with SNP results in each row, containing
 #'    at least the chromosomal position of the SNP (results$position). If NULL, one dataframe is expected as the \code{data} input argument.
 #' @return The \code{results} input data frame appended with the following columns:
-#' \item{Chi2PVAL}{The p-value of the chi-squared test.}
-#' \item{Chi2STAT}{The test statistic of the chi-squared test.}
+#' \item{HWEpval}{The p-value of the chi-squared test.}
+#' \item{HWE_TestStat}{The test statistic of the chi-squared test.}
 #' @export
 
 HWE_chisquared <- function(data, inbr = 0, results = NULL){
@@ -48,21 +48,20 @@ HWE_chisquared <- function(data, inbr = 0, results = NULL){
     PVAL <- chisq.test(rbind(c(prrOBS, prvOBS, pvvOBS), c(prrEXP, prvEXP, pvvEXP)))$p.value
     STAT <- chisq.test(rbind(c(prrOBS, prvOBS, pvvOBS), c(prrEXP, prvEXP, pvvEXP)))$statistic
     
-    return(list("PVAL" = PVAL, "STAT" = STAT))
+    return(list("HWEpval" = PVAL, "HWE_TestStat" = STAT))
   }else{
     
     inbrC <- inbr
-    positionsOI <- results$position
-    
+
     counter <- 0
     
-    results$Chi2PVAL <- 0
-    results$Chi2STAT <- 0
+    results$HWEpval <- 0
+    results$HWE_TestStat <- 0
     
-    for (z in positionsOI) {
+    for (ii in 1:nrow(results)) {
       inbr <- inbrC
       counter <- counter + 1
-      DataNow <- data[[z]]
+      DataNow <- data[[names(data)[ii]]]
       prrOBS <- sum(DataNow$prr)
       prvOBS <- sum(DataNow$prv)
       pvvOBS <- sum(DataNow$pvv)
@@ -90,8 +89,8 @@ HWE_chisquared <- function(data, inbr = 0, results = NULL){
       
       PVAL <- chisq.test(rbind(c(prrOBS, prvOBS, pvvOBS), c(prrEXP, prvEXP, pvvEXP)))$p.value
       STAT <- chisq.test(rbind(c(prrOBS, prvOBS, pvvOBS), c(prrEXP, prvEXP, pvvEXP)))$statistic
-      results$Chi2PVAL[counter] <- PVAL
-      results$Chi2STAT[counter] <- STAT
+      results$HWEpval[counter] <- PVAL
+      results$HWE_TestStat[counter] <- STAT
     }
     
     return(results)

@@ -24,66 +24,66 @@
 
 NULL
 
-#' @rdname dpqrBetaBinom
-#' @export
-dBetaBinom <- function(ms, ns, pi, theta, MemLim = 2048, Xtra = 7, LOG = FALSE) {
+# #' @rdname dpqrBetaBinom
+# #' @export
+# dBetaBinom <- function(ms, ns, pi, theta, MemLim = 2048, Xtra = 7, LOG = FALSE) {
   
-  nsC <- ns
-  msC <- ms
-  nLow <- which(ns <= 50)
-  nHigh <- which(ns > 50)
+#   nsC <- ns
+#   msC <- ms
+#   nLow <- which(ns <= 0)
+#   nHigh <- which(ns > 0)
   
-  if(length(nLow)>0){ # We can use a specific beta-binomial implementation that is faster for low-count data
-    ns <- nsC[nLow]
-    ms <- msC[nLow]
-    out1 <- dBetaBinom_cpp_old(ms, ns, pi, theta, LOG)
-  }
+#   if(length(nLow)>0){ # We can use a specific beta-binomial implementation that is faster for low-count data
+#     ns <- nsC[nLow]
+#     ms <- msC[nLow]
+#     out1 <- dBetaBinom_cpp_old(ms, ns, pi, theta, LOG)
+#   }
   
-  if(length(nHigh)>0){
+#   if(length(nHigh)>0){
     
-    ns <- nsC[nHigh]
-    ms <- msC[nHigh]
+#     ns <- nsC[nHigh]
+#     ms <- msC[nHigh]
     
-    Hlp <- log10((1/theta)+max(ns))
-    LogParRat <- ceiling(Hlp + log10(Hlp*log(10)))
-    Hlp2 <- ceiling(log10(abs(lbeta(a = max(ns), b = 1/theta))))
-    NecBits <- ceiling((Hlp2+Xtra)/log10(2))
+#     Hlp <- log10((1/theta)+max(ns))
+#     LogParRat <- ceiling(Hlp + log10(Hlp*log(10)))
+#     Hlp2 <- ceiling(log10(abs(lbeta(a = max(ns), b = 1/theta))))
+#   NecBits <- ceiling((Hlp2+Xtra)/log10(2))
     
-    NecBitsTRUE <- ceiling((LogParRat+Xtra)/log10(2)) # The previous necessary bits are calculated assuming beta-binomial calculation happen using lbeta-functions.
+#     NecBitsTRUE <- ceiling((LogParRat+Xtra)/log10(2)) # The previous necessary bits are calculated assuming beta-binomial calculation happen using lbeta-functions.
     # In the case of a large requirement in number of bits, however, we need to work in C++, which doesn't offer the lbeta function.
     # It does, however, offer an alternative computation using lgamma-functions,
     # in which case this expression is an approximation of the necessary number of bits.
     
-    if(NecBits <= 53 & theta !=0){ # Necessary bits <= 53? Then an R double's default precision is enough
-      PV1 <- ifelse(ms>0, -lbeta(a = ms, b = pi/theta) - log(ms), 0)
-      PV2 <- ifelse((ns-ms)>0, -lbeta(a = (ns-ms), b = ((1-pi)/theta)) - log(ns-ms), 0)
-      PV3 <- ifelse(ns>1, lbeta(a = ns, b = 1/theta) + log(ns), 0)
-      out <- PV1 + PV2 + PV3
-      if (LOG) {
-        out2 <- out
-      } else {
-        out2 <- exp(out)
-      }
-    } else if ((theta == 0 | NecBitsTRUE > MemLim)){ # If theta==0, we're dealing with the regular binomial
-      if(theta!=0){
-        warning("memory limit reached in dBetaBinom\n", call. = FALSE)
-      }
-      out2 <- dbinom(ms, ns, pi, log = LOG)
-    } else{
-      out2 <- dBetaBinom_MP(ms, ns, pi, theta, LOG=LOG, NecPres=LogParRat+Xtra)
-    }
+#     if(NecBits <= 53 & theta !=0){ # Necessary bits <= 53? Then an R double's default precision is enough
+#       PV1 <- ifelse(ms>0, -lbeta(a = ms, b = pi/theta) - log(ms), 0)
+#       PV2 <- ifelse((ns-ms)>0, -lbeta(a = (ns-ms), b = ((1-pi)/theta)) - log(ns-ms), 0)
+#       PV3 <- ifelse(ns>0, lbeta(a = ns, b = 1/theta) + log(ns), 0)
+#       out <- PV1 + PV2 + PV3
+#       if (LOG) {
+#         out2 <- out
+#       } else {
+#         out2 <- exp(out)
+#       }
+#     } else if ((theta == 0 | NecBitsTRUE > MemLim)){ # If theta==0, we're dealing with the regular binomial
+#       if(theta!=0){
+#         warning("memory limit reached in dBetaBinom\n", call. = FALSE)
+#       }
+#       out2 <- dbinom(ms, ns, pi, log = LOG)
+#     } else{
+#       out2 <- dBetaBinom_MP(ms, ns, pi, theta, LOG=LOG, NecPres=LogParRat+Xtra)
+#     }
     
-  }
+#   }
   
-  out <- rep(0, length(nsC))
-  if(length(nLow)>0){
-    out[nLow] <- out1
-  }
-  if(length(nHigh)>0){
-    out[nHigh] <- out2
-  }
-  return(out)
-}
+#  out <- rep(0, length(nsC))
+#  if(length(nLow)>0){
+#    out[nLow] <- out1
+#  }
+#  if(length(nHigh)>0){
+#    out[nHigh] <- out2
+#  }
+#  return(out)
+#}
 
 
 #' @rdname dpqrBetaBinom

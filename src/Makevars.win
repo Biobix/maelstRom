@@ -6,9 +6,9 @@
 
 # lines below suggested by Uwe Ligges
 
-PKG_CPPFLAGS=-I$(LIB_MPFR)/include
-PKG_LIBS=-L$(LIB_MPFR)/lib -lmpfr -lgmp
+CXX_STD = CXX11
+PKG_CPPFLAGS=-I$(LIB_MPFR)/include -I$(LIB_GSL)/include -I../inst/include -I.
+PKG_LIBS=-L$(LIB_MPFR)/lib -lmpfr -lgmp -L$(LIB_GSL)/lib -lgsl -lgslcblas
 ## or rather ?
 # PKG_CPPFLAGS=-I$(LIB_MPFR)/include -I$(LIB_GMP)/include
-# PKG_LIBS=-L$(LIB_MPFR)/lib -lmpfr -L$(LIB_GMP)/lib -lgmp 
-
+# PKG_LIBS=-L$(LIB_MPFR)/lib -lmpfr -L$(LIB_GMP)/lib -lgmp

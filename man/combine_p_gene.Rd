@@ -13,7 +13,7 @@ combine_p_gene(p_values, weights = NULL, method = "geometric", r = NULL)
 
 \item{method}{String. Specifies the method for combining p-values, the options being "arithmetic" (mean), "geometric" (mean),
 "harmonic" (mean), "minimum" (p-value), "maximum" (p-value) or "GMP" (Generalized Mean P-value).
-In case of the latter, a value for r must be specified, and the GMP is then calculated as (sum(weights * p_values^r)/sum(weights))^(1/r), see \insertCite{wilson2020generalized}{MAGE}.}
+In case of the latter, a value for r must be specified, and the GMP is then calculated as (sum(weights * p_values^r)/sum(weights))^(1/r), see \insertCite{wilson2020generalized}{maelstRom}.}
 
 \item{r}{Numeric. r-value to be used in the calculation of the GMP, should that option be chosen as the method.}
 }

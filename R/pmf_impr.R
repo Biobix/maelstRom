@@ -33,19 +33,19 @@ pmf_impr <- function(ref_counts, var_counts, allelefreq, impr, SE, inbr = 0) {
   pr <- allelefreq ^ 2 + (inbr * allelefreq * (1 - allelefreq))
   pv <- (1 - allelefreq) ^ 2 + (inbr * allelefreq * (1 - allelefreq))
   prv <- allelefreq * (1 - allelefreq) * (1 - inbr)
-
-  x_m <- MAGE::multinomial_coeff(ref_counts, var_counts)
-
+  
+  x_m <- maelstRom::multinomial_coeff(ref_counts, var_counts)
+  
   c1 <- ((0.5 - impr / 2) / (1 - impr / 2)) * (1 - SE) + (0.5 / (1 - impr / 2)) * SE
   c2 <- (0.5 / (1 - impr / 2)) * (1 - SE) + ((0.5 - impr / 2) / (1 - impr / 2)) * SE
-
+  
   #homo
   m_RR <- x_m * (1 - SE) ^ ref_counts * SE ^ var_counts
   m_VV <- x_m * SE ^ ref_counts * (1 - SE) ^ var_counts
   #hetero
   m_RV <- x_m * c1 ^ ref_counts * c2 ^ var_counts
   m_VR <- x_m * c2 ^ ref_counts * c1 ^ var_counts
-
+  
   PMF <- as.numeric(pr * m_RR + pv * m_VV + prv * m_RV + prv * m_VR)
   return(PMF)
 }

@@ -7,7 +7,7 @@
 #' @param weights Numeric vector. Weights given to each observation (corresponds to how much an observation occurs, but can be non-integer as well).
 #' @param method String. Specifies the method for combining p-values, the options being "arithmetic" (mean), "geometric" (mean),
 #' "harmonic" (mean), "minimum" (p-value), "maximum" (p-value) or "GMP" (Generalized Mean P-value).
-#' In case of the latter, a value for r must be specified, and the GMP is then calculated as (sum(weights * p_values^r)/sum(weights))^(1/r), see \insertCite{wilson2020generalized}{MAGE}.
+#' In case of the latter, a value for r must be specified, and the GMP is then calculated as (sum(weights * p_values^r)/sum(weights))^(1/r), see \insertCite{wilson2020generalized}{maelstRom}.
 #' @param r Numeric. r-value to be used in the calculation of the GMP, should that option be chosen as the method.
 #' @export
 #' @return Combined p-value of a gene.
@@ -40,7 +40,7 @@ combine_p_gene <- function (p_values, weights = NULL, method = "geometric", r = 
     if(r == 0){
       combined_p <- exp(sum(weights * log(p_values))/sum(weights))
     } else{
-      combined_p <- (sum(weigths * p_values^r)/sum(weigths))^(1/r)
+      combined_p <- (sum(weights * p_values^r)/sum(weights))^(1/r)
     }
   }
   return(combined_p)

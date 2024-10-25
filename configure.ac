@@ -1,12 +1,12 @@
 # autoconf this file --> configure
-AC_INIT([MAGE])
+AC_INIT
+AC_CONFIG_SRCDIR([MAGE])
 AC_CONFIG_SRCDIR([DESCRIPTION])
 
 dnl Select an optional include path, from a configure option
 dnl or from an environment variable  >> mpfr_INCLUDE <<
 AC_ARG_WITH([mpfr-include],
-            AC_HELP_STRING([--with-mpfr-include=INCLUDE_PATH],
-                           [the location of MPFR header files]),
+            AS_HELP_STRING([--with-mpfr-include=INCLUDE_PATH],[the location of MPFR header files]),
             [mpfr_include_path=$withval])
 
 if test -n "$mpfr_include_path" ; then
@@ -17,8 +17,7 @@ fi
 
 dnl Ditto for a library path  environment variable  >> mpfr_LDFLAGS <<
 AC_ARG_WITH([mpfr-lib],
-            AC_HELP_STRING([--with-mpfr-lib=LIB_PATH],
-                           [the location of MPFR libraries]),
+            AS_HELP_STRING([--with-mpfr-lib=LIB_PATH],[the location of MPFR libraries]),
             [mpfr_lib_path=$withval])
 
 if test -n "$mpfr_lib_path" ; then
@@ -69,6 +68,29 @@ AC_CHECK_LIB(mpfr, mpfr_digamma, ,
 AC_SUBST(PKG_CPPFLAGS)
 AC_SUBST(PKG_CFLAGS)
 AC_SUBST(PKG_LDFLAGS)
+
+
+
+## Use gsl-config to find arguments for
+## compiler and linker flags
+##
+## Check for non-standard programs: gsl-config(1)
+AC_PATH_PROG([GSL_CONFIG], [gsl-config])
+## If gsl-config was found, lets use it
+if test "${GSL_CONFIG}" != ""; then
+  # Use gsl-config for header and linker args
+  # (without BLAS which we get from R)
+  GSL_CFLAGS=`${GSL_CONFIG} --cflags`
+  GSL_LIBS=`${GSL_CONFIG} --libs-without-cblas`
+else
+  AC_MSG_ERROR([gsl-config not found, is GSL installed?])
+fi
+
+# Now substitute these variables in src/Makevars.in to create src/Makevars
+AC_SUBST(GSL_CFLAGS)
+AC_SUBST(GSL_LIBS)
+
+
 
 AC_CONFIG_FILES(src/Makevars)
 AC_OUTPUT

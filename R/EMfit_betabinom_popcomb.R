@@ -32,10 +32,10 @@
 #' \item{nrep}{The number of iterations.}
 #' \item{quality}{An "!" indicates a bad quality locus or fit (no apparent heterozygotes)}
 
-EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 10^-6, HWE = FALSE, p_InitEst = FALSE, 
-                               ThetaInits = "moment", ReEstThetas = "moment", NoSplitHom = TRUE, NoSplitHet = TRUE,
-                               ResetThetaMin = 10^-10, ResetThetaMax = 10^-1, thetaTRY = c(10^-1, 10^-3, 10^-7),
-                               probshift_init = 0.5) {
+EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 10^-6, HWE = FALSE, p_InitEst = FALSE, p_inits = c(1/3, 1/3, 1/3), 
+                                    ThetaInits = "moment", ReEstThetas = "moment", NoSplitHom = TRUE, NoSplitHet = TRUE,
+                                    ResetThetaMin = 10^-10, ResetThetaMax = 10^-1, thetaTRY = c(10^-1, 10^-3, 10^-7),
+                                    probshift_init = 0.5, FirstFewFixed = NULL, MemLim = 2048, Xtra = 5, epsabs = 0.001, MaxIt = 100) {
   
   LogLikComp_hom <- function(theta, SE, ref_counts, var_counts, spr, spv){
     return(-sum(spr*(dBetaBinom(ref_counts, ref_counts+var_counts, pi=1-SE, theta=exp(theta), LOG = TRUE)) +
@@ -87,7 +87,7 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
   }
   eval_g_f_2_CnT <- function(parvec, ref_counts, var_counts, isCase, sprv) { # Specifies the inequality constraint between parameters in case NoSplitHet == TRUE
     return(  c(((max(1 - gtools::inv.logit(parvec[1], max = 1-10^-16, min = 10^-16), gtools::inv.logit(parvec[1], max = 1-10^-16, min = 10^-16)) ) - exp(parvec[2])),
-             ((max(1 - gtools::inv.logit(parvec[1], max = 1-10^-16, min = 10^-16), gtools::inv.logit(parvec[1], max = 1-10^-16, min = 10^-16)) ) - exp(parvec[2]))) )
+               ((max(1 - gtools::inv.logit(parvec[1], max = 1-10^-16, min = 10^-16), gtools::inv.logit(parvec[1], max = 1-10^-16, min = 10^-16)) ) - exp(parvec[2]))) )
   }
   
   data_counts <- rbind(data_counts[data_counts$isCase==0,], data_counts[data_counts$isCase==1,])
@@ -100,9 +100,9 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
     pr <- allelefreq^2 + inbr * allelefreq * (1 - allelefreq)
     pv <- (1 - allelefreq)^2 + inbr * allelefreq * (1 - allelefreq) 
   } else{
-    pr <- 1/3
-    prv <- 1/3
-    pv <- 1/3
+    pr <- p_inits[1]
+    prv <- p_inits[2]
+    pv <- p_inits[3]
   }
   
   pr_H0 <- pr
@@ -146,14 +146,14 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
     spv_est <- spv_est/pdata
     sprv_est <- sprv_est/pdata
     
-    MomentEst_complete <- MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count, var_counts = data_counts$var_count, spr = spr_est, 
-                                                   spv = spv_est, sprv = sprv_est, pi_hom_fix = 1-SE, pi_het_fix = 0.5)
-    MomentEst_control <- MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count[data_counts$isCase==0], 
-                                                  var_counts = data_counts$var_count[data_counts$isCase==0], spr = spr_est[data_counts$isCase==0], 
-                                                  spv = spv_est[data_counts$isCase==0], sprv = sprv_est[data_counts$isCase==0], pi_hom_fix = 1-SE, pi_het_fix = 0.5)
-    MomentEst_tumor <- MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count[data_counts$isCase==1], 
-                                                var_counts = data_counts$var_count[data_counts$isCase==1], spr = spr_est[data_counts$isCase==1], 
-                                                spv = spv_est[data_counts$isCase==1], sprv = sprv_est[data_counts$isCase==1], pi_hom_fix = 1-SE, pi_het_fix = 0.5)
+    MomentEst_complete <- maelstRom::MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count, var_counts = data_counts$var_count, spr = spr_est, 
+                                                              spv = spv_est, sprv = sprv_est, pi_hom_fix = 1-SE, pi_het_fix = 0.5)
+    MomentEst_control <- maelstRom::MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count[data_counts$isCase==0], 
+                                                             var_counts = data_counts$var_count[data_counts$isCase==0], spr = spr_est[data_counts$isCase==0], 
+                                                             spv = spv_est[data_counts$isCase==0], sprv = sprv_est[data_counts$isCase==0], pi_hom_fix = 1-SE, pi_het_fix = 0.5)
+    MomentEst_tumor <- maelstRom::MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count[data_counts$isCase==1], 
+                                                           var_counts = data_counts$var_count[data_counts$isCase==1], spr = spr_est[data_counts$isCase==1], 
+                                                           spv = spv_est[data_counts$isCase==1], sprv = sprv_est[data_counts$isCase==1], pi_hom_fix = 1-SE, pi_het_fix = 0.5)
     
     theta_hom <- min(max(MomentEst_complete["theta_hom"], ResetThetaMin), ResetThetaMax)
     theta_het_control <- min(max(MomentEst_control["theta_het"], ResetThetaMin), ResetThetaMax)
@@ -188,14 +188,14 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
   
   Q <- 1000
   
-  while (dlta > dltaco & nrep < 100) {
+  while (dlta > dltaco & nrep < MaxIt) {
     Qold <- Q
     nrep <- nrep + 1
     
-    spr <- pr * dBetaBinom(data_counts$ref_count, data_counts$ref_count + data_counts$var_count, pi = 1 - SE, theta = theta_hom, LOG = FALSE)
-    spv <- pv * dBetaBinom(data_counts$var_count, data_counts$ref_count + data_counts$var_count, pi = 1 - SE, theta = theta_hom, LOG = FALSE)
-    sprv <- prv * c(dBetaBinom(data_counts$ref_count[data_counts$isCase==0], (data_counts$ref_count + data_counts$var_count)[data_counts$isCase==0], pi = probshift, theta = theta_het_control, LOG = FALSE), 
-                    dBetaBinom(data_counts$ref_count[data_counts$isCase==1], (data_counts$ref_count + data_counts$var_count)[data_counts$isCase==1], pi = probshift, theta = theta_het_tumor, LOG = FALSE))
+    spr <- pr * maelstRom::dBetaBinom(data_counts$ref_count, data_counts$ref_count + data_counts$var_count, pi = 1 - SE, theta = theta_hom, LOG = FALSE)
+    spv <- pv * maelstRom::dBetaBinom(data_counts$var_count, data_counts$ref_count + data_counts$var_count, pi = 1 - SE, theta = theta_hom, LOG = FALSE)
+    sprv <- prv * c(maelstRom::dBetaBinom(data_counts$ref_count[data_counts$isCase==0], (data_counts$ref_count + data_counts$var_count)[data_counts$isCase==0], pi = probshift, theta = theta_het_control, LOG = FALSE), 
+                    maelstRom::dBetaBinom(data_counts$ref_count[data_counts$isCase==1], (data_counts$ref_count + data_counts$var_count)[data_counts$isCase==1], pi = probshift, theta = theta_het_tumor, LOG = FALSE))
     
     pdata <- rowSums(cbind(spv, sprv, spr)) 
     
@@ -239,25 +239,27 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
     
     allelefreq <- mean(spr) + mean(sprv)/2 
     
-    if (HWE) {
-      prv <- 2 * allelefreq * (1 - allelefreq) * (1 - inbr)
-      pr <- allelefreq^2 + inbr * allelefreq * (1 - allelefreq)
-      pv <- (1 - allelefreq)^2 + inbr * allelefreq * (1 - allelefreq)
-    }else {
-      pv <- mean(spv) 
-      prv <- mean(sprv)
-      pr <- mean(spr)
+    if(is.null(FirstFewFixed) || nrep > FirstFewFixed){
+      if (HWE) {
+        prv <- 2 * allelefreq * (1 - allelefreq) * (1 - inbr)
+        pr <- allelefreq^2 + inbr * allelefreq * (1 - allelefreq)
+        pv <- (1 - allelefreq)^2 + inbr * allelefreq * (1 - allelefreq)
+      }else {
+        pv <- mean(spv) 
+        prv <- mean(sprv)
+        pr <- mean(spr)
+      }
     }
     
     if(ReEstThetas == "moment"){
-      MomentEst_complete <- MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count, var_counts = data_counts$var_count, spr = spr, spv = spv, sprv = sprv, 
-                                            pi_hom_fix = 1-SE, pi_het_fix = probshift)
-      MomentEst_control <- MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count[data_counts$isCase==0], var_counts = data_counts$var_count[data_counts$isCase==0],
-                                                    spr = spr[data_counts$isCase==0], spv = spv[data_counts$isCase==0], sprv = sprv[data_counts$isCase==0], 
-                                                    pi_hom_fix = 1-SE, pi_het_fix = probshift)
-      MomentEst_tumor <- MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count[data_counts$isCase==1], var_counts = data_counts$var_count[data_counts$isCase==1],
-                                                  spr = spr[data_counts$isCase==1], spv = spv[data_counts$isCase==1], sprv = sprv[data_counts$isCase==1], 
-                                                  pi_hom_fix = 1-SE, pi_het_fix = probshift)
+      MomentEst_complete <- maelstRom::MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count, var_counts = data_counts$var_count, spr = spr, spv = spv, sprv = sprv, 
+                                                                pi_hom_fix = 1-SE, pi_het_fix = probshift)
+      MomentEst_control <- maelstRom::MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count[data_counts$isCase==0], var_counts = data_counts$var_count[data_counts$isCase==0],
+                                                               spr = spr[data_counts$isCase==0], spv = spv[data_counts$isCase==0], sprv = sprv[data_counts$isCase==0], 
+                                                               pi_hom_fix = 1-SE, pi_het_fix = probshift)
+      MomentEst_tumor <- maelstRom::MomentEst_MixedBetaBinom(ref_counts = data_counts$ref_count[data_counts$isCase==1], var_counts = data_counts$var_count[data_counts$isCase==1],
+                                                             spr = spr[data_counts$isCase==1], spv = spv[data_counts$isCase==1], sprv = sprv[data_counts$isCase==1], 
+                                                             pi_hom_fix = 1-SE, pi_het_fix = probshift)
       if(sum(spr+spv)!=0){
         theta_hom <- MomentEst_complete["theta_hom"]
       }
@@ -334,9 +336,11 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
       if(sum(spr+spv)!=0){
         if(NoSplitHom){
           theta_hom_clone <- theta_hom
-          OptObj <- optim(par = log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-          theta_hom <- exp(OptObj$par)
+          
+          OptObj <- maelstRom::CppHom_Optim(log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                            spv, MemLim = MemLim, Xtra = Xtra, epsabs = epsabs)
+          
+          theta_hom <- exp(OptObj[2])
           
           if(theta_hom > max(SE, 1-SE)){
             
@@ -351,9 +355,14 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
           
           
         } else{
-          OptObj <- optim(par = log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-          theta_hom <- exp(OptObj$par)
+          OptObj <- maelstRom::CppHom_Optim(log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                            spv, MemLim = MemLim, Xtra = Xtra, epsabs = epsabs)
+          
+          #OptObj <- optim(par = log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
+          #                ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
+          
+          
+          theta_hom <- exp(OptObj[2])
         }
       }
       
@@ -363,19 +372,13 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
       if(NoSplitHet){
         theta_het_control_clone <- theta_het_control
         theta_het_tumor_clone <- theta_het_tumor
-        OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het_control, ResetThetaMin), ResetThetaMax)), log(min(max(theta_het_tumor, ResetThetaMin), ResetThetaMax))), 
-                                   fn = LogLikComp_het_CnT, gr = GradComp_het_CnT, method = "BFGS",
-                                   ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase)},
-                            error = function(e) NULL)
-        if(is.null(OptObj)){
-          OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het_control, ResetThetaMin), ResetThetaMax)), log(min(max(theta_het_tumor, ResetThetaMin), ResetThetaMax))), 
-                          fn = LogLikComp_het_CnT, method = "BFGS",
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase)
-        }
+        OptObj <- maelstRom::CppCnT_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het_control, ResetThetaMin), ResetThetaMax)), log(min(max(theta_het_tumor, ResetThetaMin), ResetThetaMax))), 
+                                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase, MemLim = MemLim, Xtra = Xtra,
+                                          epsabs = epsabs)
         
-        probshift <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-        theta_het_control <- exp(OptObj$par[2])
-        theta_het_tumor <- exp(OptObj$par[3])
+        probshift <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+        theta_het_control <- exp(OptObj[3])
+        theta_het_tumor <- exp(OptObj[4])
         
         if(theta_het_control  > max(probshift, 1-probshift) | theta_het_tumor  > max(probshift, 1-probshift)){
           
@@ -398,19 +401,12 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
           
         }
       } else{
-        OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het_control, ResetThetaMin), ResetThetaMax)), log(min(max(theta_het_tumor, ResetThetaMin), ResetThetaMax))), 
-                                   fn = LogLikComp_het_CnT, gr = GradComp_het_CnT, method = "BFGS",
-                                   ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase)},
-                            error = function(e) NULL)
-        if(is.null(OptObj)){
-          OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het_control, ResetThetaMin), ResetThetaMax)), log(min(max(theta_het_tumor, ResetThetaMin), ResetThetaMax))), 
-                          fn = LogLikComp_het_CnT, method = "BFGS",
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase)
-        }
+        OptObj <- maelstRom::CppCnT_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het_control, ResetThetaMin), ResetThetaMax)), log(min(max(theta_het_tumor, ResetThetaMin), ResetThetaMax))), 
+                                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase, MemLim = MemLim, Xtra = Xtra, epsabs = epsabs)
         
-        probshift <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-        theta_het_control <- exp(OptObj$par[2])
-        theta_het_tumor <- exp(OptObj$par[3])
+        probshift <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+        theta_het_control <- exp(OptObj[3])
+        theta_het_tumor <- exp(OptObj[4])
       }
       
     } else{
@@ -421,10 +417,14 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
+            
+            OptObj <- maelstRom::CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                              spv, MemLim = MemLim, Xtra = Xtra, epsabs = epsabs)
+            
+            #OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
+            #                ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, OptObj[1])
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom <- thetavec[theta_hom_loc]
@@ -448,10 +448,13 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
+            OptObj <- maelstRom::CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                              spv, MemLim = MemLim, Xtra = Xtra, epsabs = epsabs)
+            
+            #OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
+            #                ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, OptObj[1])
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom <- thetavec[theta_hom_loc]
@@ -472,19 +475,13 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
         
         for(TH1 in thetaTRY){
           for(TH2 in thetaTRY){
-          
-            OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(TH1), log(TH2)), fn = LogLikComp_het_CnT, gr = GradComp_het_CnT, method = "BFGS",
-                                       ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase)},
-                                error = function(e) NULL)
-            if(is.null(OptObj)){
-              OptObj <- optim(par = c(gtools::logit(probshift), log(TH1), log(TH2)), fn = LogLikComp_het_CnT, method = "BFGS",
-                              ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase)
-            }
-            thetavec_control <- c(thetavec_control, exp(OptObj$par[2]))
-            thetavec_tumor <- c(thetavec_tumor, exp(OptObj$par[3]))
-            pivec <- c(pivec, gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16))
-            likvec <- c(likvec, LogLikComp_het_CnT(c(OptObj$par[1], OptObj$par[2], OptObj$par[3]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv, isCase = data_counts$isCase))
-          
+            OptObj <- maelstRom::CppCnT_Optim(StartVals = c(gtools::logit(probshift), log(TH1), log(TH2)), 
+                                              ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase, MemLim = MemLim, Xtra = Xtra, epsabs = epsabs)
+            
+            pivec <- c(pivec, gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16))
+            thetavec_control <- exp(OptObj[3])
+            thetavec_tumor <- exp(OptObj[4])
+            likvec <- c(likvec, OptObj[1])
           }
         }
         
@@ -503,7 +500,7 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
           likvec <- c()
           for(TH1 in thetaTRY){
             for(TH2 in thetaTRY){
-            
+              
               AObj <- tryCatch( {alabama::auglag(c(gtools::logit(probshift), log(TH1), log(TH2)), fn = LogLikComp_het_CnT, gr = GradComp_het_CnT, hin = eval_g_f_2_CnT,
                                                  ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase, control.outer = list("trace" = FALSE))},
                                 error = function(e) NULL)
@@ -515,7 +512,7 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
               thetavec_tumor <- c(thetavec_tumor, exp(AObj$par[3]))
               pivec <- c(pivec, gtools::inv.logit(AObj$par[1], max = 1-10^-16, min = 10^-16))
               likvec <- c(likvec, LogLikComp_het_CnT(c(AObj$par[1], AObj$par[2], AObj$par[3]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv, isCase = data_counts$isCase))
-          
+              
             }
           }
           
@@ -534,19 +531,15 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
         likvec <- c()
         for(TH1 in thetaTRY){
           for(TH2 in thetaTRY){
-          
-            OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(TH1), log(TH2)), fn = LogLikComp_het_CnT, gr = GradComp_het_CnT, method = "BFGS",
-                                       ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase)},
-                                error = function(e) NULL)
-            if(is.null(OptObj)){
-              OptObj <- optim(par = c(gtools::logit(probshift), log(TH1), log(TH2)), fn = LogLikComp_het_CnT, method = "BFGS",
-                              ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase)
-            }
-            thetavec_control <- c(thetavec_control, exp(OptObj$par[2]))
-            thetavec_tumor <- c(thetavec_tumor, exp(OptObj$par[3]))
-            pivec <- c(pivec, gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16))
-            likvec <- c(likvec, LogLikComp_het_CnT(c(OptObj$par[1], OptObj$par[2], OptObj$par[3]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv, isCase = data_counts$isCase))
-        
+            OptObj <- maelstRom::CppCnT_Optim(StartVals = c(gtools::logit(probshift), log(TH1), log(TH2)), 
+                                              ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, isCase = data_counts$isCase, MemLim = MemLim, Xtra = Xtra, epsabs = epsabs)
+            
+            
+            pivec <- c(pivec, gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16))
+            thetavec_control <- exp(OptObj[3])
+            thetavec_tumor <- exp(OptObj[4])
+            likvec <- c(likvec, OptObj[1])
+            
           }
         }
         
@@ -571,7 +564,9 @@ EMfit_betabinom_popcomb <- function(data_counts, allelefreq=0.5, SE, inbr = 0, d
                                                         dBetaBinom(data_counts$ref_count[data_counts$isCase==1], (data_counts$ref_count+data_counts$var_count)[data_counts$isCase==1], pi = probshift, theta = theta_het_tumor, LOG = TRUE))+
                ifelse(pv>0, spv*log(pv), 0) + spv*dBetaBinom(data_counts$var_count, data_counts$ref_count+data_counts$var_count, pi = 1-SE, theta = theta_hom, LOG = TRUE))
     
-    dlta <- abs(Qold-Q)
+    if(is.null(FirstFewFixed) || nrep > FirstFewFixed){
+      dlta <- abs(Qold-Q)
+    }
     
     allelefreq <- mean(spr) + mean(sprv)/2
     data_counts$allelefreq <- allelefreq

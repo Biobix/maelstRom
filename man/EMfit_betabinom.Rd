@@ -12,6 +12,7 @@ EMfit_betabinom(
   dltaco = 10^-6,
   HWE = FALSE,
   p_InitEst = FALSE,
+  probshift_init = NULL,
   ThetaInits = "moment",
   ReEstThetas = "moment",
   NoSplitHom = TRUE,
@@ -19,7 +20,10 @@ EMfit_betabinom(
   ResetThetaMin = 10^-10,
   ResetThetaMax = 10^-1,
   thetaTRY = c(10^-1, 10^-3, 10^-7),
-  fitH0 = TRUE
+  fitH0 = TRUE,
+  FirstFewFixed = NULL,
+  epsabs = 0.001,
+  MaxIt = 100
 )
 }
 \arguments{
@@ -37,6 +41,8 @@ EMfit_betabinom(
 \item{HWE}{Logical. Should HWE be used for allele frequency estimation, not recommended (default = FALSE).}
 
 \item{p_InitEst}{Logical. Calculate initial estimates of pr, pv and prv from allelefreq, not recommended (default = FALSE).}
+
+\item{probshift_init}{Number. Initial estimate for the allelic bias in heterozygotes; it's recommended to leave this at NULL, in which case this initial estimate will be 0.5}
 
 \item{ThetaInits}{Numeric vector, "moment" or "TryThree". A vector of length two containing the initial dispersion estimate for the homozygous peaks, followed by the one for the heterozygous peak,
 or "moment", in which case moment initial estimates are generated. In case of "TryThree", three initial values given by the \code{thetaTRY} input argument are tried out and the one yielding the best fit is retained.}

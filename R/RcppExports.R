@@ -17,7 +17,7 @@
 #' @return A numeric vector of the same length as ms and ns, containing (log-)beta-binomial densities
 #' @export
 dBetaBinom_MP <- function(ms, ns, piX, thetaX, LOG, NecPres) {
-    .Call(`_MAGE_dBetaBinom_MP`, ms, ns, piX, thetaX, LOG, NecPres)
+    .Call(`_maelstRom_dBetaBinom_MP`, ms, ns, piX, thetaX, LOG, NecPres)
 }
 
 #' Exact gradient of the beta-binomial log-likelihood function for pi using a multiprecision library.
@@ -35,7 +35,7 @@ dBetaBinom_MP <- function(ms, ns, piX, thetaX, LOG, NecPres) {
 #' @return A numeric vector of the same length as ms and ns, containing the gradient to pi in the give data points
 #' @export
 grad_pi_MP <- function(ms, ns, piX, thetaX, NecPres) {
-    .Call(`_MAGE_grad_pi_MP`, ms, ns, piX, thetaX, NecPres)
+    .Call(`_maelstRom_grad_pi_MP`, ms, ns, piX, thetaX, NecPres)
 }
 
 #' Exact gradient of the beta-binomial log-likelihood function for theta using a multiprecision library.
@@ -53,7 +53,7 @@ grad_pi_MP <- function(ms, ns, piX, thetaX, NecPres) {
 #' @return A numeric vector of the same length as ms and ns, containing the gradient to theta in the give data points
 #' @export
 grad_theta_MP <- function(ms, ns, piX, thetaX, NecPres) {
-    .Call(`_MAGE_grad_theta_MP`, ms, ns, piX, thetaX, NecPres)
+    .Call(`_maelstRom_grad_theta_MP`, ms, ns, piX, thetaX, NecPres)
 }
 
 #' Exact beta-binomial density using sums.
@@ -72,7 +72,7 @@ grad_theta_MP <- function(ms, ns, piX, thetaX, NecPres) {
 #' @return A numeric vector of the same length as ms and ns, containing (log-)beta-binomial densities
 #' @export
 dBetaBinom_cpp_old <- function(ms, ns, pi, theta, LOG) {
-    .Call(`_MAGE_dBetaBinom_cpp_old`, ms, ns, pi, theta, LOG)
+    .Call(`_maelstRom_dBetaBinom_cpp_old`, ms, ns, pi, theta, LOG)
 }
 
 #' Exact gradient of the beta-binomial log-likelihood function for pi using sums.
@@ -89,7 +89,7 @@ dBetaBinom_cpp_old <- function(ms, ns, pi, theta, LOG) {
 #' @return A numeric vector of the same length as ms and ns, containing the gradient to pi in the give data points
 #' @export
 grad_pi_old <- function(ms, ns, pi, theta) {
-    .Call(`_MAGE_grad_pi_old`, ms, ns, pi, theta)
+    .Call(`_maelstRom_grad_pi_old`, ms, ns, pi, theta)
 }
 
 #' Exact gradient of the beta-binomial log-likelihood function for theta using sums.
@@ -107,6 +107,300 @@ grad_pi_old <- function(ms, ns, pi, theta) {
 #' @return A numeric vector of the same length as ms and ns, containing the gradient to theta in the give data points
 #' @export
 grad_theta_old <- function(ms, ns, pi, theta) {
-    .Call(`_MAGE_grad_theta_old`, ms, ns, pi, theta)
+    .Call(`_maelstRom_grad_theta_old`, ms, ns, pi, theta)
+}
+
+#' DO SOMETHING
+#' @export
+MyOptTest <- function(parX) {
+    .Call(`_maelstRom_MyOptTest`, parX)
+}
+
+#' DO SOMETHING
+#' @export
+dBetaBin_cppi_MP <- function(M, N, PI, THETA, NecPres) {
+    .Call(`_maelstRom_dBetaBin_cppi_MP`, M, N, PI, THETA, NecPres)
+}
+
+#' DO SOMETHING
+#' @export
+dBetaBin_cppi <- function(M, N, PI, THETA, LOG, MemLim, Xtra) {
+    .Call(`_maelstRom_dBetaBin_cppi`, M, N, PI, THETA, LOG, MemLim, Xtra)
+}
+
+#' @rdname dpqrBetaBinom
+#' @export
+dBetaBinom <- function(ms, ns, pi, theta, LOG = FALSE, MemLim = 2048L, Xtra = 7L) {
+    .Call(`_maelstRom_dBetaBinom`, ms, ns, pi, theta, LOG, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+GradPi_cppi_MP <- function(M, N, PI, THETA, NecPres) {
+    .Call(`_maelstRom_GradPi_cppi_MP`, M, N, PI, THETA, NecPres)
+}
+
+#' DO SOMETHING
+#' @export
+GradPi_cppi <- function(M, N, PI, THETA, MemLim, Xtra) {
+    .Call(`_maelstRom_GradPi_cppi`, M, N, PI, THETA, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+grad_pi <- function(ms, ns, pi, theta, MemLim = 2048L, Xtra = 7L) {
+    .Call(`_maelstRom_grad_pi`, ms, ns, pi, theta, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+GradTheta_cppi_MP <- function(M, N, PI, THETA, NecPres) {
+    .Call(`_maelstRom_GradTheta_cppi_MP`, M, N, PI, THETA, NecPres)
+}
+
+#' DO SOMETHING
+#' @export
+GradTheta_cppi <- function(M, N, PI, THETA, MemLim, Xtra) {
+    .Call(`_maelstRom_GradTheta_cppi`, M, N, PI, THETA, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+grad_theta <- function(ms, ns, pi, theta, MemLim = 2048L, Xtra = 7L) {
+    .Call(`_maelstRom_grad_theta`, ms, ns, pi, theta, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+CppCnT_Optim <- function(StartVals, ref_counts, var_counts, isCase, sprv, MemLim = 2048L, Xtra = 7L, step_size = 0.01, tol = 0.1, epsabs = 1e-3) {
+    .Call(`_maelstRom_CppCnT_Optim`, StartVals, ref_counts, var_counts, isCase, sprv, MemLim, Xtra, step_size, tol, epsabs)
+}
+
+#' DO SOMETHING
+#' @export
+CppHom_Optim <- function(ThetaHomStart, SE, ref_counts, var_counts, spr, spv, MemLim = 2048L, Xtra = 7L, step_size = 0.01, tol = 0.1, epsabs = 1e-3) {
+    .Call(`_maelstRom_CppHom_Optim`, ThetaHomStart, SE, ref_counts, var_counts, spr, spv, MemLim, Xtra, step_size, tol, epsabs)
+}
+
+#' DO SOMETHING
+#' @export
+CppHet_Optim <- function(StartVals, ref_counts, var_counts, sprv, MemLim = 2048L, Xtra = 7L, step_size = 0.01, tol = 0.1, epsabs = 1e-3) {
+    .Call(`_maelstRom_CppHet_Optim`, StartVals, ref_counts, var_counts, sprv, MemLim, Xtra, step_size, tol, epsabs)
+}
+
+#' DO SOMETHING
+#' @export
+CppHetH0_Optim <- function(ThetaHetStart, probshift, ref_counts, var_counts, sprv, MemLim = 2048L, Xtra = 7L, step_size = 0.01, tol = 0.1, epsabs = 1e-3) {
+    .Call(`_maelstRom_CppHetH0_Optim`, ThetaHetStart, probshift, ref_counts, var_counts, sprv, MemLim, Xtra, step_size, tol, epsabs)
+}
+
+#' DO SOMETHING
+#' @export
+GradPiPi_cppi_MP <- function(M, N, PI, THETA, NecPres) {
+    .Call(`_maelstRom_GradPiPi_cppi_MP`, M, N, PI, THETA, NecPres)
+}
+
+#' DO SOMETHING
+#' @export
+GradPiPi_cppi <- function(M, N, PI, THETA, MemLim, Xtra) {
+    .Call(`_maelstRom_GradPiPi_cppi`, M, N, PI, THETA, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+grad_pi_pi <- function(ms, ns, pi, theta, MemLim = 2048L, Xtra = 7L) {
+    .Call(`_maelstRom_grad_pi_pi`, ms, ns, pi, theta, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+GradPiTheta_cppi_MP <- function(M, N, PI, THETA, NecPres) {
+    .Call(`_maelstRom_GradPiTheta_cppi_MP`, M, N, PI, THETA, NecPres)
+}
+
+#' DO SOMETHING
+#' @export
+GradPiTheta_cppi <- function(M, N, PI, THETA, MemLim, Xtra) {
+    .Call(`_maelstRom_GradPiTheta_cppi`, M, N, PI, THETA, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+grad_pi_theta <- function(ms, ns, pi, theta, MemLim = 2048L, Xtra = 7L) {
+    .Call(`_maelstRom_grad_pi_theta`, ms, ns, pi, theta, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+MPhelper_GradThetaTheta <- function(M, N, PI, NecPres) {
+    .Call(`_maelstRom_MPhelper_GradThetaTheta`, M, N, PI, NecPres)
+}
+
+#' DO SOMETHING
+#' @export
+GradThetaTheta_cppi_MP <- function(M, N, PI, THETA, NecPres) {
+    .Call(`_maelstRom_GradThetaTheta_cppi_MP`, M, N, PI, THETA, NecPres)
+}
+
+#' DO SOMETHING
+#' @export
+GradThetaTheta_cppi <- function(M, N, PI, THETA, MemLim, Xtra) {
+    .Call(`_maelstRom_GradThetaTheta_cppi`, M, N, PI, THETA, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+grad_theta_theta <- function(ms, ns, pi, theta, MemLim = 2048L, Xtra = 7L) {
+    .Call(`_maelstRom_grad_theta_theta`, ms, ns, pi, theta, MemLim, Xtra)
+}
+
+#' DO SOMETHING
+#' @export
+logSums_MaxMethod_CPP <- function(logvec) {
+    .Call(`_maelstRom_logSums_MaxMethod_CPP`, logvec)
+}
+
+#' DO SOMETHING
+#' @export
+logSums_MaxMethod_CPP_R <- function(logvec) {
+    .Call(`_maelstRom_logSums_MaxMethod_CPP_R`, logvec)
+}
+
+#' DO SOMETHING
+#' @export
+logSums_MaxMethodSigned_CPP <- function(logvec, signvec) {
+    .Call(`_maelstRom_logSums_MaxMethodSigned_CPP`, logvec, signvec)
+}
+
+#' DO SOMETHING
+#' @export
+LogTrapezoidalInt_CPP <- function(lower, upper, n, a, b, q, TC, RC, curTR, curRC) {
+    .Call(`_maelstRom_LogTrapezoidalInt_CPP`, lower, upper, n, a, b, q, TC, RC, curTR, curRC)
+}
+
+#' DO SOMETHING
+#' @export
+LogNewtonCotes_CPP <- function(lower, upper, a, b, q, TC, RC, curTR, curRC, Wvec) {
+    .Call(`_maelstRom_LogNewtonCotes_CPP`, lower, upper, a, b, q, TC, RC, curTR, curRC, Wvec)
+}
+
+#' DO SOMETHING
+#' @export
+LogGaussianQuad_CPP <- function(lower, upper, a, b, q, TC, RC, curTR, curRC, Wvec, Nvec) {
+    .Call(`_maelstRom_LogGaussianQuad_CPP`, lower, upper, a, b, q, TC, RC, curTR, curRC, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+LogTanhSinhQuad_CPP <- function(lower, upper, n, a, b, q, TC, RC, curTR, curRC, prec) {
+    .Call(`_maelstRom_LogTanhSinhQuad_CPP`, lower, upper, n, a, b, q, TC, RC, curTR, curRC, prec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPurHelpFun_CPP <- function(RCcol, TC, TumReads_oi, a, b, q, SCP_oi, n, NumIntMethod, prec, Wvec, Nvec) {
+    .Call(`_maelstRom_TumPurHelpFun_CPP`, RCcol, TC, TumReads_oi, a, b, q, SCP_oi, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPurHelpFun_CPP_R <- function(RCcol, TC, TumReads_oi, a, b, q, SCP_oi, n, NumIntMethod, prec, Wvec, Nvec) {
+    .Call(`_maelstRom_TumPurHelpFun_CPP_R`, RCcol, TC, TumReads_oi, a, b, q, SCP_oi, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+qbeta_C <- function(qs, a, b) {
+    .Call(`_maelstRom_qbeta_C`, qs, a, b)
+}
+
+#' DO SOMETHING
+#' @export
+qbeta_C3 <- function(qs, a, b) {
+    .Call(`_maelstRom_qbeta_C3`, qs, a, b)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP2 <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP2`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP2X <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP2X`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP3 <- function(q, a, b, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP3`, q, a, b, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP3X <- function(q, a, b, qlim, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP3X`, q, a, b, qlim, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP4 <- function(q, a, b, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP4`, q, a, b, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP_DB1 <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP_DB1`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP_DB2 <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP_DB2`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP_DB3 <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP_DB3`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+BrolDB <- function(TC, TP) {
+    .Call(`_maelstRom_BrolDB`, TC, TP)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP2_10 <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP2_10`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP2_100 <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP2_100`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP2_1000 <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP2_1000`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
+}
+
+#' DO SOMETHING
+#' @export
+TumPur_LogLik_CPP2Y <- function(optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n = 0L, NumIntMethod = "Gregory", prec = 0.0001, Wvec = 0L, Nvec = 0L) {
+    .Call(`_maelstRom_TumPur_LogLik_CPP2Y`, optpars, ref_counts, var_counts, tumpur, weights, SCPthreshold, n, NumIntMethod, prec, Wvec, Nvec)
 }
 

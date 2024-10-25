@@ -1,4 +1,4 @@
-#' Final filtering of MAGE analysis results and writing to output files
+#' Final filtering of maelstRom analysis results and writing to output files
 #'
 #' \code{final_filter} only retains significantly imprinted SNPs (after adjusting for multiple testing) and
 #' SNPs of interest (with suitable GOF and degree of (median) imprinting) over all chromosomes. Results and

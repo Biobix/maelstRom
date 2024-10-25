@@ -61,7 +61,8 @@
 EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 10^-6, HWE = FALSE, p_InitEst = FALSE, 
                                ThetaInits = "moment", ReEstThetas = "moment", NoSplitHom = TRUE, NoSplitHet = TRUE,
                                ResetThetaMin = 10^-10, ResetThetaMax = 10^-1, DistRob = "Cook", CookMargin = 5, LikEmpNum = 1000, LikMargin = 0,
-                               NumHetMin = 5, MaxOutFrac = 0.5, thetaTRY = c(10^-1, 10^-3, 10^-7), fitH0 = TRUE) {
+                               NumHetMin = 5, MaxOutFrac = 0.5, thetaTRY = c(10^-1, 10^-3, 10^-7), fitH0 = TRUE, FirstFewFixed = NULL,
+                               epsabs = 0.001) {
   
   LogLikComp_hom <- function(theta, SE, ref_counts, var_counts, spr, spv){
     return(-sum(spr*(dBetaBinom(ref_counts, ref_counts+var_counts, pi=1-SE, theta=exp(theta), LOG = TRUE)) +
@@ -225,14 +226,16 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
     
     allelefreq <- mean(spr) + mean(sprv)/2 
     
-    if (HWE) {
-      prv <- 2 * allelefreq * (1 - allelefreq) * (1 - inbr)
-      pr <- allelefreq^2 + inbr * allelefreq * (1 - allelefreq)
-      pv <- (1 - allelefreq)^2 + inbr * allelefreq * (1 - allelefreq)
-    }else {
-      pv <- mean(spv) 
-      prv <- mean(sprv)
-      pr <- mean(spr)
+    if(is.null(FirstFewFixed) || nrep > FirstFewFixed){
+      if (HWE) {
+        prv <- 2 * allelefreq * (1 - allelefreq) * (1 - inbr)
+        pr <- allelefreq^2 + inbr * allelefreq * (1 - allelefreq)
+        pv <- (1 - allelefreq)^2 + inbr * allelefreq * (1 - allelefreq)
+      }else {
+        pv <- mean(spv) 
+        prv <- mean(sprv)
+        pr <- mean(spr)
+      }
     }
     
     if(ReEstThetas == "moment"){
@@ -274,9 +277,15 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
       if(sum(spr+spv)!=0){
         if(NoSplitHom){
           theta_hom_clone <- theta_hom
-          OptObj <- optim(par = log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-          theta_hom <- exp(OptObj$par)
+          
+          #OptObj <- optim(par = log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
+          #                ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
+          #theta_hom <- exp(OptObj$par)
+          
+          OptObj <- CppHom_Optim(log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                 spv, epsabs = epsabs)
+          
+          theta_hom <- exp(OptObj[2])
           
           if(theta_hom > max(SE, 1-SE)){
             
@@ -291,9 +300,10 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           
           
         } else{
-          OptObj <- optim(par = log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-          theta_hom <- exp(OptObj$par)
+          OptObj <- CppHom_Optim(log(min(max(theta_hom, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                 spv, epsabs = epsabs)
+          
+          theta_hom <- exp(OptObj[2])
         }
       }
       
@@ -301,19 +311,23 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
       #compareDerivatives(LogLikComp_het, GradComp_het, t0 = c(gtools::logit(1-0.002), log(0.5)), ref_counts=ref_counts, var_counts=var_counts, sprv = sprv)
       
       if(NoSplitHet){
+        
+        #theta_het_clone <- theta_het
+        #OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
+        #                           ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)},
+        #                    error = function(e) NULL)
+        
         theta_het_clone <- theta_het
-        OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                   ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)},
+        OptObj <- tryCatch( {maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), 
+                                                ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, epsabs = epsabs)},
                             error = function(e) NULL)
-        if(is.null(OptObj)){
-          OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, method = "BFGS",
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)
+        
+        if(!is.null(OptObj)){
+          probshift <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+          theta_het <- exp(OptObj[3])
         }
         
-        probshift <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-        theta_het <- exp(OptObj$par[2])
-        
-        if(theta_het  > max(probshift, 1-probshift)){
+        if((is.null(OptObj)) || (theta_het  > max(probshift, 1-probshift)) ){
           
           theta_het <- min(c(theta_het_clone, max((1-probshift)/10, probshift/10)) ) # Take some distance from the boundary at which bimodality occurs
           
@@ -330,16 +344,11 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           
         }
       } else{
-        OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                   ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)},
-                            error = function(e) NULL)
-        if(is.null(OptObj)){
-          OptObj <- optim(par = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), fn = LogLikComp_het, method = "BFGS",
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)
-        }
+        OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(min(max(theta_het, ResetThetaMin), ResetThetaMax))), 
+                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, epsabs = epsabs)
         
-        probshift <- gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16)
-        theta_het <- exp(OptObj$par[2])
+        probshift <- gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16)
+        theta_het <- exp(OptObj[3])
       }
       
     } else{
@@ -350,10 +359,10 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
+            OptObj <- CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                   spv, epsabs = epsabs)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, LogLikComp_hom(OptObj[2], SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom <- thetavec[theta_hom_loc]
@@ -377,10 +386,10 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr, spv = spv)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
+            OptObj <- CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr, 
+                                   spv, epsabs = epsabs)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, LogLikComp_hom(OptObj[2], SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr, spv=spv))
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom <- thetavec[theta_hom_loc]
@@ -396,17 +405,12 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
         pivec <- c()
         likvec <- c()
         for(TH in thetaTRY){
+          OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(TH)), 
+                                       ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, epsabs = epsabs)
           
-          OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(TH)), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)},
-                              error = function(e) NULL)
-          if(is.null(OptObj)){
-            OptObj <- optim(par = c(gtools::logit(probshift), log(TH)), fn = LogLikComp_het, method = "BFGS",
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)
-          }
-          thetavec <- c(thetavec, exp(OptObj$par[2]))
-          pivec <- c(pivec, gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16))
-          likvec <- c(likvec, LogLikComp_het(c(OptObj$par[1], OptObj$par[2]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv))
+          thetavec <- c(thetavec, exp(OptObj[3]))
+          pivec <- c(pivec, gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16))
+          likvec <- c(likvec, LogLikComp_het(c(OptObj[2], OptObj[3]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv))
         }
         theta_het_loc <- which(likvec == min(likvec))[1]
         theta_het <- thetavec[theta_het_loc]
@@ -442,18 +446,14 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
         pivec <- c()
         likvec <- c()
         for(TH in thetaTRY){
-          OptObj <- tryCatch( {optim(par = c(gtools::logit(probshift), log(TH)), fn = LogLikComp_het, gr = GradComp_het, method = "BFGS",
-                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)},
-                              error = function(e) NULL)
-          if(is.null(OptObj)){
-            OptObj <- optim(par = c(gtools::logit(probshift), log(TH)), fn = LogLikComp_het, method = "BFGS",
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv)
-          }
-          thetavec <- c(thetavec, exp(OptObj$par[2]))
-          pivec <- c(pivec, gtools::inv.logit(OptObj$par[1], max = 1-10^-16, min = 10^-16))
-          likvec <- c(likvec, LogLikComp_het(c(OptObj$par[1], OptObj$par[2]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv))
+          
+          OptObj <- maelstRom::CppHet_Optim(StartVals = c(gtools::logit(probshift), log(TH)), 
+                                       ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv, epsabs = epsabs)
+          
+          thetavec <- c(thetavec, exp(OptObj[3]))
+          pivec <- c(pivec, gtools::inv.logit(OptObj[2], max = 1-10^-16, min = 10^-16))
+          likvec <- c(likvec, LogLikComp_het(c(OptObj[2], OptObj[3]), ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv))
         }
-        
         theta_het_loc <- which(likvec == min(likvec))[1]
         theta_het <- thetavec[theta_het_loc]
         probshift <- pivec[theta_het_loc]
@@ -473,7 +473,9 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
                ifelse(prv>0, sprv*log(prv), 0) + sprv*dBetaBinom(data_counts$ref_count, data_counts$ref_count+data_counts$var_count, pi = probshift, theta = theta_het, LOG = TRUE) +
                ifelse(pv>0, spv*log(pv), 0) + spv*dBetaBinom(data_counts$var_count, data_counts$ref_count+data_counts$var_count, pi = 1-SE, theta = theta_hom, LOG = TRUE))
     
-    dlta <- abs(Qold-Q)
+    if(is.null(FirstFewFixed) || nrep > FirstFewFixed){
+      dlta <- abs(Qold-Q)
+    }
     
     allelefreq <- mean(spr) + mean(sprv)/2
     data_counts$allelefreq <- allelefreq
@@ -564,7 +566,7 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           
           NewRes <- EMfit_betabinom(data_counts[-Outliers,], allelefreq=allelefreq, SE=SE, inbr=inbr, dltaco=dltaco, HWE=HWE, p_InitEst=p_InitEst,
                                        ThetaInits=ThetaInits, ReEstThetas=ReEstThetas, NoSplitHom=NoSplitHom, NoSplitHet=NoSplitHet,
-                                       ResetThetaMin=ResetThetaMin, ResetThetaMax=ResetThetaMax)
+                                       ResetThetaMin=ResetThetaMin, ResetThetaMax=ResetThetaMax, FirstFewFixed = FirstFewFixed)
           probshift <- NewRes$AB
           theta_het <- NewRes$theta_het
           theta_hom <- NewRes$theta_hom
@@ -609,7 +611,7 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           spr <- spr/pdata
           if (sum(sprv)==0) {
             quality <- "!"
-            break
+          #  break
           } 
           allelefreq <- mean(spr) + mean(sprv)/2 
           if (HWE) {
@@ -668,7 +670,7 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           spr <- spr/pdata
           if (sum(sprv)==0) {
             quality <- "!"
-            break
+          #  break
           } 
           allelefreq <- mean(spr) + mean(sprv)/2 
           if (HWE) {
@@ -840,10 +842,11 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
     if(ReEstThetas != "TryThree"){
       if(sum(spr_H0+spv_H0)!=0){
         if(NoSplitHom){
+          
           theta_hom_H0_clone <- theta_hom_H0
-          OptObj <- optim(par = log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0)
-          theta_hom_H0 <- exp(OptObj$par)
+          OptObj <- CppHom_Optim(log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr_H0, 
+                                 spv_H0, epsabs = epsabs)
+          theta_hom_H0 <- exp(OptObj[2])
           
           if(theta_hom_H0 > max(SE, 1-SE)){
             theta_hom_H0 <- min(c(theta_hom_H0_clone, max((1-SE)/10, SE/10)) ) # Take some distance from the boundary at which bimodality occurs
@@ -855,24 +858,19 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           }
           
         } else{
-          OptObj <- optim(par = log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0)
-          theta_hom_H0 <- exp(OptObj$par)
+          OptObj <- CppHom_Optim(log(min(max(theta_hom_H0, ResetThetaMin), ResetThetaMax)), SE, data_counts$ref_count, data_counts$var_count, spr_H0, 
+                                 spv_H0, epsabs = epsabs)
+          theta_hom_H0 <- exp(OptObj[2])
         }
       }
       
       
       if(NoSplitHet){
-        theta_het_H0_clone <- theta_het_H0
-        OptObj <- tryCatch( {optim(par = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, method = "BFGS",
-                                   ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)},
-                            error = function(e) NULL)
-        if(is.null(OptObj)){
-          OptObj <- optim(par = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, method = "BFGS",
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)
-        }
         
-        theta_het_H0 <- exp(OptObj$par[1])
+        theta_het_H0_clone <- theta_het_H0
+        OptObj <- maelstRom::CppHetH0_Optim(ThetaHetStart = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5,
+                                       ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, epsabs = epsabs)
+        theta_het_H0 <- exp(OptObj[2])
         
         if(theta_het_H0  > 0.5){
           
@@ -890,15 +888,9 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           
         }
       } else{
-        OptObj <- tryCatch( {optim(par = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, method = "BFGS",
-                                   ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)},
-                            error = function(e) NULL)
-        if(is.null(OptObj)){
-          OptObj <- optim(par = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5, fn = LogLikComp_het_H0, method = "BFGS",
-                          ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)
-        }
-        
-        theta_het_H0 <- exp(OptObj$par[1])
+        OptObj <- maelstRom::CppHetH0_Optim(ThetaHetStart = log(min(max(theta_het_H0, ResetThetaMin), ResetThetaMax)), probshift = 0.5,
+                                       ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, epsabs = epsabs)
+        theta_het_H0 <- exp(OptObj[2])
       }
     } else{
       
@@ -907,10 +899,10 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr_H0, spv=spv_H0))
+            OptObj <- CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr_H0, 
+                                   spv_H0, epsabs = epsabs)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, LogLikComp_hom(OptObj[2], SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr_H0, spv=spv_H0))
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom_H0 <- thetavec[theta_hom_loc]
@@ -933,10 +925,10 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
           thetavec <- c()
           likvec <- c()
           for(TH in thetaTRY){
-            OptObj <- optim(par = log(TH), fn = LogLikComp_hom, gr = GradComp_hom, method = "BFGS", SE = SE, 
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, spr = spr_H0, spv = spv_H0)
-            thetavec <- c(thetavec, exp(OptObj$par))
-            likvec <- c(likvec, LogLikComp_hom(OptObj$par, SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr_H0, spv=spv_H0))
+            OptObj <- CppHom_Optim(log(TH), SE, data_counts$ref_count, data_counts$var_count, spr_H0, 
+                                   spv_H0, epsabs = epsabs)
+            thetavec <- c(thetavec, exp(OptObj[2]))
+            likvec <- c(likvec, LogLikComp_hom(OptObj[2], SE=SE, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, spr=spr_H0, spv=spv_H0))
           }
           theta_hom_loc <- which(likvec == min(likvec))[1]
           theta_hom_H0 <- thetavec[theta_hom_loc]
@@ -948,15 +940,10 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
         thetavec <- c()
         likvec <- c()
         for(TH in thetaTRY){
-          OptObj <- tryCatch( {optim(par = log(TH), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, method = "BFGS",
-                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)},
-                              error = function(e) NULL)
-          if(is.null(OptObj)){
-            OptObj <- optim(par = log(TH), probshift = 0.5, fn = LogLikComp_het_H0, method = "BFGS",
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)
-          }
-          thetavec <- c(thetavec, exp(OptObj$par[1]))
-          likvec <- c(likvec, LogLikComp_het_H0(OptObj$par[1], probshift=0.5, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv_H0))
+          OptObj <- maelstRom::CppHetH0_Optim(ThetaHetStart = log(TH), probshift = 0.5,
+                                         ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, epsabs = epsabs)
+          thetavec <- c(thetavec, exp(OptObj[2]))
+          likvec <- c(likvec, LogLikComp_het_H0(OptObj[2], probshift=0.5, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv_H0))
         }
         theta_het_loc <- which(likvec == min(likvec))[1]
         theta_het_H0 <- thetavec[theta_het_loc]
@@ -983,15 +970,10 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
         thetavec <- c()
         likvec <- c()
         for(TH in thetaTRY){
-          OptObj <- tryCatch( {optim(par = log(TH), probshift = 0.5, fn = LogLikComp_het_H0, gr = GradComp_het_H0, method = "BFGS",
-                                     ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)},
-                              error = function(e) NULL)
-          if(is.null(OptObj)){
-            OptObj <- optim(par = log(TH), probshift = 0.5, fn = LogLikComp_het_H0, method = "BFGS",
-                            ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0)
-          }
-          thetavec <- c(thetavec, exp(OptObj$par[1]))
-          likvec <- c(likvec, LogLikComp_het_H0(OptObj$par[1], probshift=0.5, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv_H0))
+          OptObj <- maelstRom::CppHetH0_Optim(ThetaHetStart = log(TH), probshift = 0.5,
+                                         ref_counts = data_counts$ref_count, var_counts=data_counts$var_count, sprv = sprv_H0, epsabs = epsabs)
+          thetavec <- c(thetavec, exp(OptObj[2]))
+          likvec <- c(likvec, LogLikComp_het_H0(OptObj[2], probshift=0.5, ref_counts=data_counts$ref_count, var_counts=data_counts$var_count, sprv=sprv_H0))
         }
         
         theta_het_loc <- which(likvec == min(likvec))[1]
@@ -1019,8 +1001,6 @@ EMfit_betabinom_robust <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dl
     lrtstat <- -2 * (sum(log(dmixh0)) - sum(log(dmixase)))
     pval <- pchisq(lrtstat, df = 1, lower.tail = F)
   }
-  
-  
   
   data_counts$prr_H0 <- spr_H0
   data_counts$pvv_H0 <- spv_H0

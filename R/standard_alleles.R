@@ -14,6 +14,11 @@
 #'     as well as their respective counts ("ref_count" and "var_count").
 
 standard_alleles <- function(data_pos) {
+  
+  if(is.null(data_pos$ref_alleles[1])){
+    data_pos$ref_alleles <- "A/T/C/G"
+  }
+  
   ref_alleles <- unlist(strsplit(data_pos$ref_alleles[1], "/"))
 
   allelecount_samples <- lapply(1:nrow(data_pos), function(y) c(data_pos$A[y], data_pos$T[y], data_pos$C[y], data_pos$G[y]))

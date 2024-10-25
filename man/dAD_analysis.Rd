@@ -5,13 +5,14 @@
 \title{Performs a differential Allelic Divergence analysis on a control- and case-dataset}
 \usage{
 dAD_analysis(
-  DataList,
+  datas,
   SE,
-  inbr = 0,
+  inbr,
   allelefreq = 0.5,
   dltaco = 10^-6,
   HWE = FALSE,
   p_InitEst = FALSE,
+  p_inits = c(1/3, 1/3, 1/3),
   ThetaInits = "moment",
   ReEstThetas = "moment",
   NoSplitHom = TRUE,
@@ -24,7 +25,13 @@ dAD_analysis(
   LikMargin = 0,
   NumHetMin = 5,
   MaxOutFrac = 0.5,
-  thetaTRY = c(10^-1, 10^-3, 10^-7)
+  thetaTRY = c(10^-1, 10^-3, 10^-7),
+  probshift_init = 0.5,
+  FirstFewFixed = NULL,
+  MemLim = 2048,
+  Xtra = 5,
+  epsabs = 0.001,
+  MaxIt = 100
 )
 }
 \arguments{
