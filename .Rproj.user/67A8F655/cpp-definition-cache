@@ -1,10 +1,10 @@
 [
     {
         "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/BetaBinomFuns.cpp",
-        "file_last_write": 1688652042.0,
+        "file_last_write": 1730103500.0,
         "definitions": [
             {
-                "usr": "c:@F@dBetaBinom_MP#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#b#d#",
+                "usr": "c:@F@dBetaBinom_MP#I#I#d#d#b#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "dBetaBinom_MP(Rcpp::NumericVector, Rcpp::NumericVector, double, double, bool, double)",
@@ -14,7 +14,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@grad_pi_MP#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#d#",
+                "usr": "c:@F@grad_pi_MP#I#I#d#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_pi_MP(Rcpp::NumericVector, Rcpp::NumericVector, double, double, double)",
@@ -24,7 +24,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@grad_theta_MP#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#d#",
+                "usr": "c:@F@grad_theta_MP#I#I#d#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_theta_MP(Rcpp::NumericVector, Rcpp::NumericVector, double, double, double)",
@@ -34,7 +34,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@dBetaBinom_cpp_old#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#b#",
+                "usr": "c:@F@dBetaBinom_cpp_old#I#I#d#d#b#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "dBetaBinom_cpp_old(Rcpp::NumericVector, Rcpp::NumericVector, double, double, bool)",
@@ -44,7 +44,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@grad_pi_old#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#",
+                "usr": "c:@F@grad_pi_old#I#I#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_pi_old(Rcpp::NumericVector, Rcpp::NumericVector, double, double)",
@@ -54,7 +54,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@grad_theta_old#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#",
+                "usr": "c:@F@grad_theta_old#I#I#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_theta_old(Rcpp::NumericVector, Rcpp::NumericVector, double, double)",
@@ -68,7 +68,7 @@
     },
     {
         "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTest.cpp",
-        "file_last_write": 1688652042.0,
+        "file_last_write": 1730103500.0,
         "definitions": [
             {
                 "usr": "c:@F@my_f#*1$@SA@gsl_vector#*v#",
@@ -101,7 +101,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@MyOptTest#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#",
+                "usr": "c:@F@MyOptTest#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "MyOptTest(Rcpp::NumericVector)",
@@ -115,7 +115,7 @@
     },
     {
         "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
-        "file_last_write": 1688652042.0,
+        "file_last_write": 1730103500.0,
         "definitions": [
             {
                 "usr": "c:@S@myCnT_P",
@@ -178,7 +178,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@dBetaBinom#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#b#I#I#",
+                "usr": "c:@F@dBetaBinom#I#I#d#d#b#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "dBetaBinom(Rcpp::NumericVector, Rcpp::NumericVector, double, double, bool, int, int)",
@@ -218,7 +218,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@grad_pi#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "usr": "c:@F@grad_pi#I#I#d#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_pi(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
@@ -248,7 +248,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@grad_theta#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "usr": "c:@F@grad_theta#I#I#d#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_theta(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
@@ -278,7 +278,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@CppCnT_Optim#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#I#I#d#d#d#",
+                "usr": "c:@F@CppCnT_Optim#I#I#I#I#I#I#I#d#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "CppCnT_Optim(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, int, int, double, double, double)",
@@ -318,7 +318,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@CppHom_Optim#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#I#I#d#d#d#",
+                "usr": "c:@F@CppHom_Optim#d#d#I#I#I#I#I#I#d#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "CppHom_Optim(double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, int, int, double, double, double)",
@@ -358,7 +358,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@CppHet_Optim#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#I#I#d#d#d#",
+                "usr": "c:@F@CppHet_Optim#I#I#I#I#I#I#d#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "CppHet_Optim(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, int, int, double, double, double)",
@@ -398,7 +398,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@CppHetH0_Optim#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#I#I#d#d#d#",
+                "usr": "c:@F@CppHetH0_Optim#d#d#I#I#I#I#I#d#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "CppHetH0_Optim(double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, int, int, double, double, double)",
@@ -428,7 +428,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@grad_pi_pi#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "usr": "c:@F@grad_pi_pi#I#I#d#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_pi_pi(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
@@ -458,7 +458,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@grad_pi_theta#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "usr": "c:@F@grad_pi_theta#I#I#d#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_pi_theta(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
@@ -498,7 +498,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@grad_theta_theta#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#d#d#I#I#",
+                "usr": "c:@F@grad_theta_theta#I#I#d#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "grad_theta_theta(Rcpp::NumericVector, Rcpp::NumericVector, double, double, int, int)",
@@ -512,7 +512,7 @@
     },
     {
         "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-        "file_last_write": 1725884040.0,
+        "file_last_write": 1730103500.0,
         "definitions": [
             {
                 "usr": "c:@F@logSums_MaxMethod_CPP#I#",
@@ -525,7 +525,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@logSums_MaxMethod_CPP_R#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#",
+                "usr": "c:@F@logSums_MaxMethod_CPP_R#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "logSums_MaxMethod_CPP_R(Rcpp::NumericVector)",
@@ -555,7 +555,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@LogNewtonCotes_CPP#d#d#d#d#d#I#I#I#I#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#",
+                "usr": "c:@F@LogNewtonCotes_CPP#d#d#d#d#d#I#I#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "LogNewtonCotes_CPP(double, double, double, double, double, int, int, int, int, Rcpp::NumericVector)",
@@ -565,7 +565,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@LogGaussianQuad_CPP#d#d#d#d#d#I#I#I#I#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#",
+                "usr": "c:@F@LogGaussianQuad_CPP#d#d#d#d#d#I#I#I#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "LogGaussianQuad_CPP(double, double, double, double, double, int, int, int, int, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -585,7 +585,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPurHelpFun_CPP#I#I#I#d#d#d#I#I#I#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#",
+                "usr": "c:@F@TumPurHelpFun_CPP#I#I#I#d#d#d#I#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPurHelpFun_CPP(int, int, int, double, double, double, int, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -595,7 +595,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPurHelpFun_CPP_R#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#S0_#d#d#d#S0_#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPurHelpFun_CPP_R#I#I#I#d#d#d#I#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPurHelpFun_CPP_R(Rcpp::NumericVector, int, Rcpp::NumericVector, double, double, double, Rcpp::NumericVector, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -605,7 +605,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -615,7 +615,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@qbeta_C#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#d#d#",
+                "usr": "c:@F@qbeta_C#I#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "qbeta_C(Rcpp::NumericVector, double, double)",
@@ -625,7 +625,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@qbeta_C3#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#d#d#",
+                "usr": "c:@F@qbeta_C3#I#d#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "qbeta_C3(Rcpp::NumericVector, double, double)",
@@ -635,7 +635,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP2#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP2#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -645,7 +645,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP2X#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP2X#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2X(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -655,7 +655,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP3#d#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP3#d#d#d#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP3(double, double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -665,7 +665,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP3X#d#d#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP3X#d#d#d#d#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP3X(double, double, double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -675,7 +675,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP4#d#d#d#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP4#d#d#d#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP4(double, double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -685,7 +685,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP_DB1#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP_DB1#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP_DB1(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -695,7 +695,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP_DB2#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP_DB2#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP_DB2(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -705,7 +705,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP_DB3#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP_DB3#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP_DB3(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -725,7 +725,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP2_10#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP2_10#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2_10(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -735,7 +735,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP2_100#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP2_100#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2_100(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -745,7 +745,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP2_1000#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP2_1000#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2_1000(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
@@ -755,7 +755,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@TumPur_LogLik_CPP2Y#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S0_#S0_#S0_#S0_#d#I#I#d#S0_#S0_#",
+                "usr": "c:@F@TumPur_LogLik_CPP2Y#I#I#I#I#I#d#I#I#d#I#I#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2Y(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",

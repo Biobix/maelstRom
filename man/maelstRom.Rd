@@ -8,3 +8,10 @@
 \description{
 Detection of imprinting, loss of imprinting, cis-eQTLS and differential allelic imbalance.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://biobix.github.io/maelstRom/}
+}
+
+}
