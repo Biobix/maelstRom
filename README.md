@@ -8,6 +8,28 @@
 
 Welcome to maelstRom’s readme!
 
+```
+                                                                                                ,,ggAAggg,
+                                                                                              gAACAAAAAAGAA
+                                                                                            /U¨       `*GUCU
+                                   _         _      _____                          ,gAUG¨               ¨
+                                  | ||      | ||   | ___ \\                       AGUG'   ,gggGGGGGgg
+          _ __ ___    __ _   ___  | || ___  | ||_  | |_/ //  ___   _ __ ___      ]GAC   gAAACAAAAUCCCAA
+         | '_ ` _ \\ / _` ||/ _ \\| ||/ __||| ___|||  _ <<  / _ \\| '_ ` _ \\     C'  gAAAAU¨'      ¨]C[
+         | ||| ||| || ((| || ___//| ||\__ \\| ||_  | | \ \\| (() || ||| ||| ||       CCAGG            *
+         |_|||_|||_||\__,_||\___|||_|||___//\____|||_|  \_\\\___//|_|||_|||_||       UCAC    ,aggg,
+                                                                                      ]AC   AAAACCAAa
+                                                                                            *'-¨*ACAA        
+                                                                                                 ]CAC
+          G C C                           U G G                           G C A                  CAA
+      A U | | | U U       | | |       C C | | | U A       | | |       A G | | | A A            _]U`
+| | C | | | | | | | A | | | | | | | G | | | | | | | A | | | | | | | U | | | | | | | C | | |o--´
+G C       | | |       C G | | | U A       | | |       C G | | | C A       | | |       A |
+                          A C A                           A C A
+
+         Modeller of allele-specific transcriptomics maelstRom, version 1.1.11
+```
+
 maelstRom is the Modeller of Allele-Specific Transcriptomics, an R package providing
 extensive functions for various RNAseq-based allelic analyses. This
 ranges from basic tasks such as (solely) RNAseq-based genotyping, to the
@@ -99,7 +121,7 @@ pipeline, while the expanded vignette provides more insight into maelstRom’s
 analyses and is recommended when setting out to create your own
 custom/specialized analysis pipeline.
 
-Running the entire vignette takes about 2.5 hours on a standard computer
+Running the entire vignette takes about an hour on a standard computer
 (local installation; Windows 10) if parallellization is not used
 (single-core). Enabling parallellization when running maelstRom on
 large-scale datasets on server is advised.

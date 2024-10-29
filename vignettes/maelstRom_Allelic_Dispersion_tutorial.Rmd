@@ -362,7 +362,7 @@ which ranges from 0 to 1 instead of $\theta$'s 0 to infinity, and is thus more s
 Significant dAD loci with increased $\theta_{het}$ in cases, and passing some basic filter criteria, can now be selected:
 
 ```{r, results='asis'}
-cat(paste0(paste(dAD_res$Locus[
+cat(paste0(dAD_res$Locus[
   p.adjust(dAD_res$dAD_pval, method = "BH") < 0.001 & #Significant at 0.1% FDR
     dAD_res$RhoT > dAD_res$RhoC & #Increased AD in cases
     #Median coverage of at least 10 in both cases and controls:
@@ -370,7 +370,7 @@ cat(paste0(paste(dAD_res$Locus[
     #Number of heterozygotes and HWE-conformity are only checked in controls,
     #as case-data can be rather erratic, e.g. due to tumorigenesis
     dAD_res$NumHetC >= 15 & dAD_res$HWEC >= 0.001
-  ], collapse = ", "), ",")) 
+  ], ",")) 
 ```
 
 As before, `maelstRom_EMfitplot` can be used to visualize the control-case AD difference in these loci:
@@ -444,6 +444,7 @@ cat(paste0(LancasterPVAL_vec[c(23, 40, 51)], ","))
 ```{r, results = "asis"}
 cat(paste0(CorLancasterPVAL_vec[c(23, 40, 51)], ",")) 
 ```
+
 Most genes, however, consist of more independent SNP-level data (notice the relatively small change):
 
 ```{r, results = "asis"}
@@ -476,14 +477,18 @@ for(Gene in goi){
     Tweights <- c(Tweights, sqrt(CovT_Meds[i]*NumHetTs[i]))
   }
   
-  dAD_res_Gene$Mean_NumHetC[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(NumHetCs, weights = sqrt(CovC_Meds), method = "arithmetic")
-  dAD_res_Gene$Mean_NumHetT[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(NumHetTs, weights = sqrt(CovT_Meds), method = "arithmetic")
-  dAD_res_Gene$Mean_CovC_Med[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(CovC_Meds, weights = sqrt(NumHetCs), method = "arithmetic")
-  dAD_res_Gene$Mean_CovT_Med[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(CovT_Meds, weights = sqrt(NumHetTs), method = "arithmetic")
-  dAD_res_Gene$Mean_RhoC[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(dAD_res$RhoC[dAD_res$Gene == Gene],
-                                                                              weights = Cweights, method = "arithmetic")
-  dAD_res_Gene$Mean_RhoT[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(dAD_res$RhoT[dAD_res$Gene == Gene],
-                                                                              weights = Tweights, method = "arithmetic")
+  dAD_res_Gene$Mean_NumHetC[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(NumHetCs, weights = 
+                                                            sqrt(CovC_Meds), method = "arithmetic")
+  dAD_res_Gene$Mean_NumHetT[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(NumHetTs, weights = 
+                                                            sqrt(CovT_Meds), method = "arithmetic")
+  dAD_res_Gene$Mean_CovC_Med[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(CovC_Meds, weights = 
+                                                            sqrt(NumHetCs), method = "arithmetic")
+  dAD_res_Gene$Mean_CovT_Med[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(CovT_Meds, weights = 
+                                                            sqrt(NumHetTs), method = "arithmetic")
+  dAD_res_Gene$Mean_RhoC[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(dAD_res$RhoC[dAD_res$Gene == 
+                                                        Gene], weights = Cweights, method = "arithmetic")
+  dAD_res_Gene$Mean_RhoT[dAD_res_Gene$Gene == Gene] <- maelstRom::combine_p_gene(dAD_res$RhoT[dAD_res$Gene == 
+                                                        Gene], weights = Tweights, method = "arithmetic")
 }
 
 knitr::kable(head(dAD_res_Gene))
