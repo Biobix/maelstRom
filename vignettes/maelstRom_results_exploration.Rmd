@@ -43,7 +43,7 @@ As this tutorial relies on SNP counts alone, we correlate this sample extremity,
 
 Though correlating AD  with expression is the default setting of the `AD_correlator` function below, it accepts any per-sample measure (if e.g. hypermethylation percentages or any other dysregulation data are available) as an optional input.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, results='asis'}
 AD_EX_Corrs <- c()
 AD_EX_Corr_pvals <- c()
 
@@ -60,7 +60,7 @@ for(LocOI in dAD_res$Locus){
 dAD_res$AD_EX_Corr <- AD_EX_Corrs
 dAD_res$AD_EX_Corr_pval <- AD_EX_Corr_pvals
 
-print(dAD_res$Locus[!is.na(dAD_res$AD_EX_Corr_pval) & dAD_res$AD_EX_Corr_pval < 0.05 & dAD_res$HWEC > 0.001 & dAD_res$HWET > 0.001])
+cat(paste0((dAD_res$Locus[!is.na(dAD_res$AD_EX_Corr_pval) & dAD_res$AD_EX_Corr_pval < 0.05 & dAD_res$HWEC > 0.001 & dAD_res$HWET > 0.001]), ",")) 
 ```
 
 A minimum count filter of 20 is used here to avoid low-count-based biases in the correlations' computation. Eventually, the returned number of actually significant correlations is relatively small. But they are meant as more of a data exploration tool rather than a hard result or filter criterion anyway, as their analysis isn't as robust as the population-level AD estimates to detect biologically relevant genes, and both AD in expression can be regulated in many different ways and influenced by many biases (e.g. tumor purity), making overly strong correlations between them and/or other (epi)genetic data not evident. Nevertheless, in cases where e.g. hypermethylation is strongly suspected to cause an allelic imbalance in sequencing data of afflicted samples, computing these correlations can provide soft evidence to that effect.

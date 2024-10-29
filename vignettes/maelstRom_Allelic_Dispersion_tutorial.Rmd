@@ -123,7 +123,7 @@ Some rudimentary prior filtering is always worth considering, as it avoids wasti
 
 This 20-control-sample requirement removes 5 loci, corresponding to two genes, from the toy dataset:
 
-```{r}
+```{r, results = "asis"}
 for(n in names(controlList)){
   controlList[[n]] <- maelstRom::prior_filter(controlList[[n]], min_median_cov = 0, 
     min_nr_samples = 20, checkref_filter = FALSE, prior_allelefreq_filter = FALSE, 
@@ -135,7 +135,7 @@ for(n in names(controlList)){
 }
 
 # These loci were filtered out:
-print(setdiff(unique(ControlCountsToy$Locus), names(controlList)))
+cat(paste0(setdiff(unique(ControlCountsToy$Locus), names(controlList)), ",")) 
 ```
 
 # Enabling parallellization
@@ -195,7 +195,7 @@ SEmedian <- median(SE_vec)
 Fmedian <- median(F_vec)
 
 #estimates of resp. sequencing error rate and inbreeding coefficient:
-print(c(SEmedian, Fmedian)) 
+cat(paste0(c(SEmedian, Fmedian), ","))  
 ```
 
 These metaparameter estimates seem reasonable. Please note that an extremely low sequencing error metaparameter would make fitting of homozygous peaks later down the pipeline way too strict, failing to accomodate for even a single faulty read. As such, *setting SE below 0.002 is not recommended*. An inbreeding coefficient close to zero is a sign of a panmictic population and commonplace when working on human data, but it could be more extreme in specialized experimental setups.
@@ -280,7 +280,7 @@ A final, optional, filter, is throwing out loci for which either $\pi_{het}/\the
 ```{r, results='asis'}
 # Statistical evidence for significant AB at the 5% FDR level,
 # only retaining reliable (high-quality) loci with a large enough effect size:
-print(paste(ASEfit_res$Locus[
+cat(paste0(paste(ASEfit_res$Locus[
   
   p.adjust(ASEfit_res$AB_pval, method = "BH") < 0.05 &
   (abs(ASEfit_res$pi - 0.5) > 0.1) & 
@@ -292,7 +292,7 @@ print(paste(ASEfit_res$Locus[
   ASEfit_res$pi/ASEfit_res$theta_het > 1 &
   (1-ASEfit_res$pi)/ASEfit_res$theta_het > 1], 
   
-  collapse = ", "))
+  collapse = ", "), ",")) 
 
 ```
 
@@ -362,7 +362,7 @@ which ranges from 0 to 1 instead of $\theta$'s 0 to infinity, and is thus more s
 Significant dAD loci with increased $\theta_{het}$ in cases, and passing some basic filter criteria, can now be selected:
 
 ```{r, results='asis'}
-print(paste(dAD_res$Locus[
+cat(paste0(paste(dAD_res$Locus[
   p.adjust(dAD_res$dAD_pval, method = "BH") < 0.001 & #Significant at 0.1% FDR
     dAD_res$RhoT > dAD_res$RhoC & #Increased AD in cases
     #Median coverage of at least 10 in both cases and controls:
@@ -370,7 +370,7 @@ print(paste(dAD_res$Locus[
     #Number of heterozygotes and HWE-conformity are only checked in controls,
     #as case-data can be rather erratic, e.g. due to tumorigenesis
     dAD_res$NumHetC >= 15 & dAD_res$HWEC >= 0.001
-  ], collapse = ", "))
+  ], collapse = ", "), ",")) 
 ```
 
 As before, `maelstRom_EMfitplot` can be used to visualize the control-case AD difference in these loci:
@@ -438,15 +438,19 @@ for(ii in 1:NC){
 
 There are a number of genes with highly correlated SNP-level allelic counts (suggesting said SNP are located in close proximity to eachother on the genome or on (processed) transcripts from which RNAseq data is generated), for which the correlation-corrected Lancaster p-value was greatly reduced when compared to the (non-corrected) Lancaster p-value:
 
-```{r}
-print(LancasterPVAL_vec[c(23, 40, 51)])
-print(CorLancasterPVAL_vec[c(23, 40, 51)])
+```{r, results='asis'}
+cat(paste0(LancasterPVAL_vec[c(23, 40, 51)], ",")) 
+```
+```{r, results = "asis"}
+cat(paste0(CorLancasterPVAL_vec[c(23, 40, 51)], ",")) 
 ```
 Most genes, however, consist of more independent SNP-level data (notice the relatively small change):
 
-```{r}
-print(LancasterPVAL_vec[1:5])
-print(CorLancasterPVAL_vec[1:5])
+```{r, results = "asis"}
+cat(paste0(LancasterPVAL_vec[1:5], ",")) 
+```
+```{r, results = "asis"}
+cat(paste0(CorLancasterPVAL_vec[1:5], ",")) 
 ```
 
 Next to the per-gene correlation-corrected Lancaster p-value, we can add averages of its per-SNP $\rho_{control}$s and $\rho_{case}$s (weighted averages, according to each SNP's $\sqrt{median\ coverage \times estimated\ number\ of\ heterozygotes}$ in controls or cases respectively), as well as some (weighted averages of) quality metrics:
@@ -488,13 +492,13 @@ knitr::kable(head(dAD_res_Gene))
 
 Using similar criteria as for the SNP-level results, we can now filter out those genes showing the most significant dAD:
 
-```{r}
-print(paste(dAD_res_Gene$Gene[
+```{r, results = "asis"}
+cat(paste0(paste(dAD_res_Gene$Gene[
   p.adjust(dAD_res_Gene$CorLancasterPVAL, method = "BH") < 0.001 & #Significant at 0.1% FDR
     dAD_res_Gene$Mean_RhoT > dAD_res_Gene$Mean_RhoC & #Increased AD in cases
     dAD_res_Gene$Mean_CovC_Med >= 10 & dAD_res_Gene$Mean_CovT_Med >= 10 & 
     dAD_res_Gene$Mean_NumHetC >= 15
-  ], collapse = ", "))
+  ], collapse = ", "), ",")) 
 ```
 
 ```{r, out.width='100%', fig.width=8.5, fig.height=15, fig.align='center', warning=FALSE, results = 'asis', message=FALSE}

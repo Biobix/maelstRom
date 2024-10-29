@@ -110,7 +110,7 @@ SE_vec <- do.call(c, lapply(GenoFinData, `[[`, 2))
 F_vec <- do.call(c, lapply(GenoFinData, `[[`, 3))
 SEmedian <- median(SE_vec)
 Fmedian <- median(F_vec)
-print(c(SEmedian, Fmedian)) 
+cat(paste0(c(SEmedian, Fmedian), ",")) 
 ```
 
 # Detecting imprinted and differentially imprinted loci
@@ -198,14 +198,13 @@ for(LOC in pos_impr){
 We can take a look at the loci that are significantly and sufficiently imprinted (i.e. the output of `final_filter` from above):
 
 ```{r, results='asis'}
-print(paste(impr_res_FIN$position, collapse = ", "))
+cat(paste0(impr_res_FIN$position, ",")) 
 ```
 
 From this set, a part is actually differentially imprinted in case samples, which is indicated by the p-value in the `DI_pval` column in the `p_DI_df` dataframe. We can control loss-of-imprinting detection, for a change, at the 5% FWER level (actually feasible here due to the small number of actually imprinted loci remaining, though we're looking at a small toy dataset here; this isn't necessarily the case in larger experiments):
 
 ```{r, results='asis'}
-print(paste(p_DI_df$position[p.adjust(p_DI_df$DI_pval, method = "holm") < 0.05], 
-            collapse = ", "))
+cat(paste0(p_DI_df$position[p.adjust(p_DI_df$DI_pval, method = "holm") < 0.05], ",")) 
 ```
 
 We can plot histograms of both the control and case allele fractions; locus 202 is obviously imprinted in controls and loses a lot of this imprinting in cases (controls are plotted using `maelstRom_imprintplot` to visualize imprinting results, but since an imprinting-estimation never happens on the case data - we just detect a change in heterozygosity via logistic regression - we simply make a histogram for cases instead).

@@ -1,109 +1,333 @@
-<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>https://biobix.github.io/maelstRom/404.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/articles/index.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/articles/maelstRom_Allelic_Dispersion_tutorial.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/articles/maelstRom_imprinting_tutorial.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/articles/maelstRom_results_exploration.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/authors.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/index.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/LICENSE-text.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/AllelicMeta_est.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/AllelicMeta_est_par.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/BetaBinomGenotyping.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/BetaBinomMix_LLDeriv.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/BetaBinomMix_LLDeriv_transfo.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/BetaBinom_test_pvalTS.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/BrolDB.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/combine_p_gene.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/CppCnT_Optim.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/CppHetH0_Optim.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/CppHet_Optim.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/CppHom_Optim.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/dAD_analysis.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/dBetaBinom_cpp_old.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/dBetaBinom_MP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/dBetaBin_cppi.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/dBetaBin_cppi_MP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/dpqrBetaBinom.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/EMfit_betabinom.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/EMfit_betabinom_popcomb.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/EMfit_betabinom_robust.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/EMfit_betabinom_SEslack.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/EMfit_binom.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/final_filter.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GOF_uniform.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradPiPi_cppi.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradPiPi_cppi_MP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradPiTheta_cppi.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradPiTheta_cppi_MP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradPi_cppi.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradPi_cppi_MP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradThetaTheta_cppi.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradThetaTheta_cppi_MP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradTheta_cppi.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/GradTheta_cppi_MP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/grad_pi.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/grad_pi_MP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/grad_pi_old.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/grad_pi_pi.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/grad_pi_theta.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/grad_theta.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/grad_theta_MP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/grad_theta_old.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/grad_theta_theta.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/HWE_chisquared.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/imprinting_est.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/impr_LOI_analysis.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/index.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/LikelyDistsHet.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/LogGaussianQuad_CPP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/LogNewtonCotes_CPP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/logSums_MaxMethodSigned_CPP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/logSums_MaxMethod_CPP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/logSums_MaxMethod_CPP_R.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/LogTanhSinhQuad_CPP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/LogTrapezoidalInt_CPP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/LOItest_logreg.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/LOI_calling.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/maelstRom.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/maelstRom_ADChromplot.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/maelstRom_EMfitplot.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/maelstRom_imprintplot.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/MAGE-package.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/MAGE.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/MAGE_ADChromplot.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/MAGE_EMfitplot.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/MAGE_imprintplot.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/median_AB.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/median_imprinting.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/MomentEst_MixedBetaBinom.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/MomentEst_MixedBetaBinom_SESlack.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/MPhelper_GradThetaTheta.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/multinomial_coeff.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/MyOptTest.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/pmf_betabinomMix.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/pmf_betabinomMix_SEslack.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/pmf_binomMix.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/pmf_impr.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/prior_filter.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/qbeta_C.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/qbeta_C3.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/standard_alleles.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/symmetry_gof.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPurHelpFun_CPP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPurHelpFun_CPP_R.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP2.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP2X.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP2Y.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP2_10.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP2_100.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP2_1000.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP3.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP3X.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP4.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP_DB1.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP_DB2.html</loc></url>
-<url><loc>https://biobix.github.io/maelstRom/reference/TumPur_LogLik_CPP_DB3.html</loc></url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/404.html</loc>
+  </url>
+  <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/maelstRom_Allelic_Dispersion_tutorial.html</loc>
+  </url>
+  <url>
+    <loc>/articles/maelstRom_imprinting_tutorial.html</loc>
+  </url>
+  <url>
+    <loc>/articles/maelstRom_results_exploration.html</loc>
+  </url>
+  <url>
+    <loc>/authors.html</loc>
+  </url>
+  <url>
+    <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>/reference/AllelicMeta_est.html</loc>
+  </url>
+  <url>
+    <loc>/reference/AllelicMeta_est_par.html</loc>
+  </url>
+  <url>
+    <loc>/reference/BetaBinomGenotyping.html</loc>
+  </url>
+  <url>
+    <loc>/reference/BetaBinomMix_LLDeriv.html</loc>
+  </url>
+  <url>
+    <loc>/reference/BetaBinomMix_LLDeriv_transfo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/BetaBinom_test_pvalTS.html</loc>
+  </url>
+  <url>
+    <loc>/reference/BrolDB.html</loc>
+  </url>
+  <url>
+    <loc>/reference/combine_p_gene.html</loc>
+  </url>
+  <url>
+    <loc>/reference/CppCnT_Optim.html</loc>
+  </url>
+  <url>
+    <loc>/reference/CppHetH0_Optim.html</loc>
+  </url>
+  <url>
+    <loc>/reference/CppHet_Optim.html</loc>
+  </url>
+  <url>
+    <loc>/reference/CppHom_Optim.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dAD_analysis.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dBetaBinom_cpp_old.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dBetaBinom_MP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dBetaBin_cppi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dBetaBin_cppi_MP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dpqrBetaBinom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EMfit_betabinom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EMfit_betabinom_popcomb.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EMfit_betabinom_robust.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EMfit_betabinom_SEslack.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EMfit_binom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/final_filter.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GOF_uniform.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradPiPi_cppi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradPiPi_cppi_MP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradPiTheta_cppi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradPiTheta_cppi_MP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradPi_cppi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradPi_cppi_MP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradThetaTheta_cppi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradThetaTheta_cppi_MP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradTheta_cppi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GradTheta_cppi_MP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grad_pi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grad_pi_MP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grad_pi_old.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grad_pi_pi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grad_pi_theta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grad_theta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grad_theta_MP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grad_theta_old.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grad_theta_theta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/HWE_chisquared.html</loc>
+  </url>
+  <url>
+    <loc>/reference/imprinting_est.html</loc>
+  </url>
+  <url>
+    <loc>/reference/impr_LOI_analysis.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/LikelyDistsHet.html</loc>
+  </url>
+  <url>
+    <loc>/reference/LogGaussianQuad_CPP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/LogNewtonCotes_CPP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/logSums_MaxMethodSigned_CPP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/logSums_MaxMethod_CPP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/logSums_MaxMethod_CPP_R.html</loc>
+  </url>
+  <url>
+    <loc>/reference/LogTanhSinhQuad_CPP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/LogTrapezoidalInt_CPP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/LOItest_logreg.html</loc>
+  </url>
+  <url>
+    <loc>/reference/LOI_calling.html</loc>
+  </url>
+  <url>
+    <loc>/reference/maelstRom-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/maelstRom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/maelstRom_ADChromplot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/maelstRom_EMfitplot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/maelstRom_imprintplot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MAGE-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MAGE.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MAGE_ADChromplot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MAGE_EMfitplot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MAGE_imprintplot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/median_AB.html</loc>
+  </url>
+  <url>
+    <loc>/reference/median_imprinting.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MomentEst_MixedBetaBinom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MomentEst_MixedBetaBinom_SESlack.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MPhelper_GradThetaTheta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/multinomial_coeff.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MyOptTest.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pBetaBinom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmf_betabinomMix.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmf_betabinomMix_SEslack.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmf_binomMix.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmf_impr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/prior_filter.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qBetaBinom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qbeta_C.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qbeta_C3.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rBetaBinom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/standard_alleles.html</loc>
+  </url>
+  <url>
+    <loc>/reference/symmetry_gof.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPurHelpFun_CPP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPurHelpFun_CPP_R.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP2X.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP2Y.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP2_10.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP2_100.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP2_1000.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP3.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP3X.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP4.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP_DB1.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP_DB2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPP_DB3.html</loc>
+  </url>
 </urlset>
-

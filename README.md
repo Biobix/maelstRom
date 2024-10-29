@@ -8,7 +8,7 @@
 
 Welcome to maelstRom’s readme!
 
-maelstRom is the Modeller of Allelic Gene Expression, an R package providing
+maelstRom is the Modeller of Allele-Specific Transcriptomics, an R package providing
 extensive functions for various RNAseq-based allelic analyses. This
 ranges from basic tasks such as (solely) RNAseq-based genotyping, to the
 analysis of more complex population-level phenomena such as
