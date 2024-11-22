@@ -68,7 +68,7 @@ test, though more recent versions should work fine as well):
 
 Furthermore, maelstRom relies on other R packages for its operations, which
 are listed in the tutorial:
-<https://biobix.github.io/maelstRom/articles/maelstRom_tutorial.html#session-info>
+<https://biobix.github.io/maelstRom/articles/maelstRom_Allelic_Dispersion_tutorial.html#session-info>
 
 ## Installation
 
@@ -109,19 +109,15 @@ install_github("BioBix/maelstRom", INSTALL_opts=c("--no-multiarch"))
 
 ## Getting started
 
-maelstRom contains a vignette going over its entire anaylis pipeline, which
+maelstRom contains a vignette going over its entire dAD anaylis pipeline, which
 can be found here:
-<https://biobix.github.io/maelstRom/articles/maelstRom_tutorial.html>
+<https://biobix.github.io/maelstRom/articles/maelstRom_Allelic_Dispersion_tutorial.html>
 
-Besides this “regular” vignette an “expanded” one is included as well
-(<https://biobix.github.io/maelstRom/articles/maelstRom_expanded_tutorial.html>),
-containing more in-depth code using maelstRom’s base functions while the
-regular one uses wrapper functions that handle many analyses and
-intermediary steps under-the hood. As such, the regular vignette is
-recommended for first-time users or users that just want a plug-and-play
-pipeline, while the expanded vignette provides more insight into maelstRom’s
-analyses and is recommended when setting out to create your own
-custom/specialized analysis pipeline.
+
+Besides this vignette, there's also a tutorial on further exploration of maelstRom's dAD results:
+<https://biobix.github.io/maelstRom/articles/maelstRom_results_exploration.html>
+as well as a tutorial on (differential) imprinting analyses using maelstRom:
+<https://biobix.github.io/maelstRom/articles/maelstRom_imprinting_tutorial.html>.
 
 Running the entire vignette takes about an hour on a standard computer
 (local installation; Windows 10) if parallellization is not used
