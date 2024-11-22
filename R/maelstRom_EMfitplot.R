@@ -116,18 +116,18 @@ maelstRom_EMfitplot <- function(ref_counts = NULL, var_counts = NULL, pr = NULL,
   
   if(ScaleHist){
     # Next: calculating weights!
-    spr <- pr * MAGE::dBetaBinom(RC, RC + VC, pi = 1-SE, theta = theta_hom, LOG = FALSE)
-    spv <- pv * MAGE::dBetaBinom(VC, RC + VC, pi = 1-SE, theta = theta_hom, LOG = FALSE)
-    sprv <- prv * MAGE::dBetaBinom(RC, RC + VC, pi = probshift, theta = theta_het, LOG = FALSE)
+    spr <- pr * maelstRom::dBetaBinom(RC, RC + VC, pi = 1-SE, theta = theta_hom, LOG = FALSE)
+    spv <- pv * maelstRom::dBetaBinom(VC, RC + VC, pi = 1-SE, theta = theta_hom, LOG = FALSE)
+    sprv <- prv * maelstRom::dBetaBinom(RC, RC + VC, pi = probshift, theta = theta_het, LOG = FALSE)
     pdata <- rowSums(cbind(spv, sprv, spr)) 
     if (any(pdata==0)){ 
       ProblemCases <- which(pdata==0)
       for(case in ProblemCases){
         var_part<-VC[case]
         ref_part<-RC[case]
-        spr_part<-MAGE::dBetaBinom(ref_part, ref_part+var_part, pi = 1-SE, theta = theta_hom, LOG = TRUE)
-        spv_part<-MAGE::dBetaBinom(var_part, ref_part+var_part, pi = 1-SE, theta = theta_hom, LOG = TRUE)
-        sprv_part<-MAGE::dBetaBinom(ref_part, ref_part+var_part, pi = probshift, theta = theta_het, LOG = TRUE)
+        spr_part<-maelstRom::dBetaBinom(ref_part, ref_part+var_part, pi = 1-SE, theta = theta_hom, LOG = TRUE)
+        spv_part<-maelstRom::dBetaBinom(var_part, ref_part+var_part, pi = 1-SE, theta = theta_hom, LOG = TRUE)
+        sprv_part<-maelstRom::dBetaBinom(ref_part, ref_part+var_part, pi = probshift, theta = theta_het, LOG = TRUE)
         spvec<-c(spr_part, sprv_part, spv_part)
         if(spr_part==max(spvec)){
           spr[case]<-1
@@ -146,25 +146,25 @@ maelstRom_EMfitplot <- function(ref_counts = NULL, var_counts = NULL, pr = NULL,
     spr <- spr/pdata
     # Now: for each observation, get the observation most closely corresponding to this observation,
     # should its total count have been ScaleCount
-    Helper <- MAGE::pBetaBinom(ms = RC, ns = RC+VC, pi = 1-SE, theta = theta_hom)
-    HomRR_ref <- MAGE::qBetaBinom(Helper, ns = rep(ScaleCount, length(RC)), pi = 1-SE, theta = theta_hom)
+    Helper <- maelstRom::pBetaBinom(ms = RC, ns = RC+VC, pi = 1-SE, theta = theta_hom)
+    HomRR_ref <- maelstRom::qBetaBinom(Helper, ns = rep(ScaleCount, length(RC)), pi = 1-SE, theta = theta_hom)
     HomRR_var <- ScaleCount-HomRR_ref
-    Helper <- MAGE::pBetaBinom(ms = RC, ns = RC+VC, pi = probshift, theta = theta_het)
-    Het_ref <- MAGE::qBetaBinom(Helper, ns = rep(ScaleCount, length(RC)), pi = probshift, theta = theta_het)
+    Helper <- maelstRom::pBetaBinom(ms = RC, ns = RC+VC, pi = probshift, theta = theta_het)
+    Het_ref <- maelstRom::qBetaBinom(Helper, ns = rep(ScaleCount, length(RC)), pi = probshift, theta = theta_het)
     Het_var <- ScaleCount-Het_ref
-    Helper <- MAGE::pBetaBinom(ms = VC, ns = RC+VC, pi = 1-SE, theta = theta_hom)
-    HomVV_var <- MAGE::qBetaBinom(Helper, ns = rep(ScaleCount, length(RC)), pi = 1-SE, theta = theta_hom)
+    Helper <- maelstRom::pBetaBinom(ms = VC, ns = RC+VC, pi = 1-SE, theta = theta_hom)
+    HomVV_var <- maelstRom::qBetaBinom(Helper, ns = rep(ScaleCount, length(RC)), pi = 1-SE, theta = theta_hom)
     HomVV_ref <- ScaleCount-HomVV_var
     
     
     
     
-    Dat_TheoryData <- (pr * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE) +
-                         pv * MAGE::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE) +
-                         prv * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = probshift, theta = theta_het, LOG = FALSE)) * length(RC)
-    Dat_RRData <- (pr * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE)) * length(RC)
-    Dat_VVData <- (pv * MAGE::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE)) * length(RC)
-    Dat_RVData <- (prv * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = probshift, theta = theta_het, LOG = FALSE)) * length(RC)
+    Dat_TheoryData <- (pr * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE) +
+                         pv * maelstRom::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE) +
+                         prv * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = probshift, theta = theta_het, LOG = FALSE)) * length(RC)
+    Dat_RRData <- (pr * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE)) * length(RC)
+    Dat_VVData <- (pv * maelstRom::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE)) * length(RC)
+    Dat_RVData <- (prv * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = probshift, theta = theta_het, LOG = FALSE)) * length(RC)
     
     MDX <- data.frame("Count" = 0:ScaleCount, "Data" = Dat_TheoryData, "DataRR" = Dat_RRData, "DataVV" = Dat_VVData, "DataRV" = Dat_RVData)
     MDX$St <- 0:ScaleCount/ScaleCount
@@ -206,9 +206,9 @@ maelstRom_EMfitplot <- function(ref_counts = NULL, var_counts = NULL, pr = NULL,
     Dat_Theory <- MD
     
     if(plot_NoShift){
-      Dat_TheoryData_H0 <- (pr_NoShift * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom_NoShift, LOG = FALSE) +
-                              pv_NoShift * MAGE::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom_NoShift, LOG = FALSE) +
-                              prv_NoShift * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 0.5, theta = theta_het_NoShift, LOG = FALSE)) * length(RC)
+      Dat_TheoryData_H0 <- (pr_NoShift * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom_NoShift, LOG = FALSE) +
+                              pv_NoShift * maelstRom::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom_NoShift, LOG = FALSE) +
+                              prv_NoShift * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 0.5, theta = theta_het_NoShift, LOG = FALSE)) * length(RC)
       
       Dat_Theory_Ho <- data.frame("Data" = Dat_TheoryData_H0, "Pos" = (0:ScaleCount)/ScaleCount) 
     }
@@ -261,12 +261,12 @@ maelstRom_EMfitplot <- function(ref_counts = NULL, var_counts = NULL, pr = NULL,
     
   }else{
     
-    Dat_TheoryData <- (pr * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE) +
-                         pv * MAGE::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE) +
-                         prv * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = probshift, theta = theta_het, LOG = FALSE)) * length(RC)
-    Dat_RRData <- (pr * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE)) * length(RC)
-    Dat_VVData <- (pv * MAGE::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE)) * length(RC)
-    Dat_RVData <- (prv * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = probshift, theta = theta_het, LOG = FALSE)) * length(RC)
+    Dat_TheoryData <- (pr * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE) +
+                         pv * maelstRom::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE) +
+                         prv * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = probshift, theta = theta_het, LOG = FALSE)) * length(RC)
+    Dat_RRData <- (pr * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE)) * length(RC)
+    Dat_VVData <- (pv * maelstRom::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom, LOG = FALSE)) * length(RC)
+    Dat_RVData <- (prv * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = probshift, theta = theta_het, LOG = FALSE)) * length(RC)
     
     MDX <- data.frame("Count" = 0:ScaleCount, "Data" = Dat_TheoryData, "DataRR" = Dat_RRData, "DataVV" = Dat_VVData, "DataRV" = Dat_RVData)
     MDX$St <- 0:ScaleCount/ScaleCount
@@ -308,9 +308,9 @@ maelstRom_EMfitplot <- function(ref_counts = NULL, var_counts = NULL, pr = NULL,
     Dat_Theory <- MD
     
     if(plot_NoShift){
-      Dat_TheoryData_H0 <- (pr_NoShift * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom_NoShift, LOG = FALSE) +
-                              pv_NoShift * MAGE::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom_NoShift, LOG = FALSE) +
-                              prv_NoShift * MAGE::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 0.5, theta = theta_het_NoShift, LOG = FALSE)) * length(RC)
+      Dat_TheoryData_H0 <- (pr_NoShift * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom_NoShift, LOG = FALSE) +
+                              pv_NoShift * maelstRom::dBetaBinom(ScaleCount:0, rep(ScaleCount, ScaleCount+1), pi = 1-SE, theta = theta_hom_NoShift, LOG = FALSE) +
+                              prv_NoShift * maelstRom::dBetaBinom(0:ScaleCount, rep(ScaleCount, ScaleCount+1), pi = 0.5, theta = theta_het_NoShift, LOG = FALSE)) * length(RC)
       
       Dat_Theory_Ho <- data.frame("Data" = Dat_TheoryData_H0, "Pos" = (0:ScaleCount)/ScaleCount) 
     }
