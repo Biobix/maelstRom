@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{dBetaBin_cppi}
 \alias{dBetaBin_cppi}
-\title{DO SOMETHING}
+\title{dBetaBinom implementation for internal use by C++}
 \usage{
 dBetaBin_cppi(M, N, PI, THETA, LOG, MemLim, Xtra)
 }
 \description{
-DO SOMETHING
+dBetaBinom implementation for internal use by C++
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{TumPurHelpFun_CPP}
 \alias{TumPurHelpFun_CPP}
-\title{DO SOMETHING}
+\title{Internal helper function for TumPur_LogLik_CPP}
 \usage{
 TumPurHelpFun_CPP(
   RCcol,
@@ -20,5 +20,5 @@ TumPurHelpFun_CPP(
 )
 }
 \description{
-DO SOMETHING
+Internal helper function for TumPur_LogLik_CPP
 }

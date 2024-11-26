@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{qbeta_C}
 \alias{qbeta_C}
-\title{DO SOMETHING}
+\title{UNUSED alternative implementation of the qbeta funtion}
 \usage{
 qbeta_C(qs, a, b)
 }
 \description{
-DO SOMETHING
+UNUSED alternative implementation of the qbeta funtion
 }

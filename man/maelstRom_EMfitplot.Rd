@@ -2,7 +2,7 @@
 % Please edit documentation in R/maelstRom_EMfitplot.R
 \name{maelstRom_EMfitplot}
 \alias{maelstRom_EMfitplot}
-\title{Plot maelstRom's EM-fit results.}
+\title{Plots the result of maelstRom's beta-binomial mixture EM-fit.}
 \usage{
 maelstRom_EMfitplot(
   ref_counts = NULL,
@@ -39,9 +39,9 @@ maelstRom_EMfitplot(
 )
 }
 \arguments{
-\item{ref_counts}{Numeric vector. Reference counts.}
+\item{ref_counts}{Numeric vector. Observed reference counts.}
 
-\item{var_counts}{Numeric vector. Variant counts.}
+\item{var_counts}{Numeric vector. Observed variant counts.}
 
 \item{pr}{Number. Reference homozygote genotype probability of the locus.}
 
@@ -49,21 +49,21 @@ maelstRom_EMfitplot(
 
 \item{pv}{Number. Variant homozygote genotype probability of the locus.}
 
-\item{theta_hom}{Number. The dispersion parameter of the homozygous peaks.}
+\item{theta_hom}{Number. The beta-binomial overdispersion parameter, as theta, of the homozygous peaks.}
 
-\item{theta_het}{Number. The dispersion parameter of the heterozygous peak.}
+\item{theta_het}{Number. The beta-binomial overdispersion parameter, as theta, of the heterozygous peak.}
 
-\item{pr_NoShift}{Number. Reference homozygote genotype probability of the locus under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).}
+\item{pr_NoShift}{Number. Optional; reference homozygote genotype probability of the locus under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).}
 
-\item{prv_NoShift}{Number. Heterozygote genotype probability of the locus under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).}
+\item{prv_NoShift}{Number. Optional; heterozygote genotype probability of the locus under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).}
 
-\item{pv_NoShift}{Number. Variant homozygote genotype probability of the locus under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).}
+\item{pv_NoShift}{Number. Optional; variant homozygote genotype probability of the locus under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).}
 
-\item{theta_hom_NoShift}{Number. The dispersion parameter of the homozygous peaks under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).}
+\item{theta_hom_NoShift}{Number. Optional; the beta-binomial overdispersion parameter, as theta, of the homozygous peaks under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).}
 
-\item{theta_het_NoShift}{Number. The dispersion parameter of the heterozygous peak under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).}
+\item{theta_het_NoShift}{Number. Optional; the beta-binomial overdispersion parameter, as theta, of the heterozygous peak under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).}
 
-\item{probshift}{Number. The reference allele fraction in heterozygotes, indicating allelic bias when deviating from 0.5}
+\item{probshift}{Number. The reference allele fraction in heterozygotes, i.e. the beta-binomial pi-parameter, which indicates allelic bias when deviating from 0.5}
 
 \item{SE}{Number. Sequencing error rate.}
 
@@ -78,7 +78,7 @@ with the actually observed number of counts). The idea here is to better reflect
 
 \item{nbins}{Number. Number of bins for the histogram depicting the observed reference allele fractions.}
 
-\item{plot_NoShift}{Logical. If TRUE, also plots the PMF of the unshifted fit (no allelic bias; heterozygous pi-parameter = 0.5)}
+\item{plot_NoShift}{Logical. If TRUE, also plots the PMF of the unshifted fit (see "_NoShift" parameters above)}
 
 \item{SplitPeaks}{Logical. If TRUE, the PMFs of both homozygotes and the heterozygotes are plotted seperately and using different colors. If FALSE, one total PMF of the mixture model is plotted.}
 
@@ -86,7 +86,7 @@ with the actually observed number of counts). The idea here is to better reflect
 Default colors are used in case none are given as input.}
 
 \item{NoShiftCol}{String. Color for the unshifted PMF (no allelic bias; heterozygous pi-parameter = 0.5). There's no option to split the peaks of this unshifted fit as it would make
-the final figure way too clustered, so only one color value is required. A default color is used in case non is given as input.}
+the final figure way too clustered, so only one color value is required. Will default to purple in case no input is given.}
 
 \item{wd_res}{String. Working directory where plots are saved; if non is given, the plot itself (as a \code{ggplot2} object) is returned instead.}
 
@@ -114,10 +114,14 @@ you need to specify whether to plot controls or cases using the \code{PlotWhich}
 
 \item{PlotWhich}{String. Either "control" or "case", to know which data to fetch from \code{dAD_res} for plotting.
 The dataframe given as the \code{DataList_out} argument should of course be of the corresponding population.}
+
+\item{BG}{String. Background color of the returned plots (can be a color name, or a color's hexadecimal code; default "#F2F2F2")}
 }
 \description{
-\code{maelstRom_EMfitplot} plots the results of maelstRom's beta-binomial EM-fit. More specifically, it plots both the observed reference allele fractions as a histogram (optionally scaled
-to a single total count parameter, see \code{ScaleHist} and \code{ScaleCount}) and the parameters yielded by the EM-fit as beta-binomial PMFs (assuming a total read counts \code{ScaleCount}
-and compressed to the zero-to-one interval of the reference allele fraction instead of integer reference counts). Optionally, the unshifted fit assuming no allelic bias (heterozygous
-pi-parameter = 0.5) is plotted as well, if \code{plot_NoShift} is TRUE and its distributional parameters are provided as input.
+\code{maelstRom_EMfitplot} plots the results of maelstRom's beta-binomial mixture EM-fit. More specifically, it plots both the observed reference allele fractions as a histogram 
+(with observations optionally rescaled to observations with the same/closest likelihood but all sharing the same total count parameter; see \code{ScaleHist} and \code{ScaleCount}), 
+and beta-binomial PMFs using the parameters yielded by the EM-fit as (assuming a total read count \code{ScaleCount}
+and compressed to the zero-to-one interval of the reference allele fraction instead of integer reference counts). 
+Optionally, the unshifted fit assuming no allelic bias (heterozygous pi-parameter = 0.5) is plotted as well, 
+if \code{plot_NoShift} is TRUE and its distributional parameters are provided as input.
 }

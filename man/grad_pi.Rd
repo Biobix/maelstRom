@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{grad_pi}
 \alias{grad_pi}
-\title{DO SOMETHING}
+\title{Beta-binomial gradient with respect to its pi parameter}
 \usage{
 grad_pi(ms, ns, pi, theta, MemLim = 2048L, Xtra = 7L)
 }
 \description{
-DO SOMETHING
+Beta-binomial gradient with respect to its pi parameter
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{grad_theta_theta}
 \alias{grad_theta_theta}
-\title{DO SOMETHING}
+\title{Beta-binomial second-order derivative with respect to its theta-parameter (twice)}
 \usage{
 grad_theta_theta(ms, ns, pi, theta, MemLim = 2048L, Xtra = 7L)
 }
 \description{
-DO SOMETHING
+Beta-binomial second-order derivative with respect to its theta-parameter (twice)
 }

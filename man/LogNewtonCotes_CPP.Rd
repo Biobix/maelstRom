@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{LogNewtonCotes_CPP}
 \alias{LogNewtonCotes_CPP}
-\title{DO SOMETHING}
+\title{Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "NewtonCotes"}
 \usage{
 LogNewtonCotes_CPP(lower, upper, a, b, q, TC, RC, curTR, curRC, Wvec)
 }
 \description{
-DO SOMETHING
+Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "NewtonCotes"
 }

@@ -78,7 +78,7 @@
                         <h4 data-toc-skip class="author">Cedric
 Stroobandt</h4>
             
-            <h4 data-toc-skip class="date">2024-11-22</h4>
+            <h4 data-toc-skip class="date">2024-11-26</h4>
       
       
       <div class="hidden name"><code>maelstRom_Allelic_Dispersion_tutorial.Rmd</code></div>
@@ -119,7 +119,7 @@ is used throughout the remainder of this vignette. This toy data
 consists of both a hypothetical control (healthy) and case (diseased)
 dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://biobix.github.io/maelstRom/" class="external-link">maelstRom</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">maelstRom</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Package 'maelstRom' version 1.1.11</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"maelstRom"</span>, package <span class="op">=</span> <span class="st">"maelstRom"</span><span class="op">)</span></span>
@@ -1460,7 +1460,7 @@ permutations in their publication so we do the same here:</p>
 <span></span>
 <span><span class="co"># Call the AdvancedPvalcomb function</span></span>
 <span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"cl.cores"</span>, <span class="va">NC</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">AdvPVALs</span> <span class="op">&lt;-</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parLapply</a></span><span class="op">(</span><span class="va">cl</span>, X <span class="op">=</span> <span class="va">inputlist</span>, fun <span class="op">=</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="va">AdvancedPvalcomb</span>, SE <span class="op">=</span> <span class="va">SEmedian</span>, nperm <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="va">AdvPVALs</span> <span class="op">&lt;-</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parLapply</a></span><span class="op">(</span><span class="va">cl</span>, X <span class="op">=</span> <span class="va">inputlist</span>, fun <span class="op">=</span> <span class="fu">maelstRom</span><span class="fu">::</span><span class="va"><a href="../reference/AdvancedPvalcomb.html">AdvancedPvalcomb</a></span>, SE <span class="op">=</span> <span class="va">SEmedian</span>, nperm <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
 <span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Extract gene-level p-values</span></span>
@@ -1482,7 +1482,7 @@ p-value:</p>
 <p>3.67073174475383e-12, 3.22181819373512e-41, 1.42550478480222e-28,</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">CorLancasterPVAL_vec</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">23</span>, <span class="fl">40</span>, <span class="fl">51</span><span class="op">)</span><span class="op">]</span>, <span class="st">","</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p>8.58344380865356e-07, 3.015968535183e-19, 1.59136297616542e-12,</p>
+<p>9.23757723598399e-07, 6.09614592877207e-20, 2.54549972275945e-12,</p>
 <p>Most genes, however, consist of more independent SNP-level data
 (notice the relatively small change):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -1491,8 +1491,8 @@ p-value:</p>
 0.000739519269403496, 0.8312901339832,</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">CorLancasterPVAL_vec</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="st">","</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p>6.97942661449317e-09, 0.511564984631443, 1.14922933979808e-05,
-0.000775820925790581, 0.811914030731854,</p>
+<p>4.38374274657624e-08, 0.511968548984652, 1.01778526719571e-05,
+0.000816789636545912, 0.830482332040969,</p>
 <p>Next to the per-gene correlation-corrected Lancaster p-value, we can
 add averages of its per-SNP <span class="math inline">\(\rho_{control}\)</span>s and <span class="math inline">\(\rho_{case}\)</span>s (weighted averages,
 according to each SNP’s <span class="math inline">\(\sqrt{median\
@@ -1575,7 +1575,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0198453</td>
 <td align="right">0.0243574</td>
-<td align="right">0.5115650</td>
+<td align="right">0.5119685</td>
 <td align="right">59.43292</td>
 <td align="right">114.12708</td>
 <td align="right">24.77530</td>
@@ -1586,7 +1586,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0118674</td>
 <td align="right">0.0307354</td>
-<td align="right">0.0000115</td>
+<td align="right">0.0000102</td>
 <td align="right">62.15882</td>
 <td align="right">116.28909</td>
 <td align="right">169.44331</td>
@@ -1597,7 +1597,7 @@ quality metrics:</p>
 <td align="right">2</td>
 <td align="right">0.0218546</td>
 <td align="right">0.0301046</td>
-<td align="right">0.0007758</td>
+<td align="right">0.0008168</td>
 <td align="right">37.13462</td>
 <td align="right">99.43332</td>
 <td align="right">240.21210</td>
@@ -1608,7 +1608,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0142337</td>
 <td align="right">0.0136280</td>
-<td align="right">0.8119140</td>
+<td align="right">0.8304823</td>
 <td align="right">42.79365</td>
 <td align="right">93.49767</td>
 <td align="right">10.53696</td>
@@ -1619,7 +1619,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0296196</td>
 <td align="right">0.0379265</td>
-<td align="right">0.2290847</td>
+<td align="right">0.2334484</td>
 <td align="right">36.47197</td>
 <td align="right">67.56134</td>
 <td align="right">16.07402</td>
@@ -1636,8 +1636,8 @@ filter out those genes showing the most significant dAD:</p>
 <span>    <span class="va">dAD_res_Gene</span><span class="op">$</span><span class="va">Mean_CovC_Med</span> <span class="op">&gt;=</span> <span class="fl">10</span> <span class="op">&amp;</span> <span class="va">dAD_res_Gene</span><span class="op">$</span><span class="va">Mean_CovT_Med</span> <span class="op">&gt;=</span> <span class="fl">10</span> <span class="op">&amp;</span> </span>
 <span>    <span class="va">dAD_res_Gene</span><span class="op">$</span><span class="va">Mean_NumHetC</span> <span class="op">&gt;=</span> <span class="fl">15</span></span>
 <span>  <span class="op">]</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">","</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p>Gene1, Gene3, Gene7, Gene24, Gene25, Gene26, Gene34, Gene41, Gene49,
-Gene50, Gene52, Gene56, Gene58, Gene60,</p>
+<p>Gene1, Gene3, Gene7, Gene24, Gene25, Gene26, Gene41, Gene49, Gene50,
+Gene52, Gene56, Gene58, Gene60,</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">GeneToPlot</span> <span class="op">&lt;-</span> <span class="st">"Gene7"</span></span>
 <span><span class="va">LocsToPlot</span> <span class="op">&lt;-</span> <span class="va">dAD_res</span><span class="op">$</span><span class="va">Locus</span><span class="op">[</span><span class="va">dAD_res</span><span class="op">$</span><span class="va">Gene</span><span class="op">==</span><span class="va">GeneToPlot</span><span class="op">]</span></span>
@@ -1728,47 +1728,48 @@ Gene50, Gene52, Gene56, Gene58, Gene60,</p>
 <span><span class="co">#&gt; [25] rbibutils_2.2.16   </span></span>
 <span><span class="co">#&gt; [26] munsell_0.5.1      </span></span>
 <span><span class="co">#&gt; [27] withr_3.0.0        </span></span>
-<span><span class="co">#&gt; [28] cachem_1.1.0       </span></span>
-<span><span class="co">#&gt; [29] yaml_2.3.9         </span></span>
-<span><span class="co">#&gt; [30] tools_4.3.3        </span></span>
-<span><span class="co">#&gt; [31] parallel_4.3.3     </span></span>
-<span><span class="co">#&gt; [32] memoise_2.0.1      </span></span>
-<span><span class="co">#&gt; [33] dplyr_1.1.4        </span></span>
-<span><span class="co">#&gt; [34] colorspace_2.1-0   </span></span>
-<span><span class="co">#&gt; [35] ggplot2_3.5.1      </span></span>
-<span><span class="co">#&gt; [36] hash_2.2.6.3       </span></span>
-<span><span class="co">#&gt; [37] vctrs_0.6.5        </span></span>
-<span><span class="co">#&gt; [38] R6_2.5.1           </span></span>
-<span><span class="co">#&gt; [39] zoo_1.8-12         </span></span>
-<span><span class="co">#&gt; [40] lifecycle_1.0.4    </span></span>
-<span><span class="co">#&gt; [41] stringr_1.5.1      </span></span>
-<span><span class="co">#&gt; [42] fs_1.6.4           </span></span>
-<span><span class="co">#&gt; [43] htmlwidgets_1.6.4  </span></span>
-<span><span class="co">#&gt; [44] MASS_7.3-60.0.1    </span></span>
-<span><span class="co">#&gt; [45] ragg_1.3.2         </span></span>
-<span><span class="co">#&gt; [46] pkgconfig_2.0.3    </span></span>
-<span><span class="co">#&gt; [47] desc_1.4.3         </span></span>
-<span><span class="co">#&gt; [48] pkgdown_2.0.9      </span></span>
-<span><span class="co">#&gt; [49] pillar_1.9.0       </span></span>
-<span><span class="co">#&gt; [50] bslib_0.7.0        </span></span>
-<span><span class="co">#&gt; [51] gtable_0.3.5       </span></span>
-<span><span class="co">#&gt; [52] data.table_1.16.0  </span></span>
-<span><span class="co">#&gt; [53] glue_1.7.0         </span></span>
-<span><span class="co">#&gt; [54] Rcpp_1.0.12        </span></span>
-<span><span class="co">#&gt; [55] systemfonts_1.1.0  </span></span>
-<span><span class="co">#&gt; [56] highr_0.11         </span></span>
-<span><span class="co">#&gt; [57] xfun_0.45          </span></span>
-<span><span class="co">#&gt; [58] tibble_3.2.1       </span></span>
-<span><span class="co">#&gt; [59] tidyselect_1.2.1   </span></span>
-<span><span class="co">#&gt; [60] rstudioapi_0.16.0  </span></span>
-<span><span class="co">#&gt; [61] knitr_1.48         </span></span>
-<span><span class="co">#&gt; [62] farver_2.1.2       </span></span>
-<span><span class="co">#&gt; [63] htmltools_0.5.8    </span></span>
-<span><span class="co">#&gt; [64] patchwork_1.2.0    </span></span>
-<span><span class="co">#&gt; [65] labeling_0.4.3     </span></span>
-<span><span class="co">#&gt; [66] rmarkdown_2.27     </span></span>
-<span><span class="co">#&gt; [67] compiler_4.3.3     </span></span>
-<span><span class="co">#&gt; [68] alabama_2023.1.0</span></span></code></pre></div>
+<span><span class="co">#&gt; [28] MAGE_1.0.0.18      </span></span>
+<span><span class="co">#&gt; [29] cachem_1.1.0       </span></span>
+<span><span class="co">#&gt; [30] yaml_2.3.9         </span></span>
+<span><span class="co">#&gt; [31] tools_4.3.3        </span></span>
+<span><span class="co">#&gt; [32] parallel_4.3.3     </span></span>
+<span><span class="co">#&gt; [33] memoise_2.0.1      </span></span>
+<span><span class="co">#&gt; [34] dplyr_1.1.4        </span></span>
+<span><span class="co">#&gt; [35] colorspace_2.1-0   </span></span>
+<span><span class="co">#&gt; [36] ggplot2_3.5.1      </span></span>
+<span><span class="co">#&gt; [37] hash_2.2.6.3       </span></span>
+<span><span class="co">#&gt; [38] vctrs_0.6.5        </span></span>
+<span><span class="co">#&gt; [39] R6_2.5.1           </span></span>
+<span><span class="co">#&gt; [40] zoo_1.8-12         </span></span>
+<span><span class="co">#&gt; [41] lifecycle_1.0.4    </span></span>
+<span><span class="co">#&gt; [42] stringr_1.5.1      </span></span>
+<span><span class="co">#&gt; [43] fs_1.6.4           </span></span>
+<span><span class="co">#&gt; [44] htmlwidgets_1.6.4  </span></span>
+<span><span class="co">#&gt; [45] MASS_7.3-60.0.1    </span></span>
+<span><span class="co">#&gt; [46] ragg_1.3.2         </span></span>
+<span><span class="co">#&gt; [47] pkgconfig_2.0.3    </span></span>
+<span><span class="co">#&gt; [48] desc_1.4.3         </span></span>
+<span><span class="co">#&gt; [49] pkgdown_2.0.9      </span></span>
+<span><span class="co">#&gt; [50] pillar_1.9.0       </span></span>
+<span><span class="co">#&gt; [51] bslib_0.7.0        </span></span>
+<span><span class="co">#&gt; [52] gtable_0.3.5       </span></span>
+<span><span class="co">#&gt; [53] data.table_1.16.0  </span></span>
+<span><span class="co">#&gt; [54] glue_1.7.0         </span></span>
+<span><span class="co">#&gt; [55] Rcpp_1.0.12        </span></span>
+<span><span class="co">#&gt; [56] systemfonts_1.1.0  </span></span>
+<span><span class="co">#&gt; [57] highr_0.11         </span></span>
+<span><span class="co">#&gt; [58] xfun_0.45          </span></span>
+<span><span class="co">#&gt; [59] tibble_3.2.1       </span></span>
+<span><span class="co">#&gt; [60] tidyselect_1.2.1   </span></span>
+<span><span class="co">#&gt; [61] rstudioapi_0.16.0  </span></span>
+<span><span class="co">#&gt; [62] knitr_1.48         </span></span>
+<span><span class="co">#&gt; [63] farver_2.1.2       </span></span>
+<span><span class="co">#&gt; [64] htmltools_0.5.8    </span></span>
+<span><span class="co">#&gt; [65] patchwork_1.2.0    </span></span>
+<span><span class="co">#&gt; [66] labeling_0.4.3     </span></span>
+<span><span class="co">#&gt; [67] rmarkdown_2.27     </span></span>
+<span><span class="co">#&gt; [68] compiler_4.3.3     </span></span>
+<span><span class="co">#&gt; [69] alabama_2023.1.0</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

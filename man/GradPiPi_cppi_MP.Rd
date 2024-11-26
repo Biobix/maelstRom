@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{GradPiPi_cppi_MP}
 \alias{GradPiPi_cppi_MP}
-\title{DO SOMETHING}
+\title{Beta-binomial second-order derivative with respect to its pi parameter (twice); for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)}
 \usage{
 GradPiPi_cppi_MP(M, N, PI, THETA, NecPres)
 }
 \description{
-DO SOMETHING
+Beta-binomial second-order derivative with respect to its pi parameter (twice); for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)
 }

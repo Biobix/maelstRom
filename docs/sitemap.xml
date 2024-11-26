@@ -25,6 +25,12 @@
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>/reference/AdvancedFitter.html</loc>
+  </url>
+  <url>
+    <loc>/reference/AdvancedPvalcomb.html</loc>
+  </url>
+  <url>
     <loc>/reference/AllelicMeta_est.html</loc>
   </url>
   <url>
@@ -178,6 +184,9 @@
     <loc>/reference/LogNewtonCotes_CPP.html</loc>
   </url>
   <url>
+    <loc>/reference/logSums_MaxMethod.html</loc>
+  </url>
+  <url>
     <loc>/reference/logSums_MaxMethodSigned_CPP.html</loc>
   </url>
   <url>
@@ -320,6 +329,9 @@
   </url>
   <url>
     <loc>/reference/TumPur_LogLik_CPP4.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TumPur_LogLik_CPPs.html</loc>
   </url>
   <url>
     <loc>/reference/TumPur_LogLik_CPP_DB1.html</loc>

@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{BrolDB}
 \alias{BrolDB}
-\title{DO SOMETHING}
+\title{UNUSED}
 \usage{
 BrolDB(TC, TP)
 }
 \description{
-DO SOMETHING
+UNUSED
 }

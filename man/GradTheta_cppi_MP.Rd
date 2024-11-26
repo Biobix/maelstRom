@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{GradTheta_cppi_MP}
 \alias{GradTheta_cppi_MP}
-\title{DO SOMETHING}
+\title{Beta-binomial gradient with respect to its theta parameter; for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)}
 \usage{
 GradTheta_cppi_MP(M, N, PI, THETA, NecPres)
 }
 \description{
-DO SOMETHING
+Beta-binomial gradient with respect to its theta parameter; for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)
 }

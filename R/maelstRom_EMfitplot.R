@@ -1,23 +1,25 @@
-#' Plot maelstRom's EM-fit results.
+#' Plots the result of maelstRom's beta-binomial mixture EM-fit.
 #'
-#' \code{maelstRom_EMfitplot} plots the results of maelstRom's beta-binomial EM-fit. More specifically, it plots both the observed reference allele fractions as a histogram (optionally scaled
-#' to a single total count parameter, see \code{ScaleHist} and \code{ScaleCount}) and the parameters yielded by the EM-fit as beta-binomial PMFs (assuming a total read counts \code{ScaleCount}
-#' and compressed to the zero-to-one interval of the reference allele fraction instead of integer reference counts). Optionally, the unshifted fit assuming no allelic bias (heterozygous
-#' pi-parameter = 0.5) is plotted as well, if \code{plot_NoShift} is TRUE and its distributional parameters are provided as input.
-#'
-#' @param ref_counts Numeric vector. Reference counts.
-#' @param var_counts Numeric vector. Variant counts.
+#' \code{maelstRom_EMfitplot} plots the results of maelstRom's beta-binomial mixture EM-fit. More specifically, it plots both the observed reference allele fractions as a histogram 
+#' (with observations optionally rescaled to observations with the same/closest likelihood but all sharing the same total count parameter; see \code{ScaleHist} and \code{ScaleCount}), 
+#' and beta-binomial PMFs using the parameters yielded by the EM-fit as (assuming a total read count \code{ScaleCount}
+#' and compressed to the zero-to-one interval of the reference allele fraction instead of integer reference counts). 
+#' Optionally, the unshifted fit assuming no allelic bias (heterozygous pi-parameter = 0.5) is plotted as well, 
+#' if \code{plot_NoShift} is TRUE and its distributional parameters are provided as input.
+#' 
+#' @param ref_counts Numeric vector. Observed reference counts.
+#' @param var_counts Numeric vector. Observed variant counts.
 #' @param pr Number. Reference homozygote genotype probability of the locus.
 #' @param pv Number. Variant homozygote genotype probability of the locus.
 #' @param prv Number. Heterozygote genotype probability of the locus.
-#' @param theta_hom Number. The dispersion parameter of the homozygous peaks.
-#' @param theta_het Number. The dispersion parameter of the heterozygous peak.
-#' @param pr_NoShift Number. Reference homozygote genotype probability of the locus under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).
-#' @param pv_NoShift Number. Variant homozygote genotype probability of the locus under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).
-#' @param prv_NoShift Number. Heterozygote genotype probability of the locus under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).
-#' @param theta_hom_NoShift Number. The dispersion parameter of the homozygous peaks under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).
-#' @param theta_het_NoShift Number. The dispersion parameter of the heterozygous peak under the null hypothesis fit (no allelic bias; heterozygous pi-parameter = 0.5).
-#' @param probshift Number. The reference allele fraction in heterozygotes, indicating allelic bias when deviating from 0.5
+#' @param theta_hom Number. The beta-binomial overdispersion parameter, as theta, of the homozygous peaks.
+#' @param theta_het Number. The beta-binomial overdispersion parameter, as theta, of the heterozygous peak.
+#' @param pr_NoShift Number. Optional; reference homozygote genotype probability of the locus under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).
+#' @param pv_NoShift Number. Optional; variant homozygote genotype probability of the locus under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).
+#' @param prv_NoShift Number. Optional; heterozygote genotype probability of the locus under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).
+#' @param theta_hom_NoShift Number. Optional; the beta-binomial overdispersion parameter, as theta, of the homozygous peaks under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).
+#' @param theta_het_NoShift Number. Optional; the beta-binomial overdispersion parameter, as theta, of the heterozygous peak under the null hypothesis of no allelic bias (heterozygous pi-parameter = 0.5).
+#' @param probshift Number. The reference allele fraction in heterozygotes, i.e. the beta-binomial pi-parameter, which indicates allelic bias when deviating from 0.5
 #' @param SE Number. Sequencing error rate.
 #' @param MinCount Number. A minimal count filter for plotting only; samples with a lower count will not be included in the plotted histogram.
 #' @param ScaleCount Number. Even though the observed number of reads can vary per sample, we have to assume a single number of observed reads to plot PMFs. One can opt to pick
@@ -26,15 +28,15 @@
 #' of reference reads being determined as the quantile function assuming \code{ScaleCount} total counts with the same probability as the observed data (this probability being calculated
 #' with the actually observed number of counts). The idea here is to better reflect how well the observed data corresponds to the fitted PMF, which is plotted for a single number of observed reads.
 #' @param nbins Number. Number of bins for the histogram depicting the observed reference allele fractions.
-#' @param plot_NoShift Logical. If TRUE, also plots the PMF of the unshifted fit (no allelic bias; heterozygous pi-parameter = 0.5)
+#' @param plot_NoShift Logical. If TRUE, also plots the PMF of the unshifted fit (see "_NoShift" parameters above)
 #' @param SplitPeaks Logical. If TRUE, the PMFs of both homozygotes and the heterozygotes are plotted seperately and using different colors. If FALSE, one total PMF of the mixture model is plotted.
 #' @param ShiftCols String (vector). Colors for the plotted PMFs of the fit incorporating allelic bias. Three values are required if \code{SplitPeaks} is TRUE, otherwise just one value is required.
 #' Default colors are used in case none are given as input.
 #' @param NoShiftCol String. Color for the unshifted PMF (no allelic bias; heterozygous pi-parameter = 0.5). There's no option to split the peaks of this unshifted fit as it would make
-#' the final figure way too clustered, so only one color value is required. A default color is used in case non is given as input.
+#' the final figure way too clustered, so only one color value is required. Will default to purple in case no input is given.
 #' @param wd_res String. Working directory where plots are saved; if non is given, the plot itself (as a \code{ggplot2} object) is returned instead.
-#' @param position Number. Position of the locus, to be used in naming the output file if a \code{wd_res} is given.
 #' @param chr Number. Chromosome of the locus, to be used in naming the output file if a \code{wd_res} is given.
+#' @param position Number. Position of the locus, to be used in naming the output file if a \code{wd_res} is given.
 #' @param gene String. Gene the locus is part of, to be used in naming the output file if a \code{wd_res} is given; optional.
 #' @param DataList_out Dataframe. Alternatively, \code{maelstRom_EMfitplot} accepts a dataframes containing per-sample data of the locus of interest. From this, it can
 #' infer its \code{ref_counts}, \code{var_counts}, \code{pr_NoShift}, \code{prv_NoShift} and \code{pv_NoShift} arguments. This is possible
@@ -51,6 +53,7 @@
 #' you need to specify whether to plot controls or cases using the \code{PlotWhich} argument.
 #' @param PlotWhich String. Either "control" or "case", to know which data to fetch from \code{dAD_res} for plotting.
 #' The dataframe given as the \code{DataList_out} argument should of course be of the corresponding population.
+#' @param BG String. Background color of the returned plots (can be a color name, or a color's hexadecimal code; default "#F2F2F2")
 #' @export
 
 maelstRom_EMfitplot <- function(ref_counts = NULL, var_counts = NULL, pr = NULL, prv = NULL, pv = NULL, theta_hom = NULL, theta_het = NULL, pr_NoShift = NULL, prv_NoShift = NULL, pv_NoShift = NULL, 

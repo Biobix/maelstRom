@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{LogTrapezoidalInt_CPP}
 \alias{LogTrapezoidalInt_CPP}
-\title{DO SOMETHING}
+\title{Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "Gregory"}
 \usage{
 LogTrapezoidalInt_CPP(lower, upper, n, a, b, q, TC, RC, curTR, curRC)
 }
 \description{
-DO SOMETHING
+Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "Gregory"
 }

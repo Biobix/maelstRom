@@ -1,21 +1,21 @@
-#' Performs a differential Allelic Divergence analysis on a control- and case-dataset
+#' Performs a differential Allelic Dispersion analysis on a control- and case-dataset
 #'
 #' \code{dAD_analysis} is a wrapper function bundling \code{EMfit_betabinom_robust}, \code{EMfit_betabinom}, \code{EMfit_betabinom_popcomb},
-#' \code{pmf_betabinomMix}, and \code{HWE_chisquared} to run the entire differential Allelic Divergence detection analysis as discussed in the package vignette.
+#' \code{pmf_betabinomMix}, and \code{HWE_chisquared} to run the entire differential Allelic Dispersion detection analysis as discussed in the package vignette.
 #' To this end, it goes over the following steps:
 #' \enumerate{
 #'   \item Calling \code{EMfit_betabinom_robust} on both the control- and case-dataset separately for the sole purpose of outlier detection;
 #'   detected outliers in both datasets play no part in future Expectation-Maximization-fits.
 #'   \item Perform one fit on the joint (case+control) data using \code{EMfit_betabinom}, i.e. assuming all population parameters are shared including
-#'   the heterozygous overdispersion parameter, i.e. assuming no differential Allelic Divergence.
+#'   the heterozygous overdispersion parameter, i.e. assuming no differential Allelic Dispersion.
 #'   \item Perform a fit on the control- and case-data using \code{EMfit_betabinom_popcomb}, which assumes all population parameters are shared
-#'   except for the heteroyzous overdispersion parameter, i.e. a fit accomodating differential Allelic Divergence
-#'   \item Statistically test for differential Allelic Divergence using a likelihood ratio test with one degree of freedom comparing the
+#'   except for the heteroyzous overdispersion parameter, i.e. a fit accomodating differential Allelic Dispersion
+#'   \item Statistically test for differential Allelic Dispersion using a likelihood ratio test with one degree of freedom comparing the
 #'   fits from the two previous points.
 #'   \item Filling out the results dataframe \code{dAD_res}.
 #' }
 #' 
-#' @param Datalist A list containing two lists of dataframes, which in turn contain control- and case-data (in that order). Subsequent entries in both lists
+#' @param datas A list containing two lists of dataframes, which in turn contain control- and case-data (in that order). Subsequent entries in both lists
 #' correspond to subsequent loci (lists must be the same size and named per-locus). Each of the dataframes should at least contain both a \code{ref_count} and
 #' \code{var_count} column.
 #' @param SE Number. Sequencing error rate population metaparameter.
@@ -25,34 +25,54 @@
 #' for more information. Usually, these parameter's default values are fine.
 #' @export
 #' @return A dataframe with one row per locus, containing for that locus in its columns:
-#' \item{LocName}{Locus name.}
-#' \item{PiFitH0}{Heterozygous pi parameter (reference allele fraction) for the joint fit sharing all parameters.}
-#' \item{PiFitH1}{Heterozygous pi parameter (reference allele fraction) for the fit allowing differential Allelic Divergence.}
-#' \item{ThetaHetH0}{Heterozygous theta parameter (overdispersion) for the joint fit sharing all parameters.}
-#' \item{ThetaHetCTRL}{Heterozygous theta parameter (overdispersion) of controls for the fit allowing differential Allelic Divergence.}
-#' \item{ThetaHetCASE}{Heterozygous theta parameter (overdispersion) of cases for the fit allowing differential Allelic Divergence.}
-#' \item{RhoHetH0}{Heterozygous rho parameter (overdispersion, ranging from 0 to 1) for the joint fit sharing all parameters.}
-#' \item{RhoHetCTRL}{Heterozygous rho parameter (overdispersion, ranging from 0 to 1) of controls for the fit allowing differential Allelic Divergence.}
-#' \item{RhoHetCASE}{Heterozygous rho parameter (overdispersion, ranging from 0 to 1) of cases for the fit allowing differential Allelic Divergence.}
-#' \item{NumHetCTRL}{Estimate number of heterozygotes in controls, according to its separate outlier-detection fit from step 1 above. Outliers are themselves genotyped and counted towards this number, just not used in the actual fitting procedure.}
-#' \item{NumHetCASE}{Estimate number of heterozygotes in cases, according to its separate outlier-detection fit from step 1 above. Outliers are themselves genotyped and counted towards this number, just not used in the actual fitting procedure.}
-#' \item{RobFlagCTRL}{The \code{RobFlag} output of the separate outlier-detection fit from step 1 on controls, see \code{EMfit_betabinom_robust}'s documentation.}
-#' \item{RobFlagCASE}{The \code{RobFlag} output of the separate outlier-detection fit from step 1 on cases, see \code{EMfit_betabinom_robust}'s documentation.}
-#' \item{HWECTRL}{HWE chi squared p-value for controls, see \code{HWE_chisquared}. Performed on genotyping data according to the outlier-detection fit of step 1.}
-#' \item{HWECASE}{HWE chi squared p-value for cases, see \code{HWE_chisquared}. Performed on genotyping data according to the outlier-detection fit of step 1.}
-#' \item{CovCTRL_mean}{Mean coverage (reference + variant count) across control data.}
-#' \item{CovCASE_mean}{Mean coverage (reference + variant count) across case data.}
-#' \item{CovCTRL_med}{Median coverage (reference + variant count) across control data.}
-#' \item{CovCASE_med}{Median coverage (reference + variant count) across case data.}
-#' \item{NumOutCTRL}{Number of outliers detected in control data.}
-#' \item{NumOutCASE}{Number of outliers detected in case data.}
-#' \item{QualityCTRL}{Quality flag returned by \code{EMfit_betabinom_robust} (see documentation) of the outlier-detection fit on control data (step 1 above).}
-#' \item{QualityCASE}{Quality flag returned by \code{EMfit_betabinom_robust} (see documentation) of the outlier-detection fit on case data (step 1 above).}
-#' \item{pr}{Reference homozygote fraction according to the differential Allelic Divergence accomodating fit (different heterozygous overdispersion parameters).}
-#' \item{prv}{Heterozygote fraction according to the differential Allelic Divergence accomodating fit (different heterozygous overdispersion parameters).}
-#' \item{pv}{Variant homozygote fraction according to the differential Allelic Divergence accomodating fit (different heterozygous overdispersion parameters).}
-#' \item{ThetaHomH0}{Homozygous theta parameter (overdispersion) for the joint fit sharing all parameters.}
-#' \item{ThetaHomH1}{Homozygous theta parameter (overdispersion) for the fit allowing differential Allelic Divergence.}
+#' \item{Locus}{Locus name.}
+#' \item{Gene}{Gene name.}
+#' \item{dAD_pval}{Raw likelihood ratio test p-value testing for differential allelic dispersion between controls and cases (i.e. a difference between ThetaHetC and ThetaHetT).}
+#' \item{phi_rr}{Estimated reference homozygote mixture component in the beta-binomial mixture dAD fit.}
+#' \item{phi_rv}{Estimated heterozygote mixture component in the beta-binomial mixture dAD fit.}
+#' \item{phi_vv}{Estimated variant homozygote mixture component in the beta-binomial mixture dAD fit.}
+#' \item{Pi}{Estimated heterozygous pi parameter (assumed equal in controls and cases) in the beta-binomial mixture dAD fit.}
+#' \item{ThetaHetC}{Estimated control heterozygous theta parameter in the beta-binomial mixture dAD fit.}
+#' \item{ThetaHetT}{Estimated case heterozygous theta parameter in the beta-binomial mixture dAD fit.}
+#' \item{RhoC}{Estimated control heterozygous rho parameter (0-to-1 rescaling of theta) in the beta-binomial mixture dAD fit.}
+#' \item{RhoT}{Estimated case heterozygous rho parameter (0-to-1 rescaling of theta) in the beta-binomial mixture dAD fit.}
+#' \item{ThetaHom}{Estimated homozygous theta parameter in the beta-binomial mixture dAD fit.}
+#' \item{phi_rr_H0}{Estimated reference homozygote mixture component in the beta-binomial mixture fit assuming no dAD.}
+#' \item{phi_rv_H0}{Estimated heterozygote mixture component in the beta-binomial mixture fit assuming no dAD.}
+#' \item{phi_vv_H0}{Estimated variant homozygote mixture component in the beta-binomial mixture fit assuming no dAD.}
+#' \item{PiH0}{Estimated heterozygous pi parameter (assumed equal in controls and cases) in the beta-binomial mixture fit assuming no dAD.}
+#' \item{ThetaHetH0}{Estimated heterozygous theta parameter in the beta-binomial mixture fit assuming no dAD.}
+#' \item{RhoH0}{Estimated heterozygous rho parameter (0-to-1 rescaling of theta) in the beta-binomial mixture fit assuming no dAD.}
+#' \item{ThetaHomH0}{Estimated homozygous theta parameter in the beta-binomial mixture fit assuming no dAD.}
+#' \item{phi_rr_OnlyC}{Estimated reference homozygote mixture component in the beta-binomial mixture fit on control samples alone.}
+#' \item{phi_rv_OnlyC}{Estimated heterozygote mixture component in the beta-binomial mixture fit on control samples alone.}
+#' \item{phi_vv_OnlyC}{Estimated variant homozygote mixture component in the beta-binomial mixture fit on control samples alone.}
+#' \item{PiOnlyC}{Estimated heterozygous pi parameter in the beta-binomial mixture fit on control samples alone.}
+#' \item{ThetaHetOnlyC}{Estimated heterozygous theta parameter in the beta-binomial mixture fit on control samples alone.}
+#' \item{ThetaHomOnlyC}{Estimated homozygous theta parameter in the beta-binomial mixture fit on control samples alone.}
+#' \item{phi_rr_OnlyT}{Estimated reference homozygote mixture component in the beta-binomial mixture fit on case samples alone.}
+#' \item{phi_rv_OnlyT}{Estimated heterozygote mixture component in the beta-binomial mixture fit on case samples alone.}
+#' \item{phi_vv_OnlyT}{Estimated variant homozygote mixture component in the beta-binomial mixture fit on case samples alone.}
+#' \item{PiOnlyT}{Estimated heterozygous pi parameter in the beta-binomial mixture fit on case samples alone.}
+#' \item{ThetaHetOnlyT}{Estimated heterozygous theta parameter in the beta-binomial mixture fit on case samples alone.}
+#' \item{ThetaHomOnlyT}{Estimated homozygous theta parameter in the beta-binomial mixture fit on case samples alone.}
+#' \item{NumHetC}{Estimated number of heterozygotes in controls, according to a fit on controls alone. Outliers, which are detected at the time of this fit, are counted towards this number, but not used in any following fitting procedures.}
+#' \item{NumHetT}{Estimated number of heterozygotes in cases, according to a fit on cases alone. Outliers, which are detected at the time of this fit, are counted towards this number, but not used in any following fitting procedures.}
+#' \item{RobFlagC}{The \code{RobFlag} output of the separate outlier-detection fit on controls, see \code{EMfit_betabinom_robust}'s documentation.}
+#' \item{RobFlagT}{The \code{RobFlag} output of the separate outlier-detection fit on cases, see \code{EMfit_betabinom_robust}'s documentation.}
+#' \item{HWEC}{HWE chi squared p-value for controls, see \code{HWE_chisquared}. Performed on the outlier-detection fit on controls alone.}
+#' \item{HWET}{HWE chi squared p-value for cases, see \code{HWE_chisquared}. Performed on the outlier-detection fit on cases alone.}
+#' \item{CovC}{Mean coverage (reference + variant count) across control data.}
+#' \item{CovT}{Mean coverage (reference + variant count) across case data.}
+#' \item{CovC_Med}{Median coverage (reference + variant count) across control data.}
+#' \item{CovT_Med}{Median coverage (reference + variant count) across case data.}
+#' \item{NumOutC}{Number of outliers detected in control data.}
+#' \item{NumOutT}{Number of outliers detected in case data.}
+#' \item{nrep_H0}{Number of expectation-maximization iterations run during the beta-binomial mixture fit assuming no dAD.}
+#' \item{nrep_H1}{Number of expectation-maximization iterations run during the beta-binomial dAD mixture fit.}
+#' \item{QualityC}{Quality flag returned by \code{EMfit_betabinom_robust} (see documentation) of the fit on control data alone.}
+#' \item{QualityT}{Quality flag returned by \code{EMfit_betabinom_robust} (see documentation) of the fit on case data alone.}
+#' 
 
 dAD_analysis <- function(datas,
                          SE, inbr,

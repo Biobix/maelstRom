@@ -52,7 +52,7 @@ void
 
 
 
-//' DO SOMETHING
+//' UNUSED test function for C++ driven numeric optimization
 //' @export
 // [[Rcpp::export]]
 NumericVector

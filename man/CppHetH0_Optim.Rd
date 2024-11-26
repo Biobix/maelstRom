@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{CppHetH0_Optim}
 \alias{CppHetH0_Optim}
-\title{DO SOMETHING}
+\title{Optimizer for theta for heterozygous samples assuming a fixed pi parameter in the beta-binomial mixture fit using expectation-maximization}
 \usage{
 CppHetH0_Optim(
   ThetaHetStart,
@@ -18,5 +18,5 @@ CppHetH0_Optim(
 )
 }
 \description{
-DO SOMETHING
+Optimizer for theta for heterozygous samples assuming a fixed pi parameter in the beta-binomial mixture fit using expectation-maximization
 }

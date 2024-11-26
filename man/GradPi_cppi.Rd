@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{GradPi_cppi}
 \alias{GradPi_cppi}
-\title{DO SOMETHING}
+\title{Beta-binomial gradient with respect to its pi parameter; for internal use by C++}
 \usage{
 GradPi_cppi(M, N, PI, THETA, MemLim, Xtra)
 }
 \description{
-DO SOMETHING
+Beta-binomial gradient with respect to its pi parameter; for internal use by C++
 }

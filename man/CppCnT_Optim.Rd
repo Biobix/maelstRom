@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{CppCnT_Optim}
 \alias{CppCnT_Optim}
-\title{DO SOMETHING}
+\title{Optimizer for pi, theta_control, and theta_case, for heterozygous samples in the differential control-case beta-binomial mixture fit using expectation-maximization}
 \usage{
 CppCnT_Optim(
   StartVals,
@@ -18,5 +18,5 @@ CppCnT_Optim(
 )
 }
 \description{
-DO SOMETHING
+Optimizer for pi, theta_control, and theta_case, for heterozygous samples in the differential control-case beta-binomial mixture fit using expectation-maximization
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{LogGaussianQuad_CPP}
 \alias{LogGaussianQuad_CPP}
-\title{DO SOMETHING}
+\title{Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "GaussianQuad"}
 \usage{
 LogGaussianQuad_CPP(lower, upper, a, b, q, TC, RC, curTR, curRC, Wvec, Nvec)
 }
 \description{
-DO SOMETHING
+Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "GaussianQuad"
 }

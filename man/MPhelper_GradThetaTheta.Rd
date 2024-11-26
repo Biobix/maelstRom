@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{MPhelper_GradThetaTheta}
 \alias{MPhelper_GradThetaTheta}
-\title{DO SOMETHING}
+\title{Helper function for GradThetaTheta_cppi}
 \usage{
 MPhelper_GradThetaTheta(M, N, PI, NecPres)
 }
 \description{
-DO SOMETHING
+Helper function for GradThetaTheta_cppi
 }

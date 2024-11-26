@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{dBetaBin_cppi_MP}
 \alias{dBetaBin_cppi_MP}
-\title{DO SOMETHING}
+\title{dBetaBinom implementation for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)}
 \usage{
 dBetaBin_cppi_MP(M, N, PI, THETA, NecPres)
 }
 \description{
-DO SOMETHING
+dBetaBinom implementation for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)
 }

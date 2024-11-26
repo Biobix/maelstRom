@@ -24,7 +24,7 @@ struct myHetH0_P {double probshift; NumericVector ref_counts; NumericVector var_
 
 
 
-//' DO SOMETHING
+//' dBetaBinom implementation for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)
 //' @export
 // [[Rcpp::export]]
 double
@@ -64,7 +64,7 @@ double
 
 
 
-//' DO SOMETHING
+//' dBetaBinom implementation for internal use by C++
 //' @export
 // [[Rcpp::export]]
 double
@@ -252,7 +252,7 @@ double
 
 
 
-//' DO SOMETHING
+//' Beta-binomial gradient with respect to its pi parameter; for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)
 //' @export
 // [[Rcpp::export]]
 double
@@ -285,7 +285,7 @@ double
   }
 
 
-//' DO SOMETHING
+//' Beta-binomial gradient with respect to its pi parameter; for internal use by C++
 //' @export
 // [[Rcpp::export]]
 double
@@ -373,7 +373,7 @@ double
   }
 
 
-//' DO SOMETHING
+//' Beta-binomial gradient with respect to its pi parameter
 //' @export
 // [[Rcpp::export]]
 NumericVector
@@ -396,7 +396,7 @@ NumericVector
 
 
 
-//' DO SOMETHING
+//' Beta-binomial gradient with respect to its theta parameter; for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)
 //' @export
 // [[Rcpp::export]]
 double
@@ -433,7 +433,7 @@ double
   }
 
 
-//' DO SOMETHING
+//' Beta-binomial gradient with respect to its theta parameter; for internal use by C++
 //' @export
 // [[Rcpp::export]]
 double
@@ -561,7 +561,7 @@ double
 
 
 
-//' DO SOMETHING
+//' Beta-binomial gradient with respect to its theta parameter
 //' @export
 // [[Rcpp::export]]
 NumericVector
@@ -654,7 +654,7 @@ void
  
 
 
-//' DO SOMETHING
+//' Optimizer for pi, theta_control, and theta_case, for heterozygous samples in the differential control-case beta-binomial mixture fit using expectation-maximization
 //' @export
 // [[Rcpp::export]]
 NumericVector
@@ -824,7 +824,7 @@ void
 
 
 
-//' DO SOMETHING
+//' Optimizer for theta for homozygous samples in the beta-binomial mixture fit using expectation-maximization
 //' @export
 // [[Rcpp::export]]
 NumericVector
@@ -984,7 +984,7 @@ void
 
 
 
-//' DO SOMETHING
+//' Optimizer for pi, theta for heterozygous samples in the beta-binomial mixture fit using expectation-maximization
 //' @export
 // [[Rcpp::export]]
 NumericVector
@@ -1145,7 +1145,7 @@ void
 
 
 
-//' DO SOMETHING
+//' Optimizer for theta for heterozygous samples assuming a fixed pi parameter in the beta-binomial mixture fit using expectation-maximization
 //' @export
 // [[Rcpp::export]]
 NumericVector
@@ -1213,7 +1213,7 @@ NumericVector
 
 
 
-//' DO SOMETHING
+//' Beta-binomial second-order derivative with respect to its pi parameter (twice); for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)
 //' @export
 // [[Rcpp::export]]
 double
@@ -1247,7 +1247,7 @@ double
   }
 
 
-//' DO SOMETHING
+//' Beta-binomial second-order derivative with respect to its pi parameter (twice); for internal use by C++
 //' @export
 // [[Rcpp::export]]
 double
@@ -1326,7 +1326,7 @@ double
   }
 
 
-//' DO SOMETHING
+//' Beta-binomial second-order derivative with respect to its pi parameter (twice)
 //' @export
 // [[Rcpp::export]]
 NumericVector
@@ -1356,7 +1356,7 @@ NumericVector
 
 
 
-//' DO SOMETHING
+//' Beta-binomial second-order derivative with respect to its pi parameter (once) and theta-parameter (once); for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)
 //' @export
 // [[Rcpp::export]]
 double
@@ -1390,7 +1390,7 @@ double
   }
 
 
-//' DO SOMETHING
+//' Beta-binomial second-order derivative with respect to its pi parameter (once) and theta-parameter (once); for internal use by C++
 //' @export
 // [[Rcpp::export]]
 double
@@ -1469,7 +1469,7 @@ double
   }
 
 
-//' DO SOMETHING
+//' Beta-binomial second-order derivative with respect to its pi parameter (once) and theta-parameter (once)
 //' @export
 // [[Rcpp::export]]
 NumericVector
@@ -1494,7 +1494,7 @@ NumericVector
 
 
 
-//' DO SOMETHING
+//' Helper function for GradThetaTheta_cppi
 //' @export
 // [[Rcpp::export]]
 double
@@ -1520,7 +1520,7 @@ double
 
 
 
-//' DO SOMETHING
+//' Beta-binomial second-order derivative with respect to its theta-parameter (twice); for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)
 //' @export
 // [[Rcpp::export]]
 double
@@ -1558,7 +1558,7 @@ double
   }
 
 
-//' DO SOMETHING
+//' Beta-binomial second-order derivative with respect to its theta-parameter (twice); for internal use by C++
 //' @export
 // [[Rcpp::export]]
 double
@@ -1674,7 +1674,7 @@ double
 
 
 
-//' DO SOMETHING
+//' Beta-binomial second-order derivative with respect to its theta-parameter (twice)
 //' @export
 // [[Rcpp::export]]
 NumericVector

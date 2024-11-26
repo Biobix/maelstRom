@@ -2,7 +2,7 @@
 % Please edit documentation in R/MomentEst_MixedBetaBinom_SESlack.R
 \name{MomentEst_MixedBetaBinom_SESlack}
 \alias{MomentEst_MixedBetaBinom_SESlack}
-\title{This function is a work in progress. As such, it is not exported yet; but it allows for some leniency on the sequencing error parameter, hence "SESlack"}
+\title{Similar to MomentEst_MixedBetaBinom, but allowing for slack on the SE parameter (see EMfit_betabinom_SEslack)}
 \usage{
 MomentEst_MixedBetaBinom_SESlack(
   ref_counts,
@@ -16,5 +16,5 @@ MomentEst_MixedBetaBinom_SESlack(
 )
 }
 \description{
-This function is a work in progress. As such, it is not exported yet; but it allows for some leniency on the sequencing error parameter, hence "SESlack"
+Similar to MomentEst_MixedBetaBinom, but allowing for slack on the SE parameter (see EMfit_betabinom_SEslack)
 }

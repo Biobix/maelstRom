@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{MyOptTest}
 \alias{MyOptTest}
-\title{DO SOMETHING}
+\title{UNUSED test function for C++ driven numeric optimization}
 \usage{
 MyOptTest(parX)
 }
 \description{
-DO SOMETHING
+UNUSED test function for C++ driven numeric optimization
 }

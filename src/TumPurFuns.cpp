@@ -6,8 +6,24 @@
 using namespace Rcpp;
 
 
-//' DO SOMETHING
+//' Returns an (approximate) log of a sum based on individual logs of the terms being summed
+//'
+//' \code{logSums_MaxMethod_CPP} is an internal C++ implementation of logSum_MaxMethod, and
+//' calculates the (approximate) log of a sum of terms, based on the individual logs of these terms.
+//' Simply taking the exponent of these individual terms, then summing them, then taking the log again, is usually not possible if taking the exponent of the
+//' supplied values results in a numeric overflow. The rationale here is:
+//' 
+//' log(x + y + z) =(suppose x is the MAXIMUM amongst {x,y,z}) log(((x+y+z)/x) * x) = log(x) + log((x+y+z)/x) = log(x) + log(x/x + y/x + z/x) =
+//' log(x) + log(exp(log(x/x)) + exp(log(y/x)) + exp(log(z/x))) = log(x) + log(exp(log(x)-log(x)) + exp(log(y)-log(x)) + exp(log(z)-log(x)))
+//' 
+//' Now, log(x)-log(x) cancels out, and the remaining (log(y)-log(x)) and (log(z)-log(x)) are negative (x is the maximum amontst {x,y,z}) meaning that,
+//' worst case scenario, x is that much larger than y and z that these terms are high and negative, resulting in a calculated exp-value of zero;
+//' this isn't too bad though, as the first term (log(x)) is still there, and if x is so much higher than the other terms, then the log of sums will be
+//' mainly dictated by x anyway (when remaining on R's default numerical precision, and given a limited number of terms being summed; once again, this value is approximate).
+//'
+//' @param logvec Numeric vector. separate log values, of which we want to calculate the log of the sum of their (non-log) values
 //' @export
+//' @return The log of the sum of the values for which the separate logs were supplied as input.
 // [[Rcpp::export]]
 double logSums_MaxMethod_CPP(std::vector<double> logvec) {
   
@@ -39,8 +55,24 @@ double logSums_MaxMethod_CPP(std::vector<double> logvec) {
 
 
 
-//' DO SOMETHING
+//' Returns an (approximate) log of a sum based on individual logs of the terms being summed
+//'
+//' \code{logSums_MaxMethod_CPP_R} is a C++ implementation of logSum_MaxMethod callable from R, and
+//' calculates the (approximate) log of a sum of terms, based on the individual logs of these terms.
+//' Simply taking the exponent of these individual terms, then summing them, then taking the log again, is usually not possible if taking the exponent of the
+//' supplied values results in a numeric overflow. The rationale here is:
+//' 
+//' log(x + y + z) =(suppose x is the MAXIMUM amongst {x,y,z}) log(((x+y+z)/x) * x) = log(x) + log((x+y+z)/x) = log(x) + log(x/x + y/x + z/x) =
+//' log(x) + log(exp(log(x/x)) + exp(log(y/x)) + exp(log(z/x))) = log(x) + log(exp(log(x)-log(x)) + exp(log(y)-log(x)) + exp(log(z)-log(x)))
+//' 
+//' Now, log(x)-log(x) cancels out, and the remaining (log(y)-log(x)) and (log(z)-log(x)) are negative (x is the maximum amontst {x,y,z}) meaning that,
+//' worst case scenario, x is that much larger than y and z that these terms are high and negative, resulting in a calculated exp-value of zero;
+//' this isn't too bad though, as the first term (log(x)) is still there, and if x is so much higher than the other terms, then the log of sums will be
+//' mainly dictated by x anyway (when remaining on R's default numerical precision, and given a limited number of terms being summed; once again, this value is approximate).
+//'
+//' @param logvec Numeric vector. separate log values, of which we want to calculate the log of the sum of their (non-log) values
 //' @export
+//' @return The log of the sum of the values for which the separate logs were supplied as input.
 // [[Rcpp::export]]
 double logSums_MaxMethod_CPP_R(NumericVector logvec) {
   
@@ -72,8 +104,34 @@ double logSums_MaxMethod_CPP_R(NumericVector logvec) {
 
 
 
-//' DO SOMETHING
+//' Returns an (approximate) log of a sum based on individual logs of the terms being summed, but can include negative terms (see further)
+//'
+//' \code{logSums_MaxMethod_CPP} is an internal C++ implementation of logSum_MaxMethod, and
+//' calculates the (approximate) log of a sum of terms, based on the individual logs of these terms.
+//' Simply taking the exponent of these individual terms, then summing them, then taking the log again, is usually not possible if taking the exponent of the
+//' supplied values results in a numeric overflow. The rationale here is:
+//' 
+//' log(x + y + z) =(suppose x is the MAXIMUM amongst {x,y,z}) log(((x+y+z)/x) * x) = log(x) + log((x+y+z)/x) = log(x) + log(x/x + y/x + z/x) =
+//' log(x) + log(exp(log(x/x)) + exp(log(y/x)) + exp(log(z/x))) = log(x) + log(exp(log(x)-log(x)) + exp(log(y)-log(x)) + exp(log(z)-log(x)))
+//' 
+//' Now, log(x)-log(x) cancels out, and the remaining (log(y)-log(x)) and (log(z)-log(x)) are negative (x is the maximum amontst {x,y,z}) meaning that,
+//' worst case scenario, x is that much larger than y and z that these terms are high and negative, resulting in a calculated exp-value of zero;
+//' this isn't too bad though, as the first term (log(x)) is still there, and if x is so much higher than the other terms, then the log of sums will be
+//' mainly dictated by x anyway (when remaining on R's default numerical precision, and given a limited number of terms being summed; once again, this value is approximate).
+//' 
+//' In this implementation, negative terms are actually allowed, but the sign of terms should be supplied as a separate input "signvec"
+//' If negative, a term's separate contribution to the final big log-term in the formula above (e.g. exp(log(y)-log(x)) for term y)
+//' is subtracted instead of added. This is okay as long as the final result of which the log is eventually taken still ends up being positive.
+//' Accordingly, this method should only be used if this is actually expected.
+//' For example, this function is used by maelstRom's implementation for calculating the probability distrubution of a sum
+//' of two completely correlated beta-binomials using the  Newton-Cotes numerical integration method,
+//' for which we expect positive outcomes for maelstRom's applications (integration of probability distributions). 
+//'
+//' @param logvec Numeric vector. separate log values, of which we want to calculate the log of the sum of their (non-log) values
+//' @param signvec Numeric vector. separate signs of the values being summed/subtracted (as +1 or -1), as their log-values provided in logvec can,
+//' of course, not contain this information.
 //' @export
+//' @return The log of the sum of the values for which the separate logs were supplied as input.
 // [[Rcpp::export]]
 double logSums_MaxMethodSigned_CPP(std::vector<double> logvec, std::vector<int> signvec) {
   
@@ -112,7 +170,7 @@ double logSums_MaxMethodSigned_CPP(std::vector<double> logvec, std::vector<int> 
 }
 
 
-//' DO SOMETHING
+//' Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "Gregory"
 //' @export
 // [[Rcpp::export]]
 double LogTrapezoidalInt_CPP(double lower, double upper, int n, double a, double b, double q, int TC, int RC, int curTR, int curRC) {
@@ -186,7 +244,7 @@ double LogTrapezoidalInt_CPP(double lower, double upper, int n, double a, double
 
 
 
-//' DO SOMETHING
+//' Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "NewtonCotes"
 //' @export
 // [[Rcpp::export]]
 double LogNewtonCotes_CPP(double lower, double upper, double a, double b, double q, int TC, int RC, int curTR, int curRC, NumericVector Wvec) {
@@ -242,7 +300,7 @@ double LogNewtonCotes_CPP(double lower, double upper, double a, double b, double
 
 
 
-//' DO SOMETHING
+//' Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "GaussianQuad"
 //' @export
 // [[Rcpp::export]]
 double LogGaussianQuad_CPP(double lower, double upper, double a, double b, double q, int TC, int RC, int curTR, int curRC, NumericVector Wvec, NumericVector Nvec) {
@@ -285,7 +343,7 @@ double LogGaussianQuad_CPP(double lower, double upper, double a, double b, doubl
 
 
 
-//' DO SOMETHING
+//' Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "TanhSinhQuad"
 //' @export
 // [[Rcpp::export]]
 double LogTanhSinhQuad_CPP(double lower, double upper, int n, double a, double b, double q, int TC, int RC, int curTR, int curRC, double prec) {
@@ -375,7 +433,7 @@ double LogTanhSinhQuad_CPP(double lower, double upper, int n, double a, double b
 
 
 
-//' DO SOMETHING
+//' Internal helper function for TumPur_LogLik_CPP
 //' @export
 // [[Rcpp::export]]
 double TumPurHelpFun_CPP(std::vector<int> RCcol, int TC, std::vector<int> TumReads_oi, double a, double b, double q, std::vector<double> SCP_oi, 
@@ -458,7 +516,7 @@ double TumPurHelpFun_CPP(std::vector<int> RCcol, int TC, std::vector<int> TumRea
 
 
 
-//' DO SOMETHING
+//' Internal helper function for TumPur_LogLik_CPP
 //' @export
 // [[Rcpp::export]]
 double TumPurHelpFun_CPP_R(NumericVector RCcol, int TC, NumericVector TumReads_oi, double a, double b, double q, NumericVector SCP_oi, 
@@ -537,10 +595,7 @@ double TumPurHelpFun_CPP_R(NumericVector RCcol, int TC, NumericVector TumReads_o
 }
 
 
-
-
-
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -617,7 +672,7 @@ double TumPur_LogLik_CPP(NumericVector optpars, NumericVector ref_counts, Numeri
 
 
 
-//' DO SOMETHING
+//' UNUSED alternative implementation of the qbeta funtion
 //' @export
 // [[Rcpp::export]]
 NumericVector qbeta_C(NumericVector qs, double a, double b) {
@@ -639,7 +694,7 @@ NumericVector qbeta_C(NumericVector qs, double a, double b) {
 }
 
 
-//' DO SOMETHING
+//' UNUSED alternative implementation of the qbeta funtion
 //' @export
 // [[Rcpp::export]]
 NumericVector qbeta_C3(NumericVector qs, double a, double b) {
@@ -668,7 +723,7 @@ NumericVector qbeta_C3(NumericVector qs, double a, double b) {
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP2(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -751,7 +806,7 @@ double TumPur_LogLik_CPP2(NumericVector optpars, NumericVector ref_counts, Numer
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP2X(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -834,7 +889,7 @@ double TumPur_LogLik_CPP2X(NumericVector optpars, NumericVector ref_counts, Nume
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP3(double q, double a, double b, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -911,7 +966,7 @@ double TumPur_LogLik_CPP3(double q, double a, double b, NumericVector ref_counts
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP3X(double q, double a, double b, double qlim, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -990,7 +1045,7 @@ double TumPur_LogLik_CPP3X(double q, double a, double b, double qlim, NumericVec
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP4(double q, double a, double b, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -1071,7 +1126,7 @@ double TumPur_LogLik_CPP4(double q, double a, double b, NumericVector ref_counts
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 std::vector<double> TumPur_LogLik_CPP_DB1(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -1155,7 +1210,7 @@ std::vector<double> TumPur_LogLik_CPP_DB1(NumericVector optpars, NumericVector r
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 std::list<std::vector<double> > TumPur_LogLik_CPP_DB2(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -1239,7 +1294,7 @@ std::list<std::vector<double> > TumPur_LogLik_CPP_DB2(NumericVector optpars, Num
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 std::list<std::vector<double> > TumPur_LogLik_CPP_DB3(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -1320,7 +1375,7 @@ std::list<std::vector<double> > TumPur_LogLik_CPP_DB3(NumericVector optpars, Num
 
 
 
-//' DO SOMETHING
+//' UNUSED
 //' @export
 // [[Rcpp::export]]
 std::vector<double> BrolDB(int TC, double TP){
@@ -1339,7 +1394,7 @@ std::vector<double> BrolDB(int TC, double TP){
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP2_10(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -1419,7 +1474,7 @@ double TumPur_LogLik_CPP2_10(NumericVector optpars, NumericVector ref_counts, Nu
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP2_100(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -1499,7 +1554,7 @@ double TumPur_LogLik_CPP2_100(NumericVector optpars, NumericVector ref_counts, N
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP2_1000(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {
@@ -1582,7 +1637,7 @@ double TumPur_LogLik_CPP2_1000(NumericVector optpars, NumericVector ref_counts, 
 
 
 
-//' DO SOMETHING
+//' @rdname TumPur_LogLik_CPPs
 //' @export
 // [[Rcpp::export]]
 double TumPur_LogLik_CPP2Y(NumericVector optpars, NumericVector ref_counts, NumericVector var_counts, NumericVector tumpur, NumericVector weights, double SCPthreshold, int n = 0, std::basic_string<char> NumIntMethod = "Gregory", double prec = 0.0001, NumericVector Wvec = 0, NumericVector Nvec = 0) {

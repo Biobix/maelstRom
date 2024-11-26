@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{LogTanhSinhQuad_CPP}
 \alias{LogTanhSinhQuad_CPP}
-\title{DO SOMETHING}
+\title{Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "TanhSinhQuad"}
 \usage{
 LogTanhSinhQuad_CPP(lower, upper, n, a, b, q, TC, RC, curTR, curRC, prec)
 }
 \description{
-DO SOMETHING
+Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "TanhSinhQuad"
 }

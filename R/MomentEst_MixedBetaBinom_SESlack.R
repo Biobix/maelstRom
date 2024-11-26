@@ -1,4 +1,4 @@
-#' This function is a work in progress. As such, it is not exported yet; but it allows for some leniency on the sequencing error parameter, hence "SESlack"
+#' Similar to MomentEst_MixedBetaBinom, but allowing for slack on the SE parameter (see EMfit_betabinom_SEslack)
 
 MomentEst_MixedBetaBinom_SESlack <- function(ref_counts, var_counts, spr, spv, sprv, pi_RR_fix = NULL, pi_VV_fix = NULL, pi_het_fix = NULL){
   

@@ -1,4 +1,8 @@
-#' This function is a work in progress. As such, it is not exported yet; but it allows for some leniency on the sequencing error parameter, hence "SESlack"
+#' Models allelic RNAseq counts using an expectation-maximization fit of a beta-binomial mixture distribution, allowing slight deviations in the Sequencing Error (SE) metaparameter. 
+#'
+#' \code{EMfit_betabinom_SEslack} is identical to `EMfit_betabinom`, but allows for the Sequencing Error (SE) parameter, used in the pi-parameter of homozygous beta-binomial peaks,
+#' to deviate from its given value slightly, up to a maximum of "SESlack" (input) times SE. For an explanation of the remaining inputs and the outputs, see `EMfit_betabinom`.
+#' THIS FUNCTION IS CURRENTLY NOT USED AS ITS PERFORMANCE ON ACTUAL DATA PROVED UNSATISFACTORY.
 
 EMfit_betabinom_SEslack <- function(data_counts, allelefreq=0.5, SE, inbr = 0, dltaco = 10^-6, HWE = FALSE, p_InitEst = FALSE, 
                                ThetaInits = "moment", ReEstThetas = "moment", NoSplitHom = TRUE, NoSplitHet = TRUE,

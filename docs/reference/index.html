@@ -58,6 +58,14 @@
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
+          <p><code><a href="AdvancedFitter.html">AdvancedFitter()</a></code> </p>
+        </td>
+        <td><p>Detects relationships between beta-binomial parameters (pi, theta) and independent variables</p></td>
+      </tr><tr><td>
+          <p><code><a href="AdvancedPvalcomb.html">AdvancedPvalcomb()</a></code> </p>
+        </td>
+        <td><p>Combines SNP-level dAD results to gene-level.</p></td>
+      </tr><tr><td>
           <p><code><a href="AllelicMeta_est.html">AllelicMeta_est()</a></code> </p>
         </td>
         <td><p>Estimate sequencing error rate and inbreeding using an Expectation-Maximisation algorithm</p></td>
@@ -84,7 +92,7 @@
       </tr><tr><td>
           <p><code><a href="BrolDB.html">BrolDB()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>UNUSED</p></td>
       </tr><tr><td>
           <p><code><a href="combine_p_gene.html">combine_p_gene()</a></code> </p>
         </td>
@@ -92,23 +100,23 @@
       </tr><tr><td>
           <p><code><a href="CppCnT_Optim.html">CppCnT_Optim()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Optimizer for pi, theta_control, and theta_case, for heterozygous samples in the differential control-case beta-binomial mixture fit using expectation-maximization</p></td>
       </tr><tr><td>
           <p><code><a href="CppHetH0_Optim.html">CppHetH0_Optim()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Optimizer for theta for heterozygous samples assuming a fixed pi parameter in the beta-binomial mixture fit using expectation-maximization</p></td>
       </tr><tr><td>
           <p><code><a href="CppHet_Optim.html">CppHet_Optim()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Optimizer for pi, theta for heterozygous samples in the beta-binomial mixture fit using expectation-maximization</p></td>
       </tr><tr><td>
           <p><code><a href="CppHom_Optim.html">CppHom_Optim()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Optimizer for theta for homozygous samples in the beta-binomial mixture fit using expectation-maximization</p></td>
       </tr><tr><td>
           <p><code><a href="dAD_analysis.html">dAD_analysis()</a></code> </p>
         </td>
-        <td><p>Performs a differential Allelic Divergence analysis on a control- and case-dataset</p></td>
+        <td><p>Performs a differential Allelic Dispersion analysis on a control- and case-dataset</p></td>
       </tr><tr><td>
           <p><code><a href="dBetaBinom_cpp_old.html">dBetaBinom_cpp_old()</a></code> </p>
         </td>
@@ -120,11 +128,11 @@
       </tr><tr><td>
           <p><code><a href="dBetaBin_cppi.html">dBetaBin_cppi()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>dBetaBinom implementation for internal use by C++</p></td>
       </tr><tr><td>
           <p><code><a href="dBetaBin_cppi_MP.html">dBetaBin_cppi_MP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>dBetaBinom implementation for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)</p></td>
       </tr><tr><td>
           <p><code><a href="dpqrBetaBinom.html">dBetaBinom()</a></code> <code><a href="dpqrBetaBinom.html">pBetaBinom()</a></code> <code><a href="dpqrBetaBinom.html">qBetaBinom()</a></code> <code><a href="dpqrBetaBinom.html">rBetaBinom()</a></code> </p>
         </td>
@@ -144,7 +152,7 @@
       </tr><tr><td>
           <p><code><a href="EMfit_betabinom_SEslack.html">EMfit_betabinom_SEslack()</a></code> </p>
         </td>
-        <td><p>This function is a work in progress. As such, it is not exported yet; but it allows for some leniency on the sequencing error parameter, hence "SESlack"</p></td>
+        <td><p>Models allelic RNAseq counts using an expectation-maximization fit of a beta-binomial mixture distribution, allowing slight deviations in the Sequencing Error (SE) metaparameter.</p></td>
       </tr><tr><td>
           <p><code><a href="EMfit_binom.html">EMfit_binom()</a></code> </p>
         </td>
@@ -160,47 +168,47 @@
       </tr><tr><td>
           <p><code><a href="GradPiPi_cppi.html">GradPiPi_cppi()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial second-order derivative with respect to its pi parameter (twice); for internal use by C++</p></td>
       </tr><tr><td>
           <p><code><a href="GradPiPi_cppi_MP.html">GradPiPi_cppi_MP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial second-order derivative with respect to its pi parameter (twice); for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)</p></td>
       </tr><tr><td>
           <p><code><a href="GradPiTheta_cppi.html">GradPiTheta_cppi()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial second-order derivative with respect to its pi parameter (once) and theta-parameter (once); for internal use by C++</p></td>
       </tr><tr><td>
           <p><code><a href="GradPiTheta_cppi_MP.html">GradPiTheta_cppi_MP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial second-order derivative with respect to its pi parameter (once) and theta-parameter (once); for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)</p></td>
       </tr><tr><td>
           <p><code><a href="GradPi_cppi.html">GradPi_cppi()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial gradient with respect to its pi parameter; for internal use by C++</p></td>
       </tr><tr><td>
           <p><code><a href="GradPi_cppi_MP.html">GradPi_cppi_MP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial gradient with respect to its pi parameter; for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)</p></td>
       </tr><tr><td>
           <p><code><a href="GradThetaTheta_cppi.html">GradThetaTheta_cppi()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial second-order derivative with respect to its theta-parameter (twice); for internal use by C++</p></td>
       </tr><tr><td>
           <p><code><a href="GradThetaTheta_cppi_MP.html">GradThetaTheta_cppi_MP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial second-order derivative with respect to its theta-parameter (twice); for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)</p></td>
       </tr><tr><td>
           <p><code><a href="GradTheta_cppi.html">GradTheta_cppi()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial gradient with respect to its theta parameter; for internal use by C++</p></td>
       </tr><tr><td>
           <p><code><a href="GradTheta_cppi_MP.html">GradTheta_cppi_MP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial gradient with respect to its theta parameter; for internal use by C++, accounting for numerical precision problems via increased memory usage (number of bits per number)</p></td>
       </tr><tr><td>
           <p><code><a href="grad_pi.html">grad_pi()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial gradient with respect to its pi parameter</p></td>
       </tr><tr><td>
           <p><code><a href="grad_pi_MP.html">grad_pi_MP()</a></code> </p>
         </td>
@@ -212,15 +220,15 @@
       </tr><tr><td>
           <p><code><a href="grad_pi_pi.html">grad_pi_pi()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial second-order derivative with respect to its pi parameter (twice)</p></td>
       </tr><tr><td>
           <p><code><a href="grad_pi_theta.html">grad_pi_theta()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial second-order derivative with respect to its pi parameter (once) and theta-parameter (once)</p></td>
       </tr><tr><td>
           <p><code><a href="grad_theta.html">grad_theta()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial gradient with respect to its theta parameter</p></td>
       </tr><tr><td>
           <p><code><a href="grad_theta_MP.html">grad_theta_MP()</a></code> </p>
         </td>
@@ -232,7 +240,7 @@
       </tr><tr><td>
           <p><code><a href="grad_theta_theta.html">grad_theta_theta()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Beta-binomial second-order derivative with respect to its theta-parameter (twice)</p></td>
       </tr><tr><td>
           <p><code><a href="HWE_chisquared.html">HWE_chisquared()</a></code> </p>
         </td>
@@ -252,31 +260,35 @@
       </tr><tr><td>
           <p><code><a href="LogGaussianQuad_CPP.html">LogGaussianQuad_CPP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "GaussianQuad"</p></td>
       </tr><tr><td>
           <p><code><a href="LogNewtonCotes_CPP.html">LogNewtonCotes_CPP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "NewtonCotes"</p></td>
+      </tr><tr><td>
+          <p><code><a href="logSums_MaxMethod.html">logSums_MaxMethod()</a></code> </p>
+        </td>
+        <td><p>Returns an (approximate) log of a sum based on individual logs of the terms being summed</p></td>
       </tr><tr><td>
           <p><code><a href="logSums_MaxMethodSigned_CPP.html">logSums_MaxMethodSigned_CPP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Returns an (approximate) log of a sum based on individual logs of the terms being summed, but can include negative terms (see further)</p></td>
       </tr><tr><td>
           <p><code><a href="logSums_MaxMethod_CPP.html">logSums_MaxMethod_CPP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Returns an (approximate) log of a sum based on individual logs of the terms being summed</p></td>
       </tr><tr><td>
           <p><code><a href="logSums_MaxMethod_CPP_R.html">logSums_MaxMethod_CPP_R()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Returns an (approximate) log of a sum based on individual logs of the terms being summed</p></td>
       </tr><tr><td>
           <p><code><a href="LogTanhSinhQuad_CPP.html">LogTanhSinhQuad_CPP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "TanhSinhQuad"</p></td>
       </tr><tr><td>
           <p><code><a href="LogTrapezoidalInt_CPP.html">LogTrapezoidalInt_CPP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Internal helper function for TumPur_LogLik_CPP when NumIntMethod == "Gregory"</p></td>
       </tr><tr><td>
           <p><code><a href="LOItest_logreg.html">LOItest_logreg()</a></code> </p>
         </td>
@@ -296,7 +308,7 @@
       </tr><tr><td>
           <p><code><a href="maelstRom_EMfitplot.html">maelstRom_EMfitplot()</a></code> </p>
         </td>
-        <td><p>Plot maelstRom's EM-fit results.</p></td>
+        <td><p>Plots the result of maelstRom's beta-binomial mixture EM-fit.</p></td>
       </tr><tr><td>
           <p><code><a href="maelstRom_imprintplot.html">maelstRom_imprintplot()</a></code> </p>
         </td>
@@ -316,11 +328,11 @@
       </tr><tr><td>
           <p><code><a href="MomentEst_MixedBetaBinom_SESlack.html">MomentEst_MixedBetaBinom_SESlack()</a></code> </p>
         </td>
-        <td><p>This function is a work in progress. As such, it is not exported yet; but it allows for some leniency on the sequencing error parameter, hence "SESlack"</p></td>
+        <td><p>Similar to MomentEst_MixedBetaBinom, but allowing for slack on the SE parameter (see EMfit_betabinom_SEslack)</p></td>
       </tr><tr><td>
           <p><code><a href="MPhelper_GradThetaTheta.html">MPhelper_GradThetaTheta()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Helper function for GradThetaTheta_cppi</p></td>
       </tr><tr><td>
           <p><code><a href="multinomial_coeff.html">multinomial_coeff()</a></code> </p>
         </td>
@@ -328,7 +340,7 @@
       </tr><tr><td>
           <p><code><a href="MyOptTest.html">MyOptTest()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>UNUSED test function for C++ driven numeric optimization</p></td>
       </tr><tr><td>
           <p><code><a href="pmf_betabinomMix.html">pmf_betabinomMix()</a></code> </p>
         </td>
@@ -352,11 +364,11 @@
       </tr><tr><td>
           <p><code><a href="qbeta_C.html">qbeta_C()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>UNUSED alternative implementation of the qbeta funtion</p></td>
       </tr><tr><td>
           <p><code><a href="qbeta_C3.html">qbeta_C3()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>UNUSED alternative implementation of the qbeta funtion</p></td>
       </tr><tr><td>
           <p><code><a href="standard_alleles.html">standard_alleles()</a></code> </p>
         </td>
@@ -368,63 +380,15 @@
       </tr><tr><td>
           <p><code><a href="TumPurHelpFun_CPP.html">TumPurHelpFun_CPP()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Internal helper function for TumPur_LogLik_CPP</p></td>
       </tr><tr><td>
           <p><code><a href="TumPurHelpFun_CPP_R.html">TumPurHelpFun_CPP_R()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Internal helper function for TumPur_LogLik_CPP</p></td>
       </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP.html">TumPur_LogLik_CPP()</a></code> </p>
+          <p><code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP2()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP2X()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP3()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP3X()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP4()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP_DB1()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP_DB2()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP_DB3()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP2_10()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP2_100()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP2_1000()</a></code> <code><a href="TumPur_LogLik_CPPs.html">TumPur_LogLik_CPP2Y()</a></code> </p>
         </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP2.html">TumPur_LogLik_CPP2()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP2X.html">TumPur_LogLik_CPP2X()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP2Y.html">TumPur_LogLik_CPP2Y()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP2_10.html">TumPur_LogLik_CPP2_10()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP2_100.html">TumPur_LogLik_CPP2_100()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP2_1000.html">TumPur_LogLik_CPP2_1000()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP3.html">TumPur_LogLik_CPP3()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP3X.html">TumPur_LogLik_CPP3X()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP4.html">TumPur_LogLik_CPP4()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP_DB1.html">TumPur_LogLik_CPP_DB1()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP_DB2.html">TumPur_LogLik_CPP_DB2()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
-      </tr><tr><td>
-          <p><code><a href="TumPur_LogLik_CPP_DB3.html">TumPur_LogLik_CPP_DB3()</a></code> </p>
-        </td>
-        <td><p>DO SOMETHING</p></td>
+        <td><p>Various implementations of the tumor-purity-accounting (negative) log likelihood (sum of completely correlated beta-binomials)</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

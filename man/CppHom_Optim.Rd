@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{CppHom_Optim}
 \alias{CppHom_Optim}
-\title{DO SOMETHING}
+\title{Optimizer for theta for homozygous samples in the beta-binomial mixture fit using expectation-maximization}
 \usage{
 CppHom_Optim(
   ThetaHomStart,
@@ -19,5 +19,5 @@ CppHom_Optim(
 )
 }
 \description{
-DO SOMETHING
+Optimizer for theta for homozygous samples in the beta-binomial mixture fit using expectation-maximization
 }
