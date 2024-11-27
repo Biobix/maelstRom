@@ -16,7 +16,7 @@ Imports: Rcpp (>= 1.0.5), gmp (>= 0.5.13.2), hash (>= 2.2.6), stringr
         (>= 1.3.1), RcppGSL, ggplot2 (>= 3.1.0), data.table, MASS,
         stats, gtools, alabama, Rdpack (>= 0.7), utils, jsonlite,
         ggnewscale(>= 0.4.7), parallel, patchwork(>= 1.1.1), scales(>=
-        1.1.1), zoo(>= 1.8-8)
+        1.1.1), zoo(>= 1.8-8), matlib
 LinkingTo: Rcpp, BH, RcppGSL
 RdMacros: Rdpack
 NeedsCompilation: yes
