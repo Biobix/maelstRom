@@ -68,7 +68,7 @@
     },
     {
         "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTest.cpp",
-        "file_last_write": 1730103500.0,
+        "file_last_write": 1732620660.0,
         "definitions": [
             {
                 "usr": "c:@F@my_f#*1$@SA@gsl_vector#*v#",
@@ -115,7 +115,7 @@
     },
     {
         "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/OptTestX.cpp",
-        "file_last_write": 1730103500.0,
+        "file_last_write": 1732621379.0,
         "definitions": [
             {
                 "usr": "c:@S@myCnT_P",
@@ -512,7 +512,7 @@
     },
     {
         "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-        "file_last_write": 1730103500.0,
+        "file_last_write": 1732627072.0,
         "definitions": [
             {
                 "usr": "c:@F@logSums_MaxMethod_CPP#I#",
@@ -520,7 +520,7 @@
                 "parent_name": "",
                 "name": "logSums_MaxMethod_CPP(int)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 12,
+                "line": 28,
                 "column": 8,
                 "hidden": false
             },
@@ -530,7 +530,7 @@
                 "parent_name": "",
                 "name": "logSums_MaxMethod_CPP_R(Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 45,
+                "line": 77,
                 "column": 8,
                 "hidden": false
             },
@@ -540,7 +540,7 @@
                 "parent_name": "",
                 "name": "logSums_MaxMethodSigned_CPP(int, int)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 78,
+                "line": 136,
                 "column": 8,
                 "hidden": false
             },
@@ -550,7 +550,7 @@
                 "parent_name": "",
                 "name": "LogTrapezoidalInt_CPP(double, double, int, double, double, double, int, int, int, int)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 118,
+                "line": 176,
                 "column": 8,
                 "hidden": false
             },
@@ -560,7 +560,7 @@
                 "parent_name": "",
                 "name": "LogNewtonCotes_CPP(double, double, double, double, double, int, int, int, int, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 192,
+                "line": 250,
                 "column": 8,
                 "hidden": false
             },
@@ -570,7 +570,7 @@
                 "parent_name": "",
                 "name": "LogGaussianQuad_CPP(double, double, double, double, double, int, int, int, int, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 248,
+                "line": 306,
                 "column": 8,
                 "hidden": false
             },
@@ -580,7 +580,7 @@
                 "parent_name": "",
                 "name": "LogTanhSinhQuad_CPP(double, double, int, double, double, double, int, int, int, int, double)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 291,
+                "line": 349,
                 "column": 8,
                 "hidden": false
             },
@@ -590,7 +590,7 @@
                 "parent_name": "",
                 "name": "TumPurHelpFun_CPP(int, int, int, double, double, double, int, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 381,
+                "line": 439,
                 "column": 8,
                 "hidden": false
             },
@@ -600,7 +600,7 @@
                 "parent_name": "",
                 "name": "TumPurHelpFun_CPP_R(Rcpp::NumericVector, int, Rcpp::NumericVector, double, double, double, Rcpp::NumericVector, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 464,
+                "line": 522,
                 "column": 8,
                 "hidden": false
             },
@@ -610,7 +610,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 546,
+                "line": 601,
                 "column": 8,
                 "hidden": false
             },
@@ -620,7 +620,7 @@
                 "parent_name": "",
                 "name": "qbeta_C(Rcpp::NumericVector, double, double)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 623,
+                "line": 678,
                 "column": 15,
                 "hidden": false
             },
@@ -630,7 +630,7 @@
                 "parent_name": "",
                 "name": "qbeta_C3(Rcpp::NumericVector, double, double)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 645,
+                "line": 700,
                 "column": 15,
                 "hidden": false
             },
@@ -640,7 +640,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 674,
+                "line": 729,
                 "column": 8,
                 "hidden": false
             },
@@ -650,7 +650,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2X(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 757,
+                "line": 812,
                 "column": 8,
                 "hidden": false
             },
@@ -660,7 +660,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP3(double, double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 840,
+                "line": 895,
                 "column": 8,
                 "hidden": false
             },
@@ -670,7 +670,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP3X(double, double, double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 917,
+                "line": 972,
                 "column": 8,
                 "hidden": false
             },
@@ -680,7 +680,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP4(double, double, double, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 996,
+                "line": 1051,
                 "column": 8,
                 "hidden": false
             },
@@ -690,7 +690,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP_DB1(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 1077,
+                "line": 1132,
                 "column": 21,
                 "hidden": false
             },
@@ -700,7 +700,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP_DB2(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 1161,
+                "line": 1216,
                 "column": 33,
                 "hidden": false
             },
@@ -710,7 +710,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP_DB3(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 1245,
+                "line": 1300,
                 "column": 33,
                 "hidden": false
             },
@@ -720,7 +720,7 @@
                 "parent_name": "",
                 "name": "BrolDB(int, double)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 1326,
+                "line": 1381,
                 "column": 21,
                 "hidden": false
             },
@@ -730,7 +730,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2_10(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 1345,
+                "line": 1400,
                 "column": 8,
                 "hidden": false
             },
@@ -740,7 +740,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2_100(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 1425,
+                "line": 1480,
                 "column": 8,
                 "hidden": false
             },
@@ -750,7 +750,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2_1000(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 1505,
+                "line": 1560,
                 "column": 8,
                 "hidden": false
             },
@@ -760,7 +760,7 @@
                 "parent_name": "",
                 "name": "TumPur_LogLik_CPP2Y(Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, int, int, double, Rcpp::NumericVector, Rcpp::NumericVector)",
                 "file": "C:/Users/Cedric/Documents/MAGEgenotyper/maelstRom/src/TumPurFuns.cpp",
-                "line": 1588,
+                "line": 1643,
                 "column": 8,
                 "hidden": false
             }

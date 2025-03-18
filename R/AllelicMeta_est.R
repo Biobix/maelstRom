@@ -91,8 +91,8 @@ AllelicMeta_est <- function(ref_counts, var_counts, deltaF = 10^-8, maxIT = 100,
       F_inbr <- 1
       genoprobs <- data.frame("p(rr)" = spr, "p(rv)" = sprv, "p(vv)" = spv)
       genotypes <- rep("NR", length(ref_counts))
-      returnOBJ <- list(allelefreq, SE, F_inbr, genotypes, genoprobs)
-      names(returnOBJ) <- c("allelefreq", "SE", "F_inbr", "genotypes", "genoprobs")
+      returnOBJ <- list(allelefreq, SE, F_inbr, genotypes, genoprobs, nrep)
+      names(returnOBJ) <- c("allelefreq", "SE", "F_inbr", "genotypes", "genoprobs", "nrep")
       return(returnOBJ)
     }
 

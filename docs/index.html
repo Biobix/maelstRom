@@ -123,9 +123,10 @@
 </h3>
 <p>maelstRom is an R software package with additional C/C++ code under-the-hood, and as such relies on (versions listed are those used for maelstRom’s latest test, though more recent versions should work fine as well):</p>
 <ul>
-<li>R (v4.0.2)</li>
-<li>GNU multiple precision arithmetic library (gmp; v6.1.2)</li>
-<li>Boost Multiple Precision Floating-Point Reliable Library (mpfr; v4.0.1)</li>
+<li>CMake (&gt;= v3.0.0)</li>
+<li>R (&gt;= v4.0.2)</li>
+<li>GNU multiple precision arithmetic library (gmp; &gt;= v6.1.2)</li>
+<li>Boost Multiple Precision Floating-Point Reliable Library (mpfr; &gt;= v4.0.1)</li>
 </ul>
 <p>Furthermore, maelstRom relies on other R packages for its operations, which are listed in the tutorial: <a href="https://biobix.github.io/maelstRom/articles/maelstRom_Allelic_Dispersion_tutorial.html#session-info" class="external-link uri">https://biobix.github.io/maelstRom/articles/maelstRom_Allelic_Dispersion_tutorial.html#session-info</a></p>
 </div>
@@ -133,7 +134,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>If you want to install maelstRom in a conda environment including an R-installation, the following bash commands sets up the previously listed software dependencies, then opens the environment, and launches R:</p>
+<p>If you want to install maelstRom in a conda environment including an R-installation, the following bash commands sets up the previously listed software dependencies, then opens the environment, and launches R. <strong>An important</strong> exception to this is CMake, which needs to be installed on your machine.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> <span class="op">&lt;</span>envname<span class="op">&gt;</span> r-essentials r-base r-devtools gmp mpfr</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">conda</span> activate <span class="op">&lt;</span>envname<span class="op">&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="ex">R</span></span></code></pre></div>

@@ -61,10 +61,11 @@ maelstRom is an R software package with additional C/C++ code under-the-hood,
 and as such relies on (versions listed are those used for maelstRom’s latest
 test, though more recent versions should work fine as well):
 
--   R (v4.0.2)
--   GNU multiple precision arithmetic library (gmp; v6.1.2)
+-   CMake (\>= v3.0.0)
+-   R (\>= v4.0.2)
+-   GNU multiple precision arithmetic library (gmp; \>= v6.1.2)
 -   Boost Multiple Precision Floating-Point Reliable Library (mpfr;
-    v4.0.1)
+    \>= v4.0.1)
 
 Furthermore, maelstRom relies on other R packages for its operations, which
 are listed in the tutorial:
@@ -75,7 +76,8 @@ are listed in the tutorial:
 If you want to install maelstRom in a conda environment including an
 R-installation, the following bash commands sets up the previously
 listed software dependencies, then opens the environment, and launches
-R:
+R. **An important** exception to this is CMake, which needs to be
+installed on your machine.
 
 ``` bash
 conda create -n <envname> r-essentials r-base r-devtools gmp mpfr
@@ -95,7 +97,7 @@ library(devtools)
 install_github("BioBix/maelstRom")
 ```
 
-From a clean R installation (e.g. as in the conda environment set up
+From a clean R installation (e.g. as in the conda environment set up
 previously), this installation takes about 2 minutes.
 
 For a local installation, rtools will be required. In case the code
