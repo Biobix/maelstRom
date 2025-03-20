@@ -78,7 +78,7 @@
                         <h4 data-toc-skip class="author">Cedric
 Stroobandt</h4>
             
-            <h4 data-toc-skip class="date">2025-03-17</h4>
+            <h4 data-toc-skip class="date">2025-03-20</h4>
       
       
       <div class="hidden name"><code>maelstRom_Allelic_Dispersion_tutorial.Rmd</code></div>
@@ -1482,7 +1482,7 @@ p-value:</p>
 <p>3.67073174475383e-12, 3.22181819373512e-41, 1.42550478480222e-28,</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">CorLancasterPVAL_vec</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">23</span>, <span class="fl">40</span>, <span class="fl">51</span><span class="op">)</span><span class="op">]</span>, <span class="st">","</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p>1.00208492272019e-06, 3.90183374100843e-19, 1.0905724718204e-12,</p>
+<p>1.08467664187682e-06, 1.87005704906356e-18, 7.38737069563075e-13,</p>
 <p>Most genes, however, consist of more independent SNP-level data
 (notice the relatively small change):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -1491,8 +1491,8 @@ p-value:</p>
 0.000739519269403496, 0.8312901339832,</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">CorLancasterPVAL_vec</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="st">","</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p>7.28832845341961e-08, 0.512947480507768, 1.05617180277806e-05,
-0.000902176236225832, 0.827455390434166,</p>
+<p>2.57372589504065e-08, 0.509791426967712, 1.1611708628077e-05,
+0.000892833381655735, 0.830692115914281,</p>
 <p>Next to the per-gene correlation-corrected Lancaster p-value, we can
 add averages of its per-SNP <span class="math inline">\(\rho_{control}\)</span>s and <span class="math inline">\(\rho_{case}\)</span>s (weighted averages,
 according to each SNP’s <span class="math inline">\(\sqrt{median\
@@ -1564,7 +1564,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0167054</td>
 <td align="right">0.0609712</td>
-<td align="right">0.0000001</td>
+<td align="right">0.0000000</td>
 <td align="right">46.44028</td>
 <td align="right">87.74274</td>
 <td align="right">139.63312</td>
@@ -1575,7 +1575,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0198453</td>
 <td align="right">0.0243574</td>
-<td align="right">0.5129475</td>
+<td align="right">0.5097914</td>
 <td align="right">59.43292</td>
 <td align="right">114.12708</td>
 <td align="right">24.77530</td>
@@ -1586,7 +1586,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0118674</td>
 <td align="right">0.0307354</td>
-<td align="right">0.0000106</td>
+<td align="right">0.0000116</td>
 <td align="right">62.15882</td>
 <td align="right">116.28909</td>
 <td align="right">169.44331</td>
@@ -1597,7 +1597,7 @@ quality metrics:</p>
 <td align="right">2</td>
 <td align="right">0.0218546</td>
 <td align="right">0.0301046</td>
-<td align="right">0.0009022</td>
+<td align="right">0.0008928</td>
 <td align="right">37.13462</td>
 <td align="right">99.43332</td>
 <td align="right">240.21210</td>
@@ -1608,7 +1608,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0142337</td>
 <td align="right">0.0136280</td>
-<td align="right">0.8274554</td>
+<td align="right">0.8306921</td>
 <td align="right">42.79365</td>
 <td align="right">93.49767</td>
 <td align="right">10.53696</td>
@@ -1619,7 +1619,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0296196</td>
 <td align="right">0.0379265</td>
-<td align="right">0.2285984</td>
+<td align="right">0.2305270</td>
 <td align="right">36.47197</td>
 <td align="right">67.56134</td>
 <td align="right">16.07402</td>
