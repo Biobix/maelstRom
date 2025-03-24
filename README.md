@@ -128,6 +128,13 @@ large-scale datasets on server is advised.
 
 maelstRom has an associated paper pending publication. Coming soon…
 
+
+## License
+
+This repo's main license, AGPL-3.0, applies to the entire repo,
+except for subfolders that have their own license file. 
+In such cases, the license file in the subfolder takes precedence.
+
 ## Contact
 
 For theoretical/technical questions or issues while using the maelstRom
