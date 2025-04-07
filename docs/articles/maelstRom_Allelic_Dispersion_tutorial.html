@@ -78,7 +78,7 @@
                         <h4 data-toc-skip class="author">Cedric
 Stroobandt</h4>
             
-            <h4 data-toc-skip class="date">2025-03-24</h4>
+            <h4 data-toc-skip class="date">2025-04-07</h4>
       
       
       <div class="hidden name"><code>maelstRom_Allelic_Dispersion_tutorial.Rmd</code></div>
@@ -119,7 +119,7 @@ is used throughout the remainder of this vignette. This toy data
 consists of both a hypothetical control (healthy) and case (diseased)
 dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://biobix.github.io/maelstRom/" class="external-link">maelstRom</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">maelstRom</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Package 'maelstRom' version 1.1.11</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"maelstRom"</span>, package <span class="op">=</span> <span class="st">"maelstRom"</span><span class="op">)</span></span>
@@ -1482,7 +1482,7 @@ p-value:</p>
 <p>3.67073174475383e-12, 3.22181819373512e-41, 1.42550478480222e-28,</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">CorLancasterPVAL_vec</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">23</span>, <span class="fl">40</span>, <span class="fl">51</span><span class="op">)</span><span class="op">]</span>, <span class="st">","</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p>8.58344380865356e-07, 2.6309870987951e-20, 9.08136408380933e-13,</p>
+<p>9.95188435724022e-07, 2.93022685642902e-19, 1.53840705377799e-12,</p>
 <p>Most genes, however, consist of more independent SNP-level data
 (notice the relatively small change):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -1491,8 +1491,8 @@ p-value:</p>
 0.000739519269403496, 0.8312901339832,</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">CorLancasterPVAL_vec</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="st">","</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<p>1.70290296297308e-08, 0.510179481874246, 4.89718078033109e-06,
-0.00085426659826074, 0.826540920692501,</p>
+<p>1.03805215744791e-08, 0.515313342144933, 9.78641306075595e-06,
+0.000739519269403496, 0.831116214853174,</p>
 <p>Next to the per-gene correlation-corrected Lancaster p-value, we can
 add averages of its per-SNP <span class="math inline">\(\rho_{control}\)</span>s and <span class="math inline">\(\rho_{case}\)</span>s (weighted averages,
 according to each SNP’s <span class="math inline">\(\sqrt{median\
@@ -1575,7 +1575,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0198453</td>
 <td align="right">0.0243574</td>
-<td align="right">0.5101795</td>
+<td align="right">0.5153133</td>
 <td align="right">59.43292</td>
 <td align="right">114.12708</td>
 <td align="right">24.77530</td>
@@ -1586,7 +1586,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0118674</td>
 <td align="right">0.0307354</td>
-<td align="right">0.0000049</td>
+<td align="right">0.0000098</td>
 <td align="right">62.15882</td>
 <td align="right">116.28909</td>
 <td align="right">169.44331</td>
@@ -1597,7 +1597,7 @@ quality metrics:</p>
 <td align="right">2</td>
 <td align="right">0.0218546</td>
 <td align="right">0.0301046</td>
-<td align="right">0.0008543</td>
+<td align="right">0.0007395</td>
 <td align="right">37.13462</td>
 <td align="right">99.43332</td>
 <td align="right">240.21210</td>
@@ -1608,7 +1608,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0142337</td>
 <td align="right">0.0136280</td>
-<td align="right">0.8265409</td>
+<td align="right">0.8311162</td>
 <td align="right">42.79365</td>
 <td align="right">93.49767</td>
 <td align="right">10.53696</td>
@@ -1619,7 +1619,7 @@ quality metrics:</p>
 <td align="right">3</td>
 <td align="right">0.0296196</td>
 <td align="right">0.0379265</td>
-<td align="right">0.2301608</td>
+<td align="right">0.2342048</td>
 <td align="right">36.47197</td>
 <td align="right">67.56134</td>
 <td align="right">16.07402</td>
@@ -1701,81 +1701,75 @@ Gene50, Gene52, Gene56, Gene58, Gene60,</p>
 <span><span class="co">#&gt; [1] maelstRom_1.1.11</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] gtable_0.3.5       </span></span>
-<span><span class="co">#&gt;  [2] xfun_0.45          </span></span>
-<span><span class="co">#&gt;  [3] bslib_0.7.0        </span></span>
-<span><span class="co">#&gt;  [4] ggplot2_3.5.1      </span></span>
-<span><span class="co">#&gt;  [5] htmlwidgets_1.6.4  </span></span>
-<span><span class="co">#&gt;  [6] lattice_0.22-5     </span></span>
-<span><span class="co">#&gt;  [7] numDeriv_2016.8-1.1</span></span>
-<span><span class="co">#&gt;  [8] vctrs_0.6.5        </span></span>
-<span><span class="co">#&gt;  [9] tools_4.3.3        </span></span>
-<span><span class="co">#&gt; [10] Rdpack_2.6.1       </span></span>
-<span><span class="co">#&gt; [11] generics_0.1.3     </span></span>
-<span><span class="co">#&gt; [12] parallel_4.3.3     </span></span>
-<span><span class="co">#&gt; [13] rgl_1.3.1          </span></span>
-<span><span class="co">#&gt; [14] tibble_3.2.1       </span></span>
-<span><span class="co">#&gt; [15] fansi_1.0.6        </span></span>
-<span><span class="co">#&gt; [16] highr_0.11         </span></span>
-<span><span class="co">#&gt; [17] pkgconfig_2.0.3    </span></span>
-<span><span class="co">#&gt; [18] data.table_1.16.0  </span></span>
-<span><span class="co">#&gt; [19] ggnewscale_0.5.0   </span></span>
-<span><span class="co">#&gt; [20] desc_1.4.3         </span></span>
-<span><span class="co">#&gt; [21] alabama_2023.1.0   </span></span>
-<span><span class="co">#&gt; [22] lifecycle_1.0.4    </span></span>
-<span><span class="co">#&gt; [23] compiler_4.3.3     </span></span>
-<span><span class="co">#&gt; [24] farver_2.1.2       </span></span>
-<span><span class="co">#&gt; [25] stringr_1.5.1      </span></span>
-<span><span class="co">#&gt; [26] textshaping_0.4.0  </span></span>
-<span><span class="co">#&gt; [27] munsell_0.5.1      </span></span>
-<span><span class="co">#&gt; [28] carData_3.0-5      </span></span>
-<span><span class="co">#&gt; [29] matlib_0.9.6       </span></span>
-<span><span class="co">#&gt; [30] htmltools_0.5.8    </span></span>
-<span><span class="co">#&gt; [31] sass_0.4.9         </span></span>
-<span><span class="co">#&gt; [32] hash_2.2.6.3       </span></span>
-<span><span class="co">#&gt; [33] yaml_2.3.9         </span></span>
-<span><span class="co">#&gt; [34] gmp_0.7-5          </span></span>
-<span><span class="co">#&gt; [35] pillar_1.9.0       </span></span>
-<span><span class="co">#&gt; [36] pkgdown_2.0.9      </span></span>
-<span><span class="co">#&gt; [37] car_3.1-2          </span></span>
-<span><span class="co">#&gt; [38] jquerylib_0.1.4    </span></span>
-<span><span class="co">#&gt; [39] MASS_7.3-60.0.1    </span></span>
-<span><span class="co">#&gt; [40] cachem_1.1.0       </span></span>
-<span><span class="co">#&gt; [41] abind_1.4-5        </span></span>
-<span><span class="co">#&gt; [42] gtools_3.9.5       </span></span>
-<span><span class="co">#&gt; [43] tidyselect_1.2.1   </span></span>
-<span><span class="co">#&gt; [44] digest_0.6.35      </span></span>
-<span><span class="co">#&gt; [45] stringi_1.8.3      </span></span>
-<span><span class="co">#&gt; [46] dplyr_1.1.4        </span></span>
-<span><span class="co">#&gt; [47] purrr_1.0.2        </span></span>
-<span><span class="co">#&gt; [48] labeling_0.4.3     </span></span>
-<span><span class="co">#&gt; [49] fastmap_1.2.0      </span></span>
-<span><span class="co">#&gt; [50] grid_4.3.3         </span></span>
-<span><span class="co">#&gt; [51] colorspace_2.1-0   </span></span>
-<span><span class="co">#&gt; [52] cli_3.6.2          </span></span>
-<span><span class="co">#&gt; [53] magrittr_2.0.3     </span></span>
-<span><span class="co">#&gt; [54] patchwork_1.2.0    </span></span>
-<span><span class="co">#&gt; [55] base64enc_0.1-3    </span></span>
-<span><span class="co">#&gt; [56] utf8_1.2.4         </span></span>
-<span><span class="co">#&gt; [57] withr_3.0.0        </span></span>
-<span><span class="co">#&gt; [58] scales_1.3.0       </span></span>
-<span><span class="co">#&gt; [59] rmarkdown_2.27     </span></span>
-<span><span class="co">#&gt; [60] gridExtra_2.3      </span></span>
-<span><span class="co">#&gt; [61] ragg_1.3.2         </span></span>
-<span><span class="co">#&gt; [62] zoo_1.8-12         </span></span>
-<span><span class="co">#&gt; [63] memoise_2.0.1      </span></span>
-<span><span class="co">#&gt; [64] evaluate_0.24.0    </span></span>
-<span><span class="co">#&gt; [65] knitr_1.48         </span></span>
-<span><span class="co">#&gt; [66] rbibutils_2.2.16   </span></span>
-<span><span class="co">#&gt; [67] rlang_1.1.3        </span></span>
-<span><span class="co">#&gt; [68] Rcpp_1.0.12        </span></span>
-<span><span class="co">#&gt; [69] xtable_1.8-4       </span></span>
-<span><span class="co">#&gt; [70] glue_1.7.0         </span></span>
-<span><span class="co">#&gt; [71] rstudioapi_0.16.0  </span></span>
-<span><span class="co">#&gt; [72] jsonlite_1.8.8     </span></span>
-<span><span class="co">#&gt; [73] R6_2.5.1           </span></span>
-<span><span class="co">#&gt; [74] systemfonts_1.1.0  </span></span>
-<span><span class="co">#&gt; [75] fs_1.6.4</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] gmp_0.7-5          </span></span>
+<span><span class="co">#&gt;  [2] sass_0.4.9         </span></span>
+<span><span class="co">#&gt;  [3] utf8_1.2.4         </span></span>
+<span><span class="co">#&gt;  [4] generics_0.1.3     </span></span>
+<span><span class="co">#&gt;  [5] gtools_3.9.5       </span></span>
+<span><span class="co">#&gt;  [6] stringi_1.8.3      </span></span>
+<span><span class="co">#&gt;  [7] lattice_0.22-5     </span></span>
+<span><span class="co">#&gt;  [8] digest_0.6.35      </span></span>
+<span><span class="co">#&gt;  [9] magrittr_2.0.3     </span></span>
+<span><span class="co">#&gt; [10] evaluate_0.24.0    </span></span>
+<span><span class="co">#&gt; [11] grid_4.3.3         </span></span>
+<span><span class="co">#&gt; [12] fastmap_1.2.0      </span></span>
+<span><span class="co">#&gt; [13] jsonlite_1.8.8     </span></span>
+<span><span class="co">#&gt; [14] ggnewscale_0.5.0   </span></span>
+<span><span class="co">#&gt; [15] gridExtra_2.3      </span></span>
+<span><span class="co">#&gt; [16] purrr_1.0.2        </span></span>
+<span><span class="co">#&gt; [17] fansi_1.0.6        </span></span>
+<span><span class="co">#&gt; [18] scales_1.3.0       </span></span>
+<span><span class="co">#&gt; [19] numDeriv_2016.8-1.1</span></span>
+<span><span class="co">#&gt; [20] textshaping_0.4.0  </span></span>
+<span><span class="co">#&gt; [21] jquerylib_0.1.4    </span></span>
+<span><span class="co">#&gt; [22] Rdpack_2.6.1       </span></span>
+<span><span class="co">#&gt; [23] cli_3.6.2          </span></span>
+<span><span class="co">#&gt; [24] rlang_1.1.3        </span></span>
+<span><span class="co">#&gt; [25] rbibutils_2.2.16   </span></span>
+<span><span class="co">#&gt; [26] munsell_0.5.1      </span></span>
+<span><span class="co">#&gt; [27] withr_3.0.0        </span></span>
+<span><span class="co">#&gt; [28] MAGE_1.0.0.18      </span></span>
+<span><span class="co">#&gt; [29] cachem_1.1.0       </span></span>
+<span><span class="co">#&gt; [30] yaml_2.3.9         </span></span>
+<span><span class="co">#&gt; [31] tools_4.3.3        </span></span>
+<span><span class="co">#&gt; [32] parallel_4.3.3     </span></span>
+<span><span class="co">#&gt; [33] memoise_2.0.1      </span></span>
+<span><span class="co">#&gt; [34] dplyr_1.1.4        </span></span>
+<span><span class="co">#&gt; [35] colorspace_2.1-0   </span></span>
+<span><span class="co">#&gt; [36] ggplot2_3.5.1      </span></span>
+<span><span class="co">#&gt; [37] hash_2.2.6.3       </span></span>
+<span><span class="co">#&gt; [38] vctrs_0.6.5        </span></span>
+<span><span class="co">#&gt; [39] R6_2.5.1           </span></span>
+<span><span class="co">#&gt; [40] zoo_1.8-12         </span></span>
+<span><span class="co">#&gt; [41] lifecycle_1.0.4    </span></span>
+<span><span class="co">#&gt; [42] stringr_1.5.1      </span></span>
+<span><span class="co">#&gt; [43] fs_1.6.4           </span></span>
+<span><span class="co">#&gt; [44] htmlwidgets_1.6.4  </span></span>
+<span><span class="co">#&gt; [45] MASS_7.3-60.0.1    </span></span>
+<span><span class="co">#&gt; [46] ragg_1.3.2         </span></span>
+<span><span class="co">#&gt; [47] pkgconfig_2.0.3    </span></span>
+<span><span class="co">#&gt; [48] desc_1.4.3         </span></span>
+<span><span class="co">#&gt; [49] pkgdown_2.0.9      </span></span>
+<span><span class="co">#&gt; [50] pillar_1.9.0       </span></span>
+<span><span class="co">#&gt; [51] bslib_0.7.0        </span></span>
+<span><span class="co">#&gt; [52] gtable_0.3.5       </span></span>
+<span><span class="co">#&gt; [53] data.table_1.16.0  </span></span>
+<span><span class="co">#&gt; [54] glue_1.7.0         </span></span>
+<span><span class="co">#&gt; [55] Rcpp_1.0.12        </span></span>
+<span><span class="co">#&gt; [56] systemfonts_1.1.0  </span></span>
+<span><span class="co">#&gt; [57] highr_0.11         </span></span>
+<span><span class="co">#&gt; [58] xfun_0.45          </span></span>
+<span><span class="co">#&gt; [59] tibble_3.2.1       </span></span>
+<span><span class="co">#&gt; [60] tidyselect_1.2.1   </span></span>
+<span><span class="co">#&gt; [61] rstudioapi_0.16.0  </span></span>
+<span><span class="co">#&gt; [62] knitr_1.48         </span></span>
+<span><span class="co">#&gt; [63] farver_2.1.2       </span></span>
+<span><span class="co">#&gt; [64] htmltools_0.5.8    </span></span>
+<span><span class="co">#&gt; [65] patchwork_1.2.0    </span></span>
+<span><span class="co">#&gt; [66] labeling_0.4.3     </span></span>
+<span><span class="co">#&gt; [67] rmarkdown_2.27     </span></span>
+<span><span class="co">#&gt; [68] compiler_4.3.3     </span></span>
+<span><span class="co">#&gt; [69] alabama_2023.1.0</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
