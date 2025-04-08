@@ -1,7 +1,7 @@
 #' AnnotateLater 
 #' @export
 
-AD_correlator <- function(CountDF, dAD_fitres, CustomCor = NULL, MinCount = 0, method = "spearman"){
+AD_correlator <- function(CountDF, dAD_fitres, SE, CustomCor = NULL, MinCount = 0, method = "spearman"){
   
   CountDF$GT<- "none"
   
@@ -23,22 +23,22 @@ AD_correlator <- function(CountDF, dAD_fitres, CustomCor = NULL, MinCount = 0, m
     
     GT <- which(c(dAD_fitres$phi_rr*maelstRom::dBetaBinom(CountDF$ref_count[AAi],
                                                      CountDF$ref_count[AAi] + CountDF$var_count[AAi],
-                                                     1-SEmedian, dAD_fitres$ThetaHom),
+                                                     1-SE, dAD_fitres$ThetaHom),
                   dAD_fitres$phi_rv*maelstRom::dBetaBinom(CountDF$ref_count[AAi],
                                                      CountDF$ref_count[AAi] + CountDF$var_count[AAi],
                                                      dAD_fitres$Pi, dAD_fitres$ThetaHetT),
                   dAD_fitres$phi_vv*maelstRom::dBetaBinom(CountDF$ref_count[AAi],
                                                      CountDF$ref_count[AAi] + CountDF$var_count[AAi],
-                                                     SEmedian, dAD_fitres$ThetaHom)) == 
+                                                     SE, dAD_fitres$ThetaHom)) == 
                   max(c(dAD_fitres$phi_rr*maelstRom::dBetaBinom(CountDF$ref_count[AAi],
                                                            CountDF$ref_count[AAi] + CountDF$var_count[AAi],
-                                                           1-SEmedian, dAD_fitres$ThetaHom),
+                                                           1-SE, dAD_fitres$ThetaHom),
                         dAD_fitres$phi_rv*maelstRom::dBetaBinom(CountDF$ref_count[AAi],
                                                            CountDF$ref_count[AAi] + CountDF$var_count[AAi],
                                                            dAD_fitres$Pi, dAD_fitres$ThetaHetT),
                         dAD_fitres$phi_vv*maelstRom::dBetaBinom(CountDF$ref_count[AAi],
                                                            CountDF$ref_count[AAi] + CountDF$var_count[AAi],
-                                                           SEmedian, dAD_fitres$ThetaHom))))
+                                                           SE, dAD_fitres$ThetaHom))))
     
     if(any(GT == 2)){
       CountDF$GT[AAi]<- "rv"

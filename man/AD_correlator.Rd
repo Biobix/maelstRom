@@ -7,6 +7,7 @@
 AD_correlator(
   CountDF,
   dAD_fitres,
+  SE,
   CustomCor = NULL,
   MinCount = 0,
   method = "spearman"

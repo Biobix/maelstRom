@@ -51,7 +51,7 @@ for(LocOI in dAD_res$Locus){
   CountDF <- caseList[[LocOI]]
   dAD_fitres <- dAD_res[dAD_res$Locus == LocOI,]
   
-  CorResult <- maelstRom::AD_correlator(CountDF, dAD_fitres, MinCount = 20, method = "spearman")
+  CorResult <- maelstRom::AD_correlator(CountDF, dAD_fitres, SE = SEmedian, MinCount = 20, method = "spearman")
   
   AD_EX_Corrs <- c(AD_EX_Corrs, as.numeric(CorResult["correlation"]))
   AD_EX_Corr_pvals <- c(AD_EX_Corr_pvals, as.numeric(CorResult["p-value"]))
