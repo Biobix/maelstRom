@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 
 The results from maelstRom's Allelic Dispersion tutorial can be explored even further with auxiliary data analyses, as documented in this tutorial. It starts from the previously obtained Allelic Dispersion tutorial results, which are loaded into the workspace below.
 
-```{r}
+```{r, warning=FALSE}
 library(maelstRom)
 data("VignetteImage", package = "maelstRom")
 

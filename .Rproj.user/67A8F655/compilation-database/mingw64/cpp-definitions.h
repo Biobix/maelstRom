@@ -1752,6 +1752,10 @@
 # define __cpp_generic_lambdas 201304L
 #endif
 
+#ifndef __declspec
+# define __declspec(x) __attribute__((x))
+#endif
+
 #ifndef __SSE_MATH__
 # define __SSE_MATH__ 1
 #endif
@@ -1810,10 +1814,6 @@
 
 #ifndef __ATOMIC_RELEASE
 # define __ATOMIC_RELEASE 3
-#endif
-
-#ifndef __declspec
-# define __declspec(x) __attribute__((x))
 #endif
 
 

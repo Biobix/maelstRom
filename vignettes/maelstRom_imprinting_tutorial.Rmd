@@ -32,7 +32,7 @@ maelstRom includes functionalities for the detection of (differential) imprintin
 
 This vignette utilizes the same toy dataset as the "maelstRom Allelic Dispersion tutorial". As such, the code chunk below re-runs the code found there up to and including "Enabling parallellization"; please consult this tutorial for an in-depth explanation of input data collection and pre-processing.
 
-```{r}
+```{r, warning=FALSE}
 data("maelstRom", package = "maelstRom")
 
 # maelstRom expects lists:
